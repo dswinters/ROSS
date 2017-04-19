@@ -198,16 +198,13 @@ ADCP data and GPS data are saved to different structures:
 
 * Data Sets
 
-#+INCLUDE: "./org/leconte_2016_aug.org"
+#+INCLUDE: "org/leconte_2016_aug.org"
 
 ** 2016 Nov - Palau
-[[file:mfiles/ross_palau_2016_nov_deployments.m]]
-
 ** 2017 Jan - Newport
 [[file:mfiles/ross_newport_2017_jan_deployments.m]]
 
 ** 2017 Jan - Puget Sound
-[[file:mfiles/ross_puget_2017_jan_deployments.m]]
 
 [Summary figure]
 [Surface velocity figure]
@@ -282,10 +279,6 @@ In summary:
 | Swankie | Sentinel V 300 | Sweden | ROSS6   |
 | Rosie   | PAVS 150       | Alaska | ROSS3   |
 | Casey   | Workhorse 600  | Norway |         |
-
-WiFi password: SwimRobotSwim
-SSH: ross@192.168.1.10
-SSH password: robotics
 
 *** Sentinel V Notes
 Two-profiles

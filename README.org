@@ -19,7 +19,7 @@ deployment file.
 * Data Sets
 
 ** 2016 Aug - LeConte Glacier
-[[org/leconte_2016_aug.org]]
+[[org/leconte_2016_aug.org][Processing log & figures]]
 
 ** TODO 2016 Nov - Palau
 ** TODO 2017 Jan - Newport

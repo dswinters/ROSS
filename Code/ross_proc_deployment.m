@@ -104,7 +104,7 @@ for ia = 1:length(adcp)
 end
 
 %% Update ADCP data structure
-for i = 1:length(adcp)
+for ia = 1:length(adcp)
     adcp(ia).vel = ve(ia).vel;
 end
 

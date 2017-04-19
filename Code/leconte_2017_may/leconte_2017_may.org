@@ -1,0 +1,17 @@
+* ROSS
+#+name:kayak_info
+| Name    | ADCP           | Flag   | Network |
+|---------+----------------+--------+---------|
+| Swankie | Sentinel V 300 | Sweden | ROSS6   |
+| Rosie   | PAVS 150       | Alaska | ROSS3   |
+| Casey   | Workhorse 600  | Norway |         |
+
+WiFi password: SwimRobotSwim
+SSH: ross@192.168.1.10
+SSH password: robotics
+
+
+** Sentinel V Notes
+Two-profiles
+- 4m bins long-range profile mode
+- 1m-2m high-resolution mode

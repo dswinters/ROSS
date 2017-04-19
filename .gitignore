@@ -1,0 +1,9 @@
+scratch.m
+.DS_Store
+ROSS.pdf
+Data/
+Figures/
+Maps/
+*.html
+*.pdf
+*.tex

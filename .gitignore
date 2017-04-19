@@ -2,7 +2,7 @@ scratch.m
 .DS_Store
 ROSS.pdf
 Data/
-Figures/
+/Figures/
 Maps/
 *.html
 *.pdf

@@ -6,11 +6,11 @@ fexist = exist(matfile,'file');
 
 if ~fexist || ross.deployments(ndep).proc.adcp_raw2mat
     %% Load raw data
-    adcp_load_func = 'adcp_parse';
+    adcp_load_func = 'rdradcp_multi';
     if isfield(D.proc,'adcp_load_function')
         adcp_load_func = D.proc.adcp_load_function;
     end
-    A = feval(adcp_load_func,D.files.adcp)
+    A = feval(adcp_load_func,D.files.adcp);
 
     %% Minor processing
     for ia = 1:length(A)
@@ -37,7 +37,12 @@ end
 
 for i = 1:length(A)
     disp(sprintf('- ADCP configuration %d:',i))
-    struct2table(A(i).config)
+    s = evalc('A(i).config');
+    s = s(10:end-1);
+    s = regexprep(s,'  +',' |');
+    s = regexprep(s,'\n','|\n');
+    s = regexprep(s,': ',' | ');   
+    fprintf(['\n' s '\n']);
 end
 
 end

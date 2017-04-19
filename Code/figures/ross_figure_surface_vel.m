@@ -68,8 +68,8 @@ npad = [ny nx] - size(vx);
 vx = padarray(vx,npad,nan,'post');
 vy = padarray(vy,npad,nan,'post');
 % compute cell centers for quiver plot
-[xc yc] = meshgrid(xbe(1:end-1) + diff(xbe),...
-                   ybe(1:end-1) + diff(ybe));
+[xc yc] = meshgrid(xbe(1:end-1) + diff(xbe)/2,...
+                   ybe(1:end-1) + diff(ybe)/2);
 [xbe ybe] = meshgrid(xbe,ybe);
 % compute velocity magnitude
 mag = sqrt(vx.^2 + vy.^2);

@@ -50,20 +50,20 @@ for i = 1:length(master.kayaks)
     Ross(i).deployments = ross_fill_defaults(Ross(i).deployments,defaults);
 end
 
-if make_logfile
-    logfile = fullfile(dirs.logs, [master.name '.org']);
-    fid = fopen(logfile,'w');
-    fclose(fid);
-    diary(logfile);
-end
-fprintf(['* ' tripname '\n\n']);
-
 %% Trip-specific setup
 switch tripname
   case 'leconte_2016_aug'
     disp('Calibrating 600khz ADCP compass')
     Ross = leconte_2016_aug_calibrate_compass(Ross);
 end
+
+%% Set up logging
+if make_logfile
+    logfile = fullfile(dirs.logs, [master.name '.org']);
+    eval(['!rm ' logfile])
+    diary(logfile);
+end
+fprintf(['* ' tripname '\n\n']);
 
 %% Process deployments
 

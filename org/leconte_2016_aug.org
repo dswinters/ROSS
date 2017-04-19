@@ -12,42 +12,42 @@ Skipped!
   - TESTTWO3679820743.000
 - ADCP configuration 1:
 
- | name                     | 'unrecognized firmware version' |
- | sourceprog               |                    'instrument' |
- | prog_ver                 |                         54.0800 |
- | config                   |             '01000010-01001001' |
- | beam_angle               |                              30 |
- | numbeams                 |                               4 |
- | beam_freq                |                             150 |
- | beam_pattern             |                        'convex' |
- | orientation              |                          'down' |
- | simflag                  |                          'real' |
- | n_beams                  |                               4 |
- | n_cells                  |                              50 |
- | pings_per_ensemble       |                               1 |
- | cell_size                |                               6 |
- | blank                    |                          2.5000 |
- | prof_mode                |                               1 |
- | corr_threshold           |                               0 |
- | n_codereps               |                               8 |
- | min_pgood                |                               0 |
- | evel_threshold           |                            5000 |
- | time_between_ping_groups |                               2 |
- | coord                    |                      '00000000' |
- | coord_sys                |                          'beam' |
- | use_pitchroll            |                            'no' |
- | use_3beam                |                            'no' |
- | bin_mapping              |                            'no' |
- | xducer_misalign          |                              45 |
- | magnetic_var             |                               0 |
- | sensors_src              |                      '10000010' |
- | sensors_avail            |                      '00000000' |
- | bin1_dist                |                          8.9800 |
- | xmit_pulse               |                          6.1800 |
- | water_ref_cells          |                    [2x1 double] |
- | fls_target_threshold     |                             255 |
- | xmit_lag                 |                          0.7800 |
- | ranges                   |                   [50x1 double] |
+ |name | 'unrecognized firmware version'|
+ |sourceprog | 'instrument'|
+ |prog_ver | 54.0800|
+ |config | '01000010-01001001'|
+ |beam_angle | 30|
+ |numbeams | 4|
+ |beam_freq | 150|
+ |beam_pattern | 'convex'|
+ |orientation | 'down'|
+ |simflag | 'real'|
+ |n_beams | 4|
+ |n_cells | 50|
+ |pings_per_ensemble | 1|
+ |cell_size | 6|
+ |blank | 2.5000|
+ |prof_mode | 1|
+ |corr_threshold | 0|
+ |n_codereps | 8|
+ |min_pgood | 0|
+ |evel_threshold | 5000|
+ |time_between_ping_groups | 2|
+ |coord | '00000000'|
+ |coord_sys | 'beam'|
+ |use_pitchroll | 'no'|
+ |use_3beam | 'no'|
+ |bin_mapping | 'no'|
+ |xducer_misalign | 45|
+ |magnetic_var | 0|
+ |sensors_src | '10000010'|
+ |sensors_avail | '00000000'|
+ |bin1_dist | 8.9800|
+ |xmit_pulse | 6.1800|
+ |water_ref_cells | [2x1 double]|
+ |fls_target_threshold | 255|
+ |xmit_lag | 0.7800|
+ |ranges | [50x1 double]|
 
 - Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Rosie/raw/GPS/ROSIE_2016_08_10_0443.mat
   - GPS_20160810051207.log
@@ -74,42 +74,42 @@ Skipped!
   - BEAVER3680002563.000
 - ADCP configuration 1:
 
- | name                     | 'unrecognized firmware version' |
- | sourceprog               |                    'instrument' |
- | prog_ver                 |                         54.0800 |
- | config                   |             '01000010-01001001' |
- | beam_angle               |                              30 |
- | numbeams                 |                               4 |
- | beam_freq                |                             150 |
- | beam_pattern             |                        'convex' |
- | orientation              |                          'down' |
- | simflag                  |                          'real' |
- | n_beams                  |                               4 |
- | n_cells                  |                              50 |
- | pings_per_ensemble       |                               1 |
- | cell_size                |                               6 |
- | blank                    |                          2.5000 |
- | prof_mode                |                               1 |
- | corr_threshold           |                               0 |
- | n_codereps               |                               8 |
- | min_pgood                |                               0 |
- | evel_threshold           |                            5000 |
- | time_between_ping_groups |                               2 |
- | coord                    |                      '00000000' |
- | coord_sys                |                          'beam' |
- | use_pitchroll            |                            'no' |
- | use_3beam                |                            'no' |
- | bin_mapping              |                            'no' |
- | xducer_misalign          |                              45 |
- | magnetic_var             |                               0 |
- | sensors_src              |                      '10000010' |
- | sensors_avail            |                      '00000000' |
- | bin1_dist                |                          8.9800 |
- | xmit_pulse               |                          6.1800 |
- | water_ref_cells          |                    [2x1 double] |
- | fls_target_threshold     |                             255 |
- | xmit_lag                 |                          0.7800 |
- | ranges                   |                   [50x1 double] |
+ |name | 'unrecognized firmware version'|
+ |sourceprog | 'instrument'|
+ |prog_ver | 54.0800|
+ |config | '01000010-01001001'|
+ |beam_angle | 30|
+ |numbeams | 4|
+ |beam_freq | 150|
+ |beam_pattern | 'convex'|
+ |orientation | 'down'|
+ |simflag | 'real'|
+ |n_beams | 4|
+ |n_cells | 50|
+ |pings_per_ensemble | 1|
+ |cell_size | 6|
+ |blank | 2.5000|
+ |prof_mode | 1|
+ |corr_threshold | 0|
+ |n_codereps | 8|
+ |min_pgood | 0|
+ |evel_threshold | 5000|
+ |time_between_ping_groups | 2|
+ |coord | '00000000'|
+ |coord_sys | 'beam'|
+ |use_pitchroll | 'no'|
+ |use_3beam | 'no'|
+ |bin_mapping | 'no'|
+ |xducer_misalign | 45|
+ |magnetic_var | 0|
+ |sensors_src | '10000010'|
+ |sensors_avail | '00000000'|
+ |bin1_dist | 8.9800|
+ |xmit_pulse | 6.1800|
+ |water_ref_cells | [2x1 double]|
+ |fls_target_threshold | 255|
+ |xmit_lag | 0.7800|
+ |ranges | [50x1 double]|
 
 - Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Rosie/raw/GPS/ROSIE_2016_08_12_0403.mat
   - GPS_20160812034315.log
@@ -127,42 +127,42 @@ Skipped!
   - COUGAR3680045343.000
 - ADCP configuration 1:
 
- | name                     | 'unrecognized firmware version' |
- | sourceprog               |                    'instrument' |
- | prog_ver                 |                         54.0800 |
- | config                   |             '01000010-01001001' |
- | beam_angle               |                              30 |
- | numbeams                 |                               4 |
- | beam_freq                |                             150 |
- | beam_pattern             |                        'convex' |
- | orientation              |                          'down' |
- | simflag                  |                          'real' |
- | n_beams                  |                               4 |
- | n_cells                  |                              50 |
- | pings_per_ensemble       |                               1 |
- | cell_size                |                               6 |
- | blank                    |                          2.5000 |
- | prof_mode                |                               1 |
- | corr_threshold           |                               0 |
- | n_codereps               |                               8 |
- | min_pgood                |                               0 |
- | evel_threshold           |                            5000 |
- | time_between_ping_groups |                               2 |
- | coord                    |                      '00000000' |
- | coord_sys                |                          'beam' |
- | use_pitchroll            |                            'no' |
- | use_3beam                |                            'no' |
- | bin_mapping              |                            'no' |
- | xducer_misalign          |                              45 |
- | magnetic_var             |                               0 |
- | sensors_src              |                      '10000010' |
- | sensors_avail            |                      '00000000' |
- | bin1_dist                |                          8.9700 |
- | xmit_pulse               |                          6.1700 |
- | water_ref_cells          |                    [2x1 double] |
- | fls_target_threshold     |                             255 |
- | xmit_lag                 |                          0.7800 |
- | ranges                   |                   [50x1 double] |
+ |name | 'unrecognized firmware version'|
+ |sourceprog | 'instrument'|
+ |prog_ver | 54.0800|
+ |config | '01000010-01001001'|
+ |beam_angle | 30|
+ |numbeams | 4|
+ |beam_freq | 150|
+ |beam_pattern | 'convex'|
+ |orientation | 'down'|
+ |simflag | 'real'|
+ |n_beams | 4|
+ |n_cells | 50|
+ |pings_per_ensemble | 1|
+ |cell_size | 6|
+ |blank | 2.5000|
+ |prof_mode | 1|
+ |corr_threshold | 0|
+ |n_codereps | 8|
+ |min_pgood | 0|
+ |evel_threshold | 5000|
+ |time_between_ping_groups | 2|
+ |coord | '00000000'|
+ |coord_sys | 'beam'|
+ |use_pitchroll | 'no'|
+ |use_3beam | 'no'|
+ |bin_mapping | 'no'|
+ |xducer_misalign | 45|
+ |magnetic_var | 0|
+ |sensors_src | '10000010'|
+ |sensors_avail | '00000000'|
+ |bin1_dist | 8.9700|
+ |xmit_pulse | 6.1700|
+ |water_ref_cells | [2x1 double]|
+ |fls_target_threshold | 255|
+ |xmit_lag | 0.7800|
+ |ranges | [50x1 double]|
 
 - Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Rosie/raw/GPS/ROSIE_2016_08_13_0104.mat
   - GPS_20160813005424.log
@@ -176,42 +176,42 @@ Skipped!
   - DINGO3680174793.000
 - ADCP configuration 1:
 
- | name                     | 'unrecognized firmware version' |
- | sourceprog               |                    'instrument' |
- | prog_ver                 |                         54.0800 |
- | config                   |             '01000010-01001001' |
- | beam_angle               |                              30 |
- | numbeams                 |                               4 |
- | beam_freq                |                             150 |
- | beam_pattern             |                        'convex' |
- | orientation              |                          'down' |
- | simflag                  |                          'real' |
- | n_beams                  |                               4 |
- | n_cells                  |                              50 |
- | pings_per_ensemble       |                               1 |
- | cell_size                |                               6 |
- | blank                    |                          2.5000 |
- | prof_mode                |                               1 |
- | corr_threshold           |                               0 |
- | n_codereps               |                               8 |
- | min_pgood                |                               0 |
- | evel_threshold           |                            5000 |
- | time_between_ping_groups |                               2 |
- | coord                    |                      '00000000' |
- | coord_sys                |                          'beam' |
- | use_pitchroll            |                            'no' |
- | use_3beam                |                            'no' |
- | bin_mapping              |                            'no' |
- | xducer_misalign          |                              45 |
- | magnetic_var             |                               0 |
- | sensors_src              |                      '10000010' |
- | sensors_avail            |                      '00000000' |
- | bin1_dist                |                          8.9700 |
- | xmit_pulse               |                          6.1600 |
- | water_ref_cells          |                    [2x1 double] |
- | fls_target_threshold     |                             255 |
- | xmit_lag                 |                          0.7700 |
- | ranges                   |                   [50x1 double] |
+ |name | 'unrecognized firmware version'|
+ |sourceprog | 'instrument'|
+ |prog_ver | 54.0800|
+ |config | '01000010-01001001'|
+ |beam_angle | 30|
+ |numbeams | 4|
+ |beam_freq | 150|
+ |beam_pattern | 'convex'|
+ |orientation | 'down'|
+ |simflag | 'real'|
+ |n_beams | 4|
+ |n_cells | 50|
+ |pings_per_ensemble | 1|
+ |cell_size | 6|
+ |blank | 2.5000|
+ |prof_mode | 1|
+ |corr_threshold | 0|
+ |n_codereps | 8|
+ |min_pgood | 0|
+ |evel_threshold | 5000|
+ |time_between_ping_groups | 2|
+ |coord | '00000000'|
+ |coord_sys | 'beam'|
+ |use_pitchroll | 'no'|
+ |use_3beam | 'no'|
+ |bin_mapping | 'no'|
+ |xducer_misalign | 45|
+ |magnetic_var | 0|
+ |sensors_src | '10000010'|
+ |sensors_avail | '00000000'|
+ |bin1_dist | 8.9700|
+ |xmit_pulse | 6.1600|
+ |water_ref_cells | [2x1 double]|
+ |fls_target_threshold | 255|
+ |xmit_lag | 0.7700|
+ |ranges | [50x1 double]|
 
 - Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Rosie/raw/GPS/ROSIE_2016_08_14_2330.mat
   - GPS_20160813232804.log
@@ -224,42 +224,42 @@ Skipped!
   - ELK3680220174.000
 - ADCP configuration 1:
 
- | name                     | 'unrecognized firmware version' |
- | sourceprog               |                    'instrument' |
- | prog_ver                 |                         54.0800 |
- | config                   |             '01000010-01001001' |
- | beam_angle               |                              30 |
- | numbeams                 |                               4 |
- | beam_freq                |                             150 |
- | beam_pattern             |                        'convex' |
- | orientation              |                          'down' |
- | simflag                  |                          'real' |
- | n_beams                  |                               4 |
- | n_cells                  |                              50 |
- | pings_per_ensemble       |                               1 |
- | cell_size                |                               6 |
- | blank                    |                          2.5000 |
- | prof_mode                |                               1 |
- | corr_threshold           |                               0 |
- | n_codereps               |                               8 |
- | min_pgood                |                               0 |
- | evel_threshold           |                            5000 |
- | time_between_ping_groups |                               2 |
- | coord                    |                      '00000000' |
- | coord_sys                |                          'beam' |
- | use_pitchroll            |                            'no' |
- | use_3beam                |                            'no' |
- | bin_mapping              |                            'no' |
- | xducer_misalign          |                              45 |
- | magnetic_var             |                               0 |
- | sensors_src              |                      '10000010' |
- | sensors_avail            |                      '00000000' |
- | bin1_dist                |                          8.9500 |
- | xmit_pulse               |                          6.1500 |
- | water_ref_cells          |                    [2x1 double] |
- | fls_target_threshold     |                             255 |
- | xmit_lag                 |                          0.7700 |
- | ranges                   |                   [50x1 double] |
+ |name | 'unrecognized firmware version'|
+ |sourceprog | 'instrument'|
+ |prog_ver | 54.0800|
+ |config | '01000010-01001001'|
+ |beam_angle | 30|
+ |numbeams | 4|
+ |beam_freq | 150|
+ |beam_pattern | 'convex'|
+ |orientation | 'down'|
+ |simflag | 'real'|
+ |n_beams | 4|
+ |n_cells | 50|
+ |pings_per_ensemble | 1|
+ |cell_size | 6|
+ |blank | 2.5000|
+ |prof_mode | 1|
+ |corr_threshold | 0|
+ |n_codereps | 8|
+ |min_pgood | 0|
+ |evel_threshold | 5000|
+ |time_between_ping_groups | 2|
+ |coord | '00000000'|
+ |coord_sys | 'beam'|
+ |use_pitchroll | 'no'|
+ |use_3beam | 'no'|
+ |bin_mapping | 'no'|
+ |xducer_misalign | 45|
+ |magnetic_var | 0|
+ |sensors_src | '10000010'|
+ |sensors_avail | '00000000'|
+ |bin1_dist | 8.9500|
+ |xmit_pulse | 6.1500|
+ |water_ref_cells | [2x1 double]|
+ |fls_target_threshold | 255|
+ |xmit_lag | 0.7700|
+ |ranges | [50x1 double]|
 
 - Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Rosie/raw/GPS/ROSIE_2016_08_14_2239.mat
   - GPS_20160814220615.log
@@ -273,42 +273,42 @@ Skipped!
   - ELK3680220174.000
 - ADCP configuration 1:
 
- | name                     | 'unrecognized firmware version' |
- | sourceprog               |                    'instrument' |
- | prog_ver                 |                         54.0800 |
- | config                   |             '01000010-01001001' |
- | beam_angle               |                              30 |
- | numbeams                 |                               4 |
- | beam_freq                |                             150 |
- | beam_pattern             |                        'convex' |
- | orientation              |                          'down' |
- | simflag                  |                          'real' |
- | n_beams                  |                               4 |
- | n_cells                  |                              50 |
- | pings_per_ensemble       |                               1 |
- | cell_size                |                               6 |
- | blank                    |                          2.5000 |
- | prof_mode                |                               1 |
- | corr_threshold           |                               0 |
- | n_codereps               |                               8 |
- | min_pgood                |                               0 |
- | evel_threshold           |                            5000 |
- | time_between_ping_groups |                               2 |
- | coord                    |                      '00000000' |
- | coord_sys                |                          'beam' |
- | use_pitchroll            |                            'no' |
- | use_3beam                |                            'no' |
- | bin_mapping              |                            'no' |
- | xducer_misalign          |                              45 |
- | magnetic_var             |                               0 |
- | sensors_src              |                      '10000010' |
- | sensors_avail            |                      '00000000' |
- | bin1_dist                |                          8.9500 |
- | xmit_pulse               |                          6.1500 |
- | water_ref_cells          |                    [2x1 double] |
- | fls_target_threshold     |                             255 |
- | xmit_lag                 |                          0.7700 |
- | ranges                   |                   [50x1 double] |
+ |name | 'unrecognized firmware version'|
+ |sourceprog | 'instrument'|
+ |prog_ver | 54.0800|
+ |config | '01000010-01001001'|
+ |beam_angle | 30|
+ |numbeams | 4|
+ |beam_freq | 150|
+ |beam_pattern | 'convex'|
+ |orientation | 'down'|
+ |simflag | 'real'|
+ |n_beams | 4|
+ |n_cells | 50|
+ |pings_per_ensemble | 1|
+ |cell_size | 6|
+ |blank | 2.5000|
+ |prof_mode | 1|
+ |corr_threshold | 0|
+ |n_codereps | 8|
+ |min_pgood | 0|
+ |evel_threshold | 5000|
+ |time_between_ping_groups | 2|
+ |coord | '00000000'|
+ |coord_sys | 'beam'|
+ |use_pitchroll | 'no'|
+ |use_3beam | 'no'|
+ |bin_mapping | 'no'|
+ |xducer_misalign | 45|
+ |magnetic_var | 0|
+ |sensors_src | '10000010'|
+ |sensors_avail | '00000000'|
+ |bin1_dist | 8.9500|
+ |xmit_pulse | 6.1500|
+ |water_ref_cells | [2x1 double]|
+ |fls_target_threshold | 255|
+ |xmit_lag | 0.7700|
+ |ranges | [50x1 double]|
 
 - Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Rosie/raw/GPS/ROSIE_2016_08_15_0027.mat
   - GPS_20160815001414.log
@@ -325,48 +325,48 @@ Skipped!
   - ROSS4000.000
 - ADCP configuration 1:
 
- | name                     |           'wh-adcp' |
- | sourceprog               |        'instrument' |
- | prog_ver                 |             51.4000 |
- | config                   | '01000001-01001011' |
- | beam_angle               |                  20 |
- | numbeams                 |                   4 |
- | beam_freq                |                 600 |
- | beam_pattern             |            'convex' |
- | orientation              |              'down' |
- | simflag                  |              'real' |
- | n_beams                  |                   4 |
- | n_cells                  |                  80 |
- | pings_per_ensemble       |                   1 |
- | cell_size                |                   1 |
- | blank                    |              0.5400 |
- | prof_mode                |                   1 |
- | corr_threshold           |                  10 |
- | n_codereps               |                   9 |
- | min_pgood                |                   0 |
- | evel_threshold           |                2000 |
- | time_between_ping_groups |              0.5000 |
- | coord                    |          '00000000' |
- | coord_sys                |              'beam' |
- | use_pitchroll            |                'no' |
- | use_3beam                |                'no' |
- | bin_mapping              |                'no' |
- | xducer_misalign          |                   0 |
- | magnetic_var             |                   0 |
- | sensors_src              |          '01111101' |
- | sensors_avail            |          '00011101' |
- | bin1_dist                |              1.6200 |
- | xmit_pulse               |              1.0400 |
- | water_ref_cells          |        [2x1 double] |
- | fls_target_threshold     |                 255 |
- | xmit_lag                 |              0.1200 |
- | serialnum                |        [8x1 double] |
- | sysbandwidth             |        [2x1 double] |
- | syspower                 |                 255 |
- | navigator_basefreqindex  |                   0 |
- | remus_serialnum          |        [4x1 double] |
- | h_adcp_beam_angle        |                  20 |
- | ranges                   |       [80x1 double] |
+ |name | 'wh-adcp'|
+ |sourceprog | 'instrument'|
+ |prog_ver | 51.4000|
+ |config | '01000001-01001011'|
+ |beam_angle | 20|
+ |numbeams | 4|
+ |beam_freq | 600|
+ |beam_pattern | 'convex'|
+ |orientation | 'down'|
+ |simflag | 'real'|
+ |n_beams | 4|
+ |n_cells | 80|
+ |pings_per_ensemble | 1|
+ |cell_size | 1|
+ |blank | 0.5400|
+ |prof_mode | 1|
+ |corr_threshold | 10|
+ |n_codereps | 9|
+ |min_pgood | 0|
+ |evel_threshold | 2000|
+ |time_between_ping_groups | 0.5000|
+ |coord | '00000000'|
+ |coord_sys | 'beam'|
+ |use_pitchroll | 'no'|
+ |use_3beam | 'no'|
+ |bin_mapping | 'no'|
+ |xducer_misalign | 0|
+ |magnetic_var | 0|
+ |sensors_src | '01111101'|
+ |sensors_avail | '00011101'|
+ |bin1_dist | 1.6200|
+ |xmit_pulse | 1.0400|
+ |water_ref_cells | [2x1 double]|
+ |fls_target_threshold | 255|
+ |xmit_lag | 0.1200|
+ |serialnum | [8x1 double]|
+ |sysbandwidth | [2x1 double]|
+ |syspower | 255|
+ |navigator_basefreqindex | 0|
+ |remus_serialnum | [4x1 double]|
+ |h_adcp_beam_angle | 20|
+ |ranges | [80x1 double]|
 
 - Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Casey/raw/GPS/CASEY_2016_08_10_1730.mat
   - GPS_20160810170136.log
@@ -381,48 +381,48 @@ Skipped!
   - ROSS5000.000
 - ADCP configuration 1:
 
- | name                     |           'wh-adcp' |
- | sourceprog               |        'instrument' |
- | prog_ver                 |             51.4000 |
- | config                   | '01000001-01001011' |
- | beam_angle               |                  20 |
- | numbeams                 |                   4 |
- | beam_freq                |                 600 |
- | beam_pattern             |            'convex' |
- | orientation              |              'down' |
- | simflag                  |              'real' |
- | n_beams                  |                   4 |
- | n_cells                  |                  80 |
- | pings_per_ensemble       |                   1 |
- | cell_size                |                   1 |
- | blank                    |              0.5400 |
- | prof_mode                |                   1 |
- | corr_threshold           |                  10 |
- | n_codereps               |                   9 |
- | min_pgood                |                   0 |
- | evel_threshold           |                2000 |
- | time_between_ping_groups |              0.5000 |
- | coord                    |          '00000000' |
- | coord_sys                |              'beam' |
- | use_pitchroll            |                'no' |
- | use_3beam                |                'no' |
- | bin_mapping              |                'no' |
- | xducer_misalign          |                   0 |
- | magnetic_var             |                   0 |
- | sensors_src              |          '01111101' |
- | sensors_avail            |          '00011101' |
- | bin1_dist                |              1.6200 |
- | xmit_pulse               |              1.0400 |
- | water_ref_cells          |        [2x1 double] |
- | fls_target_threshold     |                 255 |
- | xmit_lag                 |              0.1200 |
- | serialnum                |        [8x1 double] |
- | sysbandwidth             |        [2x1 double] |
- | syspower                 |                 255 |
- | navigator_basefreqindex  |                   0 |
- | remus_serialnum          |        [4x1 double] |
- | h_adcp_beam_angle        |                  20 |
- | ranges                   |       [80x1 double] |
+ |name | 'wh-adcp'|
+ |sourceprog | 'instrument'|
+ |prog_ver | 51.4000|
+ |config | '01000001-01001011'|
+ |beam_angle | 20|
+ |numbeams | 4|
+ |beam_freq | 600|
+ |beam_pattern | 'convex'|
+ |orientation | 'down'|
+ |simflag | 'real'|
+ |n_beams | 4|
+ |n_cells | 80|
+ |pings_per_ensemble | 1|
+ |cell_size | 1|
+ |blank | 0.5400|
+ |prof_mode | 1|
+ |corr_threshold | 10|
+ |n_codereps | 9|
+ |min_pgood | 0|
+ |evel_threshold | 2000|
+ |time_between_ping_groups | 0.5000|
+ |coord | '00000000'|
+ |coord_sys | 'beam'|
+ |use_pitchroll | 'no'|
+ |use_3beam | 'no'|
+ |bin_mapping | 'no'|
+ |xducer_misalign | 0|
+ |magnetic_var | 0|
+ |sensors_src | '01111101'|
+ |sensors_avail | '00011101'|
+ |bin1_dist | 1.6200|
+ |xmit_pulse | 1.0400|
+ |water_ref_cells | [2x1 double]|
+ |fls_target_threshold | 255|
+ |xmit_lag | 0.1200|
+ |serialnum | [8x1 double]|
+ |sysbandwidth | [2x1 double]|
+ |syspower | 255|
+ |navigator_basefreqindex | 0|
+ |remus_serialnum | [4x1 double]|
+ |h_adcp_beam_angle | 20|
+ |ranges | [80x1 double]|
 
 - Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Casey/raw/GPS/CASEY_2016_08_11_0413.mat
   - GPS_20160811033925.log
@@ -438,48 +438,48 @@ Skipped!
   - ROSS5002.000
 - ADCP configuration 1:
 
- | name                     |           'wh-adcp' |
- | sourceprog               |        'instrument' |
- | prog_ver                 |             51.4000 |
- | config                   | '01000001-01001011' |
- | beam_angle               |                  20 |
- | numbeams                 |                   4 |
- | beam_freq                |                 600 |
- | beam_pattern             |            'convex' |
- | orientation              |              'down' |
- | simflag                  |              'real' |
- | n_beams                  |                   4 |
- | n_cells                  |                  80 |
- | pings_per_ensemble       |                   1 |
- | cell_size                |                   1 |
- | blank                    |              0.5400 |
- | prof_mode                |                   1 |
- | corr_threshold           |                  10 |
- | n_codereps               |                   9 |
- | min_pgood                |                   0 |
- | evel_threshold           |                2000 |
- | time_between_ping_groups |              0.5000 |
- | coord                    |          '00000000' |
- | coord_sys                |              'beam' |
- | use_pitchroll            |                'no' |
- | use_3beam                |                'no' |
- | bin_mapping              |                'no' |
- | xducer_misalign          |                   0 |
- | magnetic_var             |                   0 |
- | sensors_src              |          '01111101' |
- | sensors_avail            |          '00011101' |
- | bin1_dist                |              1.6200 |
- | xmit_pulse               |              1.0500 |
- | water_ref_cells          |        [2x1 double] |
- | fls_target_threshold     |                 255 |
- | xmit_lag                 |              0.1200 |
- | serialnum                |        [8x1 double] |
- | sysbandwidth             |        [2x1 double] |
- | syspower                 |                 255 |
- | navigator_basefreqindex  |                   0 |
- | remus_serialnum          |        [4x1 double] |
- | h_adcp_beam_angle        |                  20 |
- | ranges                   |       [80x1 double] |
+ |name | 'wh-adcp'|
+ |sourceprog | 'instrument'|
+ |prog_ver | 51.4000|
+ |config | '01000001-01001011'|
+ |beam_angle | 20|
+ |numbeams | 4|
+ |beam_freq | 600|
+ |beam_pattern | 'convex'|
+ |orientation | 'down'|
+ |simflag | 'real'|
+ |n_beams | 4|
+ |n_cells | 80|
+ |pings_per_ensemble | 1|
+ |cell_size | 1|
+ |blank | 0.5400|
+ |prof_mode | 1|
+ |corr_threshold | 10|
+ |n_codereps | 9|
+ |min_pgood | 0|
+ |evel_threshold | 2000|
+ |time_between_ping_groups | 0.5000|
+ |coord | '00000000'|
+ |coord_sys | 'beam'|
+ |use_pitchroll | 'no'|
+ |use_3beam | 'no'|
+ |bin_mapping | 'no'|
+ |xducer_misalign | 0|
+ |magnetic_var | 0|
+ |sensors_src | '01111101'|
+ |sensors_avail | '00011101'|
+ |bin1_dist | 1.6200|
+ |xmit_pulse | 1.0500|
+ |water_ref_cells | [2x1 double]|
+ |fls_target_threshold | 255|
+ |xmit_lag | 0.1200|
+ |serialnum | [8x1 double]|
+ |sysbandwidth | [2x1 double]|
+ |syspower | 255|
+ |navigator_basefreqindex | 0|
+ |remus_serialnum | [4x1 double]|
+ |h_adcp_beam_angle | 20|
+ |ranges | [80x1 double]|
 
 - Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Casey/raw/GPS/CASEY_2016_08_11_2158.mat
   - GPS_20160811214326.log
@@ -494,48 +494,48 @@ Skipped!
   - ROSS5003.000
 - ADCP configuration 1:
 
- | name                     |           'wh-adcp' |
- | sourceprog               |        'instrument' |
- | prog_ver                 |             51.4000 |
- | config                   | '01000001-01001011' |
- | beam_angle               |                  20 |
- | numbeams                 |                   4 |
- | beam_freq                |                 600 |
- | beam_pattern             |            'convex' |
- | orientation              |              'down' |
- | simflag                  |              'real' |
- | n_beams                  |                   4 |
- | n_cells                  |                  80 |
- | pings_per_ensemble       |                   1 |
- | cell_size                |                   1 |
- | blank                    |              0.5400 |
- | prof_mode                |                   1 |
- | corr_threshold           |                  10 |
- | n_codereps               |                   9 |
- | min_pgood                |                   0 |
- | evel_threshold           |                2000 |
- | time_between_ping_groups |              0.5000 |
- | coord                    |          '00000000' |
- | coord_sys                |              'beam' |
- | use_pitchroll            |                'no' |
- | use_3beam                |                'no' |
- | bin_mapping              |                'no' |
- | xducer_misalign          |                   0 |
- | magnetic_var             |                   0 |
- | sensors_src              |          '01111101' |
- | sensors_avail            |          '00011101' |
- | bin1_dist                |              1.6200 |
- | xmit_pulse               |              1.0500 |
- | water_ref_cells          |        [2x1 double] |
- | fls_target_threshold     |                 255 |
- | xmit_lag                 |              0.1200 |
- | serialnum                |        [8x1 double] |
- | sysbandwidth             |        [2x1 double] |
- | syspower                 |                 255 |
- | navigator_basefreqindex  |                   0 |
- | remus_serialnum          |        [4x1 double] |
- | h_adcp_beam_angle        |                  20 |
- | ranges                   |       [80x1 double] |
+ |name | 'wh-adcp'|
+ |sourceprog | 'instrument'|
+ |prog_ver | 51.4000|
+ |config | '01000001-01001011'|
+ |beam_angle | 20|
+ |numbeams | 4|
+ |beam_freq | 600|
+ |beam_pattern | 'convex'|
+ |orientation | 'down'|
+ |simflag | 'real'|
+ |n_beams | 4|
+ |n_cells | 80|
+ |pings_per_ensemble | 1|
+ |cell_size | 1|
+ |blank | 0.5400|
+ |prof_mode | 1|
+ |corr_threshold | 10|
+ |n_codereps | 9|
+ |min_pgood | 0|
+ |evel_threshold | 2000|
+ |time_between_ping_groups | 0.5000|
+ |coord | '00000000'|
+ |coord_sys | 'beam'|
+ |use_pitchroll | 'no'|
+ |use_3beam | 'no'|
+ |bin_mapping | 'no'|
+ |xducer_misalign | 0|
+ |magnetic_var | 0|
+ |sensors_src | '01111101'|
+ |sensors_avail | '00011101'|
+ |bin1_dist | 1.6200|
+ |xmit_pulse | 1.0500|
+ |water_ref_cells | [2x1 double]|
+ |fls_target_threshold | 255|
+ |xmit_lag | 0.1200|
+ |serialnum | [8x1 double]|
+ |sysbandwidth | [2x1 double]|
+ |syspower | 255|
+ |navigator_basefreqindex | 0|
+ |remus_serialnum | [4x1 double]|
+ |h_adcp_beam_angle | 20|
+ |ranges | [80x1 double]|
 
 - Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Casey/raw/GPS/CASEY_2016_08_12_0454.mat
   - GPS_20160812052713.log
@@ -550,48 +550,48 @@ Skipped!
   - ROSS5005.000
 - ADCP configuration 1:
 
- | name                     |           'wh-adcp' |
- | sourceprog               |        'instrument' |
- | prog_ver                 |             51.4000 |
- | config                   | '01000001-01001011' |
- | beam_angle               |                  20 |
- | numbeams                 |                   4 |
- | beam_freq                |                 600 |
- | beam_pattern             |            'convex' |
- | orientation              |              'down' |
- | simflag                  |              'real' |
- | n_beams                  |                   4 |
- | n_cells                  |                  80 |
- | pings_per_ensemble       |                   1 |
- | cell_size                |                   1 |
- | blank                    |              0.5400 |
- | prof_mode                |                   1 |
- | corr_threshold           |                  10 |
- | n_codereps               |                   9 |
- | min_pgood                |                   0 |
- | evel_threshold           |                2000 |
- | time_between_ping_groups |              0.5000 |
- | coord                    |          '00000000' |
- | coord_sys                |              'beam' |
- | use_pitchroll            |                'no' |
- | use_3beam                |                'no' |
- | bin_mapping              |                'no' |
- | xducer_misalign          |                   0 |
- | magnetic_var             |                   0 |
- | sensors_src              |          '01111101' |
- | sensors_avail            |          '00011101' |
- | bin1_dist                |              1.6200 |
- | xmit_pulse               |              1.0500 |
- | water_ref_cells          |        [2x1 double] |
- | fls_target_threshold     |                 255 |
- | xmit_lag                 |              0.1200 |
- | serialnum                |        [8x1 double] |
- | sysbandwidth             |        [2x1 double] |
- | syspower                 |                 255 |
- | navigator_basefreqindex  |                   0 |
- | remus_serialnum          |        [4x1 double] |
- | h_adcp_beam_angle        |                  20 |
- | ranges                   |       [80x1 double] |
+ |name | 'wh-adcp'|
+ |sourceprog | 'instrument'|
+ |prog_ver | 51.4000|
+ |config | '01000001-01001011'|
+ |beam_angle | 20|
+ |numbeams | 4|
+ |beam_freq | 600|
+ |beam_pattern | 'convex'|
+ |orientation | 'down'|
+ |simflag | 'real'|
+ |n_beams | 4|
+ |n_cells | 80|
+ |pings_per_ensemble | 1|
+ |cell_size | 1|
+ |blank | 0.5400|
+ |prof_mode | 1|
+ |corr_threshold | 10|
+ |n_codereps | 9|
+ |min_pgood | 0|
+ |evel_threshold | 2000|
+ |time_between_ping_groups | 0.5000|
+ |coord | '00000000'|
+ |coord_sys | 'beam'|
+ |use_pitchroll | 'no'|
+ |use_3beam | 'no'|
+ |bin_mapping | 'no'|
+ |xducer_misalign | 0|
+ |magnetic_var | 0|
+ |sensors_src | '01111101'|
+ |sensors_avail | '00011101'|
+ |bin1_dist | 1.6200|
+ |xmit_pulse | 1.0500|
+ |water_ref_cells | [2x1 double]|
+ |fls_target_threshold | 255|
+ |xmit_lag | 0.1200|
+ |serialnum | [8x1 double]|
+ |sysbandwidth | [2x1 double]|
+ |syspower | 255|
+ |navigator_basefreqindex | 0|
+ |remus_serialnum | [4x1 double]|
+ |h_adcp_beam_angle | 20|
+ |ranges | [80x1 double]|
 
 - Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Casey/raw/GPS/CASEY_2016_08_12_1419.mat
   - GPS_20160812134337.log
@@ -615,48 +615,48 @@ Skipped!
   - ROSS6003.000
 - ADCP configuration 1:
 
- | name                     |           'wh-adcp' |
- | sourceprog               |        'instrument' |
- | prog_ver                 |             51.4000 |
- | config                   | '01000001-01001011' |
- | beam_angle               |                  20 |
- | numbeams                 |                   4 |
- | beam_freq                |                 600 |
- | beam_pattern             |            'convex' |
- | orientation              |              'down' |
- | simflag                  |              'real' |
- | n_beams                  |                   4 |
- | n_cells                  |                  80 |
- | pings_per_ensemble       |                   1 |
- | cell_size                |                   1 |
- | blank                    |              0.5400 |
- | prof_mode                |                   1 |
- | corr_threshold           |                  10 |
- | n_codereps               |                   9 |
- | min_pgood                |                   0 |
- | evel_threshold           |                2000 |
- | time_between_ping_groups |              0.5000 |
- | coord                    |          '00000000' |
- | coord_sys                |              'beam' |
- | use_pitchroll            |                'no' |
- | use_3beam                |                'no' |
- | bin_mapping              |                'no' |
- | xducer_misalign          |                   0 |
- | magnetic_var             |                   0 |
- | sensors_src              |          '01111101' |
- | sensors_avail            |          '00011101' |
- | bin1_dist                |              1.6200 |
- | xmit_pulse               |              1.0400 |
- | water_ref_cells          |        [2x1 double] |
- | fls_target_threshold     |                 255 |
- | xmit_lag                 |              0.1200 |
- | serialnum                |        [8x1 double] |
- | sysbandwidth             |        [2x1 double] |
- | syspower                 |                 255 |
- | navigator_basefreqindex  |                   0 |
- | remus_serialnum          |        [4x1 double] |
- | h_adcp_beam_angle        |                  20 |
- | ranges                   |       [80x1 double] |
+ |name | 'wh-adcp'|
+ |sourceprog | 'instrument'|
+ |prog_ver | 51.4000|
+ |config | '01000001-01001011'|
+ |beam_angle | 20|
+ |numbeams | 4|
+ |beam_freq | 600|
+ |beam_pattern | 'convex'|
+ |orientation | 'down'|
+ |simflag | 'real'|
+ |n_beams | 4|
+ |n_cells | 80|
+ |pings_per_ensemble | 1|
+ |cell_size | 1|
+ |blank | 0.5400|
+ |prof_mode | 1|
+ |corr_threshold | 10|
+ |n_codereps | 9|
+ |min_pgood | 0|
+ |evel_threshold | 2000|
+ |time_between_ping_groups | 0.5000|
+ |coord | '00000000'|
+ |coord_sys | 'beam'|
+ |use_pitchroll | 'no'|
+ |use_3beam | 'no'|
+ |bin_mapping | 'no'|
+ |xducer_misalign | 0|
+ |magnetic_var | 0|
+ |sensors_src | '01111101'|
+ |sensors_avail | '00011101'|
+ |bin1_dist | 1.6200|
+ |xmit_pulse | 1.0400|
+ |water_ref_cells | [2x1 double]|
+ |fls_target_threshold | 255|
+ |xmit_lag | 0.1200|
+ |serialnum | [8x1 double]|
+ |sysbandwidth | [2x1 double]|
+ |syspower | 255|
+ |navigator_basefreqindex | 0|
+ |remus_serialnum | [4x1 double]|
+ |h_adcp_beam_angle | 20|
+ |ranges | [80x1 double]|
 
 - Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Casey/raw/GPS/CASEY_2016_08_14_1717.mat
   - GPS_20160814170006.log
@@ -671,48 +671,48 @@ Skipped!
   - CASEY000.000
 - ADCP configuration 1:
 
- | name                     |           'wh-adcp' |
- | sourceprog               |        'instrument' |
- | prog_ver                 |             50.4000 |
- | config                   | '01000001-01001010' |
- | beam_angle               |                  20 |
- | numbeams                 |                   4 |
- | beam_freq                |                 300 |
- | beam_pattern             |            'convex' |
- | orientation              |              'down' |
- | simflag                  |              'real' |
- | n_beams                  |                   4 |
- | n_cells                  |                  40 |
- | pings_per_ensemble       |                   1 |
- | cell_size                |                   4 |
- | blank                    |              1.7600 |
- | prof_mode                |                   1 |
- | corr_threshold           |                  10 |
- | n_codereps               |                   9 |
- | min_pgood                |                   0 |
- | evel_threshold           |                5000 |
- | time_between_ping_groups |                   1 |
- | coord                    |          '00000000' |
- | coord_sys                |              'beam' |
- | use_pitchroll            |                'no' |
- | use_3beam                |                'no' |
- | bin_mapping              |                'no' |
- | xducer_misalign          |                   0 |
- | magnetic_var             |                   0 |
- | sensors_src              |          '01111101' |
- | sensors_avail            |          '00111101' |
- | bin1_dist                |              6.1500 |
- | xmit_pulse               |              4.3000 |
- | water_ref_cells          |        [2x1 double] |
- | fls_target_threshold     |                 255 |
- | xmit_lag                 |              0.4800 |
- | serialnum                |        [8x1 double] |
- | sysbandwidth             |        [2x1 double] |
- | syspower                 |                 255 |
- | navigator_basefreqindex  |                   0 |
- | remus_serialnum          |        [4x1 double] |
- | h_adcp_beam_angle        |                  20 |
- | ranges                   |       [40x1 double] |
+ |name | 'wh-adcp'|
+ |sourceprog | 'instrument'|
+ |prog_ver | 50.4000|
+ |config | '01000001-01001010'|
+ |beam_angle | 20|
+ |numbeams | 4|
+ |beam_freq | 300|
+ |beam_pattern | 'convex'|
+ |orientation | 'down'|
+ |simflag | 'real'|
+ |n_beams | 4|
+ |n_cells | 40|
+ |pings_per_ensemble | 1|
+ |cell_size | 4|
+ |blank | 1.7600|
+ |prof_mode | 1|
+ |corr_threshold | 10|
+ |n_codereps | 9|
+ |min_pgood | 0|
+ |evel_threshold | 5000|
+ |time_between_ping_groups | 1|
+ |coord | '00000000'|
+ |coord_sys | 'beam'|
+ |use_pitchroll | 'no'|
+ |use_3beam | 'no'|
+ |bin_mapping | 'no'|
+ |xducer_misalign | 0|
+ |magnetic_var | 0|
+ |sensors_src | '01111101'|
+ |sensors_avail | '00111101'|
+ |bin1_dist | 6.1500|
+ |xmit_pulse | 4.3000|
+ |water_ref_cells | [2x1 double]|
+ |fls_target_threshold | 255|
+ |xmit_lag | 0.4800|
+ |serialnum | [8x1 double]|
+ |sysbandwidth | [2x1 double]|
+ |syspower | 255|
+ |navigator_basefreqindex | 0|
+ |remus_serialnum | [4x1 double]|
+ |h_adcp_beam_angle | 20|
+ |ranges | [40x1 double]|
 
 - Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Casey/raw/GPS/CASEY_2016_08_15_0001.mat
   - GPS_20160815004929.log

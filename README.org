@@ -4,7 +4,7 @@
 #+TITLE: ROSS Data Processing
 #+AUTHOR: Dylan Winters
 
-* Overview
+* TODO Overview
 This set of matlab functions is designed to process ADCP data
 collected using ROSS kayaks with minimal code modifications between
 trips and deployments. Each set of deployments requires a trip name,
@@ -12,199 +12,18 @@ consistent file & folder organization, and the creation of a
 deployment file.
 
 ** File/Folder Structure
-Each set of deployments, and each kayak used, needs a name for
-organizational purposes. For example, the deployments from the LeConte
-glacier trip in August 2016 are under the name
-*~leconte_2016_aug~*. The kayaks for this trip were given the names
-Rosie and Casey. Data must be organized by trip name, kayak name, and
-data type. For this example, we have the following folders for raw
-data:
-
-
-- ~ROSS/data/leconte_2016_aug/Casey/raw/GPS/~
-- ~ROSS/data/leconte_2016_aug/Casey/raw/ADCP/~
-
-
-- ~ROSS/data/leconte_2016_aug/Rosie/raw/GPS/~
-- ~ROSS/data/leconte_2016_aug/Rosie/raw/ADCP/~
-
-
-The ~GPS~ folders contain .log files with NMEA data logged to the
-kayaks' computers. The ~ADCP~ folders contain biary data saved
-directly to the ADCP's.
-
-The final deployment files are stored in the automatically created
-folders:
-
-- ~ROSS/data/leconte_2016_aug/Casey/processed/~
-- ~ROSS/data/leconte_2016_aug/Rosie/processed/~
-
-** Deployment File
-Each set of deployments needs a deployment file to specify time limits
-and other parameters for kayak deployments. These use the same trip
-name used to organize data and are of the form
-"ross_tripname_deployments.m", e.g.:
-
-
-- ~ross_leconte_2016_aug_deployments.m~
-- ~ross_palau_2016_nov_deployments.m~
-
-The deployment file is a function that returns two structures:
-
-- ~master~: Contains global trip information and processing instructions
-  (e.g. kayak names and which figures to make).
-
-- ~deployments~: Contains deployment-specific information and
-  processing instructions.
-
-
-Fields in these structures are filled in the three main sections of
-the deployment file. Below are examples of these sections using the
-Palau dataset from November 2016.
-
-*** Master parameters
-Global settings and instructions.
-
-#+BEGIN_SRC matlab
-  master = struct();
-  master.name = 'palau_2016_nov';
-  master.process_data = true;
-  master.make_figures.summary = true;
-  master.make_figures.surface_vel = true;
-  master.make_figures.diagnostics = true;
-  master.kayaks = {'Ata'};
-#+END_SRC
-
-
-*** ADCP parameters
-Defines some parameters for different ADCP configurations used during the trip.
-
-#+BEGIN_SRC matlab
-  ADCP_300 = struct('freq',300,...
-                    'beam_angle',20,...
-                    'h0',135,...
-                    'unit_dir',1); % 1:towards xducer; -1:away from xducer
-#+END_SRC
-
-
-*** Deployment parameters
-Deployment-specific settings and instructions.
-
-#+BEGIN_SRC matlab
-  ata0.ADCP = ADCP_300;
-  ata0.lon_unit = 'E';
-  ata0.plot.map.pos = [1000 847 548 491];
-
-  dep = 1;
-  ata(dep).name = 'ATA_2016_11_03_0051';
-  ata(dep).files.map = 'palau.mat';
-  ata(dep).ADCP = ADCP_300;
-  ata(dep).tlim = datenum(['03-Nov-2016 00:51:03';
-                           '03-Nov-2016 06:12:18']);
-  ata(dep).files.adcp = {'ROSS4011.000'};
-  ata(dep).files.gps = {'GPS_20161103004229.log';
-                        'GPS_20161103015217.log';
-                        'GPS_20161103030237.log';
-                        'GPS_20161103041141.log';
-                        'GPS_20161103052115.log'};
-  ata(dep).proc.vel = 'BT';
-  ata(dep).proc.trim = {'BT'};
-  ata(dep).plot.ylim = [0 50];
-  ata(dep).plot.map.pos = [1000 787 658 551];
-#+END_SRC
-
-- ~name~: deployment name
-- ~ADCP~: ADCP parameters
-- ~files.map~: map file (#TODO: describe the creation of map files)
-- ~files.adcp~: names of binary ADCP data files collected during the deployment
-- ~files.gps~: names of gps .log files collected during the deployment
-- ~tlim~: start and end time of deployment
-- ~proc.vel~: method to be used for removing kayak velocity from currents
-  - ~'BT'~: use bottom-tracking
-  - ~'GPS'~: use GPS-based velocity estimate
-- ~proc.trim~: method(s) to be used for trimming bad data. Multiple
-  methods can be used, e.g. ~{'EI',100}~ would trim data below the 1st
-  sharp spike in echo intensity and also remove data below 100 meters.
-  - ~'BT'~: remove data below 90% of bottom-track depth
-  - ~'EI'~: remove data below the first sharp spike in echo intensity
-  - ~n~: remove data below n meters
-- ~plot.ylim~: axis limits to be used for depth-dependent variables
-- ~plot.map.pos~: position (in MATLAB pixel coordinates) for map figure
-
-** Output
-
-Each deployment's data is output to ~Data/<trip>/<kayak>/processed/~.
-
-ADCP data and GPS data are saved to different structures:
-
-#+BEGIN_SRC matlab
-  >> load Data/leconte_2016_aug/Rosie/processed/ROSIE_2016_08_09_1445.mat
-  >> whos
-    Name      Size              Bytes  Class     Attributes
-
-    adcp      1x1             9547704  struct              
-    gps       1x1              427344  struct              
-
-  >> adcp
-
-  adcp = 
-
-              name: 'adcp'
-            config: [1x1 struct]
-             mtime: [1x892 double]
-            number: [1x892 double]
-             pitch: [1x892 double]
-              roll: [1x892 double]
-           heading: [1x892 double]
-         pitch_std: [1x892 double]
-          roll_std: [1x892 double]
-       heading_std: [1x892 double]
-             depth: [1x892 double]
-       temperature: [1x892 double]
-          salinity: [1x892 double]
-          pressure: [1x892 double]
-      pressure_std: [1x892 double]
-          east_vel: [50x892 double]
-         north_vel: [50x892 double]
-          vert_vel: [50x892 double]
-         error_vel: [50x892 double]
-              corr: [50x4x892 double]
-            status: [50x4x892 double]
-            intens: [50x4x892 double]
-          bt_range: [4x892 double]
-            bt_vel: [4x892 double]
-           bt_corr: [4x892 double]
-           bt_ampl: [4x892 double]
-      bt_perc_good: [4x892 double]
-         perc_good: [50x4x892 double]
-              file: [1x893 double]
-              beam: [1x1 struct]
-             earth: [1x1 struct]
-               lat: [1x892 double]
-               lon: [1x892 double]
-
-  >> gps
-
-  gps = 
-
-       dn: [1x8881 double]
-      lat: [1x8881 double]
-      lon: [1x8881 double]
-        h: [1x8881 double]
-       vx: [1x8881 double]
-       vy: [1x8881 double]
-#+END_SRC
-
+** Deployment Files
+** Output Data
+** Output Figures
 
 * Data Sets
 
-#+INCLUDE: "org/leconte_2016_aug.org"
+** 2016 Aug - LeConte Glacier
+[[org/leconte_2016_aug.org]]
 
-** 2016 Nov - Palau
-** 2017 Jan - Newport
-[[file:mfiles/ross_newport_2017_jan_deployments.m]]
-
-** 2017 Jan - Puget Sound
+** TODO 2016 Nov - Palau
+** TODO 2017 Jan - Newport
+** TODO 2017 Jan - Puget Sound
 
 [Summary figure]
 [Surface velocity figure]
@@ -251,7 +70,6 @@ In summary:
   bottom-track velocities would be similarly incorrect.
 - Velocity measurements from pings that hit the bottom are generally
   smaller than velocity measurements from BT and GPS.
-
 
 
 

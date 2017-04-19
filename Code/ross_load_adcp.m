@@ -34,7 +34,6 @@ else
     end
 end
 
-
 for i = 1:length(A)
     disp(sprintf('- ADCP configuration %d:',i))
     s = evalc('A(i).config');

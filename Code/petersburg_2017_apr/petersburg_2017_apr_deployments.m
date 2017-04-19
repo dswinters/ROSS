@@ -4,6 +4,7 @@ function [master deployments] = petersburg_2017_apr_deployments()
 % Define some filters
 %========================================================
 newfilt =@(n,p) struct('name',n,'params',p);
+trim_ei_edge_a = newfilt('ei_edge','avg');
 trim_ei_edge_b = newfilt('ei_edge','beam');
 filt_rotmax3   = newfilt('rotmax',3);
 notrim = newfilt('cutoff',inf);
@@ -23,7 +24,8 @@ master.make_figures.surface_vel = true;
 % Processing defaults
 %========================================================
 defaults.proc.skip             = false;
-defaults.proc.trim_methods(1)  = notrim;
+% defaults.proc.trim_methods(1)  = notrim;
+defaults.proc.trim_methods(1)  = trim_ei_edge_a;
 % defaults.proc.filters(1)       = filt_rotmax3;
 defaults.proc.ship_vel_removal = 'GPS';
 defaults.files.map             = 'petersburg_dock';

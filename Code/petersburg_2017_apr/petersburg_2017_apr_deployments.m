@@ -17,7 +17,7 @@ master.name                     = 'petersburg_2017_apr';
 master.kayaks = {'Swankie'};
 master.process_data             = true;
 master.make_figures.summary     = true;
-master.make_figures.surface_vel = false;
+master.make_figures.surface_vel = true;
 
 %========================================================
 % Processing defaults

@@ -122,4 +122,6 @@ set(ha_map,'DataAspectRatio',[1 yx 1])
 
 fout = [dep.fig_dir, 'surface_vel.jpg'];
 print('-djpeg90','-r300',fout)
-disp(['[[' fout ']]'])
+fparts = strsplit(fout,'/');
+flink = fullfile('..',fparts{6:end});
+disp(['[[' flink ']]'])

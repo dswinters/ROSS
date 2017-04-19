@@ -102,5 +102,47 @@
 
 
 ** Figures
-[[/Users/dylan/OSU/ROSS/Figures/petersburg_2017_apr/Swankie/SWANKIE_test1/summary.jpg]]
-[[/Users/dylan/OSU/ROSS/Figures/petersburg_2017_apr/Swankie/SWANKIE_test1/surface_vel.jpg]]
+fparts = strsplit(fout,'/')
+
+fparts = 
+
+  Columns 1 through 9
+
+    ''    'Users'    'dylan'    'OSU'    'ROSS'    'Figures'    'petersburg_2017_apr'    'Swankie'    'SWANKIE_test1'
+
+  Column 10
+
+    'summary.jpg'
+
+fullfile('..',fparts{5:end})
+
+ans =
+
+../ROSS/Figures/petersburg_2017_apr/Swankie/SWANKIE_test1/summary.jpg
+
+fparts = strsplit(fout,'/')
+
+fparts = 
+
+  Columns 1 through 9
+
+    ''    'Users'    'dylan'    'OSU'    'ROSS'    'Figures'    'petersburg_2017_apr'    'Swankie'    'SWANKIE_test1'
+
+  Column 10
+
+    'summary.jpg'
+
+fullfile('..',fparts{6:end})
+
+ans =
+
+../Figures/petersburg_2017_apr/Swankie/SWANKIE_test1/summary.jpg
+
+dbquit
+ross_master('leconte_2016_aug')
+Calibrating 600khz ADCP compass
+[Warning: Could not find appropriate function on path loading function handle
+/Users/dylan/OSU/ROSS/mfiles/ross_leconte_2016_aug_calibrate_compass.m>@(C,h)h(:)+X(h(:))*C] 
+[> In leconte_2016_aug_calibrate_compass (line 8)
+  In ross_master (line 57)] 
+Loaded ../Data/leconte_2016_aug/600khz_compass_calibration.mat

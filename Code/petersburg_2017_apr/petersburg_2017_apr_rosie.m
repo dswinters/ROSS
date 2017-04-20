@@ -16,7 +16,7 @@ rosie(dep).plot.ylim  = [0 100];
 % -- Pelican trip 04/19/17
 % %    - the logged PAVS files seem to be corrupted.
 % dep = 2;
-% rosie(dep).name       = 'ROSIE_pelican_trip_0419';
+% rosie(dep).name       = 'ROSIE_Pelican_0419';
 % rosie(dep).tlim       = datenum([-inf inf]);
 % rosie(dep).files.adcp = {...
 %     'ADCP_raw_20170419012224.bin';

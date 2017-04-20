@@ -22,35 +22,44 @@ swankie(dep).files.gps  = {...
 swankie(dep).tlim = datenum(...
     ['16-Apr-2017 19:47:50';
      '16-Apr-2017 21:53:59']);
-
 %--------------------------------------------------------%
+dep = 2;
+swankie(dep).name       = 'SWANKIE_Pelican_0419';
+swankie(dep).tlim       = datenum([-inf inf]);
+swankie(dep).files.adcp = {...
+    'ADCP_raw_20170419200404.bin';
+    'ADCP_raw_20170419210000.bin';
+    'ADCP_raw_20170419220000.bin';
+    'ADCP_raw_20170419220457.bin';
+    'ADCP_raw_20170419230000.bin';
+    'ADCP_raw_20170420000000.bin';
+    'ADCP_raw_20170420010000.bin';
+    'ADCP_raw_20170420020000.bin';
+    'ADCP_raw_20170420025215.bin';
+    'ADCP_raw_20170420025748.bin';
+    'ADCP_raw_20170420025932.bin';
+    'ADCP_raw_20170420030000.bin';
+    'ADCP_raw_20170420030127.bin';
+    'ADCP_raw_20170420030312.bin';
+    'ADCP_raw_20170420110208.bin'};
+swankie(dep).files.gps  = {...
+    'GPS_20170419001055.log';
+    'GPS_20170419200404.log';
+    'GPS_20170419211343.log';
+    'GPS_20170419220457.log';
+    'GPS_20170419231427.log';
+    'GPS_20170420002347.log';
+    'GPS_20170420013315.log';
+    'GPS_20170420024243.log';
+    'GPS_20170420025215.log';
+    'GPS_20170420025748.log';
+    'GPS_20170420025932.log';
+    'GPS_20170420030127.log';
+    'GPS_20170420030312.log';
+    'GPS_20170420110208.log'};
+swankie(dep).plot.ylim = [0 200];
+%--------------------------------------------------------%
+
+
 swankie = ross_fill_defaults(swankie,swankie0);
-
-% % return
-% dir_in = '~/OSU/ROSS/Data/petersburg_2017_apr/Swankie/raw/ADCP/';
-% adcp = adcp_parse(strcat(dir_in,swankie(1).files.adcp));
-% save ~/Desktop/swankie_psg_test_adcp.mat adcp
-
-
-% dir_in = '~/OSU/ROSS/Data/petersburg_2017_apr/Swankie/raw/GPS/';
-% nmea_types = {'GPRMC','HEHDT','HEROT','GPGGA','GPRMC','PASHR'};
-% nav = nav_read(strcat(dir_in,swankie(1).files.gps),nmea_types);
-
-% a(1) = adcp_beam2earth(adcp(1));
-% a(2) = adcp_beam2earth(adcp(2));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

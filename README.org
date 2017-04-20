@@ -5,16 +5,21 @@
 #+AUTHOR: Dylan Winters
 
 * TODO Overview
-This set of matlab functions is designed to process ADCP data
-collected using ROSS kayaks with minimal code modifications between
-trips and deployments. Each set of deployments requires a trip name,
-consistent file & folder organization, and the creation of a
-deployment file.
+This repository is designed to serve as both a code repository and lab
+notebook for processing data from Robotic Oceanographic Surface
+Sampler (ROSS) kayaks. 
 
 ** File/Folder Structure
+[[./Code][Code]], data, and [[./Figures][figures]] are organized by trips > kayaks >
+deployments. Each trip has been given a unique name that is used for
+organization.
+
 ** Deployment Files
-** Output Data
-** Output Figures
+Each trip requires a deployment file that contains processing
+instructions for each kayak deployment.
+
+See [[./Code/petersburg_2017_apr/petersburg_2017_apr_deployments.m][petersburg_2017_apr_deployments.m]] for an example deployment
+file.
 
 * Data Sets
 

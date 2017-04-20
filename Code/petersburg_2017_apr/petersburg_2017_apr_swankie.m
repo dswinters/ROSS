@@ -23,9 +23,12 @@ swankie(dep).tlim = datenum(...
     ['16-Apr-2017 19:47:50';
      '16-Apr-2017 21:53:59']);
 %--------------------------------------------------------%
+newfilt =@(n,p) struct('name',n,'params',p);
 dep = 2;
 swankie(dep).name       = 'SWANKIE_Pelican_0419';
-swankie(dep).tlim       = datenum([-inf inf]);
+swankie(dep).tlim = ...
+    datenum(['19-Apr-2017 20:18:47';
+             '19-Apr-2017 21:28:32']);
 swankie(dep).files.adcp = {...
     'ADCP_raw_20170419200404.bin';
     'ADCP_raw_20170419210000.bin';
@@ -57,9 +60,11 @@ swankie(dep).files.gps  = {...
     'GPS_20170420030127.log';
     'GPS_20170420030312.log';
     'GPS_20170420110208.log'};
-swankie(dep).plot.ylim = [0 200];
+swankie(dep).plot.ylim = [0 100];
+swankie(dep).proc.trim_methods = newfilt('none',[]);
+% swankie(dep).proc.trim_methods = newfilt('ei_edge','beam');
+swankie(dep).proc.filters(1) = newfilt('rotmax',3);
 %--------------------------------------------------------%
-
 
 swankie = ross_fill_defaults(swankie,swankie0);
 

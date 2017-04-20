@@ -74,6 +74,9 @@ In summary:
 
 
 ** 2017 Apr - Petersburg
+
+[[org/petersburg_2016_apr.org][Processing log & figures]]
+
 - [[file:Code/petersburg_2017_apr/][Code]]
   - [[file:Code/petersburg_2017_apr/petersburg_2017_apr_swankie.m][Swankie]]
   - [[file:Code/petersburg_2017_apr/petersburg_2017_apr_rosie.m][Rosie]]

@@ -6,7 +6,9 @@ fexist = exist(matfile,'file');
 
 if ~fexist || ross.deployments(ndep).proc.adcp_raw2mat
     %% Load raw data
-    adcp_load_func = 'rdradcp_multi';
+    % Default binary ADCP data parsing function - slow, but safe
+    adcp_load_func = 'adcp_rdradcp_multi';
+    % Override binary ADCP data parsing function?
     if isfield(D.proc,'adcp_load_function')
         adcp_load_func = D.proc.adcp_load_function;
     end

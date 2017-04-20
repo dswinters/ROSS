@@ -29,7 +29,9 @@ separated into different functions for each kayak: [[Code/petersburg_2017_apr/pe
 - [[org/leconte_2016_aug_rosie.org][Rosie processing log & figures]]
 - [[org/leconte_2016_aug_casey.org][Casey processing log & figures]]
 
-** TODO 2016 Nov - Palau
+** 2016 Nov - Palau
+- [[org/palau_2016_nov_ata.org][Ata processing log & figures]]
+
 ** TODO 2017 Jan - Newport
 ** 2017 Jan - Puget Sound
 - [[org/puget_2017_jan_spanky.org][Spanky processing log & figures]]

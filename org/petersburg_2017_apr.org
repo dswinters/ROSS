@@ -1,0 +1,18 @@
+* petersburg_2017_apr notes
+** Kayak attributes
+#+name:kayak_info
+| Name    | ADCP           | Flag   | Network |
+|---------+----------------+--------+---------|
+| Swankie | Sentinel V 300 | Sweden | ROSS6   |
+| Rosie   | PAVS 150       | Alaska | ROSS3   |
+| Casey   | Workhorse 600  | Norway |         |
+
+** Sentinel V Notes
+
+| Profile         | Bins | Bin Size (m) | Bin 1 Distance (m) |
+|-----------------+------+--------------+--------------------|
+| Long Range      |   40 |          4.0 |               5.91 |
+| High Resolution |   63 |          1.5 |               3.50 |
+
+
+

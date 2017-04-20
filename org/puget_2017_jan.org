@@ -1,0 +1,47 @@
+* puget_2017_jan additional notes
+[Summary figure]
+[Surface velocity figure]
+
+The two above figures show a bias in measured currents proportional to
+ROSS's velocity. As ROSS travels clockwise along its four primary
+transect directions, the currents appear to match the direction of
+travel.
+
+I grouped the data by transect direciton in case there was a
+directional aspect to these problems. The colored points in the
+figures below represent data where ROSS was moving faster than 2m/s
+along one of these directions, and the black points show all other
+data.
+
+Plotting currents vs. ROSS's velocity from GPS measurements shows that
+final corrected currents have a component that scales linearly with
+ROSS's velocity (red dashed lines, upper 2 panels). This is indicative
+of measured currents that are weaker than ROSS's velocity.
+
+Measured currents in the forward-backward and port-starboard
+directions scale normally with velocity when ROSS is moving slower
+than 2m/s (black points; the green dashed line shows how measured
+currents would scale with velocity in still water). When ROSS is
+moving faster than 2m/s, forward-backward velocity is significantly
+lower than expected, while port-starboard velocity is slightly higher
+than expected.
+
+These signs point towards some kind of instrument orientation
+problem. However, bottom-track velocities would then experience
+similar problems, which is not the case here. Bottom-track velocities
+agree very closely with GPS velocities whenever the botton is in rage,
+even at high speeds. Estimates of ROSS's speed using velocity data from
+pings that hit the bottom are generally lower than GPS and BT speed:
+
+[bottom track figure]
+
+In summary:
+
+- Measured velocities in the forward-backward direction are smaller
+  than expected. This caused currents to be over-corrected when ship
+  speed is removed, resulting in biases proportional to ship velocity.
+- This is not due to incorrect instrument orientation, otherwise
+  bottom-track velocities would be similarly incorrect.
+- Velocity measurements from pings that hit the bottom are generally
+  smaller than velocity measurements from BT and GPS.
+

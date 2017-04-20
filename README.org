@@ -19,7 +19,7 @@ deployment file.
 * Data Sets
 
 ** 2016 Aug - LeConte Glacier
-- [[org/leconge_2016_aug_rosie.org][Rosie processing log & figures]]
+- [[org/leconte_2016_aug_rosie.org][Rosie processing log & figures]]
 - [[org/leconte_2016_aug_casey.org][Casey processing log & figures]]
 
 ** TODO 2016 Nov - Palau

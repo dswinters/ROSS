@@ -1,4 +1,26 @@
 * petersburg_2017_apr notes
+Test deployments in Petersburg, getting ready for the May cruise on
+the Stellar.
+
+This is the first set of ROSS data using the Sentinel-V ADCP.
+
+** Status summary
+Logged Sentinel V ADCP data can be parsed in single- and dual-profile
+mode. There is a problem with the PAVS data logging. This is likely an
+issue with hardware between the ADCP and the ABox, since the logging
+software is unchanged, and past data loaded directly from the PAVS can
+be parsed.
+
+TODO: Test new ADCP logging timestamp method.
+
+** Deployments:
+| Kayak   | Name                 | Description                          | Processed  | Notes                      |
+|---------+----------------------+--------------------------------------+------------+----------------------------|
+| Swankie | SWANKIE_test1        | Shallow water SV test off dock       | Yes        |                            |
+| Swankie | SWANKIE_Pelican_0419 | Deep water SV test near Petersburg   | Yes        |                            |
+| Rosie   | ROSIE_test1          | Shallow water PAVS test off dock     | Incomplete | logged PAVS data corrupted |
+| Rosie   | ROSIE_Pelican_0419   | Deep water PAVS test near Petersburg | No         | logged PAVS data corrupted |
+
 ** Kayak attributes
 #+name:kayak_info
 | Name    | ADCP           | Flag   | Network |
@@ -13,6 +35,4 @@
 |-----------------+------+--------------+--------------------|
 | Long Range      |   40 |          4.0 |               5.91 |
 | High Resolution |   63 |          1.5 |               3.50 |
-
-
 

@@ -15,8 +15,7 @@ notrim = newfilt('cutoff',inf);
 %========================================================
 master                          = struct();
 master.name                     = 'petersburg_2017_apr';
-% master.kayaks                   = {'Rosie','Casey','Swankie'};
-master.kayaks = {'Swankie'};
+master.kayaks                   = {'Rosie','Casey','Swankie'};
 master.process_data             = true;
 master.make_figures.summary     = true;
 master.make_figures.surface_vel = true;
@@ -55,4 +54,7 @@ swankie = ross_fill_defaults(swankie,defaults);
 % Combine deployment structures into final cell array
 %========================================================
 % deployments = {rosie, casey, swankie};
-deployments = {swankie};
+% master.kaysks = {'Rosie','Casey','Swankie'};
+
+deployments = {rosie};
+master.kayaks = {'Rosie'};

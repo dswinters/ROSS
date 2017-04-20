@@ -3,7 +3,8 @@ function rosie = petersburg_2017_apr_rosie()
 %  4   1    ^
 %    x      |--> STARBOARD
 %  2   3  
-rosie0.heading_offset = 135;
+rosie0.proc.heading_offset = 135;
+rosie0.proc.adcp_load_function = 'adcp_rdradcp_multi';
 %--------------------------------------------------------%
 dep = 1;
 rosie(dep).name       = 'ROSIE_test1';

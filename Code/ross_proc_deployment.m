@@ -151,5 +151,8 @@ for i = 1:length(adcp(1).info)
     disp(['  - ' adcp(1).info{i}])
 end
 
-
+%% Make figures
+close all
+fprintf('\n\n**** Figures\n')
+ross = ross_figures(ross,ndep);
 

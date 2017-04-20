@@ -14,6 +14,7 @@ defaults.proc.adcp_raw2mat = false; % re-parse ADCP data?
 defaults.proc.gps_raw2mat  = false; % re-parse GPS data?
 
 %% Set up directories and filepaths
+addpath('figures/');
 dirs = struct();
 dirs.base = fullfile(getenv('HOME'),'OSU/ROSS/');
 dirs.data = fullfile(dirs.base, 'Data/');
@@ -74,16 +75,6 @@ if master.process_data
                          Ross(k).deployments(ndep).name))
             Ross(k) = ross_proc_deployment(Ross(k),ndep);
         end
-    end
-end
-
-%% Make figures
-addpath('figures/');
-fprintf('\n\n** Figures\n')
-for k = 1:length(master.kayaks)
-    for ndep = 1:length(Ross(k).deployments)
-        close all
-        Ross(k) = ross_figures(Ross(k),ndep);
     end
 end
 

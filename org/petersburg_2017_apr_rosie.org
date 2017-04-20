@@ -1,0 +1,24 @@
+
+** Deployment Processing: Rosie 
+
+*** Deployment 1: ROSIE_test1
+- Loaded /Users/dylan/OSU/ROSS/Data/petersburg_2017_apr/Rosie/raw/ADCP/ROSIE_test1.mat
+  - ADCP_raw_20170418230229.bin
+- ADCP configuration(s):
+|Freq|Beams|Beam Angle|Depth Cells|Cell Size|Blank Distance|
+|-+--+--+--+--+-|
+|150|4|30|50|6.00|2.50|
+
+- Loaded /Users/dylan/OSU/ROSS/Data/petersburg_2017_apr/Rosie/raw/GPS/ROSIE_test1.mat
+  - GPS_20170418230229.log
+
+- Saved /Users/dylan/OSU/ROSS/Data/petersburg_2017_apr/Rosie/processed/ROSIE_test1.mat
+  - Data removed using beam-specific echo intensity edge detection
+  - Ship velocity corrected using GPS-based velocity estimate
+  - Data removed where rate of turn > 5.00 deg/s
+  - Data removed where correlation < 50 counts
+
+
+**** Figures
+[[../Figures/petersburg_2017_apr/Rosie/ROSIE_test1/summary.jpg]]
+[[../Figures/petersburg_2017_apr/Rosie/ROSIE_test1/surface_vel.jpg]]

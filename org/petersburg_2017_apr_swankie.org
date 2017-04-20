@@ -26,8 +26,6 @@
   - Data removed where correlation < 50 counts
 
 
-** Figures
-[[../Figures/petersburg_2017_apr/Rosie/ROSIE_test1/summary.jpg]]
-[[../Figures/petersburg_2017_apr/Rosie/ROSIE_test1/surface_vel.jpg]]
+**** Figures
 [[../Figures/petersburg_2017_apr/Swankie/SWANKIE_test1/summary.jpg]]
 [[../Figures/petersburg_2017_apr/Swankie/SWANKIE_test1/surface_vel.jpg]]

@@ -36,14 +36,34 @@ else
     end
 end
 
-for i = 1:length(A)
-    disp(sprintf('- ADCP configuration %d:',i))
-    s = evalc('A(i).config');
-    s = s(10:end-1);
-    s = regexprep(s,'  +',' |');
-    s = regexprep(s,'\n','|\n');
-    s = regexprep(s,': ',' | ');   
-    fprintf(['\n' s '\n']);
+flds = {'beam_freq'  , 'Freq'          , '%d';
+        'n_beams'    , 'Beams'         , '%d';
+        'beam_angle' , 'Beam Angle'    , '%d';
+        'n_cells'    , 'Depth Cells'   , '%d';
+        'cell_size'  , 'Cell Size'     , '%.2f';
+        'blank'      , 'Blank Distance', '%.2f'};
+disp('- ADCP configuration(s):')
+fprintf('|')
+for i = 1:length(flds)
+    fprintf([flds{i,2} '|']);
 end
+fprintf('\n')
+fprintf('|')
+for i = 1:length(flds)-1
+    fprintf('-+-')
+end
+fprintf('|\n')
+
+
+for ia = 1:length(A)
+    fprintf('|')
+    for i = 1:length(flds)
+        str = sprintf(flds{i,3},...
+                      A(ia).config.(flds{i,1}));
+        fprintf('%s|',str);
+    end
+    fprintf('\n')
+end
+fprintf('\n');
 
 end

@@ -15,6 +15,7 @@ else
     for i = 1:length(gps.files)
         disp(sprintf('  - %s',gps.files{i}));
     end
+    fprintf('\n');
 end
 
 %% Make sure GPRMC timestamps are unique

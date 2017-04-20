@@ -57,18 +57,17 @@ switch tripname
     Ross = leconte_2016_aug_calibrate_compass(Ross);
 end
 
-%% Set up logging
-if make_logfile
-    logfile = fullfile(dirs.logs, [master.name '.org']);
-    eval(['!rm ' logfile])
-    diary(logfile);
-end
-fprintf(['* ' tripname '\n\n']);
-
 %% Process deployments
-
 if master.process_data
     for k = 1:length(master.kayaks)
+        % Set up logfile
+        if make_logfile
+            logfile = fullfile(dirs.logs,...
+                               [master.name,...
+                                '_' lower(master.kayaks{k}) '.org']);
+            eval(['!rm ' logfile])
+            diary(logfile);
+        end
         disp(sprintf('\n** Deployment Processing: %s ',master.kayaks{k}))
         for ndep = 1:length(Ross(k).deployments)
             disp(sprintf('\n*** Deployment %d: %s', ndep ,...

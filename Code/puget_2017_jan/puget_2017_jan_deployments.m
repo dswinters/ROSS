@@ -1,4 +1,4 @@
-function [master, deployments] = ross_puget_2017_jan_deployments();
+function [master, deployments] = puget_2017_jan_deployments();
 
 %%% Trip info
 master = struct();
@@ -15,11 +15,11 @@ defs.proc.skip = false;
 % defs.proc.trim_methods(1).params = 'beam';
 % defs.proc.trim_methods(2).name = 'cutoff';
 % defs.proc.trim_methods(2).params = 130;
-defs.proc.trim_methods(1).name = 'none';
-defs.proc.trim_methods(1).params = [];
+defs.proc.trim_methods(1).name = 'ei_edge';
+defs.proc.trim_methods(1).params = 'beam';
 defs.proc.ship_vel_removal = 'GPS';
-defs.proc.save_ship = true;
-defs.proc.save_beam = true;
+% defs.proc.save_ship = true;
+% defs.proc.save_beam = true;
 % Beams top-down (4&1 forward):
 % 4 1
 % 2 3

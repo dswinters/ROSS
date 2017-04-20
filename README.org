@@ -31,7 +31,8 @@ separated into different functions for each kayak: [[Code/petersburg_2017_apr/pe
 
 ** TODO 2016 Nov - Palau
 ** TODO 2017 Jan - Newport
-** TODO 2017 Jan - Puget Sound
+** 2017 Jan - Puget Sound
+- [[org/puget_2017_jan_spanky.org][Spanky processing log & figures]]
 - [[org/puget_2017_jan.org][Additional notes]]
 
 

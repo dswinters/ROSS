@@ -19,7 +19,9 @@ Each trip requires a deployment file that contains processing
 instructions for each kayak deployment.
 
 See [[./Code/petersburg_2017_apr/petersburg_2017_apr_deployments.m][petersburg_2017_apr_deployments.m]] for an example deployment
-file.
+file. Note that for this trip, deployment information has been
+separated into different functions for each kayak: [[Code/petersburg_2017_apr/petersburg_2017_apr_rosie.m][Rosie]], [[Code/petersburg_2017_apr/petersburg_2017_apr_casey.m][Casey]], and
+[[Code/petersburg_2017_apr/petersburg_2017_apr_swankie.m][Swankie]].
 
 * Data Sets
 

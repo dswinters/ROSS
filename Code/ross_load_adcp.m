@@ -12,7 +12,14 @@ if ~fexist || ross.deployments(ndep).proc.adcp_raw2mat
     if isfield(D.proc,'adcp_load_function')
         adcp_load_func = D.proc.adcp_load_function;
     end
-    A = feval(adcp_load_func,D.files.adcp);
+    if strcmp('adcp_parse',adcp_load_function) &&
+        isfield(D.proc,'ross_timestamps') &&
+        D.proc.ross_timestamps
+        A = feval(adcp_load_func,D.files.adcp,'ross');
+    else
+        A = feval(adcp_load_func,D.files.adcp,'ross');
+    end
+
 
     %% Minor processing
     for ia = 1:length(A)

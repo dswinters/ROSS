@@ -10,8 +10,8 @@ fn = [tripname '_deployments'];
 
 %% Global deployment defaults
 defaults = struct();
-defaults.proc.adcp_raw2mat = false; % re-parse ADCP data?
-defaults.proc.gps_raw2mat  = false; % re-parse GPS data?
+defaults.proc.adcp_raw2mat = true; % re-parse ADCP data?
+defaults.proc.gps_raw2mat  = true; % re-parse GPS data?
 
 %% Set up directories and filepaths
 addpath('figures/');

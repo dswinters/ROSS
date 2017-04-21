@@ -17,7 +17,7 @@ rosie(dep).plot.ylim  = [0 100];
 % -- Pelican trip 04/19/17
 %    - the logged PAVS files seem to be corrupted.
 dep = 2;
-rosie(dep).files.map = 'petersburg_fredrick_sound';
+rosie(dep).files.map = 'petersburg_fredrick_sound_large';
 rosie(dep).proc.ross_timestamps = true;
 rosie(dep).name       = 'ROSIE_Pelican_0419';
 rosie(dep).tlim       = datenum(...
@@ -58,7 +58,7 @@ rosie(dep).proc.filters = rotmax;
 
 %--------------------------------------------------------%
 dep = 3;
-rosie(dep).files.map = 'petersburg_fredrick_sound';
+rosie(dep).files.map = 'petersburg_fredrick_sound_large';
 rosie(dep).proc.ross_timestamps = true;
 rosie(dep).name = 'ROSIE_Fredrick_Sound_0420';
 rosie(dep).tlim = datenum(...
@@ -82,19 +82,6 @@ rosie(dep).files.gps = {...
 rosie(dep).plot.ylim = [0 200];
 rosie(dep).proc.trim_methods = noflt;
 rosie(dep).proc.filters = rotmax;
-    
-    
-    
-    
-    
-
-
-
-
-
-
-
-
 %--------------------------------------------------------%
 rosie = ross_fill_defaults(rosie,rosie0);
 

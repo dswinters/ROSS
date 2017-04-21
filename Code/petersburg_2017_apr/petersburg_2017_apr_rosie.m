@@ -51,8 +51,9 @@ rosie(dep).files.gps  = {...
 rosie(dep).plot.ylim  = [0 200];
 noflt = struct('name','none','params',[]);
 trim = struct('name','ei_edge','params','beam');
+rotmax = struct('name','rotmax','params',5);
 rosie(dep).proc.trim_methods = noflt;
-rosie(dep).proc.filters = noflt;
+rosie(dep).proc.filters = rotmax;
 
 %--------------------------------------------------------%
 rosie = ross_fill_defaults(rosie,rosie0);

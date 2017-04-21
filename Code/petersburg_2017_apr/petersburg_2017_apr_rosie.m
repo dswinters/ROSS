@@ -56,6 +56,44 @@ rosie(dep).proc.trim_methods = noflt;
 rosie(dep).proc.filters = rotmax;
 
 %--------------------------------------------------------%
+dep = 3;
+rosie(dep).proc.ross_timestamps = true;
+rosie(dep).name = 'ROSIE_Fredrick_Sound_0420';
+rosie(dep).tlim = datenum(...
+    ['20-Apr-2017 20:30:54';
+     '20-Apr-2017 23:06:02']);
+rosie(dep).files.adcp = {...
+    'ADCP_timestamped_20170420184211.bin';
+    'ADCP_timestamped_20170420190436.bin';
+    'ADCP_timestamped_20170420200000.bin';
+    'ADCP_timestamped_20170420210000.bin';
+    'ADCP_timestamped_20170420220000.bin';
+    'ADCP_timestamped_20170420230000.bin';
+                   };
+rosie(dep).files.gps = {...
+    'GPS_20170420184211.log';
+    'GPS_20170420195137.log';
+    'GPS_20170420210113.log';
+    'GPS_20170420221035.log';
+    'GPS_20170420231949.log';
+                   };
+rosie(dep).plot.ylim = [0 200];
+rosie(dep).proc.trim_methods = noflt;
+rosie(dep).proc.filters = rotmax;
+    
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+%--------------------------------------------------------%
 rosie = ross_fill_defaults(rosie,rosie0);
 
 

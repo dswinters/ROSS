@@ -5,7 +5,7 @@ function rosie = petersburg_2017_apr_rosie()
 %  2   3  
 rosie0.proc.heading_offset = 135;
 rosie0.proc.adcp_load_function = 'adcp_parse';
-rosie0.proc.ross_timestamps    = true;
+rosie0.proc.ross_timestamps    = false;
 %--------------------------------------------------------%
 dep = 1;
 rosie(dep).name       = 'ROSIE_test1';
@@ -17,22 +17,25 @@ rosie(dep).plot.ylim  = [0 100];
 % -- Pelican trip 04/19/17
 %    - the logged PAVS files seem to be corrupted.
 dep = 2;
+rosie(dep).proc.ross_timestamps = true;
 rosie(dep).name       = 'ROSIE_Pelican_0419';
-rosie(dep).tlim       = datenum([-inf inf]);
+rosie(dep).tlim       = datenum(...
+    ['19-Apr-2017 20:29:27';
+     '19-Apr-2017 21:03:16']);
 rosie(dep).files.adcp = {...
-    'ADCP_raw_20170419012224.bin';
-    'ADCP_raw_20170419020002.bin';
-    'ADCP_raw_20170419190056.bin';
-    'ADCP_raw_20170419193703.bin';
-    'ADCP_raw_20170419200001.bin';
-    'ADCP_raw_20170419210001.bin';
-    'ADCP_raw_20170419220329.bin';
-    'ADCP_raw_20170419230125.bin';
-    'ADCP_raw_20170420000053.bin';
-    'ADCP_raw_20170420010321.bin';
-    'ADCP_raw_20170420020613.bin';
-    'ADCP_raw_20170420023303.bin';
-    'ADCP_raw_20170420033646.bin'};
+    'ADCP_timestamped_20170419012224.bin';
+    'ADCP_timestamped_20170419020002.bin';
+    'ADCP_timestamped_20170419190056.bin';
+    'ADCP_timestamped_20170419193703.bin';
+    'ADCP_timestamped_20170419200001.bin';
+    'ADCP_timestamped_20170419210001.bin';
+    'ADCP_timestamped_20170419220329.bin';
+    'ADCP_timestamped_20170419230125.bin';
+    'ADCP_timestamped_20170420000053.bin';
+    'ADCP_timestamped_20170420010321.bin';
+    'ADCP_timestamped_20170420020613.bin';
+    'ADCP_timestamped_20170420023303.bin';
+    'ADCP_timestamped_20170420033646.bin'};
 rosie(dep).files.gps  = {...
     'GPS_20170419011808.log';
     'GPS_20170419012224.log';
@@ -46,6 +49,11 @@ rosie(dep).files.gps  = {...
     'GPS_20170420023303.log';
     'GPS_20170420033646.log'};
 rosie(dep).plot.ylim  = [0 200];
+noflt = struct('name','none','params',[]);
+trim = struct('name','ei_edge','params','beam');
+rosie(dep).proc.trim_methods = noflt;
+rosie(dep).proc.filters = noflt;
+
 %--------------------------------------------------------%
 rosie = ross_fill_defaults(rosie,rosie0);
 

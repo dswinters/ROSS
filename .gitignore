@@ -6,3 +6,5 @@ Maps/
 *.html
 *.pdf
 *.tex
+*.bin
+*.log

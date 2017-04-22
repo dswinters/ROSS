@@ -1,7 +1,7 @@
 function A = ross_load_adcp(ross,ndep)
-D = ross.deployments(ndep);
 
-matfile = [ross.dirs.raw.adcp D.name '.mat'];
+D = ross.deployments(ndep);
+matfile = [ross.dirs.raw.adcp D.name '_adcp.mat'];
 fexist = exist(matfile,'file');
 
 if ~fexist || ross.deployments(ndep).proc.adcp_raw2mat

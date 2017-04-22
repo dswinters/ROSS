@@ -4,7 +4,8 @@ function [gps] = ross_load_gps(ross,ndep)
 D = ross.deployments(ndep);
 prefix = {'GPRMC','HEHDT','PASHR','GPGGA'};
 f_in = D.files.gps;
-matfile = [ross.dirs.raw.gps D.name '.mat'];
+
+matfile = [ross.dirs.raw.gps D.name '_gps.mat'];
 if ~exist(matfile,'file') || D.proc.gps_raw2mat
     gps = nav_read(f_in,prefix);
     save(matfile,'-struct','gps');

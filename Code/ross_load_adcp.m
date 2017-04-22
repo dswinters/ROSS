@@ -3,6 +3,8 @@ function A = ross_load_adcp(ross,ndep)
 D = ross.deployments(ndep);
 matfile = [ross.dirs.raw.adcp D.name '_adcp.mat'];
 fexist = exist(matfile,'file');
+fparts = strsplit(matfile,'/');
+flink = ['[[' fullfile('..',fparts{6:end}) ']]'];
 
 if ~fexist || ross.deployments(ndep).proc.adcp_raw2mat
     %% Load raw data
@@ -38,10 +40,13 @@ if ~fexist || ross.deployments(ndep).proc.adcp_raw2mat
     
     %% save matfile
     save(matfile,'A');
-    disp(['Saved ' matfile])
+    disp(['Saved ' flink])
 else
     load(matfile,'A');
-    disp(['- Loaded ' matfile])
+    
+
+
+    disp(['- Loaded ' flink])
     for i = 1:length(A(1).files)
         disp(sprintf('  - %s',A(1).files{i}));
     end

@@ -6,13 +6,15 @@ prefix = {'GPRMC','HEHDT','PASHR','GPGGA'};
 f_in = D.files.gps;
 
 matfile = [ross.dirs.raw.gps D.name '_gps.mat'];
+fparts = strsplit(matfile,'/');
+flink = ['[[' fullfile('..',fparts{6:end}) ']]'];
 if ~exist(matfile,'file') || D.proc.gps_raw2mat
     gps = nav_read(f_in,prefix);
     save(matfile,'-struct','gps');
-    disp(['Saved ' matfile]);
+    disp(['Saved ' flink]);
 else
     gps = load(matfile);
-    disp(['- Loaded ' matfile]);
+    disp(['- Loaded ' flink]);
     for i = 1:length(gps.files)
         disp(sprintf('  - %s',gps.files{i}));
     end

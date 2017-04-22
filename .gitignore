@@ -1,10 +1,13 @@
 scratch.m
 .DS_Store
 ROSS.pdf
-Data/
 Maps/
 *.html
 *.pdf
 *.tex
 *.bin
 *.log
+*.BIN*
+*.000
+*Pixhawk*
+*pixhawk*

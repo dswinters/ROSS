@@ -5,7 +5,7 @@
 Skipped!
 
 *** Deployment 2: ROSIE_2016_08_10_0443
-- Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Rosie/raw/ADCP/ROSIE_2016_08_10_0443.mat
+- Loaded ../Data/leconte_2016_aug/Rosie/raw/ADCP/ROSIE_2016_08_10_0443.mat
   - TESTTWO3679819381.000
   - TESTTWO3679820743.000
 - ADCP configuration(s):
@@ -13,7 +13,7 @@ Skipped!
 |-+--+--+--+--+-|
 |150|4|30|50|6.00|2.50|
 
-- Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Rosie/raw/GPS/ROSIE_2016_08_10_0443.mat
+- Loaded ../Data/leconte_2016_aug/Rosie/raw/GPS/ROSIE_2016_08_10_0443.mat
   - GPS_20160810051207.log
   - GPS_20160810052108.log
   - GPS_20160810053633.log
@@ -30,7 +30,7 @@ Skipped!
   - GPS_20160810062350.log
   - GPS_20160810063107.log
 
-- Saved /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Rosie/processed/ROSIE_2016_08_10_0443.mat
+- Saved ../Data/leconte_2016_aug/Rosie/processed/ROSIE_2016_08_10_0443.mat
   - Data removed using beam-specific echo intensity edge detection
   - Ship velocity corrected using GPS-based velocity estimate
 
@@ -40,14 +40,14 @@ Skipped!
 [[../Figures/leconte_2016_aug/Rosie/ROSIE_2016_08_10_0443/surface_vel.jpg]]
 
 *** Deployment 3: ROSIE_2016_08_12_0403
-- Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Rosie/raw/ADCP/ROSIE_2016_08_12_0403.mat
+- Loaded ../Data/leconte_2016_aug/Rosie/raw/ADCP/ROSIE_2016_08_12_0403.mat
   - BEAVER3680002563.000
 - ADCP configuration(s):
 |Freq|Beams|Beam Angle|Depth Cells|Cell Size|Blank Distance|
 |-+--+--+--+--+-|
 |150|4|30|50|6.00|2.50|
 
-- Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Rosie/raw/GPS/ROSIE_2016_08_12_0403.mat
+- Loaded ../Data/leconte_2016_aug/Rosie/raw/GPS/ROSIE_2016_08_12_0403.mat
   - GPS_20160812034315.log
   - GPS_20160812042217.log
   - GPS_20160812043453.log
@@ -55,7 +55,7 @@ Skipped!
   - GPS_20160812044727.log
   - GPS_20160812051037.log
 
-- Saved /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Rosie/processed/ROSIE_2016_08_12_0403.mat
+- Saved ../Data/leconte_2016_aug/Rosie/processed/ROSIE_2016_08_12_0403.mat
   - Data removed using beam-specific echo intensity edge detection
   - Ship velocity corrected using GPS-based velocity estimate
 
@@ -65,18 +65,18 @@ Skipped!
 [[../Figures/leconte_2016_aug/Rosie/ROSIE_2016_08_12_0403/surface_vel.jpg]]
 
 *** Deployment 4: ROSIE_2016_08_13_0104
-- Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Rosie/raw/ADCP/ROSIE_2016_08_13_0104.mat
+- Loaded ../Data/leconte_2016_aug/Rosie/raw/ADCP/ROSIE_2016_08_13_0104.mat
   - COUGAR3680045343.000
 - ADCP configuration(s):
 |Freq|Beams|Beam Angle|Depth Cells|Cell Size|Blank Distance|
 |-+--+--+--+--+-|
 |150|4|30|50|6.00|2.50|
 
-- Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Rosie/raw/GPS/ROSIE_2016_08_13_0104.mat
+- Loaded ../Data/leconte_2016_aug/Rosie/raw/GPS/ROSIE_2016_08_13_0104.mat
   - GPS_20160813005424.log
   - GPS_20160813015836.log
 
-- Saved /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Rosie/processed/ROSIE_2016_08_13_0104.mat
+- Saved ../Data/leconte_2016_aug/Rosie/processed/ROSIE_2016_08_13_0104.mat
   - Data removed using beam-specific echo intensity edge detection
   - Ship velocity corrected using GPS-based velocity estimate
 
@@ -86,17 +86,17 @@ Skipped!
 [[../Figures/leconte_2016_aug/Rosie/ROSIE_2016_08_13_0104/surface_vel.jpg]]
 
 *** Deployment 5: ROSIE_2016_08_14_2330
-- Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Rosie/raw/ADCP/ROSIE_2016_08_14_2330.mat
+- Loaded ../Data/leconte_2016_aug/Rosie/raw/ADCP/ROSIE_2016_08_14_2330.mat
   - DINGO3680174793.000
 - ADCP configuration(s):
 |Freq|Beams|Beam Angle|Depth Cells|Cell Size|Blank Distance|
 |-+--+--+--+--+-|
 |150|4|30|50|6.00|2.50|
 
-- Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Rosie/raw/GPS/ROSIE_2016_08_14_2330.mat
+- Loaded ../Data/leconte_2016_aug/Rosie/raw/GPS/ROSIE_2016_08_14_2330.mat
   - GPS_20160813232804.log
 
-- Saved /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Rosie/processed/ROSIE_2016_08_14_2330.mat
+- Saved ../Data/leconte_2016_aug/Rosie/processed/ROSIE_2016_08_14_2330.mat
   - Data removed using beam-specific echo intensity edge detection
   - Ship velocity corrected using GPS-based velocity estimate
 
@@ -106,18 +106,18 @@ Skipped!
 [[../Figures/leconte_2016_aug/Rosie/ROSIE_2016_08_14_2330/surface_vel.jpg]]
 
 *** Deployment 6: ROSIE_2016_08_14_2239
-- Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Rosie/raw/ADCP/ROSIE_2016_08_14_2239.mat
+- Loaded ../Data/leconte_2016_aug/Rosie/raw/ADCP/ROSIE_2016_08_14_2239.mat
   - ELK3680220174.000
 - ADCP configuration(s):
 |Freq|Beams|Beam Angle|Depth Cells|Cell Size|Blank Distance|
 |-+--+--+--+--+-|
 |150|4|30|50|6.00|2.50|
 
-- Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Rosie/raw/GPS/ROSIE_2016_08_14_2239.mat
+- Loaded ../Data/leconte_2016_aug/Rosie/raw/GPS/ROSIE_2016_08_14_2239.mat
   - GPS_20160814220615.log
   - GPS_20160814231022.log
 
-- Saved /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Rosie/processed/ROSIE_2016_08_14_2239.mat
+- Saved ../Data/leconte_2016_aug/Rosie/processed/ROSIE_2016_08_14_2239.mat
   - Data removed using beam-specific echo intensity edge detection
   - Ship velocity corrected using GPS-based velocity estimate
 
@@ -127,19 +127,19 @@ Skipped!
 [[../Figures/leconte_2016_aug/Rosie/ROSIE_2016_08_14_2239/surface_vel.jpg]]
 
 *** Deployment 7: ROSIE_2016_08_15_0027
-- Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Rosie/raw/ADCP/ROSIE_2016_08_15_0027.mat
+- Loaded ../Data/leconte_2016_aug/Rosie/raw/ADCP/ROSIE_2016_08_15_0027.mat
   - ELK3680220174.000
 - ADCP configuration(s):
 |Freq|Beams|Beam Angle|Depth Cells|Cell Size|Blank Distance|
 |-+--+--+--+--+-|
 |150|4|30|50|6.00|2.50|
 
-- Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Rosie/raw/GPS/ROSIE_2016_08_15_0027.mat
+- Loaded ../Data/leconte_2016_aug/Rosie/raw/GPS/ROSIE_2016_08_15_0027.mat
   - GPS_20160815001414.log
   - GPS_20160815011800.log
   - GPS_20160815013051.log
 
-- Saved /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Rosie/processed/ROSIE_2016_08_15_0027.mat
+- Saved ../Data/leconte_2016_aug/Rosie/processed/ROSIE_2016_08_15_0027.mat
   - Data removed using beam-specific echo intensity edge detection
   - Ship velocity corrected using GPS-based velocity estimate
 

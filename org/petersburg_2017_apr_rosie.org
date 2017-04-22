@@ -2,17 +2,17 @@
 ** Deployment Processing: Rosie 
 
 *** Deployment 1: ROSIE_test1
-- Loaded /Users/dylan/OSU/ROSS/Data/petersburg_2017_apr/Rosie/raw/ADCP/ROSIE_test1.mat
+- Loaded ../Data/petersburg_2017_apr/Rosie/raw/ADCP/ROSIE_test1.mat
   - ADCP_raw_20170418230229.bin
 - ADCP configuration(s):
 |Freq|Beams|Beam Angle|Depth Cells|Cell Size|Blank Distance|
 |-+--+--+--+--+-|
 |150|4|30|50|6.00|2.50|
 
-- Loaded /Users/dylan/OSU/ROSS/Data/petersburg_2017_apr/Rosie/raw/GPS/ROSIE_test1.mat
+- Loaded ../Data/petersburg_2017_apr/Rosie/raw/GPS/ROSIE_test1.mat
   - GPS_20170418230229.log
 
-- Saved /Users/dylan/OSU/ROSS/Data/petersburg_2017_apr/Rosie/processed/ROSIE_test1.mat
+- Saved ../Data/petersburg_2017_apr/Rosie/processed/ROSIE_test1.mat
   - Data removed using beam-specific echo intensity edge detection
   - Ship velocity corrected using GPS-based velocity estimate
   - Data removed where rate of turn > 5.00 deg/s
@@ -24,7 +24,7 @@
 [[../Figures/petersburg_2017_apr/Rosie/ROSIE_test1/surface_vel.jpg]]
 
 *** Deployment 2: ROSIE_Pelican_0419
-- Loaded /Users/dylan/OSU/ROSS/Data/petersburg_2017_apr/Rosie/raw/ADCP/ROSIE_Pelican_0419.mat
+- Loaded ../Data/petersburg_2017_apr/Rosie/raw/ADCP/ROSIE_Pelican_0419.mat
   - ADCP_timestamped_20170419012224.bin
   - ADCP_timestamped_20170419020002.bin
   - ADCP_timestamped_20170419190056.bin
@@ -43,7 +43,7 @@
 |-+--+--+--+--+-|
 |150|4|30|50|6.00|2.50|
 
-- Loaded /Users/dylan/OSU/ROSS/Data/petersburg_2017_apr/Rosie/raw/GPS/ROSIE_Pelican_0419.mat
+- Loaded ../Data/petersburg_2017_apr/Rosie/raw/GPS/ROSIE_Pelican_0419.mat
   - GPS_20170419011808.log
   - GPS_20170419012224.log
   - GPS_20170419190056.log
@@ -56,7 +56,7 @@
   - GPS_20170420023303.log
   - GPS_20170420033646.log
 
-- Saved /Users/dylan/OSU/ROSS/Data/petersburg_2017_apr/Rosie/processed/ROSIE_Pelican_0419.mat
+- Saved ../Data/petersburg_2017_apr/Rosie/processed/ROSIE_Pelican_0419.mat
   - Ship velocity corrected using GPS-based velocity estimate
   - Data removed where rate of turn > 5.00 deg/s
 
@@ -66,7 +66,7 @@
 [[../Figures/petersburg_2017_apr/Rosie/ROSIE_Pelican_0419/surface_vel.jpg]]
 
 *** Deployment 3: ROSIE_Fredrick_Sound_0420
-- Loaded /Users/dylan/OSU/ROSS/Data/petersburg_2017_apr/Rosie/raw/ADCP/ROSIE_Fredrick_Sound_0420.mat
+- Loaded ../Data/petersburg_2017_apr/Rosie/raw/ADCP/ROSIE_Fredrick_Sound_0420.mat
   - ADCP_timestamped_20170420184211.bin
   - ADCP_timestamped_20170420190436.bin
   - ADCP_timestamped_20170420200000.bin
@@ -78,14 +78,14 @@
 |-+--+--+--+--+-|
 |150|4|30|50|6.00|2.50|
 
-- Loaded /Users/dylan/OSU/ROSS/Data/petersburg_2017_apr/Rosie/raw/GPS/ROSIE_Fredrick_Sound_0420.mat
+- Loaded ../Data/petersburg_2017_apr/Rosie/raw/GPS/ROSIE_Fredrick_Sound_0420.mat
   - GPS_20170420184211.log
   - GPS_20170420195137.log
   - GPS_20170420210113.log
   - GPS_20170420221035.log
   - GPS_20170420231949.log
 
-- Saved /Users/dylan/OSU/ROSS/Data/petersburg_2017_apr/Rosie/processed/ROSIE_Fredrick_Sound_0420.mat
+- Saved ../Data/petersburg_2017_apr/Rosie/processed/ROSIE_Fredrick_Sound_0420.mat
   - Ship velocity corrected using GPS-based velocity estimate
   - Data removed where rate of turn > 5.00 deg/s
 

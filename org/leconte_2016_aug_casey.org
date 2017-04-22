@@ -2,18 +2,18 @@
 ** Deployment Processing: Casey 
 
 *** Deployment 1: CASEY_2016_08_10_1730
-- Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Casey/raw/ADCP/CASEY_2016_08_10_1730.mat
+- Loaded ../Data/leconte_2016_aug/Casey/raw/ADCP/CASEY_2016_08_10_1730.mat
   - ROSS4000.000
 - ADCP configuration(s):
 |Freq|Beams|Beam Angle|Depth Cells|Cell Size|Blank Distance|
 |-+--+--+--+--+-|
 |600|4|20|80|1.00|0.54|
 
-- Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Casey/raw/GPS/CASEY_2016_08_10_1730.mat
+- Loaded ../Data/leconte_2016_aug/Casey/raw/GPS/CASEY_2016_08_10_1730.mat
   - GPS_20160810170136.log
   - GPS_20160810180726.log
 
-- Saved /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Casey/processed/CASEY_2016_08_10_1730.mat
+- Saved ../Data/leconte_2016_aug/Casey/processed/CASEY_2016_08_10_1730.mat
   - Data removed using beam-specific correlation edge detection
   - Data removed below 80.00m depth
   - Ship velocity corrected using GPS-based velocity estimate
@@ -24,19 +24,19 @@
 [[../Figures/leconte_2016_aug/Casey/CASEY_2016_08_10_1730/surface_vel.jpg]]
 
 *** Deployment 2: CASEY_2016_08_11_0413
-- Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Casey/raw/ADCP/CASEY_2016_08_11_0413.mat
+- Loaded ../Data/leconte_2016_aug/Casey/raw/ADCP/CASEY_2016_08_11_0413.mat
   - ROSS5000.000
 - ADCP configuration(s):
 |Freq|Beams|Beam Angle|Depth Cells|Cell Size|Blank Distance|
 |-+--+--+--+--+-|
 |600|4|20|80|1.00|0.54|
 
-- Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Casey/raw/GPS/CASEY_2016_08_11_0413.mat
+- Loaded ../Data/leconte_2016_aug/Casey/raw/GPS/CASEY_2016_08_11_0413.mat
   - GPS_20160811033925.log
   - GPS_20160811044341.log
   - GPS_20160811054836.log
 
-- Saved /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Casey/processed/CASEY_2016_08_11_0413.mat
+- Saved ../Data/leconte_2016_aug/Casey/processed/CASEY_2016_08_11_0413.mat
   - Data removed using beam-specific correlation edge detection
   - Data removed below 80.00m depth
   - Ship velocity corrected using GPS-based velocity estimate
@@ -47,18 +47,18 @@
 [[../Figures/leconte_2016_aug/Casey/CASEY_2016_08_11_0413/surface_vel.jpg]]
 
 *** Deployment 3: CASEY_2016_08_11_2158
-- Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Casey/raw/ADCP/CASEY_2016_08_11_2158.mat
+- Loaded ../Data/leconte_2016_aug/Casey/raw/ADCP/CASEY_2016_08_11_2158.mat
   - ROSS5002.000
 - ADCP configuration(s):
 |Freq|Beams|Beam Angle|Depth Cells|Cell Size|Blank Distance|
 |-+--+--+--+--+-|
 |600|4|20|80|1.00|0.54|
 
-- Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Casey/raw/GPS/CASEY_2016_08_11_2158.mat
+- Loaded ../Data/leconte_2016_aug/Casey/raw/GPS/CASEY_2016_08_11_2158.mat
   - GPS_20160811214326.log
   - GPS_20160811223505.log
 
-- Saved /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Casey/processed/CASEY_2016_08_11_2158.mat
+- Saved ../Data/leconte_2016_aug/Casey/processed/CASEY_2016_08_11_2158.mat
   - Data removed using beam-specific correlation edge detection
   - Data removed 
   - Ship velocity corrected using GPS-based velocity estimate
@@ -69,17 +69,17 @@
 [[../Figures/leconte_2016_aug/Casey/CASEY_2016_08_11_2158/surface_vel.jpg]]
 
 *** Deployment 4: CASEY_2016_08_12_0454
-- Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Casey/raw/ADCP/CASEY_2016_08_12_0454.mat
+- Loaded ../Data/leconte_2016_aug/Casey/raw/ADCP/CASEY_2016_08_12_0454.mat
   - ROSS5003.000
 - ADCP configuration(s):
 |Freq|Beams|Beam Angle|Depth Cells|Cell Size|Blank Distance|
 |-+--+--+--+--+-|
 |600|4|20|80|1.00|0.54|
 
-- Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Casey/raw/GPS/CASEY_2016_08_12_0454.mat
+- Loaded ../Data/leconte_2016_aug/Casey/raw/GPS/CASEY_2016_08_12_0454.mat
   - GPS_20160812052713.log
 
-- Saved /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Casey/processed/CASEY_2016_08_12_0454.mat
+- Saved ../Data/leconte_2016_aug/Casey/processed/CASEY_2016_08_12_0454.mat
   - Data removed using beam-specific correlation edge detection
   - Data removed below 80.00m depth
   - Ship velocity corrected using GPS-based velocity estimate
@@ -90,7 +90,7 @@
 [[../Figures/leconte_2016_aug/Casey/CASEY_2016_08_12_0454/surface_vel.jpg]]
 
 *** Deployment 5: CASEY_2016_08_12_1419
-- Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Casey/raw/ADCP/CASEY_2016_08_12_1419.mat
+- Loaded ../Data/leconte_2016_aug/Casey/raw/ADCP/CASEY_2016_08_12_1419.mat
   - ROSS5004.000
   - ROSS5005.000
 - ADCP configuration(s):
@@ -98,14 +98,14 @@
 |-+--+--+--+--+-|
 |600|4|20|80|1.00|0.54|
 
-- Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Casey/raw/GPS/CASEY_2016_08_12_1419.mat
+- Loaded ../Data/leconte_2016_aug/Casey/raw/GPS/CASEY_2016_08_12_1419.mat
   - GPS_20160812134337.log
   - GPS_20160812144805.log
   - GPS_20160812155217.log
   - GPS_20160812165636.log
   - GPS_20160812180218.log
 
-- Saved /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Casey/processed/CASEY_2016_08_12_1419.mat
+- Saved ../Data/leconte_2016_aug/Casey/processed/CASEY_2016_08_12_1419.mat
   - Data removed using beam-specific correlation edge detection
   - Data removed below 80.00m depth
   - Ship velocity corrected using GPS-based velocity estimate
@@ -122,18 +122,18 @@ Skipped!
 Skipped!
 
 *** Deployment 8: CASEY_2016_08_14_1717
-- Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Casey/raw/ADCP/CASEY_2016_08_14_1717.mat
+- Loaded ../Data/leconte_2016_aug/Casey/raw/ADCP/CASEY_2016_08_14_1717.mat
   - ROSS6003.000
 - ADCP configuration(s):
 |Freq|Beams|Beam Angle|Depth Cells|Cell Size|Blank Distance|
 |-+--+--+--+--+-|
 |600|4|20|80|1.00|0.54|
 
-- Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Casey/raw/GPS/CASEY_2016_08_14_1717.mat
+- Loaded ../Data/leconte_2016_aug/Casey/raw/GPS/CASEY_2016_08_14_1717.mat
   - GPS_20160814170006.log
   - GPS_20160814180551.log
 
-- Saved /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Casey/processed/CASEY_2016_08_14_1717.mat
+- Saved ../Data/leconte_2016_aug/Casey/processed/CASEY_2016_08_14_1717.mat
   - Data removed using beam-specific correlation edge detection
   - Data removed below 80.00m depth
   - Ship velocity corrected using GPS-based velocity estimate
@@ -144,17 +144,17 @@ Skipped!
 [[../Figures/leconte_2016_aug/Casey/CASEY_2016_08_14_1717/surface_vel.jpg]]
 
 *** Deployment 9: CASEY_2016_08_15_0001
-- Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Casey/raw/ADCP/CASEY_2016_08_15_0001.mat
+- Loaded ../Data/leconte_2016_aug/Casey/raw/ADCP/CASEY_2016_08_15_0001.mat
   - CASEY000.000
 - ADCP configuration(s):
 |Freq|Beams|Beam Angle|Depth Cells|Cell Size|Blank Distance|
 |-+--+--+--+--+-|
 |300|4|20|40|4.00|1.76|
 
-- Loaded /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Casey/raw/GPS/CASEY_2016_08_15_0001.mat
+- Loaded ../Data/leconte_2016_aug/Casey/raw/GPS/CASEY_2016_08_15_0001.mat
   - GPS_20160815004929.log
 
-- Saved /Users/dylan/OSU/ROSS/Data/leconte_2016_aug/Casey/processed/CASEY_2016_08_15_0001.mat
+- Saved ../Data/leconte_2016_aug/Casey/processed/CASEY_2016_08_15_0001.mat
   - Data removed using beam-specific correlation edge detection
   - Data removed below 80.00m depth
   - Ship velocity corrected using GPS-based velocity estimate

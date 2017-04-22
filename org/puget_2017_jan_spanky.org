@@ -2,18 +2,18 @@
 ** Deployment Processing: Spanky 
 
 *** Deployment 1: SPANKY_2017_01_18_2040
-- Loaded /Users/dylan/OSU/ROSS/Data/puget_2017_jan/Spanky/raw/ADCP/SPANKY_2017_01_18_2040.mat
+- Loaded /Users/dylan/OSU/ROSS/Data/puget_2017_jan/Spanky/raw/ADCP/SPANKY_2017_01_18_2040_adcp.mat
   - ROSS4043.000
 - ADCP configuration(s):
 |Freq|Beams|Beam Angle|Depth Cells|Cell Size|Blank Distance|
 |-+--+--+--+--+-|
 |300|4|20|40|4.00|0.76|
 
-- Loaded /Users/dylan/OSU/ROSS/Data/puget_2017_jan/Spanky/raw/GPS/SPANKY_2017_01_18_2040.mat
+- Loaded /Users/dylan/OSU/ROSS/Data/puget_2017_jan/Spanky/raw/GPS/SPANKY_2017_01_18_2040_gps.mat
   - GPS_20170118203238.log
   - GPS_20170118214227.log
 
-- Saved /Users/dylan/OSU/ROSS/Data/puget_2017_jan/Spanky/processed/SPANKY_2017_01_18_2040.mat
+- Saved [[../Data/puget_2017_jan/Spanky/processed/SPANKY_2017_01_18_2040.mat]]
   - Data removed using beam-specific echo intensity edge detection
   - Ship velocity corrected using GPS-based velocity estimate
 
@@ -23,22 +23,21 @@
 [[../Figures/puget_2017_jan/Spanky/SPANKY_2017_01_18_2040/surface_vel.jpg]]
 
 *** Deployment 2: SPANKY_2017_01_19_1228
-- Loaded /Users/dylan/OSU/ROSS/Data/puget_2017_jan/Spanky/raw/ADCP/SPANKY_2017_01_19_1228.mat
+- Loaded /Users/dylan/OSU/ROSS/Data/puget_2017_jan/Spanky/raw/ADCP/SPANKY_2017_01_19_1228_adcp.mat
   - ROSS4045.000
 - ADCP configuration(s):
 |Freq|Beams|Beam Angle|Depth Cells|Cell Size|Blank Distance|
 |-+--+--+--+--+-|
 |300|4|20|40|4.00|0.76|
 
-- Loaded /Users/dylan/OSU/ROSS/Data/puget_2017_jan/Spanky/raw/GPS/SPANKY_2017_01_19_1228.mat
-  - GPS_20170119120950.log
-  - GPS_20170119153951.log
-  - GPS_20170119142934.log
-  - GPS_20170119164949.log
-  - GPS_20170119175954.log
-  - GPS_20170119131948.log
-
-- Saved /Users/dylan/OSU/ROSS/Data/puget_2017_jan/Spanky/processed/SPANKY_2017_01_19_1228.mat
+Processing /Users/dylan/OSU/ROSS/Data/puget_2017_jan/Spanky/raw/GPS/GPS_20170119120950.log...
+Processing /Users/dylan/OSU/ROSS/Data/puget_2017_jan/Spanky/raw/GPS/GPS_20170119153951.log...
+Processing /Users/dylan/OSU/ROSS/Data/puget_2017_jan/Spanky/raw/GPS/GPS_20170119142934.log...
+Processing /Users/dylan/OSU/ROSS/Data/puget_2017_jan/Spanky/raw/GPS/GPS_20170119164949.log...
+Processing /Users/dylan/OSU/ROSS/Data/puget_2017_jan/Spanky/raw/GPS/GPS_20170119175954.log...
+Processing /Users/dylan/OSU/ROSS/Data/puget_2017_jan/Spanky/raw/GPS/GPS_20170119131948.log...
+Saved /Users/dylan/OSU/ROSS/Data/puget_2017_jan/Spanky/raw/GPS/SPANKY_2017_01_19_1228_gps.mat
+- Saved [[../Data/puget_2017_jan/Spanky/processed/SPANKY_2017_01_19_1228.mat]]
   - Data removed using beam-specific echo intensity edge detection
   - Ship velocity corrected using GPS-based velocity estimate
 

@@ -145,8 +145,9 @@ if ~exist(dirout,'dir'); mkdir(dirout); end
 fout = [D.name '.mat'];
 ross.deployments(ndep).files.final = [dirout fout];
 save(ross.deployments(ndep).files.final,'adcp')
-disp(['- Saved ' ross.deployments(ndep).files.final])
-
+fparts = strsplit(ross.deployments(ndep).files.final,'/');
+flink = fullfile('..',fparts{6:end});
+disp(sprintf('- Saved [[%s]]',flink))
 for i = 1:length(adcp(1).info)
     disp(['  - ' adcp(1).info{i}])
 end

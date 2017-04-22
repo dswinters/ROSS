@@ -2,7 +2,7 @@
 ** Deployment Processing: Swankie 
 
 *** Deployment 1: SWANKIE_test1
-- Loaded ../Data/petersburg_2017_apr/Swankie/raw/ADCP/SWANKIE_test1.mat
+- Loaded [[../Data/petersburg_2017_apr/Swankie/raw/ADCP/SWANKIE_test1_adcp.mat]]
   - ADCP_raw_20170416194415.bin
   - ADCP_raw_20170416200000.bin
   - ADCP_raw_20170416210000.bin
@@ -13,13 +13,13 @@
 |300|5|25|63|1.50|1.60|
 |300|5|25|40|4.00|1.60|
 
-- Loaded ../Data/petersburg_2017_apr/Swankie/raw/GPS/SWANKIE_test1.mat
+- Loaded [[../Data/petersburg_2017_apr/Swankie/raw/GPS/SWANKIE_test1_gps.mat]]
   - GPS_20170416174002.log
   - GPS_20170416184711.log
   - GPS_20170416195729.log
   - GPS_20170416210732.log
 
-- Saved ../Data/petersburg_2017_apr/Swankie/processed/SWANKIE_test1.mat
+- Saved [[../Data/petersburg_2017_apr/Swankie/processed/SWANKIE_test1.mat]]
   - Data removed using beam-specific echo intensity edge detection
   - Ship velocity corrected using GPS-based velocity estimate
   - Data removed where rate of turn > 5.00 deg/s
@@ -31,7 +31,7 @@
 [[../Figures/petersburg_2017_apr/Swankie/SWANKIE_test1/surface_vel.jpg]]
 
 *** Deployment 2: SWANKIE_Pelican_0419
-- Loaded ../Data/petersburg_2017_apr/Swankie/raw/ADCP/SWANKIE_Pelican_0419.mat
+- Loaded [[../Data/petersburg_2017_apr/Swankie/raw/ADCP/SWANKIE_Pelican_0419_adcp.mat]]
   - ADCP_raw_20170419200404.bin
   - ADCP_raw_20170419210000.bin
   - ADCP_raw_20170419220000.bin
@@ -53,7 +53,7 @@
 |300|5|25|40|4.00|1.60|
 |300|5|25|63|1.50|1.60|
 
-- Loaded ../Data/petersburg_2017_apr/Swankie/raw/GPS/SWANKIE_Pelican_0419.mat
+- Loaded [[../Data/petersburg_2017_apr/Swankie/raw/GPS/SWANKIE_Pelican_0419_gps.mat]]
   - GPS_20170419001055.log
   - GPS_20170419200404.log
   - GPS_20170419211343.log
@@ -69,7 +69,7 @@
   - GPS_20170420030312.log
   - GPS_20170420110208.log
 
-- Saved ../Data/petersburg_2017_apr/Swankie/processed/SWANKIE_Pelican_0419.mat
+- Saved [[../Data/petersburg_2017_apr/Swankie/processed/SWANKIE_Pelican_0419.mat]]
   - Ship velocity corrected using GPS-based velocity estimate
   - Data removed where rate of turn > 3.00 deg/s
 

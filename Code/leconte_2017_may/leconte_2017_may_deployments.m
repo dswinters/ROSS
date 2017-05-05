@@ -11,26 +11,27 @@ master.make_figures.summary     = true;
 master.make_figures.surface_vel = true;
 
 %========================================================
-% Processing defaults
-%========================================================
-defaults.proc.skip             = false;
-defaults.proc.trim_methods(1)  = trim_ei_edge_b;
-defaults.proc.filters(1)       = filt_rotmax3;
-defaults.proc.ship_vel_removal = 'GPS';
-defaults.files.map             = 'petersburg_dock';
-defaults.plot.ylim             = [0 200];
-
-%========================================================
 % Define some filters
 %========================================================
 newfilt =@(n,p) struct('name',n,'params',p);
 trim_ei_edge_b = newfilt('ei_edge','beam');
 filt_rotmax3   = newfilt('rotmax',3);
+notrim = newfilt('none',[]);
+
+%========================================================
+% Processing defaults
+%========================================================
+defaults.proc.skip             = false;
+defaults.proc.trim_methods(1)  = notrim;
+defaults.proc.filters(1)       = filt_rotmax3;
+defaults.proc.ship_vel_removal = 'GPS';
+defaults.files.map             = 'petersburg_dock';
+defaults.plot.ylim             = [0 200];
 
 %=======================================================
 % Rosie deployments (150 hHz PAVS, Alaska flag)
 %========================================================
-rosie = lecote_2017_may_rosie()
+rosie = leconte_2017_may_rosie()
 rosie = ross_fill_defaults(rosie,defaults);
 
 %========================================================
@@ -48,4 +49,6 @@ swankie = ross_fill_defaults(swankie,defaults);
 %========================================================
 % Combine deployment structures into final cell array
 %========================================================
-deployments = {rosie, casey, swankie};
+master.kayaks = {'Swankie'};
+deployments = {swankie};
+% deployments = {rosie, casey, swankie};

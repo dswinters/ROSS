@@ -2,40 +2,76 @@
 ** Deployment Processing: Swankie 
 
 *** Deployment 1: dock_transects_20170503
-- Loaded [[../Data/leconte_2017_may/Swankie/raw/ADCP/dock_transects_20170503_adcp.mat]]
-  - ADCP_raw_20170503050911.bin
-  - ADCP_raw_20170503210616.bin
-  - ADCP_raw_20170503220000.bin
-  - ADCP_raw_20170503235237.bin
-  - ADCP_raw_20170504003107.bin
-  - ADCP_raw_20170504010000.bin
-  - ADCP_raw_20170504013814.bin
-  - ADCP_raw_20170504020000.bin
-  - ADCP_raw_20170504024831.bin
-  - ADCP_raw_20170504030000.bin
-  - ADCP_raw_20170504034734.bin
+Skipped!
+
+*** Deployment 2: swankie_deployment_201705081400
+Skipped!
+
+*** Deployment 3: swankie_deployment_201705091345
+- Loaded [[../Data/leconte_2017_may/Swankie/raw/ADCP/swankie_deployment_201705091345_adcp.mat]]
+  - ADCP_timestamped_20170509130949.bin
+  - ADCP_timestamped_20170509140000.bin
+- ADCP configuration(s):
+|Freq|Beams|Beam Angle|Depth Cells|Cell Size|Blank Distance|
+|-+--+--+--+--+-|
+|300|5|25|63|1.50|1.60|
+|300|5|25|40|4.00|1.60|
+
+- Loaded [[../Data/leconte_2017_may/Swankie/raw/GPS/swankie_deployment_201705091345_gps.mat]]
+  - GPS_20170509130949.log
+  - GPS_20170509141320.log
+
+- Saved [[../Data/leconte_2017_may/Swankie/processed/swankie_deployment_201705091345.mat]]
+  - Ship velocity corrected using GPS-based velocity estimate
+  - Data removed where rate of turn > 3.00 deg/s
+
+
+**** Figures
+[[../Figures/leconte_2017_may/Swankie/swankie_deployment_201705091345/summary.jpg]]
+[[../Figures/leconte_2017_may/Swankie/swankie_deployment_201705091345/surface_vel.jpg]]
+
+*** Deployment 4: swankie_deployment_201705091550
+- Loaded [[../Data/leconte_2017_may/Swankie/raw/ADCP/swankie_deployment_201705091550_adcp.mat]]
+  - ADCP_timestamped_20170509151138.bin
+  - ADCP_timestamped_20170509160000.bin
 - ADCP configuration(s):
 |Freq|Beams|Beam Angle|Depth Cells|Cell Size|Blank Distance|
 |-+--+--+--+--+-|
 |300|5|25|40|4.00|1.60|
 |300|5|25|63|1.50|1.60|
 
-- Loaded [[../Data/leconte_2017_may/Swankie/raw/GPS/dock_transects_20170503_gps.mat]]
-  - GPS_20170503050911.log
-  - GPS_20170503210616.log
-  - GPS_20170503221549.log
-  - GPS_20170503235237.log
-  - GPS_20170504003107.log
-  - GPS_20170504013814.log
-  - GPS_20170504024747.log
-  - GPS_20170504024831.log
-  - GPS_20170504034734.log
+- Loaded [[../Data/leconte_2017_may/Swankie/raw/GPS/swankie_deployment_201705091550_gps.mat]]
+  - GPS_20170509151138.log
+  - GPS_20170509161504.log
 
-- Saved [[../Data/leconte_2017_may/Swankie/processed/dock_transects_20170503.mat]]
+- Saved [[../Data/leconte_2017_may/Swankie/processed/swankie_deployment_201705091550.mat]]
   - Ship velocity corrected using GPS-based velocity estimate
   - Data removed where rate of turn > 3.00 deg/s
 
 
 **** Figures
-[[../Figures/leconte_2017_may/Swankie/dock_transects_20170503/summary.jpg]]
-[[../Figures/leconte_2017_may/Swankie/dock_transects_20170503/surface_vel.jpg]]
+[[../Figures/leconte_2017_may/Swankie/swankie_deployment_201705091550/summary.jpg]]
+[[../Figures/leconte_2017_may/Swankie/swankie_deployment_201705091550/surface_vel.jpg]]
+
+*** Deployment 5: swankie_deployment_201705091830
+- Loaded [[../Data/leconte_2017_may/Swankie/raw/ADCP/swankie_deployment_201705091830_adcp.mat]]
+  - ADCP_timestamped_20170509180609.bin
+  - ADCP_timestamped_20170509190000.bin
+- ADCP configuration(s):
+|Freq|Beams|Beam Angle|Depth Cells|Cell Size|Blank Distance|
+|-+--+--+--+--+-|
+|300|5|25|40|4.00|1.60|
+|300|5|25|63|1.50|1.60|
+
+- Loaded [[../Data/leconte_2017_may/Swankie/raw/GPS/swankie_deployment_201705091830_gps.mat]]
+  - GPS_20170509180609.log
+  - GPS_20170509191556.log
+
+- Saved [[../Data/leconte_2017_may/Swankie/processed/swankie_deployment_201705091830.mat]]
+  - Ship velocity corrected using GPS-based velocity estimate
+  - Data removed where rate of turn > 3.00 deg/s
+
+
+**** Figures
+[[../Figures/leconte_2017_may/Swankie/swankie_deployment_201705091830/summary.jpg]]
+[[../Figures/leconte_2017_may/Swankie/swankie_deployment_201705091830/surface_vel.jpg]]

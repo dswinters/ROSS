@@ -79,9 +79,9 @@ clims = {nan;
          nan;
          nan;
          nan;
-         1*[-1 1]; % East-West velocity (m/s)
-         1*[-1 1]; % North-South velocity (m/s)
-         1*[-1 1]; % Vertical velocity (m/s)
+         0.3*[-1 1]; % East-West velocity (m/s)
+         0.3*[-1 1]; % North-South velocity (m/s)
+         0.3*[-1 1]; % Vertical velocity (m/s)
          nan;      % Echo intensity (counts)
          nan};     % Correlation (counts)
 

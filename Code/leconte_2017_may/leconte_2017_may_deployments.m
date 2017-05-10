@@ -49,6 +49,8 @@ swankie = ross_fill_defaults(swankie,defaults);
 %========================================================
 % Combine deployment structures into final cell array
 %========================================================
+% master.kayaks = {'Rosie'};
+% deployments = {rosie};
 master.kayaks = {'Swankie'};
 deployments = {swankie};
 % deployments = {rosie, casey, swankie};

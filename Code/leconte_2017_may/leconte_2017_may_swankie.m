@@ -1,15 +1,23 @@
 function swankie = leconte_2017_may_swankie()
+%--------------------------------------------------------%
+% ADCP orientation                                       %
+%--------------------------------------------------------%
 %        FORWARD
 %  1   3    ^
 %    5      |--> STARBOARD
 %  4   2   
+
+%--------------------------------------------------------%
+% Default deployment options                             %
+%--------------------------------------------------------%
 swankie0.proc.heading_offset = 45;
 swankie0.proc.adcp_load_function = 'adcp_parse';
 swankie0.proc.skip = true;
 swankie0.tlim = [-inf inf];
 swankie0.proc.ross_timestamps = 'pre';
+
 %--------------------------------------------------------%
-% Define some filters
+% Define some filters                                    %
 %--------------------------------------------------------%
 newfilt =@(n,p) struct('name',n,'params',p);
 trim_ei_edge_b = newfilt('ei_edge','beam');
@@ -17,8 +25,10 @@ trim_corr_edge_b = newfilt('corr_edge','beam');
 filt_rotmax3   = newfilt('rotmax',3);
 notrim = newfilt('none',[]);
 
+
 %--------------------------------------------------------%
-% "Deployment" 1: Petersburg dock shallow transects
+% "Deployment" 1: Petersburg dock shallow transects      %
+%--------------------------------------------------------%
 dep = 1;
 swankie(dep).proc.skip = true;
 swankie(dep).name       = 'dock_transects_20170503';
@@ -50,7 +60,7 @@ swankie(dep).files.gps = {...
 swankie(dep).plot.ylim = [0 20];
 
 %--------------------------------------------------------%
-% "Deployment" 2: Looks like ADCP was out of water
+% "Deployment" 2: Looks like ADCP was out of water       %
 %--------------------------------------------------------%
 dep = 2;
 swankie(dep).proc.skip = true;
@@ -63,7 +73,7 @@ swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'leconte_terminus';
 
 %--------------------------------------------------------%
-% Deployment 3
+%                    Deployment 3                        %
 %--------------------------------------------------------%
 dep = 3;
 swankie(dep).name = 'swankie_deployment_201705091345';
@@ -78,7 +88,7 @@ swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'leconte_terminus';
 
 %--------------------------------------------------------%
-% Deployment 4
+%                    Deployment 4                        %
 %--------------------------------------------------------%
 dep = 4;
 swankie(dep).name = 'swankie_deployment_201705091550';
@@ -93,7 +103,7 @@ swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'leconte_terminus';
 
 %--------------------------------------------------------%
-% Deployment 5
+%                    Deployment 5                        %
 %--------------------------------------------------------%
 dep = 5;
 swankie(dep).proc.skip = false;

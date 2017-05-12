@@ -7,7 +7,7 @@ adcp = dat.adcp; clear dat
 
 %% Plot settings
 psty = '.'; % plot style
-msiz = 1; % plot marker size
+msiz = 10; % plot marker size
 axesfontsize = 10;
 
 defaultaxesfontsize = get(0,'defaultaxesfontsize');

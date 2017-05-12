@@ -7,7 +7,7 @@ adcp = dat.adcp; clear dat
 
 %% Plot settings
 psty = '.'; % plot style
-msiz = 1; % plot marker size
+msiz = 10; % plot marker size
 axesfontsize = 10;
 
 defaultaxesfontsize = get(0,'defaultaxesfontsize');
@@ -132,6 +132,24 @@ for i = 1:np
         set(ax(i),'color',bgcol);
     end
 end
+
+%% Plot echo intensity edges
+tmethod = struct('name','ei_edge','params','beam');
+edges = {};
+for i = 1:length(adcp)
+    [~,edges{i}] = adcp_trim_data(adcp(i),tmethod);
+    edges{i}(edges{i}>=adcp(i).config.ranges(end)) = nan;
+end
+edges = cat(2,edges{:});
+dn = cat(2,adcp.mtime);
+[dn,idx] = sort(dn);
+edges = edges(:,idx);
+for i = 1:adcp(1).config.n_beams
+    axes(ax(4+i));
+    hold on
+    plot(dn,edges(i,:),'linewidth',2,'color',[0 1 0 0.5])
+end
+
 
 %% Format plots
 t = sort(cat(2,adcp(:).mtime));

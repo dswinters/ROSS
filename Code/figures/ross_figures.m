@@ -27,3 +27,9 @@ end
 if ross.master.make_figures.surface_vel
     ross = ross_figure_surface_vel(ross,ndep);
 end
+if ross.master.make_figures.echo_intens
+    ross = ross_figure_echo_intens(ross,ndep);
+end
+if ross.master.make_figures.corr
+    ross = ross_figure_corr(ross,ndep);
+end

@@ -12,7 +12,6 @@ function swankie = leconte_2017_may_swankie()
 %--------------------------------------------------------%
 swankie0.proc.heading_offset = 45;
 swankie0.proc.adcp_load_function = 'adcp_parse';
-swankie0.proc.skip = false;
 swankie0.tlim = [-inf inf];
 swankie0.proc.ross_timestamps = 'pre';
 
@@ -28,7 +27,6 @@ notrim = newfilt('none',[]);
 
 %--------------------------------------------------------%
 % "Deployment" 1: Petersburg dock shallow transects      %
-%--------------------------------------------------------%
 dep = 1;
 swankie(dep).proc.skip = true;
 swankie(dep).name       = 'dock_transects_20170503';
@@ -60,8 +58,7 @@ swankie(dep).files.gps = {...
 swankie(dep).plot.ylim = [0 20];
 
 %--------------------------------------------------------%
-% "Deployment" 2: Looks like ADCP was out of water       %
-%--------------------------------------------------------%
+% Looks like ADCP was out of water
 dep = 2;
 swankie(dep).proc.skip = true;
 swankie(dep).name = 'swankie_deployment_201705081400';
@@ -72,8 +69,6 @@ swankie(dep).files.gps = {'deployment_201705081400'};
 swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'leconte_terminus';
 
-%--------------------------------------------------------%
-%                    Deployment 3                        %
 %--------------------------------------------------------%
 dep = 3;
 swankie(dep).name = 'swankie_deployment_201705091345';
@@ -88,8 +83,6 @@ swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'leconte_terminus';
 
 %--------------------------------------------------------%
-%                    Deployment 4                        %
-%--------------------------------------------------------%
 dep = 4;
 swankie(dep).name = 'swankie_deployment_201705091550';
 swankie(dep).tlim       = datenum([...
@@ -102,8 +95,6 @@ swankie(dep).files.gps = {'deployment_201705091550'};
 swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'leconte_terminus';
 
-%--------------------------------------------------------%
-%                    Deployment 5                        %
 %--------------------------------------------------------%
 dep = 5;
 swankie(dep).name = 'swankie_deployment_201705091830';
@@ -119,8 +110,6 @@ swankie(dep).files.map = 'leconte_terminus';
 swankie(dep).proc.filters(1).name = 'velmax';
 swankie(dep).proc.filters(1).params = 0.6;
 
-%--------------------------------------------------------%
-%                    Deployment 6                        %
 %--------------------------------------------------------%
 dep = 6;
 swankie(dep).name = 'swankie_deployment_201705101700';
@@ -138,8 +127,6 @@ swankie(dep).files.map = 'leconte_terminus';
 
 
 %--------------------------------------------------------%
-%                    Deployment 7                        %
-%--------------------------------------------------------%
 dep = 7;
 swankie(dep).name = 'swankie_deployment_201705102100';
 swankie(dep).tlim       = datenum([...
@@ -155,8 +142,6 @@ swankie(dep).files.map = 'leconte_terminus';
 % swankie(dep).proc.filters(1).params = 0.6;
 
 %--------------------------------------------------------%
-%                    Deployment 8                        %
-%--------------------------------------------------------%
 dep = 8;
 swankie(dep).name = 'swankie_deployment_201705102200';
 swankie(dep).tlim       = datenum([...
@@ -169,8 +154,6 @@ swankie(dep).files.gps = {'deployment_201705102200'};
 swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'leconte_terminus';
 
-%--------------------------------------------------------%
-%                    Deployment 9                        %
 %--------------------------------------------------------%
 dep = 9;
 swankie(dep).name = 'swankie_deployment_201705111800';
@@ -185,8 +168,6 @@ swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'leconte_terminus';
 
 %--------------------------------------------------------%
-%                    Deployment 10   (trash)             %
-%--------------------------------------------------------%
 dep = 10;
 swankie(dep).proc.skip = true;
 swankie(dep).name = 'swankie_deployment_201705111840';
@@ -198,9 +179,7 @@ swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'leconte_terminus';
 
 %--------------------------------------------------------%
-%                    Deployment 11                       %
-%--------------------------------------------------------%
-dep = 10;
+dep = 11;
 swankie(dep).name = 'swankie_deployment_201705112250';
 swankie(dep).tlim       = datenum([...
     2017 05 11 22 52 00;
@@ -211,9 +190,47 @@ swankie(dep).files.adcp = {...
 swankie(dep).files.gps = {'deployment_201705112250'};
 swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'leconte_terminus';
+swankie(dep).proc.skip = false;
+
+%--------------------------------------------------------%
+% swankie_deployment_201705112250 sections
+ts = reshape(...
+    datenum(['11-May-2017 23:17:45';
+             '11-May-2017 23:21:20';
+             '11-May-2017 23:23:25';
+             '11-May-2017 23:25:11';
+             '11-May-2017 23:26:02';
+             '11-May-2017 23:30:28';
+             '11-May-2017 23:30:32';
+             '11-May-2017 23:32:25';
+             '11-May-2017 23:32:57';
+             '11-May-2017 23:35:37';
+             '11-May-2017 23:36:59';
+             '11-May-2017 23:38:17';
+             '11-May-2017 23:38:53';
+             '11-May-2017 23:41:33']),...
+    2,[])';
+d0 = swankie(dep);
+for i = 1:length(ts)
+    dep = dep+1;
+    swankie(dep) = d0;
+    swankie(dep).tlim = ts(i,:);
+    swankie(dep).name = sprintf('swankie_section_201705112250_%02d',i);
+end
 
 
-
+%--------------------------------------------------------%
+dep = dep+1;
+swankie(dep).name = 'swankie_deployment_201705120000';
+% swankie(dep).tlim       = datenum([...
+%     2017 05 11 22 52 00;
+%     2017 05 11 23 58 00]);
+swankie(dep).files.adcp = {...
+    'deployment_201705120000';
+    'timestamped'};
+swankie(dep).files.gps = {'deployment_201705120000'};
+swankie(dep).plot.ylim = [0 200];
+swankie(dep).files.map = 'leconte_terminus';
 
 
 swankie = ross_fill_defaults(swankie,swankie0);

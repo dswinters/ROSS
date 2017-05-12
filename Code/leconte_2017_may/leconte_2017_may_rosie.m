@@ -7,10 +7,8 @@ rosie0.proc.heading_offset = 135;
 rosie0.tlim = [-inf inf];
 rosie0.files.map = 'leconte_terminus';
 rosie0.plot.ylim = [0 200];
-rosie0.proc.skip = false;
 rosie0.proc.adcp_load_function = 'adcp_parse';
 rosie0.proc.ross_timestamps = 'post';
-rosie0.proc.skip = false;
 %--------------------------------------------------------%
 dep = 1;
 rosie(dep).name       = 'rosie_deployment_201705100100';

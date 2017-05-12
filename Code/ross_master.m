@@ -1,4 +1,5 @@
-function ross_master(tripname)
+function f_out = ross_master(tripname)
+f_out = {};
 
 %% Write output to log file?
 make_logfile = true;
@@ -97,6 +98,13 @@ if master.process_data
         end
     end
 end
-
 diary off
+
+for i = 1:length(Ross)
+    for d = 1:length(Ross(i).deployments)
+        if isfield(Ross(i).deployments(d).files,'final')
+            f_out{end+1} = Ross(i).deployments(d).files.final;
+        end
+    end
+end
 

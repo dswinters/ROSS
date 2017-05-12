@@ -14,6 +14,7 @@ swankie0.proc.heading_offset = 45;
 swankie0.proc.adcp_load_function = 'adcp_parse';
 swankie0.tlim = [-inf inf];
 swankie0.proc.ross_timestamps = 'pre';
+swankie0.proc.skip = false;
 
 %--------------------------------------------------------%
 % Define some filters                                    %
@@ -23,7 +24,6 @@ trim_ei_edge_b = newfilt('ei_edge','beam');
 trim_corr_edge_b = newfilt('corr_edge','beam');
 filt_rotmax3   = newfilt('rotmax',3);
 notrim = newfilt('none',[]);
-
 
 %--------------------------------------------------------%
 % "Deployment" 1: Petersburg dock shallow transects      %
@@ -166,9 +166,35 @@ swankie(dep).files.adcp = {...
 swankie(dep).files.gps = {'deployment_201705111800'};
 swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'leconte_terminus';
+swankie(dep).proc.skip = false;
+% Sections
+ts = reshape(...
+    datenum(['11-May-2017 18:04:42';
+             '11-May-2017 18:05:34';
+             '11-May-2017 18:05:39';
+             '11-May-2017 18:06:10';
+             '11-May-2017 18:06:19';
+             '11-May-2017 18:07:13';
+             '11-May-2017 18:08:13';
+             '11-May-2017 18:09:43';
+             '11-May-2017 18:10:37';
+             '11-May-2017 18:11:22']),...
+    2,[])';
+d0 = swankie(dep);
+d0.proc.adcp_raw2mat = false;
+d0.proc.gps_raw2mat = false;
+for i = 1:length(ts)
+    dep = dep+1;
+    swankie(dep) = d0;
+    swankie(dep).tlim = ts(i,:);
+    swankie(dep).name = ...
+        sprintf('swankie_section_201705111800_%02d',i);
+end
+
 
 %--------------------------------------------------------%
-dep = 10;
+% very short, out of water?
+dep = dep+1;
 swankie(dep).proc.skip = true;
 swankie(dep).name = 'swankie_deployment_201705111840';
 swankie(dep).files.adcp = {...
@@ -179,7 +205,7 @@ swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'leconte_terminus';
 
 %--------------------------------------------------------%
-dep = 11;
+dep = dep+1;
 swankie(dep).name = 'swankie_deployment_201705112250';
 swankie(dep).tlim       = datenum([...
     2017 05 11 22 52 00;
@@ -214,7 +240,8 @@ for i = 1:length(ts)
     dep = dep+1;
     swankie(dep) = d0;
     swankie(dep).tlim = ts(i,:);
-    swankie(dep).name = sprintf('swankie_section_201705112250_%02d',i);
+    swankie(dep).name = ...
+        sprintf('swankie_section_201705112250_%02d',i);
 end
 
 
@@ -230,7 +257,6 @@ swankie(dep).files.adcp = {...
 swankie(dep).files.gps = {'deployment_201705120000'};
 swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'leconte_terminus';
-swankie(dep).proc.skip = false;
 % Sections
 ts = reshape(...
     datenum(['12-May-2017 00:31:50';
@@ -249,7 +275,8 @@ for i = 1:length(ts)
     dep = dep+1;
     swankie(dep) = d0;
     swankie(dep).tlim = ts(i,:);
-    swankie(dep).name = sprintf('swankie_section_201705120000_%02d',i);
+    swankie(dep).name = ...
+        sprintf('swankie_section_201705120000_%02d',i);
 end
 
 

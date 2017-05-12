@@ -23,7 +23,7 @@ notrim = newfilt('none',[]);
 %========================================================
 % Processing defaults
 %========================================================
-defaults.proc.skip             = false;
+defaults.proc.skip             = true;
 defaults.proc.trim_methods(1)  = notrim;
 % defaults.proc.filters(1)       = filt_rotmax3;
 defaults.proc.ship_vel_removal = 'GPS';

@@ -88,6 +88,7 @@ for ia = 1:length(adcp)
     adcp(ia).gps_vx  = adcp(ia).gps.vx;
     adcp(ia).gps_vy  = adcp(ia).gps.vy;
 end
+ross_vel_scale = 3.5;
 
 %% Make plots
 for i = 1:np
@@ -143,6 +144,12 @@ set(ax,'xlim',t([1 end]))
 axes(ax(3))
 ylim([0 360])
 set(gca,'ytick',0:180:360)
+% ROSS velocity
+axes(ax(2))
+yyaxis left
+ylim(ross_vel_scale*[-1 1]);
+yyaxis right
+ylim(ross_vel_scale*[-1 1]);
 % Grid markers for ROSS location, velocity, and heading
 for i = 1:4
     axes(ax(i))

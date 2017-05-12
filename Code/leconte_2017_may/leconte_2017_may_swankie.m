@@ -190,10 +190,7 @@ swankie(dep).files.adcp = {...
 swankie(dep).files.gps = {'deployment_201705112250'};
 swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'leconte_terminus';
-swankie(dep).proc.skip = false;
-
-%--------------------------------------------------------%
-% swankie_deployment_201705112250 sections
+% Sections
 ts = reshape(...
     datenum(['11-May-2017 23:17:45';
              '11-May-2017 23:21:20';
@@ -211,6 +208,8 @@ ts = reshape(...
              '11-May-2017 23:41:33']),...
     2,[])';
 d0 = swankie(dep);
+d0.proc.adcp_raw2mat = false;
+d0.proc.gps_raw2mat = false;
 for i = 1:length(ts)
     dep = dep+1;
     swankie(dep) = d0;
@@ -231,6 +230,30 @@ swankie(dep).files.adcp = {...
 swankie(dep).files.gps = {'deployment_201705120000'};
 swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'leconte_terminus';
+swankie(dep).proc.skip = false;
+% Sections
+ts = reshape(...
+    datenum(['12-May-2017 00:31:50';
+             '12-May-2017 00:34:15';
+             '12-May-2017 00:34:20';
+             '12-May-2017 00:36:25';
+             '12-May-2017 00:37:22';
+             '12-May-2017 00:40:55';
+             '12-May-2017 00:44:13';
+             '12-May-2017 00:46:59']),...
+    2,[])';
+d0 = swankie(dep);
+d0.proc.adcp_raw2mat = false;
+d0.proc.gps_raw2mat = false;
+for i = 1:length(ts)
+    dep = dep+1;
+    swankie(dep) = d0;
+    swankie(dep).tlim = ts(i,:);
+    swankie(dep).name = sprintf('swankie_section_201705120000_%02d',i);
+end
+
+
+
 
 
 swankie = ross_fill_defaults(swankie,swankie0);

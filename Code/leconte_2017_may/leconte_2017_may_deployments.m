@@ -29,6 +29,8 @@ defaults.proc.trim_methods(1)  = notrim;
 defaults.proc.ship_vel_removal = 'GPS';
 defaults.files.map             = 'petersburg_dock';
 defaults.plot.ylim             = [0 200];
+defaults.proc.adcp_raw2mat     = true;
+defaults.proc.gps_raw2mat      = true;
 
 %=======================================================
 % Rosie deployments (150 hHz PAVS, Alaska flag)

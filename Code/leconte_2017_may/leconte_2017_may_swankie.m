@@ -12,7 +12,7 @@ function swankie = leconte_2017_may_swankie()
 %--------------------------------------------------------%
 swankie0.proc.heading_offset = 45;
 swankie0.proc.adcp_load_function = 'adcp_parse';
-swankie0.proc.skip = true;
+swankie0.proc.skip = false;
 swankie0.tlim = [-inf inf];
 swankie0.proc.ross_timestamps = 'pre';
 
@@ -106,7 +106,6 @@ swankie(dep).files.map = 'leconte_terminus';
 %                    Deployment 5                        %
 %--------------------------------------------------------%
 dep = 5;
-swankie(dep).proc.skip = false;
 swankie(dep).name = 'swankie_deployment_201705091830';
 swankie(dep).tlim       = datenum([...
     2017 05 09 18 30 00;
@@ -119,6 +118,103 @@ swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'leconte_terminus';
 swankie(dep).proc.filters(1).name = 'velmax';
 swankie(dep).proc.filters(1).params = 0.6;
+
+%--------------------------------------------------------%
+%                    Deployment 6                        %
+%--------------------------------------------------------%
+dep = 6;
+swankie(dep).name = 'swankie_deployment_201705101700';
+swankie(dep).tlim       = datenum([...
+    2017 05 10 16 18 00;
+    2017 05 10 17 10 00]);
+swankie(dep).files.adcp = {...
+    'deployment_201705101700';
+    'timestamped'};
+swankie(dep).files.gps = {'deployment_201705101700'};
+swankie(dep).plot.ylim = [0 200];
+swankie(dep).files.map = 'leconte_terminus';
+% swankie(dep).proc.filters(1).name = 'velmax';
+% swankie(dep).proc.filters(1).params = 0.6;
+
+
+%--------------------------------------------------------%
+%                    Deployment 7                        %
+%--------------------------------------------------------%
+dep = 7;
+swankie(dep).name = 'swankie_deployment_201705102100';
+swankie(dep).tlim       = datenum([...
+    2017 05 10 20 57 00;
+    2017 05 10 21 37 00]);
+swankie(dep).files.adcp = {...
+    'deployment_201705102100';
+    'timestamped'};
+swankie(dep).files.gps = {'deployment_201705102100'};
+swankie(dep).plot.ylim = [0 200];
+swankie(dep).files.map = 'leconte_terminus';
+% swankie(dep).proc.filters(1).name = 'velmax';
+% swankie(dep).proc.filters(1).params = 0.6;
+
+%--------------------------------------------------------%
+%                    Deployment 8                        %
+%--------------------------------------------------------%
+dep = 8;
+swankie(dep).name = 'swankie_deployment_201705102200';
+swankie(dep).tlim       = datenum([...
+    2017 05 10 22 03 00;
+    2017 05 10 22 55 00]);
+swankie(dep).files.adcp = {...
+    'deployment_201705102200';
+    'timestamped'};
+swankie(dep).files.gps = {'deployment_201705102200'};
+swankie(dep).plot.ylim = [0 200];
+swankie(dep).files.map = 'leconte_terminus';
+
+%--------------------------------------------------------%
+%                    Deployment 9                        %
+%--------------------------------------------------------%
+dep = 9;
+swankie(dep).name = 'swankie_deployment_201705111800';
+swankie(dep).tlim       = datenum([...
+    2017 05 11 18 02 00;
+    2017 05 11 18 22 00]);
+swankie(dep).files.adcp = {...
+    'deployment_201705111800';
+    'timestamped'};
+swankie(dep).files.gps = {'deployment_201705111800'};
+swankie(dep).plot.ylim = [0 200];
+swankie(dep).files.map = 'leconte_terminus';
+
+%--------------------------------------------------------%
+%                    Deployment 10   (trash)             %
+%--------------------------------------------------------%
+dep = 10;
+swankie(dep).proc.skip = true;
+swankie(dep).name = 'swankie_deployment_201705111840';
+swankie(dep).files.adcp = {...
+    'deployment_201705111840';
+    'timestamped'};
+swankie(dep).files.gps = {'deployment_201705111840'};
+swankie(dep).plot.ylim = [0 200];
+swankie(dep).files.map = 'leconte_terminus';
+
+%--------------------------------------------------------%
+%                    Deployment 11                       %
+%--------------------------------------------------------%
+dep = 10;
+swankie(dep).name = 'swankie_deployment_201705112250';
+swankie(dep).tlim       = datenum([...
+    2017 05 11 22 52 00;
+    2017 05 11 23 58 00]);
+swankie(dep).files.adcp = {...
+    'deployment_201705112250';
+    'timestamped'};
+swankie(dep).files.gps = {'deployment_201705112250'};
+swankie(dep).plot.ylim = [0 200];
+swankie(dep).files.map = 'leconte_terminus';
+
+
+
+
 
 swankie = ross_fill_defaults(swankie,swankie0);
 

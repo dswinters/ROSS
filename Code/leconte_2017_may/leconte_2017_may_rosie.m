@@ -10,13 +10,20 @@ rosie0.plot.ylim = [0 200];
 rosie0.proc.skip = false;
 rosie0.proc.adcp_load_function = 'adcp_parse';
 rosie0.proc.ross_timestamps = 'post';
+rosie0.proc.skip = false;
 %--------------------------------------------------------%
 dep = 1;
 rosie(dep).name       = 'rosie_deployment_201705100100';
-rosie(dep).tlim       = datenum([;])
 rosie(dep).files.adcp = {...
     'deployment_201705100100'
     'timestamped'};
 rosie(dep).files.gps  = {'deployment_201705100100'};
+%--------------------------------------------------------%
+dep = 2;
+rosie(dep).name       = 'rosie_deployment_201705102330';
+rosie(dep).files.adcp = {...
+    'deployment_201705102330'
+    'timestamped'};
+rosie(dep).files.gps  = {'deployment_201705102330'};
 %--------------------------------------------------------%
 rosie = ross_fill_defaults(rosie,rosie0);

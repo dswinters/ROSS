@@ -5,10 +5,12 @@ function [master deployments] = leconte_2017_may_deployments()
 %========================================================
 master                          = struct();
 master.name                     = 'leconte_2017_may';
-master.kayaks                   = {'Rosie','Casey','Swankie'};
+master.kayaks                   = {'Rosie','Swankie'};
 master.process_data             = true;
 master.make_figures.summary     = true;
 master.make_figures.surface_vel = true;
+master.make_figures.echo_intens = true;
+master.make_figures.corr        = true;
 
 %========================================================
 % Define some filters
@@ -23,7 +25,7 @@ notrim = newfilt('none',[]);
 %========================================================
 defaults.proc.skip             = false;
 defaults.proc.trim_methods(1)  = notrim;
-defaults.proc.filters(1)       = filt_rotmax3;
+% defaults.proc.filters(1)       = filt_rotmax3;
 defaults.proc.ship_vel_removal = 'GPS';
 defaults.files.map             = 'petersburg_dock';
 defaults.plot.ylim             = [0 200];
@@ -49,8 +51,4 @@ swankie = ross_fill_defaults(swankie,defaults);
 %========================================================
 % Combine deployment structures into final cell array
 %========================================================
-% master.kayaks = {'Rosie'};
-% deployments = {rosie};
-master.kayaks = {'Swankie'};
-deployments = {swankie};
-% deployments = {rosie, casey, swankie};
+deployments = {rosie, swankie};

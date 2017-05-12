@@ -11,3 +11,5 @@ Maps/
 *.000
 *Pixhawk*
 *pixhawk*
+scratch/*
+scratch

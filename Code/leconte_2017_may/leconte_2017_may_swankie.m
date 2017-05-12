@@ -16,6 +16,7 @@ swankie0.tlim = [-inf inf];
 swankie0.proc.ross_timestamps = 'pre';
 swankie0.proc.skip = false;
 
+
 %--------------------------------------------------------%
 % Define some filters                                    %
 %--------------------------------------------------------%
@@ -24,6 +25,7 @@ trim_ei_edge_b = newfilt('ei_edge','beam');
 trim_corr_edge_b = newfilt('corr_edge','beam');
 filt_rotmax3   = newfilt('rotmax',3);
 notrim = newfilt('none',[]);
+swankie0.proc.trim_methods(1) = trim_ei_edge_b;
 
 %--------------------------------------------------------%
 % "Deployment" 1: Petersburg dock shallow transects      %

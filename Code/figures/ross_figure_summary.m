@@ -6,7 +6,7 @@ dat = load(dep.files.final);
 adcp = dat.adcp; clear dat
 
 %% Plot settings
-psty = '-'; % plot style
+psty = '.'; % plot style
 msiz = 1; % plot marker size
 axesfontsize = 10;
 

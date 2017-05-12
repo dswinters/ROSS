@@ -9,6 +9,17 @@ rosie0.files.map = 'leconte_terminus';
 rosie0.plot.ylim = [0 200];
 rosie0.proc.adcp_load_function = 'adcp_parse';
 rosie0.proc.ross_timestamps = 'post';
+
+%--------------------------------------------------------%
+% Define some filters                                    %
+%--------------------------------------------------------%
+newfilt =@(n,p) struct('name',n,'params',p);
+trim_ei_edge_b = newfilt('ei_edge','beam');
+trim_corr_edge_b = newfilt('corr_edge','beam');
+filt_rotmax3   = newfilt('rotmax',3);
+notrim = newfilt('none',[]);
+rosie0.proc.trim_methods(1) = trim_ei_edge_b;
+
 %--------------------------------------------------------%
 dep = 1;
 rosie(dep).name       = 'rosie_deployment_201705100100';

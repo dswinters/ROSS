@@ -6,6 +6,7 @@ function swankie = leconte_2017_may_swankie()
 %  1   3    ^
 %    5      |--> STARBOARD
 %  4   2   
+dep = 0;
 
 %--------------------------------------------------------%
 % Default deployment options                             %
@@ -14,8 +15,6 @@ swankie0.proc.heading_offset = 45;
 swankie0.proc.adcp_load_function = 'adcp_parse';
 swankie0.tlim = [-inf inf];
 swankie0.proc.ross_timestamps = 'pre';
-swankie0.proc.skip = false;
-
 
 %--------------------------------------------------------%
 % Define some filters                                    %
@@ -28,40 +27,21 @@ notrim = newfilt('none',[]);
 swankie0.proc.trim_methods(1) = trim_ei_edge_b;
 
 %--------------------------------------------------------%
-% "Deployment" 1: Petersburg dock shallow transects      %
-dep = 1;
+% Petersburg dock shallow transects
+% Too shallow, not much to see here...
+dep = dep+1;
 swankie(dep).proc.skip = true;
-swankie(dep).name       = 'dock_transects_20170503';
+swankie(dep).name       = 'swankie_dock_transects_20170503';
 swankie(dep).tlim       = [-inf inf];
 swankie(dep).files.adcp = {...
-    'ADCP_timestamped_20170503050911.bin';
-    'ADCP_timestamped_20170503210616.bin';
-    'ADCP_timestamped_20170503220000.bin';
-    'ADCP_timestamped_20170503235237.bin';
-    'ADCP_timestamped_20170504003107.bin';
-    'ADCP_timestamped_20170504010000.bin';
-    'ADCP_timestamped_20170504013814.bin';
-    'ADCP_timestamped_20170504020000.bin';
-    'ADCP_timestamped_20170504024831.bin';
-    'ADCP_timestamped_20170504030000.bin';
-    'ADCP_timestamped_20170504034734.bin';
-                   };
-swankie(dep).files.gps = {...
-    'GPS_20170503050911.log';
-    'GPS_20170503210616.log';
-    'GPS_20170503221549.log';
-    'GPS_20170503235237.log';
-    'GPS_20170504003107.log';
-    'GPS_20170504013814.log';
-    'GPS_20170504024747.log';
-    'GPS_20170504024831.log';
-    'GPS_20170504034734.log';
-                   };
+    'dock_transects_20170503';
+    'timestamped'};
+swankie(dep).files.gps = {'dock_transects_20170503'};
 swankie(dep).plot.ylim = [0 20];
 
 %--------------------------------------------------------%
 % Looks like ADCP was out of water
-dep = 2;
+dep = dep+1;
 swankie(dep).proc.skip = true;
 swankie(dep).name = 'swankie_deployment_201705081400';
 swankie(dep).files.adcp = {...
@@ -72,7 +52,7 @@ swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'leconte_terminus';
 
 %--------------------------------------------------------%
-dep = 3;
+dep = dep+1;
 swankie(dep).name = 'swankie_deployment_201705091345';
 swankie(dep).tlim       = datenum([...
     2017 05 09 13 40 00;
@@ -85,7 +65,7 @@ swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'leconte_terminus';
 
 %--------------------------------------------------------%
-dep = 4;
+dep = dep+1;
 swankie(dep).name = 'swankie_deployment_201705091550';
 swankie(dep).tlim       = datenum([...
     2017 05 09 15 50 00;
@@ -98,7 +78,7 @@ swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'leconte_terminus';
 
 %--------------------------------------------------------%
-dep = 5;
+dep = dep+1;
 swankie(dep).name = 'swankie_deployment_201705091830';
 swankie(dep).tlim       = datenum([...
     2017 05 09 18 30 00;
@@ -113,7 +93,7 @@ swankie(dep).proc.filters(1).name = 'velmax';
 swankie(dep).proc.filters(1).params = 0.6;
 
 %--------------------------------------------------------%
-dep = 6;
+dep = dep+1;
 swankie(dep).name = 'swankie_deployment_201705101700';
 swankie(dep).tlim       = datenum([...
     2017 05 10 16 18 00;
@@ -124,12 +104,9 @@ swankie(dep).files.adcp = {...
 swankie(dep).files.gps = {'deployment_201705101700'};
 swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'leconte_terminus';
-% swankie(dep).proc.filters(1).name = 'velmax';
-% swankie(dep).proc.filters(1).params = 0.6;
-
 
 %--------------------------------------------------------%
-dep = 7;
+dep = dep+1;
 swankie(dep).name = 'swankie_deployment_201705102100';
 swankie(dep).tlim       = datenum([...
     2017 05 10 20 57 00;
@@ -140,11 +117,9 @@ swankie(dep).files.adcp = {...
 swankie(dep).files.gps = {'deployment_201705102100'};
 swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'leconte_terminus';
-% swankie(dep).proc.filters(1).name = 'velmax';
-% swankie(dep).proc.filters(1).params = 0.6;
 
 %--------------------------------------------------------%
-dep = 8;
+dep = dep+1;
 swankie(dep).name = 'swankie_deployment_201705102200';
 swankie(dep).tlim       = datenum([...
     2017 05 10 22 03 00;
@@ -157,7 +132,7 @@ swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'leconte_terminus';
 
 %--------------------------------------------------------%
-dep = 9;
+dep = dep+1;
 swankie(dep).name = 'swankie_deployment_201705111800';
 swankie(dep).tlim       = datenum([...
     2017 05 11 18 02 00;
@@ -168,7 +143,6 @@ swankie(dep).files.adcp = {...
 swankie(dep).files.gps = {'deployment_201705111800'};
 swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'leconte_terminus';
-swankie(dep).proc.skip = false;
 % Sections
 ts = reshape(...
     datenum(['11-May-2017 18:04:42';
@@ -280,9 +254,6 @@ for i = 1:length(ts)
     swankie(dep).name = ...
         sprintf('swankie_section_201705120000_%02d',i);
 end
-
-
-
 
 
 swankie = ross_fill_defaults(swankie,swankie0);

@@ -135,6 +135,13 @@ swankie(dep).files.adcp = {...
 swankie(dep).files.gps = {'deployment_201705102200'};
 swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'leconte_terminus';
+swankie(dep).proc.adcp_raw2mat = true;
+% Sections
+secs = datenum(['10-May-2017 22:22:44';
+                '10-May-2017 22:32:47']);
+namefmt = 'swankie_section_201705102200_%02d';
+[swankie dep] = ross_deployment_sections(...
+    swankie,dep,secs,namefmt);
 
 %--------------------------------------------------------%
 dep = dep+1;
@@ -246,7 +253,6 @@ swankie(dep).files.adcp = {...
 swankie(dep).files.gps = {'deployment_201705121830'};
 swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'leconte_terminus';
-swankie(dep).proc.skip = false;
 swankie(dep).proc.trim_methods(1) = notrim;
 % Sections
 secs = datenum([...
@@ -263,7 +269,33 @@ secs = datenum([...
 namefmt = 'swankie_section_201705121830_%02d';
 [swankie dep] = ross_deployment_sections(...
     swankie,dep,secs,namefmt);
-
+%--------------------------------------------------------%
+dep = dep+1;
+swankie(dep).name = 'swankie_deployment_201705132100';
+swankie(dep).tlim = datenum([...
+    '13-May-2017 21:06:00';
+    '13-May-2017 22:15:00']);
+swankie(dep).files.adcp = {...
+    'deployment_201705132100';
+    'timestamped'};
+swankie(dep).files.gps = {'deployment_201705132100'};
+swankie(dep).plot.ylim = [0 200];
+swankie(dep).files.map = 'leconte_terminus';
+% swankie(dep).proc.skip = false;
+%--------------------------------------------------------%
+dep = dep+1;
+swankie(dep).name = 'swankie_deployment_201705131810';
+swankie(dep).tlim = datenum([...
+    '13-May-2017 18:13:00';
+    '13-May-2017 19:30:00']);
+swankie(dep).files.adcp = {...
+    'deployment_201705131810';
+    'timestamped'};
+swankie(dep).files.gps = {'deployment_201705131810'};
+swankie(dep).plot.ylim = [0 200];
+swankie(dep).files.map = 'leconte_terminus';
+swankie(dep).proc.skip = false;
+swankie(dep).proc.adcp_raw2mat = true;
 
 %--------------------------------------------------------%
 % Fill defaults                                          %

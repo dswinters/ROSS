@@ -9,7 +9,7 @@ rosie0.files.map = 'leconte_terminus';
 rosie0.plot.ylim = [0 200];
 rosie0.proc.adcp_load_function = 'adcp_parse';
 rosie0.proc.ross_timestamps = 'post';
-
+dep=0;
 %--------------------------------------------------------%
 % Define some filters                                    %
 %--------------------------------------------------------%
@@ -21,18 +21,27 @@ notrim = newfilt('none',[]);
 rosie0.proc.trim_methods(1) = trim_ei_edge_b;
 
 %--------------------------------------------------------%
-dep = 1;
+dep = dep+1;
 rosie(dep).name       = 'rosie_deployment_201705100100';
 rosie(dep).files.adcp = {...
     'deployment_201705100100'
     'timestamped'};
 rosie(dep).files.gps  = {'deployment_201705100100'};
 %--------------------------------------------------------%
-dep = 2;
+dep = dep+1;
 rosie(dep).name       = 'rosie_deployment_201705102330';
 rosie(dep).files.adcp = {...
     'deployment_201705102330'
     'timestamped'};
 rosie(dep).files.gps  = {'deployment_201705102330'};
 %--------------------------------------------------------%
+dep = dep+1;
+rosie(dep).name       = 'rosie_deployment_201705130300';
+rosie(dep).files.adcp = {...
+    'deployment_201705130300'
+    'timestamped'};
+rosie(dep).files.gps  = {'deployment_201705130300'};
+rosie(dep).proc.trim_methods = newfilt('none',[]);
+%--------------------------------------------------------%
+
 rosie = ross_fill_defaults(rosie,rosie0);

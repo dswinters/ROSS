@@ -281,7 +281,8 @@ swankie(dep).files.adcp = {...
 swankie(dep).files.gps = {'deployment_201705132100'};
 swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'leconte_terminus';
-% swankie(dep).proc.skip = false;
+swankie(dep).plot.vlim = [1 1 0.25];
+swankie(dep).proc.skip = false;
 %--------------------------------------------------------%
 dep = dep+1;
 swankie(dep).name = 'swankie_deployment_201705131810';
@@ -293,10 +294,9 @@ swankie(dep).files.adcp = {...
     'timestamped'};
 swankie(dep).files.gps = {'deployment_201705131810'};
 swankie(dep).plot.ylim = [0 200];
-swankie(dep).files.map = 'leconte_terminus';
+swankie(dep).files.map = 'none';
+swankie(dep).plot.vlim = [0.5 0.5 0.25];
 swankie(dep).proc.skip = false;
-swankie(dep).proc.adcp_raw2mat = true;
-
 %--------------------------------------------------------%
 % Fill defaults                                          %
 %--------------------------------------------------------%

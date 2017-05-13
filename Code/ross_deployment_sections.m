@@ -18,7 +18,7 @@ d0 = ross(dep);
 d0.proc.adcp_raw2mat = false;
 d0.proc.gps_raw2mat = false;
 
-for i = 1:length(tlims)
+for i = 1:size(tlims,1)
     dep = dep+1;
     ross(dep) = d0;
     ross(dep).tlim = tlims(i,:);

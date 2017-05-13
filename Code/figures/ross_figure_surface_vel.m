@@ -10,11 +10,6 @@ nx = 75; ny = 75;
 map = load(dep.files.map);
 
 %% Create the background image
-if isfield(dep,'plot') && isfield(dep.plot,'map')
-    pos = dep.plot.map.pos;
-else
-    pos = [963 708 723 630];
-end
 figure('position',pos,'paperpositionmode','auto')
 ha_map = axes();
 m = mapshow(map.x,map.y,map.I); hold on

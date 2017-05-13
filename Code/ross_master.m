@@ -11,6 +11,9 @@ fn = [tripname '_deployments'];
 
 %% Global deployment defaults
 defaults = struct();
+% Plot options
+defaults.plot.vlim = [0.3 0.3 0.3];
+defaults.plot.map.pos = [963 708 723 630];
 % defaults.proc.adcp_raw2mat = true; % re-parse ADCP data?
 % defaults.proc.gps_raw2mat  = true; % re-parse GPS data?
 

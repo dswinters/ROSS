@@ -7,7 +7,7 @@ make_logfile = true;
 %% Get information about trip and deployments
 addpath(tripname);
 fn = [tripname '_deployments'];
-[master, deployments] = feval(fn);
+[trip, deployments] = feval(fn);
 
 %% Set up directories and filepaths
 addpath('figures/');
@@ -19,12 +19,12 @@ dirs.maps = fullfile(dirs.base, 'Maps/');
 dirs.logs = fullfile(dirs.base, 'org/');
 dirs.meta = fullfile(dirs.base, 'Metadata/');
 
-for i = 1:length(master.kayaks)
-    Ross(i).name                  = master.kayaks{i};
-    Ross(i).master                = rmfield(master,'kayaks');
+for i = 1:length(trip.kayaks)
+    Ross(i).name                  = trip.kayaks{i};
+    Ross(i).trip                  = trip.name;
     Ross(i).deployments           = deployments{i};
     %
-    subdir                        = fullfile(master.name, master.kayaks{i}, '/');
+    subdir                        = fullfile(trip.name, trip.kayaks{i}, '/');
     Ross(i).dirs.figs             = fullfile(dirs.figs, subdir);
     rawdir                        = fullfile(dirs.data, subdir, 'raw/');
     Ross(i).dirs.raw.gps          = fullfile(rawdir, 'GPS/');
@@ -34,6 +34,10 @@ for i = 1:length(master.kayaks)
     Ross(i).dirs.proc.deployments = fullfile(procdir);
     Ross(i).dirs.proc.pixhawk     = fullfile(procdir, 'Pixhawk/');
     %
+    % Fill with default options
+    Ross(i).deployments = ross_fill_defaults(...
+        Ross(i).deployments,...
+        ross_defaults());
     for d = 1:length(Ross(i).deployments)
         Ross(i).deployments(d).files.map = fullfile(...
             dirs.maps,Ross(i).deployments(d).files.map);
@@ -68,10 +72,6 @@ for i = 1:length(master.kayaks)
             fullfile(Ross(i).dirs.raw.gps ,...
                      Ross(i).deployments(d).files.gps);
     end
-    % Fill with default options
-    Ross(i).deployments = ross_fill_defaults(...
-        Ross(i).deployments,...
-        ross_defaults());
 end
 
 %% Trip-specific setup
@@ -82,22 +82,20 @@ switch tripname
 end
 
 %% Process deployments
-if master.process_data
-    for k = 1:length(master.kayaks)
-        % Set up logfile
-        if make_logfile
-            logfile = fullfile(dirs.logs,...
-                               [master.name,...
-                                '_' lower(master.kayaks{k}) '.org']);
-            eval(['!rm ' logfile])
-            diary(logfile);
-        end
-        disp(sprintf('\n** Deployment Processing: %s ',master.kayaks{k}))
-        for ndep = 1:length(Ross(k).deployments)
-            disp(sprintf('\n*** Deployment %d: %s', ndep ,...
-                         Ross(k).deployments(ndep).name))
-            Ross(k) = ross_proc_deployment(Ross(k),ndep);
-        end
+for k = 1:length(trip.kayaks)
+    % Set up logfile
+    if make_logfile
+        logfile = fullfile(dirs.logs,...
+                           [trip.name,...
+                            '_' lower(trip.kayaks{k}) '.org']);
+        eval(['!rm ' logfile])
+        diary(logfile);
+    end
+    disp(sprintf('\n** Deployment Processing: %s ',trip.kayaks{k}))
+    for ndep = 1:length(Ross(k).deployments)
+        disp(sprintf('\n*** Deployment %d: %s', ndep ,...
+                     Ross(k).deployments(ndep).name))
+        Ross(k) = ross_proc_deployment(Ross(k),ndep);
     end
 end
 diary off

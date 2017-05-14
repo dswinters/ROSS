@@ -48,7 +48,7 @@ for ia = 1:length(adcp)
 end
 
 %% Deployment-specific pre-rotation processing
-fn = [ross.master.name '_proc_pre_rotation'];
+fn = [ross.trip '_proc_pre_rotation'];
 if exist(fn) == 2
     [ross adcp] = feval(fn,ross,ndep,adcp);
 end
@@ -61,7 +61,6 @@ for ia = 1:length(adcp)
     adcp(ia).config.xducer_misalign = D.proc.heading_offset;
     ve(ia) = adcp_beam2earth(adcp(ia));
 end
-
 
 % %% Save velocity data in ship coordinates (?)
 % if checkfield(D.proc,'save_ship')
@@ -109,7 +108,7 @@ for ia = 1:length(adcp)
 end
 
 %% Deployment-specific post-rotation processing
-fn = [ross.master.name '_proc_post_rotation'];
+fn = [ross.trip '_proc_post_rotation'];
 if exist(fn) == 2
     [ross adcp] = feval(fn,ross,ndep,adcp);
 end

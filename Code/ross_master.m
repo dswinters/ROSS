@@ -16,6 +16,8 @@ defaults.plot.vlim = [0.3 0.3 0.3];
 defaults.plot.map.pos = [963 708 723 630];
 defaults.plot.map.latlim = [NaN NaN];
 defaults.plot.map.lonlim = [NaN NaN];
+defaults.plot.map.nx = 75;
+defaults.plot.map.ny = 75;
 % defaults.proc.adcp_raw2mat = true; % re-parse ADCP data?
 % defaults.proc.gps_raw2mat  = true; % re-parse GPS data?
 
@@ -46,6 +48,8 @@ for i = 1:length(master.kayaks)
     for d = 1:length(Ross(i).deployments)
         Ross(i).deployments(d).files.map = fullfile(...
             dirs.maps,Ross(i).deployments(d).files.map);
+        
+        % Check whether an ADCP directory was given instead of a list of files
         if isdir([Ross(i).dirs.raw.adcp ...
                   Ross(i).deployments(d).files.adcp{1}])
             files = dir(fullfile(...
@@ -59,6 +63,8 @@ for i = 1:length(master.kayaks)
         Ross(i).deployments(d).files.adcp = ...
             fullfile(Ross(i).dirs.raw.adcp ,...
                      Ross(i).deployments(d).files.adcp);
+
+        % Check whether a GPS directory was given instead of a list of files
         if isdir([Ross(i).dirs.raw.gps ...
                   Ross(i).deployments(d).files.gps{1}])
             files = dir(fullfile(...
@@ -108,7 +114,7 @@ diary off
 for i = 1:length(Ross)
     for d = 1:length(Ross(i).deployments)
         if isfield(Ross(i).deployments(d).files,'final')
-            f_out{end+1} = Ross(i).deployments(d).files.final;
+            f_out{end+1,1} = Ross(i).deployments(d).files.final;
         end
     end
 end

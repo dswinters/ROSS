@@ -12,6 +12,7 @@ defaults.plot.map.coastline = false;
 defaults.files.map = 'none';
 
 % Make figures
+defaults.plot.make_figure.all         = false;
 defaults.plot.make_figure.summary     = true;
 defaults.plot.make_figure.surface_vel = false;
 defaults.plot.make_figure.echo_intens = false;

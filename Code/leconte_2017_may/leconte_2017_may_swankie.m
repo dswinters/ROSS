@@ -251,7 +251,6 @@ swankie(dep).files.map = 'none';
 swankie(dep).plot.vlim = [1 1 0.25];
 swankie(dep).plot.ylim = [0 60];
 swankie(dep).proc.filters(1) = filt_rotmax3;
-swankie(dep).proc.skip = false;
 % Sections
 secs = datenum(...
     ['13-May-2017 21:07:24'; '13-May-2017 21:10:35';
@@ -289,6 +288,42 @@ swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'none';
 swankie(dep).plot.vlim = [0.5 0.5 0.25];
 %--------------------------------------------------------%
+% T-Chain
+dep = dep+1;
+swankie(dep).name = 'swankie_deployment_201705141300';
+% swankie(dep).tlim = datenum([...
+%     '13-May-2017 18:13:00';
+%     '13-May-2017 19:30:00']);
+swankie(dep).files.adcp = {...
+    'deployment_201705141300';
+    'timestamped'};
+swankie(dep).files.gps = {'deployment_201705141300'};
+swankie(dep).plot.ylim = [0 200];
+swankie(dep).files.map = 'none';
+swankie(dep).plot.vlim = [0.5 0.5 0.25];
+swankie(dep).plot.ylim = [0 100];
+swankie(dep).proc.skip = false;
+swankie(dep).plot.make_figure.all = true;
+%--------------------------------------------------------%
+% T-Chain
+dep = dep+1;
+swankie(dep).name = 'swankie_deployment_201705141620';
+% swankie(dep).tlim = datenum([...
+%     '13-May-2017 18:13:00';
+%     '13-May-2017 19:30:00']);
+swankie(dep).files.adcp = {...
+    'deployment_201705141620';
+    'timestamped'};
+swankie(dep).files.gps = {'deployment_201705141620'};
+swankie(dep).plot.ylim = [0 200];
+swankie(dep).files.map = 'none';
+swankie(dep).plot.vlim = [0.5 0.5 0.25];
+swankie(dep).plot.ylim = [0 100];
+swankie(dep).proc.skip = false;
+swankie(dep).plot.make_figure.all = true;
+
+%--------------------------------------------------------%
 % Fill defaults                                          %
 %--------------------------------------------------------%
 swankie = ross_fill_defaults(swankie,swankie0);
+

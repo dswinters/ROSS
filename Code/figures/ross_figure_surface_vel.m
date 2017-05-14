@@ -5,7 +5,8 @@ dat = load(dep.files.final);
 adcp = dat.adcp; clear dat;
 
 dmax = 20;
-nx = 75; ny = 75;
+nx = dep.plot.map.nx;
+ny = dep.plot.map.ny;
 pos = dep.plot.map.pos;
 
 [fdir fname fext] = fileparts(dep.files.map);

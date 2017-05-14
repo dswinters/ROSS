@@ -94,20 +94,16 @@ vy = padarray(vy,npad,nan,'post');
 % compute velocity magnitude
 mag = sqrt(vx.^2 + vy.^2);
 
-
-
-
 %% Show current speeds as a sparse pcolor
-pcolor(xbe,ybe,padarray(mag,[1 1],nan,'post'))
+pcolor(ha_map,xbe,ybe,padarray(mag,[1 1],nan,'post'))
 caxis([0 sqrt(sum(dep.plot.vlim(1:2).^2))])
 shading flat
 cb = colorbar;
 
 %% Show current directions as a quiver plot
 % q = quiver(xc(:),yc(:),vx(:)./mag(:),vy(:)./mag(:),2);
-q = quiver(xc(:),yc(:),vx(:),vy(:),5);
+q = quiver(ha_map,xc(:),yc(:),vx(:),vy(:),5);
 set(q,'color','w')
-
 
 %% Annotations
 ha = axes('position',[0 0 1 1],...

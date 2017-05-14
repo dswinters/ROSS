@@ -5,10 +5,10 @@ function rosie = leconte_2017_may_rosie()
 %  2   3  
 rosie0.proc.heading_offset = 135;
 rosie0.tlim = [-inf inf];
-rosie0.files.map = 'leconte_terminus';
 rosie0.plot.ylim = [0 200];
 rosie0.proc.adcp_load_function = 'adcp_parse';
 rosie0.proc.ross_timestamps = 'post';
+% rosie0.proc.skip = false;
 dep=0;
 %--------------------------------------------------------%
 % Define some filters                                    %

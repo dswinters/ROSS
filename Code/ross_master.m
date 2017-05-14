@@ -1,4 +1,4 @@
-function f_out = ross_master(tripname)
+function ross_master(tripname)
 f_out = {};
 
 %% Write output to log file?
@@ -29,6 +29,7 @@ dirs.data = fullfile(dirs.base, 'Data/');
 dirs.figs = fullfile(dirs.base, 'Figures/');
 dirs.maps = fullfile(dirs.base, 'Maps/');
 dirs.logs = fullfile(dirs.base, 'org/');
+dirs.meta = fullfile(dirs.base, 'Metadata/');
 
 for i = 1:length(master.kayaks)
     Ross(i).name                  = master.kayaks{i};
@@ -111,11 +112,12 @@ if master.process_data
 end
 diary off
 
-for i = 1:length(Ross)
-    for d = 1:length(Ross(i).deployments)
-        if isfield(Ross(i).deployments(d).files,'final')
-            f_out{end+1,1} = Ross(i).deployments(d).files.final;
-        end
-    end
+metadat = struct();
+for k = 1:length(Ross)
+    metadat.(lower(Ross(k).name)) = Ross(k).deployments;
 end
+f_out = fullfile(dirs.meta,[tripname '.mat']);
+save(f_out,'-struct','metadat')
+disp(['Saved ' f_out])
+
 

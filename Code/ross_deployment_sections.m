@@ -15,9 +15,6 @@ function [ross dep] = ross_deployment_sections(ross,dep,tlims,namefmt)
 
 tlims = reshape(tlims,2,[])';
 d0 = ross(dep);
-d0.proc.adcp_raw2mat = false;
-d0.proc.gps_raw2mat = false;
-
 for i = 1:size(tlims,1)
     dep = dep+1;
     ross(dep) = d0;

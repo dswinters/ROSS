@@ -9,18 +9,6 @@ addpath(tripname);
 fn = [tripname '_deployments'];
 [master, deployments] = feval(fn);
 
-%% Global deployment defaults
-defaults = struct();
-% Plot options
-defaults.plot.vlim = [0.3 0.3 0.3];
-defaults.plot.map.pos = [963 708 723 630];
-defaults.plot.map.latlim = [NaN NaN];
-defaults.plot.map.lonlim = [NaN NaN];
-defaults.plot.map.nx = 75;
-defaults.plot.map.ny = 75;
-% defaults.proc.adcp_raw2mat = true; % re-parse ADCP data?
-% defaults.proc.gps_raw2mat  = true; % re-parse GPS data?
-
 %% Set up directories and filepaths
 addpath('figures/');
 dirs = struct();
@@ -81,7 +69,9 @@ for i = 1:length(master.kayaks)
                      Ross(i).deployments(d).files.gps);
     end
     % Fill with default options
-    Ross(i).deployments = ross_fill_defaults(Ross(i).deployments,defaults);
+    Ross(i).deployments = ross_fill_defaults(...
+        Ross(i).deployments,...
+        ross_defaults());
 end
 
 %% Trip-specific setup

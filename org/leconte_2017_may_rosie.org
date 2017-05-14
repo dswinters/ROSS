@@ -6,3 +6,6 @@ Skipped!
 
 *** Deployment 2: rosie_deployment_201705102330
 Skipped!
+
+*** Deployment 3: rosie_deployment_201705130300
+Skipped!

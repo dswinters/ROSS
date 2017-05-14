@@ -6,14 +6,38 @@ adcp = dat.adcp; clear dat;
 
 dmax = 20;
 nx = 75; ny = 75;
+pos = dep.plot.map.pos;
 
-map = load(dep.files.map);
+[fdir fname fext] = fileparts(dep.files.map);
+matfile = fullfile(fdir,[fname '.mat']);
 
 %% Create the background image
+if exist(matfile,'file')
+    map = load(dep.files.map);
+else
+    map = struct;
+    lonmin = inf;
+    lonmax = -inf;
+    latmin = inf;
+    latmax = -inf;
+    for i = 1:length(adcp)
+        lonmin = min(lonmin,min(adcp(i).gps.lon));
+        lonmax = max(lonmin,max(adcp(i).gps.lon));        
+        latmin = min(latmin,min(adcp(i).gps.lat));
+        latmax = max(latmin,max(adcp(i).gps.lat));        
+    end
+    lonmin = max(lonmin,dep.plot.map.lonlim(1));
+    lonmax = min(lonmax,dep.plot.map.lonlim(2));
+    latmin = max(latmin,dep.plot.map.latlim(1));
+    latmax = min(latmax,dep.plot.map.latlim(2));
+    map.x = [lonmin lonmax];
+    map.y = [latmin latmax]';
+    map.I = uint8(0.7*255*ones(2,2,3));
+end
+
 figure('position',pos,'paperpositionmode','auto')
 ha_map = axes();
 m = mapshow(map.x,map.y,map.I); hold on
-
 xlim(map.x([1 end]))
 ylim(map.y([1 end]))
 daspect([size(map,2)/size(map,1),1, 1]);
@@ -41,7 +65,7 @@ for ia = 1:length(adcp)
     [~,xb] = histc(x,xbe);
     [~,yb] = histc(y,ybe);
     % only keep data within our bin limits
-    kp = xb>0 & yb>0;
+    kp = xb>0 & yb>0 & xb<=nx & yb<=ny;
 
     % increment data count and velocity sparse matrices
     counts = counts + sparse(yb(kp),xb(kp),1,ny,nx);
@@ -74,12 +98,13 @@ mag = sqrt(vx.^2 + vy.^2);
 
 %% Show current speeds as a sparse pcolor
 pcolor(xbe,ybe,padarray(mag,[1 1],nan,'post'))
-caxis([0 2.5])
+caxis([0 sqrt(sum(dep.plot.vlim(1:2).^2))])
 shading flat
 cb = colorbar;
 
 %% Show current directions as a quiver plot
-q = quiver(xc(:),yc(:),vx(:)./mag(:),vy(:)./mag(:),2);
+% q = quiver(xc(:),yc(:),vx(:)./mag(:),vy(:)./mag(:),2);
+q = quiver(xc(:),yc(:),vx(:),vy(:),5);
 set(q,'color','w')
 
 
@@ -113,7 +138,9 @@ text(2,0,'Current Speed (ms^{-1})',...
 
 % rescale
 yx = cosd(nanmean(map.y));
-set(ha_map,'DataAspectRatio',[1 yx 1])
+grid on
+set(ha_map,'DataAspectRatio',[1 yx 1],...
+           'layer','top')
 
 fout = [dep.fig_dir, 'surface_vel.jpg'];
 print('-djpeg90','-r300',fout);

@@ -16,7 +16,7 @@ swankie0.proc.adcp_load_function = 'adcp_parse';
 swankie0.tlim = [-inf inf];
 swankie0.proc.ross_timestamps = 'pre';
 swankie0.files.map = 'none';
-% swankie0.proc.skip = false;
+swankie0.proc.skip = true;
 
 %--------------------------------------------------------%
 % Define some filters                                    %
@@ -226,6 +226,7 @@ swankie(dep).files.adcp = {...
 swankie(dep).files.gps = {'deployment_201705121830'};
 swankie(dep).plot.ylim = [0 200];
 swankie(dep).proc.trim_methods(1) = notrim;
+swankie(dep).proc.skip = false;
 % Sections
 secs = datenum([...
     '12-May-2017 18:34:45'; '12-May-2017 18:43:00';
@@ -302,8 +303,8 @@ swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'none';
 swankie(dep).plot.vlim = [0.5 0.5 0.25];
 swankie(dep).plot.ylim = [0 100];
-swankie(dep).proc.skip = false;
-swankie(dep).plot.make_figure.all = true;
+% swankie(dep).proc.skip = false;
+% swankie(dep).plot.make_figure.all = true;
 %--------------------------------------------------------%
 % T-Chain
 dep = dep+1;
@@ -319,8 +320,8 @@ swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'none';
 swankie(dep).plot.vlim = [0.5 0.5 0.25];
 swankie(dep).plot.ylim = [0 100];
-swankie(dep).proc.skip = false;
-swankie(dep).plot.make_figure.all = true;
+% swankie(dep).proc.skip = false;
+% swankie(dep).plot.make_figure.all = true;
 
 %--------------------------------------------------------%
 % Fill defaults                                          %

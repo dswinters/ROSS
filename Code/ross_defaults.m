@@ -12,15 +12,15 @@ defaults.plot.map.coastline = false;
 defaults.files.map = 'none';
 
 % Make figures
-defaults.plot.make_figure.all         = false;
-defaults.plot.make_figure.summary     = true;
+defaults.plot.make_figure.all         = true;
+defaults.plot.make_figure.summary     = false;
 defaults.plot.make_figure.surface_vel = false;
 defaults.plot.make_figure.echo_intens = false;
 defaults.plot.make_figure.corr        = false;
 
 % Processing options
 defaults.proc.ship_vel_removal = 'GPS';
-defaults.proc.adcp_raw2mat = true;
-defaults.proc.gps_raw2mat = true;
+defaults.proc.adcp_raw2mat = false;
+defaults.proc.gps_raw2mat = false;
 
 

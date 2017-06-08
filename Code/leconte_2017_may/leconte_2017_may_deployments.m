@@ -20,10 +20,10 @@ notrim = newfilt('none',[]);
 %========================================================
 opts.proc.skip             = true;
 opts.proc.trim_methods(1)  = trim_ei_edge_b;
-% opts.proc.filters(1)       = filt_rotmax3;
+opts.proc.filters(1)       = filt_rotmax3;
 opts.plot.ylim             = [0 200];
-opts.proc.adcp_raw2mat     = true;
-opts.proc.gps_raw2mat      = true;
+opts.proc.adcp_raw2mat     = false;
+opts.proc.gps_raw2mat      = false;
 opts.plot.map.coastline    = '../Maps/leconte2_grid_coastline.mat';
 
 %=======================================================

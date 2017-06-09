@@ -227,6 +227,10 @@ swankie(dep).files.gps = {'deployment_201705121830'};
 swankie(dep).plot.ylim = [0 200];
 swankie(dep).proc.trim_methods(1) = notrim;
 swankie(dep).proc.skip = false;
+swankie(dep).proc.bad = ...
+    {datenum(['12-May-2017 19:26:52';
+             '12-May-2017 19:27:18'])};
+
 % Sections
 secs = datenum([...
     '12-May-2017 18:34:45'; '12-May-2017 18:43:00';

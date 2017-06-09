@@ -26,6 +26,12 @@ if ~isfield(adcp,'info')
     [adcp(:).info] = deal({});
 end
 
+%% Deployment-specific post-load function
+fn = [ross.trip '_proc_post_load'];
+if exist(fn) == 2
+    [ross adcp] = feval(fn,ross,ndep,adcp);
+end
+
 %% Process GPS data for ADCP data
 % For lat/lon/heading, this prioritizes:
 %  1. GPS logged to ROSS computer
@@ -130,9 +136,7 @@ if isfield(D.proc,'bad');
             mes = sprintf('Data removed manually between %s and %s',...
                           datestr(bad{i}(1)),datestr(bad{i}(2)));
             idx = adcp(ia).mtime>=bad{i}(1) & adcp(ia).mtime<=bad{i}(2);
-            for ib = 1:length(beamnames)
-                adcp(ia).(beamnames{ib})(:,idx) = NaN;
-            end
+            adcp(ia).vel(:,:,idx) = NaN;
             adcp(ia).info = cat(1,adcp(ia).info,mes);
         end
     end

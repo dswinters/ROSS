@@ -33,6 +33,10 @@ if ~fexist || ross.deployments(ndep).proc.adcp_raw2mat
         % Make sure century is correct
         idx = year(A(ia).mtime) < 2000;
         A(ia).mtime(idx) = A(ia).mtime(idx) + datenum([2000 0 0 0 0 0]);
+
+        % Fix timestamps
+        A(ia).mtime = A(ia).mtime(1) + A(ia).mtime_raw - A(ia).mtime_raw(1);
+
         % limit to deployment start/stop time
         idx = find(A(ia).mtime >= D.tlim(1) & ...
                    A(ia).mtime <= D.tlim(2));

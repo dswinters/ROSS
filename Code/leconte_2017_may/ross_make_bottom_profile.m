@@ -47,7 +47,7 @@ else
     S.bt.dn = sort([adcp.mtime]);
     S.bt.depth = nan(5,length(S.bt.dn));
 end
-S.xlim = [min(S.bt.dn), max(S.bt.dn)];
+S.xlim = [min(cat(2,adcp.mtime)), max(cat(2,adcp.mtime))];
 S.ylim = [0 max(maxrange)];
 
 draw();
@@ -125,7 +125,7 @@ function key_pressed(fig_obj,eventDat)
         draw();
         
       case 'r' % reset xlim
-        S.xlim = [min(S.bt.dn), max(S.bt.dn)];
+        S.xlim = [min(cat(2,adcp.mtime)), max(cat(2,adcp.mtime))];
         S.ylim = [0 max(maxrange)];
         draw();
 

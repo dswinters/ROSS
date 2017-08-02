@@ -18,7 +18,7 @@ notrim = newfilt('none',[]);
 %========================================================
 % Processing options
 %========================================================
-opts.proc.skip             = true;
+opts.proc.skip             = false;
 opts.proc.trim_methods(1)  = trim_ei_edge_b;
 opts.proc.filters(1)       = filt_rotmax3;
 opts.plot.ylim             = [0 200];

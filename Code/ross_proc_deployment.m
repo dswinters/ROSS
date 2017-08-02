@@ -65,7 +65,11 @@ for ia = 1:length(adcp)
     adcp(ia).heading_compass = adcp(ia).heading;
     adcp(ia).heading = adcp(ia).gps.h;
     adcp(ia).config.xducer_misalign = D.proc.heading_offset;
-    ve(ia) = adcp_beam2earth(adcp(ia));
+    if adcp(ia).config.n_beams==5
+        ve(ia) = adcp_5beam2earth(adcp(ia));
+    else
+        ve(ia) = adcp_beam2earth(adcp(ia));
+    end
 end
 
 % %% Save velocity data in ship coordinates (?)

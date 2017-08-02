@@ -43,3 +43,6 @@ separated into different functions for each kayak: [[Code/petersburg_2017_apr/pe
 - [[org/petersburg_2017_apr_swankie.org][Swankie processing log & figures]]
 - [[org/petersburg_2017_apr.org][Additional notes]]
 
+
+** 2017 May - LeConte Glacier
+- [[org/leconte_2017_may_swankie.org][Swankie processing log & figures]]

@@ -4,6 +4,10 @@ load redblue
 dep = ross.deployments(ndep);
 dat = load(dep.files.final);
 adcp = dat.adcp; clear dat
+maxrange = 0;
+for i = 1:length(adcp)
+    maxrange = max(maxrange,max(adcp(i).config.ranges));
+end
 
 %% Plot settings
 psty = '.'; % plot style
@@ -106,7 +110,7 @@ for i = 1:np
     else % Plotting single axes
         plotfuns{i}(adcp);
         if plotdims(i) == 2
-            ylim(dep.plot.ylim)
+            ylim([0 maxrange])
             set(gca,'ydir','reverse')
         end
         ylabel(ylabs{i})
@@ -133,22 +137,35 @@ for i = 1:np
     end
 end
 
-%% Plot echo intensity edges
-tmethod = struct('name','ei_edge','params','beam');
-edges = {};
-for i = 1:length(adcp)
-    [~,edges{i}] = adcp_trim_data(adcp(i),tmethod);
-    edges{i}(edges{i}>=adcp(i).config.ranges(end)) = nan;
-end
-edges = cat(2,edges{:});
-dn = cat(2,adcp.mtime);
-[dn,idx] = sort(dn);
-edges = edges(:,idx);
+% %% Plot echo intensity edges
+% tmethod = struct('name','ei_edge','params','beam');
+% edges = {};
+% for i = 1:length(adcp)
+%     [~,edges{i}] = adcp_trim_data(adcp(i),tmethod);
+%     edges{i}(edges{i}>=adcp(i).config.ranges(end)) = nan;
+% end
+% edges = cat(2,edges{:});
+% dn = cat(2,adcp.mtime);
+% [dn,idx] = sort(dn);
+% edges = edges(:,idx);
+% for i = 1:adcp(1).config.n_beams
+%     axes(ax(4+i));
+%     hold on
+%     plot(dn,edges(i,:),'linewidth',2,'color',[0 1 0 0.5])
+% end
+
+%% Plot BT ranges
+btdn = cat(2,adcp(:).mtime);
+btd = cat(2,adcp(:).bt_range);
+[~,idx] = sort(btdn);
+btdn = btdn(idx);
+btd = btd(:,idx);
 for i = 1:adcp(1).config.n_beams
     axes(ax(4+i));
     hold on
-    plot(dn,edges(i,:),'linewidth',2,'color',[0 1 0 0.5])
+    plot(btdn,btd(i,:),'g-','linewidth',1.5)
 end
+
 
 
 %% Format plots

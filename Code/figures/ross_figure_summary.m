@@ -4,6 +4,10 @@ load redblue
 dep = ross.deployments(ndep);
 dat = load(dep.files.final);
 adcp = dat.adcp; clear dat
+maxrange = 0;
+for i = 1:length(adcp)
+    maxrange = max(maxrange,max(adcp(i).config.ranges));
+end
 
 %% Plot settings
 psty = '.'; % plot style
@@ -63,8 +67,8 @@ titles = {'ROSS Location (deg E/N)';
           'East-West Currents (ms^{-1} East)';
           'North-South Currents (ms^{-1} North)';
           'Vertical Currents (ms^{-1} up)';
-          'Echo Intensity (counts)';
-          'Correlation (counts)'};
+          'Beam-Averaged Echo Intensity (counts)';
+          'Beam-Averaged Correlation (counts)'};
 ylabs = {{'lon','lat'};
          {'v_{EW}','v_{NS}'};
          'heading'
@@ -124,7 +128,7 @@ for i = 1:np
     else % Plotting single axes
         plotfuns{i}(adcp);
         if plotdims(i) == 2
-            ylim(dep.plot.ylim)
+            ylim([0 maxrange])
             set(gca,'ydir','reverse')
         end
         ylabel(ylabs{i})

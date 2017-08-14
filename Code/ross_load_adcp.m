@@ -42,6 +42,15 @@ if ~fexist || ross.deployments(ndep).proc.adcp_raw2mat
                    A(ia).mtime <= D.tlim(2));
         A(ia) = adcp_index(A(ia),idx);
     end
+
+    % sort by adcp configuration
+    maxrange = nan(1,length(adcp));
+    for i = 1:length(A)
+        maxrange(i) = max(A(i).config.ranges);
+    end
+    [~,idx] = sort(maxrange);
+    A = A(idx);
+
     
     %% save matfile
     save(matfile,'A');

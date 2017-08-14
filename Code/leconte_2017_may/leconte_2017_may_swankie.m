@@ -130,6 +130,8 @@ swankie(dep).files.adcp = {...
     'timestamped'};
 swankie(dep).files.gps = {'deployment_201705102200'};
 swankie(dep).plot.ylim = [0 200];
+swankie(dep).proc.skip = false;
+swankie(dep).proc.filters(1) = newfilt('none',nan);
 % Sections
 secs = datenum(['10-May-2017 22:22:44';
                 '10-May-2017 22:32:47']);
@@ -226,7 +228,6 @@ swankie(dep).files.adcp = {...
     'timestamped'};
 swankie(dep).files.gps = {'deployment_201705121830'};
 swankie(dep).plot.ylim = [0 200];
-swankie(dep).proc.skip = false;
 swankie(dep).proc.bad = ...
     {datenum(['12-May-2017 19:26:52';
              '12-May-2017 19:27:18'])};

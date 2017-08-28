@@ -34,8 +34,8 @@ if ~fexist || ross.deployments(ndep).proc.adcp_raw2mat
         idx = year(A(ia).mtime) < 2000;
         A(ia).mtime(idx) = A(ia).mtime(idx) + datenum([2000 0 0 0 0 0]);
 
-        % Fix timestamps
-        A(ia).mtime = A(ia).mtime(1) + A(ia).mtime_raw - A(ia).mtime_raw(1);
+        % % Fix timestamps
+        % A(ia).mtime = A(ia).mtime(1) + A(ia).mtime_raw - A(ia).mtime_raw(1);
 
         % limit to deployment start/stop time
         idx = find(A(ia).mtime >= D.tlim(1) & ...
@@ -44,7 +44,7 @@ if ~fexist || ross.deployments(ndep).proc.adcp_raw2mat
     end
 
     % sort by adcp configuration
-    maxrange = nan(1,length(adcp));
+    maxrange = nan(1,length(A));
     for i = 1:length(A)
         maxrange(i) = max(A(i).config.ranges);
     end
@@ -57,9 +57,6 @@ if ~fexist || ross.deployments(ndep).proc.adcp_raw2mat
     disp(['Saved ' flink])
 else
     load(matfile,'A');
-    
-
-
     disp(['- Loaded ' flink])
     for i = 1:length(A(1).files)
         disp(sprintf('  - %s',A(1).files{i}));

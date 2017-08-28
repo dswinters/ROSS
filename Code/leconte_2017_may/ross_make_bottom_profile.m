@@ -4,10 +4,10 @@ close all
 id = regexp(ross.deployments(ndep).name,'(\d{12})','tokens');
 id = str2num(id{1}{1});
 
-maxrange = [max(adcp(1).config.ranges) max(adcp(2).config.ranges)];
-[~,idx] = sort(maxrange);
-adcp = adcp(idx);
-a = adcp(2);
+maxrange = nan(1,length(adcp));
+for i = 1:length(adcp)
+    maxrange(i) = max(adcp(i).config.ranges);
+end
 
 hfig = figure('position',[63 739 2277 324],'keypressfcn',@key_pressed);
 

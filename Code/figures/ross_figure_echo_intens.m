@@ -174,7 +174,7 @@ t = sort(cat(2,adcp(:).mtime));
 axes(ax(end))
 datetick('keeplimits')
 set(ax(1:end-1),'xticklabel',[])
-set(ax,'xlim',t([1 end]))
+set(ax,'xlim',ross.deployments(ndep).tlim)
 % ROSS heading
 axes(ax(3))
 ylim([0 360])

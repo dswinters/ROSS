@@ -39,6 +39,8 @@ for i = 1:length(trip.kayaks)
             files = dir([Ross(i).dirs.raw.adcp,dep.files.adcp]);
             Ross(i).deployments(d).files.adcp = strcat(Ross(i).dirs.raw.adcp,{files.name});
         end
+        % Fill default options
+        Ross(i).deployments = ross_fill_defaults(Ross(i).deployments,ross_defaults());
     else
         rawdir                        = fullfile(dirs.data, subdir, 'raw/');
         Ross(i).dirs.raw.gps          = fullfile(rawdir, 'GPS/');
@@ -100,9 +102,7 @@ end
 for k = 1:length(trip.kayaks)
     % Set up logfile
     if make_logfile
-        logfile = fullfile(dirs.logs,...
-                           [trip.name,...
-                            '_' lower(trip.kayaks{k}) '.org']);
+        logfile = fullfile(dirs.logs, [trip.name,'_',lower(trip.kayaks{k}),'.org']);
         eval(['!rm ' logfile])
         diary(logfile);
     end

@@ -36,7 +36,7 @@ for i = 1:length(trip.kayaks)
             dep = Ross(i).deployments(d);
             files = dir([Ross(i).dirs.raw.gps,dep.files.gps]);
             Ross(i).deployments(d).files.gps = strcat(Ross(i).dirs.raw.gps,{files.name});
-            files = dir([Ross(i).dirs.raw.gps,dep.files.adcp]);
+            files = dir([Ross(i).dirs.raw.adcp,dep.files.adcp]);
             Ross(i).deployments(d).files.adcp = strcat(Ross(i).dirs.raw.adcp,{files.name});
         end
     else

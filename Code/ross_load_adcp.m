@@ -63,6 +63,7 @@ else
     end
 end
 
+%% Print some information to the log file
 flds = {'beam_freq'  , 'Freq'          , '%d';
         'n_beams'    , 'Beams'         , '%d';
         'beam_angle' , 'Beam Angle'    , '%d';
@@ -80,7 +81,6 @@ for i = 1:length(flds)-1
     fprintf('-+-')
 end
 fprintf('|\n')
-
 
 for ia = 1:length(A)
     fprintf('|')

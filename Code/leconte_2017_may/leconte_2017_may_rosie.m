@@ -8,7 +8,7 @@ rosie0.tlim = [-inf inf];
 rosie0.plot.ylim = [0 200];
 rosie0.proc.adcp_load_function = 'adcp_parse';
 rosie0.proc.ross_timestamps = 'post';
-% rosie0.proc.skip = false;
+rosie0.proc.skip = true;
 dep=0;
 %--------------------------------------------------------%
 % Define some filters                                    %

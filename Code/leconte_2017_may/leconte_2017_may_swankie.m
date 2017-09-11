@@ -16,7 +16,7 @@ swankie0.proc.adcp_load_function = 'adcp_parse';
 swankie0.tlim = [-inf inf];
 swankie0.proc.ross_timestamps = 'pre';
 swankie0.files.map = 'none';
-swankie0.proc.skip = false;
+swankie0.proc.skip = true;
 
 %--------------------------------------------------------%
 % Define some filters                                    %
@@ -25,6 +25,7 @@ newfilt =@(n,p) struct('name',n,'params',p);
 trim_ei_edge_b = newfilt('ei_edge','beam');
 trim_corr_edge_b = newfilt('corr_edge','beam');
 trim_bt90 = newfilt('BT',90);
+trim_bt50 = newfilt('BT',50);
 filt_rotmax3   = newfilt('rotmax',3);
 notrim = newfilt('none',[]);
 swankie0.proc.trim_methods(1) = trim_bt90;
@@ -37,7 +38,7 @@ swankie0.proc.trim_methods(1) = trim_bt90;
 % Petersburg dock shallow transects
 % Too shallow, not much to see here...
 dep = dep+1;
-swankie(dep).proc.skip = true;
+swankie(dep).proc.skip = true; % SKIP ALWAYS
 swankie(dep).name       = 'swankie_dock_transects_20170503';
 swankie(dep).tlim       = [-inf inf];
 swankie(dep).files.adcp = {...
@@ -49,7 +50,7 @@ swankie(dep).plot.ylim = [0 20];
 %--------------------------------------------------------%
 % Looks like ADCP was out of water
 dep = dep+1;
-swankie(dep).proc.skip = true;
+swankie(dep).proc.skip = true; % SKIP ALWAYS
 swankie(dep).name = 'swankie_deployment_201705081400';
 swankie(dep).files.adcp = {...
     'deployment_201705081400';
@@ -122,9 +123,12 @@ swankie(dep).plot.ylim = [0 200];
 %--------------------------------------------------------%
 dep = dep+1;
 swankie(dep).name = 'swankie_deployment_201705102200';
-swankie(dep).tlim       = datenum([...
-    2017 05 10 22 03 00;
-    2017 05 10 22 55 00]);
+% swankie(dep).tlim       = datenum([... % actual deployment tlim
+%     2017 05 10 22 03 00;
+%     2017 05 10 22 55 00]);
+swankie(dep).tlim       = datenum([... % temp deployment tlim
+    2017 05 10 22 10 00;
+    2017 05 10 22 35 00]);
 swankie(dep).files.adcp = {...
     'deployment_201705102200';
     'timestamped'};
@@ -132,12 +136,13 @@ swankie(dep).files.gps = {'deployment_201705102200'};
 swankie(dep).plot.ylim = [0 200];
 swankie(dep).proc.skip = false;
 swankie(dep).proc.filters(1) = newfilt('none',nan);
-% Sections
-secs = datenum(['10-May-2017 22:22:44';
-                '10-May-2017 22:32:47']);
-namefmt = 'swankie_section_201705102200_%02d';
-[swankie dep] = ross_deployment_sections(...
-    swankie,dep,secs,namefmt);
+% swankie(dep).proc.trim_methods(1) = trim_bt50;
+% % Sections
+% secs = datenum(['10-May-2017 22:22:44';
+%                 '10-May-2017 22:32:47']);
+% namefmt = 'swankie_section_201705102200_%02d';
+% [swankie dep] = ross_deployment_sections(...
+%     swankie,dep,secs,namefmt);
 
 %--------------------------------------------------------%
 dep = dep+1;
@@ -164,7 +169,7 @@ namefmt = 'swankie_section_201705111800_%02d';
 %--------------------------------------------------------%
 % very short, out of water?
 dep = dep+1;
-swankie(dep).proc.skip = true;
+swankie(dep).proc.skip = true; % SKIP ALWAYS
 swankie(dep).name = 'swankie_deployment_201705111840';
 swankie(dep).files.adcp = {...
     'deployment_201705111840';

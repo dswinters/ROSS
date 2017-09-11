@@ -20,16 +20,15 @@ dirs.logs = fullfile(dirs.base, 'org/');
 dirs.meta = fullfile(dirs.base, 'Metadata/');
 
 for i = 1:length(trip.kayaks)
-    Ross(i).name                  = trip.kayaks{i};
-    Ross(i).trip                  = trip.name;
-    Ross(i).deployments           = deployments{i};
+    Ross(i).name        = trip.kayaks{i};
+    Ross(i).trip        = trip.name;
+    Ross(i).deployments = deployments{i};
     %
-    subdir                        = fullfile(trip.name, trip.kayaks{i}, '/');
-    Ross(i).dirs.figs             = fullfile(dirs.figs, subdir);
-
+    subdir              = fullfile(trip.name, trip.kayaks{i}, '/');
+    Ross(i).dirs.figs   = fullfile(dirs.figs, subdir);
     rawdir = fullfile(dirs.data, subdir, 'raw', Ross(i).deployments.dir_raw); 
-    Ross(i).dirs.raw.gps = fullfile(rawdir,'GPS/');
-    Ross(i).dirs.raw.adcp = fullfile(rawdir, 'ADCP/');
+    Ross(i).dirs.raw.gps          = fullfile(rawdir,'GPS/');
+    Ross(i).dirs.raw.adcp         = fullfile(rawdir, 'ADCP/');
     Ross(i).dirs.proc.deployments = fullfile(dirs.data, subdir, 'processed/');
     for d = 1:length(Ross(i).deployments)
         dep = Ross(i).deployments(d);

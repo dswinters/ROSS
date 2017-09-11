@@ -39,8 +39,6 @@ for i = 1:length(trip.kayaks)
             files = dir([Ross(i).dirs.raw.adcp,dep.files.adcp]);
             Ross(i).deployments(d).files.adcp = strcat(Ross(i).dirs.raw.adcp,{files.name});
         end
-        % Fill default options
-        Ross(i).deployments = ross_fill_defaults(Ross(i).deployments,ross_defaults());
     else
         rawdir                        = fullfile(dirs.data, subdir, 'raw/');
         Ross(i).dirs.raw.gps          = fullfile(rawdir, 'GPS/');
@@ -89,6 +87,8 @@ for i = 1:length(trip.kayaks)
                          Ross(i).deployments(d).files.gps);
         end
     end
+    % Fill default options
+    Ross(i).deployments = ross_fill_defaults(Ross(i).deployments,ross_defaults());
 end
 
 %% Trip-specific setup

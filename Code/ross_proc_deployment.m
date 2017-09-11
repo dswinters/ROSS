@@ -65,7 +65,7 @@ for ia = 1:length(adcp)
     adcp(ia).heading_compass = adcp(ia).heading;
     adcp(ia).heading = adcp(ia).gps.h;
     adcp(ia).config.xducer_misalign = D.proc.heading_offset;
-    if adcp(ia).config.n_beams==5
+    if checkfield(D.proc,'use_3beam')
         ve(ia) = adcp_5beam2earth(adcp(ia));
     else
         ve(ia) = adcp_beam2earth(adcp(ia));

@@ -6,20 +6,20 @@ function rosie = leconte_2017_sep_rosie()
 %  4   1    ^
 %    x      |--> STARBOARD
 %  2   3  
-dep=0;
+dep = 0;
 
 %--------------------------------------------------------%
 % Default deployment options                             %
 %--------------------------------------------------------%
-rosie0.proc.heading_offset = 135;
-rosie0.proc.adcp_load_function = 'adcp_parse';
-rosie0.proc.ross_timestamps = 'pre';
-swankie0.files.map = 'leconte_terminus';
-rosie0.tlim = [-inf inf];
-rosie0.plot.ylim = [0 200];
-rosie0.proc.skip = false;
-rosie0.proc.use_3beam = false;
+defaults.proc.heading_offset = 135;
+defaults.proc.adcp_load_function = 'adcp_parse';
+defaults.proc.ross_timestamps = 'pre';
+defaults.files.map = 'leconte_terminus';
+defaults.tlim = [-inf inf];
+defaults.plot.ylim = [0 200];
+defaults.proc.skip = false;
+defaults.proc.use_3beam = false;
 
 % Deployments here
 
-rosie = ross_fill_defaults(rosie,rosie0);
+rosie = ross_fill_defaults(rosie,defaults);

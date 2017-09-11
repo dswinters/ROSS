@@ -11,14 +11,14 @@ dep = 0;
 %--------------------------------------------------------%
 % Default deployment options                             %
 %--------------------------------------------------------%
-swankie0.proc.heading_offset = 45;
-swankie0.proc.adcp_load_function = 'adcp_parse';
-swankie0.proc.ross_timestamps = 'pre';
-swankie0.files.map = 'leconte_terminus';
-swankie0.tlim = [-inf inf];
-rosie0.plot.ylim = [0 200];
-swankie0.proc.skip = false;
-swankie0.proc.use_3beam = false;
+defaults.proc.heading_offset = 45;
+defaults.proc.adcp_load_function = 'adcp_parse';
+defaults.proc.ross_timestamps = 'pre';
+defaults.files.map = 'leconte_terminus';
+defaults.tlim = [-inf inf];
+defaults.plot.ylim = [0 200];
+defaults.proc.skip = false;
+defaults.proc.use_3beam = false;
 
 % Deployments here
 

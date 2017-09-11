@@ -12,6 +12,7 @@ for i = 1:length(swankie)
     if isfield(swankie(i).files,'final')
         load(swankie(i).files.final);
         for i = 1:length(adcp)
+            t  = cat(2,t,adcp(i).mtime);
             vx = cat(2,vx,adcp(i).gps.vx);
             vy = cat(2,vy,adcp(i).gps.vy);
             ht = cat(2,ht,adcp(i).heading);
@@ -22,11 +23,13 @@ end
 
 
 [~,idx] = unique(ht);
+t  = t(idx);
 ht = ht(idx);
 hc = hc(idx);
 vx = vx(idx);
 vy = vy(idx);
 [~,idx] = sort(ht);
+t  = t(idx);
 ht = ht(idx);
 hc = hc(idx);
 vx = vx(idx);
@@ -90,3 +93,49 @@ for i = 1:length(dirs_out)
     end
 end
 
+% sort by time
+[~,idx] = sort(t);
+t  = t(idx);
+ht = ht(idx);
+hc = hc(idx);
+vx = vx(idx);
+vy = vy(idx);
+dt = diff(t)*86400;
+
+
+% Apply heading correction
+hc = hc - F(C,ht);
+dhc = diff(hc);
+dhc(dhc>180) = dhc(dhc>180) - 360;
+dhc(dhc<-180) = dhc(dhc<-180) + 360;
+crot = dhc./dt;
+crot(abs(crot)>20) = nan;
+
+dht = diff(ht);
+dht(dht>180) = dht(dht>180) - 360;
+dht(dht<-180) = dht(dht<-180) + 360;
+trot = dht./dt;
+trot(abs(trot)>20) = nan;
+
+t2 = t(1:end-1) + diff(t)/2;
+
+cs = crot;
+for i = 1:5
+    cs = nanmean([cs([1,1:end-1]);cs;cs([2:end,end])]);
+end
+
+
+figure()
+plot(t2,cs), hold on
+plot(t2,trot)
+% xx = datenum(['11-May-2017 18:01:39';
+%               '11-May-2017 18:22:35';]);
+xlim(xx)
+title([datestr(nanmean(xlim),1) ' ' datestr(nanmean(xlim),15)]);
+ylabel('RoT (deg/s)')
+xlabel('Time UTC')
+hl = legend('Internal Compass','Hemisphere');
+set(hl,'location','northeastoutside')
+
+
+print('-djpeg90','-r300','~/Desktop/swankie_heading.jpg')

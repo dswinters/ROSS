@@ -1,7 +1,7 @@
 function A = ross_load_adcp(ross,ndep)
 
 D = ross.deployments(ndep);
-matfile = [ross.dirs.raw.adcp D.name '_adcp.mat'];
+matfile = [D.dirs.raw_adcp D.name '_adcp.mat'];
 fexist = exist(matfile,'file');
 fparts = strsplit(matfile,'/');
 flink = ['[[' fullfile('..',fparts{6:end}) ']]'];

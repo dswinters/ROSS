@@ -5,7 +5,7 @@ D = ross.deployments(ndep);
 prefix = {'GPRMC','HEHDT','PASHR','GPGGA'};
 f_in = D.files.gps;
 
-matfile = [ross.dirs.raw.gps D.name '_gps.mat'];
+matfile = [D.dirs.raw_gps D.name '_gps.mat'];
 fparts = strsplit(matfile,'/');
 flink = ['[[' fullfile('..',fparts{6:end}) ']]'];
 if ~exist(matfile,'file') || D.proc.gps_raw2mat

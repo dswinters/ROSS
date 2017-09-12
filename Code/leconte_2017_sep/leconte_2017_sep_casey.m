@@ -1,4 +1,4 @@
-function swankie = leconte_2017_sep_swankie()
+function swankie = leconte_2017_sep_casey()
 %--------------------------------------------------------%
 % ADCP orientation                                       %
 %--------------------------------------------------------%
@@ -23,4 +23,5 @@ defaults.proc.adcp_raw2mat = true;
 
 % Deployments here
 
-swankie = ross_fill_defaults(swankie,defaults);
+
+casey = ross_fill_defaults(casey,defaults);

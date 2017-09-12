@@ -80,7 +80,7 @@ for k = 1:length(trip.kayaks)
     end
     disp(sprintf('\n** Deployment Processing: %s ',trip.kayaks{k}))
     for ndep = 1:length(Ross(k).deployments)
-        disp(sprintf('\n*** %n) %s', ndep ,...
+        disp(sprintf('\n*** %d) %s', ndep ,...
                      Ross(k).deployments(ndep).name))
         Ross(k) = ross_proc_deployment(Ross(k),ndep);
     end

@@ -23,20 +23,20 @@ rosie0.proc.trim_methods(1) = trim_ei_edge_b;
 %--------------------------------------------------------%
 dep = dep+1;
 rosie(dep).name       = 'rosie_deployment_201705100100';
-swankie(dep).dir_raw = 'deployment_201705100100'
-swankie(dep).files.adcp = '*timestamped*.bin';
+rosie(dep).dirs.raw = 'deployment_201705100100';
+rosie(dep).files.adcp = '*timestamped*.bin';
 rosie(dep).files.gps  = '*.log';
 %--------------------------------------------------------%
 dep = dep+1;
 rosie(dep).name       = 'rosie_deployment_201705102330';
-swankie(dep).dir_raw = 'deployment_201705102330'
-swankie(dep).files.adcp = '*timestamped*.bin';
+rosie(dep).dirs.raw = 'deployment_201705102330';
+rosie(dep).files.adcp = '*timestamped*.bin';
 rosie(dep).files.gps  = '*.log';
 %--------------------------------------------------------%
 dep = dep+1;
 rosie(dep).name       = 'rosie_deployment_201705130300';
-swankie(dep).dir_raw = 'deployment_201705130300'
-swankie(dep).files.adcp = '*timestamped*.bin';
+rosie(dep).dirs.raw = 'deployment_201705130300';
+rosie(dep).files.adcp = '*timestamped*.bin';
 rosie(dep).files.gps  = '*.log';
 rosie(dep).proc.trim_methods = newfilt('none',[]);
 %--------------------------------------------------------%

@@ -16,27 +16,28 @@ filt_rotmax3   = newfilt('rotmax',3);
 notrim = newfilt('none',[]);
 
 %========================================================
-% Processing options
+% Default options
 %========================================================
-opts.proc.skip             = false;
-opts.proc.trim_methods(1)  = trim_ei_edge_b;
-opts.proc.filters(1)       = filt_rotmax3;
-opts.plot.ylim             = [0 200];
-opts.proc.adcp_raw2mat     = false;
-opts.proc.gps_raw2mat      = false;
-opts.plot.map.coastline    = '../Maps/leconte2_grid_coastline.mat';
+defaults.files.map             = 'leconte_terminus';
+defaults.proc.skip             = false;
+defaults.proc.trim_methods(1)  = trim_ei_edge_b;
+defaults.proc.filters(1)       = filt_rotmax3;
+defaults.plot.ylim             = [0 200];
+defaults.proc.adcp_raw2mat     = false;
+defaults.proc.gps_raw2mat      = false;
+defaults.plot.map.coastline    = '../Maps/leconte2_grid_coastline.mat';
 
 %=======================================================
 % Rosie deployments (150 hHz PAVS, Alaska flag)
 %========================================================
 rosie = leconte_2017_may_rosie();
-rosie = ross_fill_defaults(rosie,opts);
+rosie = ross_fill_defaults(rosie,defaults);
 
 %========================================================
 % Swankie deployments (300 kHz Sentinel V, Sweden flag)
 %========================================================
 swankie = leconte_2017_may_swankie();
-swankie = ross_fill_defaults(swankie,opts);
+swankie = ross_fill_defaults(swankie,defaults);
 
 %========================================================
 % Combine deployment structures into final cell array

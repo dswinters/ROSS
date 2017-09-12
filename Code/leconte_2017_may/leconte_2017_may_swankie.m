@@ -41,10 +41,9 @@ dep = dep+1;
 swankie(dep).proc.skip = true; % SKIP ALWAYS
 swankie(dep).name       = 'swankie_dock_transects_20170503';
 swankie(dep).tlim       = [-inf inf];
-swankie(dep).files.adcp = {...
-    'dock_transects_20170503';
-    'timestamped'};
-swankie(dep).files.gps = {'dock_transects_20170503'};
+swankie(dep).dir_raw = 'dock_transects_20170503';
+swankie(dep).files.adcp = '*timestamped*.bin';
+swankie(dep).files.gps = '*.log';
 swankie(dep).plot.ylim = [0 20];
 
 %--------------------------------------------------------%
@@ -52,10 +51,9 @@ swankie(dep).plot.ylim = [0 20];
 dep = dep+1;
 swankie(dep).proc.skip = true; % SKIP ALWAYS
 swankie(dep).name = 'swankie_deployment_201705081400';
-swankie(dep).files.adcp = {...
-    'deployment_201705081400';
-    'timestamped'};
-swankie(dep).files.gps = {'deployment_201705081400'};
+swankie(dep).dir_raw = 'deployment_201705081400';
+swankie(dep).files.adcp = '*timestamped*.bin';
+swankie(dep).files.gps = '*.log';
 swankie(dep).plot.ylim = [0 200];
 
 %--------------------------------------------------------%
@@ -64,10 +62,9 @@ swankie(dep).name = 'swankie_deployment_201705091345';
 swankie(dep).tlim       = datenum([...
     '09-May-2017 13:43:22';
     '09-May-2017 14:16:08']);
-swankie(dep).files.adcp = {...
-    'deployment_201705091345';
-    'timestamped'};
-swankie(dep).files.gps = {'deployment_201705091345'};
+swankie(dep).dir_raw = 'deployment_201705091345';
+swankie(dep).files.adcp = '*timestamped*.bin';
+swankie(dep).files.gps = '*.log';
 swankie(dep).plot.ylim = [0 200];
 
 %--------------------------------------------------------%
@@ -76,10 +73,9 @@ swankie(dep).name = 'swankie_deployment_201705091550';
 swankie(dep).tlim       = datenum([...
     '09-May-2017 15:51:31';
     '09-May-2017 16:30:00']);
-swankie(dep).files.adcp = {...
-    'deployment_201705091550';
-    'timestamped'};
-swankie(dep).files.gps = {'deployment_201705091550'};
+swankie(dep).dir_raw = 'deployment_201705091550';
+swankie(dep).files.adcp = '*timestamped*.bin';
+swankie(dep).files.gps = '*.log';
 swankie(dep).plot.ylim = [0 200];
 
 %--------------------------------------------------------%
@@ -88,10 +84,9 @@ swankie(dep).name = 'swankie_deployment_201705091830';
 swankie(dep).tlim       = datenum([...
     '09-May-2017 18:30:29';
     '09-May-2017 19:37:19']);
-swankie(dep).files.adcp = {...
-    'deployment_201705091830';
-    'timestamped'};
-swankie(dep).files.gps = {'deployment_201705091830'};
+swankie(dep).dir_raw = 'deployment_201705091830';
+swankie(dep).files.adcp = '*timestamped*.bin';
+swankie(dep).files.gps = '*.log';
 swankie(dep).plot.ylim = [0 200];
 swankie(dep).proc.filters(1).name = 'velmax';
 swankie(dep).proc.filters(1).params = 0.6;
@@ -102,10 +97,9 @@ swankie(dep).name = 'swankie_deployment_201705101700';
 swankie(dep).tlim       = datenum([...
     2017 05 10 16 18 00;
     2017 05 10 17 10 00]);
-swankie(dep).files.adcp = {...
-    'deployment_201705101700';
-    'timestamped'};
-swankie(dep).files.gps = {'deployment_201705101700'};
+swankie(dep).dir_raw = 'deployment_201705101700';
+swankie(dep).files.adcp = '*timestamped*.bin';
+swankie(dep).files.gps = '*.log';
 swankie(dep).plot.ylim = [0 200];
 
 %--------------------------------------------------------%
@@ -114,10 +108,9 @@ swankie(dep).name = 'swankie_deployment_201705102100';
 swankie(dep).tlim       = datenum([...
     '10-May-2017 20:57:00';
     '10-May-2017 21:37:04']);
-swankie(dep).files.adcp = {...
-    'deployment_201705102100';
-    'timestamped'};
-swankie(dep).files.gps = {'deployment_201705102100'};
+swankie(dep).dir_raw = 'deployment_201705102100';
+swankie(dep).files.adcp = '*timestamped*.bin';
+swankie(dep).files.gps = '*.log';
 swankie(dep).plot.ylim = [0 200];
 
 %--------------------------------------------------------%
@@ -129,10 +122,9 @@ swankie(dep).name = 'swankie_deployment_201705102200';
 swankie(dep).tlim       = datenum([... % temp deployment tlim
     2017 05 10 22 10 00;
     2017 05 10 22 35 00]);
-swankie(dep).files.adcp = {...
-    'deployment_201705102200';
-    'timestamped'};
-swankie(dep).files.gps = {'deployment_201705102200'};
+swankie(dep).dir_raw = 'deployment_201705102200';
+swankie(dep).files.adcp = '*timestamped*.bin';
+swankie(dep).files.gps = '*.log';
 swankie(dep).plot.ylim = [0 200];
 swankie(dep).proc.skip = false;
 swankie(dep).proc.filters(1) = newfilt('none',nan);
@@ -150,10 +142,9 @@ swankie(dep).name = 'swankie_deployment_201705111800';
 swankie(dep).tlim       = datenum([...
     2017 05 11 18 02 00;
     2017 05 11 18 22 00]);
-swankie(dep).files.adcp = {...
-    'deployment_201705111800';
-    'timestamped'};
-swankie(dep).files.gps = {'deployment_201705111800'};
+swankie(dep).dir_raw = 'deployment_201705111800';
+swankie(dep).files.adcp = '*timestamped*.bin';
+swankie(dep).files.gps = '*.log';
 swankie(dep).plot.ylim = [0 200];
 % Sections
 secs = datenum([...
@@ -171,10 +162,9 @@ namefmt = 'swankie_section_201705111800_%02d';
 dep = dep+1;
 swankie(dep).proc.skip = true; % SKIP ALWAYS
 swankie(dep).name = 'swankie_deployment_201705111840';
-swankie(dep).files.adcp = {...
-    'deployment_201705111840';
-    'timestamped'};
-swankie(dep).files.gps = {'deployment_201705111840'};
+swankie(dep).dir_raw = 'deployment_201705111840';
+swankie(dep).files.adcp = '*timestamped*.bin';
+swankie(dep).files.gps = '*.log';
 swankie(dep).plot.ylim = [0 200];
 
 %--------------------------------------------------------%
@@ -183,10 +173,9 @@ swankie(dep).name = 'swankie_deployment_201705112250';
 swankie(dep).tlim       = datenum([...
     2017 05 11 22 52 00;
     2017 05 11 23 58 00]);
-swankie(dep).files.adcp = {...
-    'deployment_201705112250';
-    'timestamped'};
-swankie(dep).files.gps = {'deployment_201705112250'};
+swankie(dep).dir_raw = 'deployment_201705112250';
+swankie(dep).files.adcp = '*timestamped*.bin';
+swankie(dep).files.gps = '*.log';
 swankie(dep).plot.ylim = [0 200];
 % Sections
 secs = datenum([...
@@ -207,10 +196,9 @@ swankie(dep).name = 'swankie_deployment_201705120000';
 swankie(dep).tlim = datenum([...
     '12-May-2017 00:25:02';
     '12-May-2017 01:07:34']);
-swankie(dep).files.adcp = {...
-    'deployment_201705120000';
-    'timestamped'};
-swankie(dep).files.gps = {'deployment_201705120000'};
+swankie(dep).dir_raw = 'deployment_201705120000';
+swankie(dep).files.adcp = '*timestamped*.bin';
+swankie(dep).files.gps = '*.log';
 swankie(dep).plot.ylim = [0 200];
 % Sections
 secs = datenum([...
@@ -228,10 +216,9 @@ swankie(dep).name = 'swankie_deployment_201705121830';
 swankie(dep).tlim = datenum([...
     '12-May-2017 18:31:24';
     '12-May-2017 19:41:36']);
-swankie(dep).files.adcp = {...
-    'deployment_201705121830';
-    'timestamped'};
-swankie(dep).files.gps = {'deployment_201705121830'};
+swankie(dep).dir_raw = 'deployment_201705121830';
+swankie(dep).files.adcp = '*timestamped*.bin';
+swankie(dep).files.gps = '*.log';
 swankie(dep).plot.ylim = [0 200];
 swankie(dep).proc.bad = ...
     {datenum(['12-May-2017 19:26:52';
@@ -253,10 +240,9 @@ swankie(dep).name = 'swankie_deployment_201705132100';
 swankie(dep).tlim = datenum([...
     '13-May-2017 21:06:00';
     '13-May-2017 22:15:00']);
-swankie(dep).files.adcp = {...
-    'deployment_201705132100';
-    'timestamped'};
-swankie(dep).files.gps = {'deployment_201705132100'};
+swankie(dep).dir_raw = 'deployment_201705132100';
+swankie(dep).files.adcp = '*timestamped*.bin';
+swankie(dep).files.gps = '*.log';
 swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'none';
 swankie(dep).plot.vlim = [1 1 0.25];
@@ -291,10 +277,9 @@ swankie(dep).name = 'swankie_deployment_201705131810';
 swankie(dep).tlim = datenum([...
     '13-May-2017 18:13:00';
     '13-May-2017 19:30:00']);
-swankie(dep).files.adcp = {...
-    'deployment_201705131810';
-    'timestamped'};
-swankie(dep).files.gps = {'deployment_201705131810'};
+swankie(dep).dir_raw = 'deployment_201705131810';
+swankie(dep).files.adcp = '*timestamped*.bin';
+swankie(dep).files.gps = '*.log';
 swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'none';
 swankie(dep).plot.vlim = [0.5 0.5 0.25];
@@ -305,10 +290,9 @@ swankie(dep).name = 'swankie_deployment_201705141300';
 swankie(dep).tlim = datenum([...
     '14-May-2017 12:58:46';
     '14-May-2017 14:59:44']);
-swankie(dep).files.adcp = {...
-    'deployment_201705141300';
-    'timestamped'};
-swankie(dep).files.gps = {'deployment_201705141300'};
+swankie(dep).dir_raw = 'deployment_201705141300';
+swankie(dep).files.adcp = '*timestamped*.bin';
+swankie(dep).files.gps = '*.log';
 swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'none';
 swankie(dep).plot.vlim = [0.5 0.5 0.25];
@@ -322,10 +306,9 @@ swankie(dep).name = 'swankie_deployment_201705141620';
 swankie(dep).tlim = datenum([...
     '14-May-2017 16:28:00';
     '14-May-2017 18:40:02']);
-swankie(dep).files.adcp = {...
-    'deployment_201705141620';
-    'timestamped'};
-swankie(dep).files.gps = {'deployment_201705141620'};
+swankie(dep).dir_raw = 'deployment_201705141620';
+swankie(dep).files.adcp = '*timestamped*.bin';
+swankie(dep).files.gps = '*.log';
 swankie(dep).plot.ylim = [0 200];
 swankie(dep).files.map = 'none';
 swankie(dep).plot.vlim = [0.5 0.5 0.25];

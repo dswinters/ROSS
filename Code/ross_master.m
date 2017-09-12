@@ -40,7 +40,7 @@ for i = 1:length(trip.kayaks)
         % TODO: implement this
     else
         Ross(i).dirs.proc.deployments = fullfile(dirs.data, subdir, 'processed/');
-        Ross(i).dirs.raw = fullfile(dirs.data,subdir,'raw/')
+        Ross(i).dirs.raw = fullfile(dirs.data,subdir,'raw/');
         for d = 1:length(Ross(i).deployments)
             dep = Ross(i).deployments(d);
             dep.dirs.raw_gps  = ...
@@ -80,7 +80,7 @@ for k = 1:length(trip.kayaks)
     end
     disp(sprintf('\n** Deployment Processing: %s ',trip.kayaks{k}))
     for ndep = 1:length(Ross(k).deployments)
-        disp(sprintf('\n*** Deployment %d: %s', ndep ,...
+        disp(sprintf('\n*** %n) %s', ndep ,...
                      Ross(k).deployments(ndep).name))
         Ross(k) = ross_proc_deployment(Ross(k),ndep);
     end

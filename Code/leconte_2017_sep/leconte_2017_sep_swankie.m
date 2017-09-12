@@ -19,7 +19,17 @@ defaults.tlim = [-inf inf];
 defaults.plot.ylim = [0 200];
 defaults.proc.skip = false;
 defaults.proc.use_3beam = false;
+defaults.proc.adcp_raw2mat = true;
 
 % Deployments here
+dep = dep+1;
+swankie(dep).proc.skip = false;
+swankie(dep).dirs.raw = 'deployment_fake';
+swankie(dep).name = 'swankie_deployment_test';
+swankie(dep).files.adcp = '*_timestamped*.bin';
+swankie(dep).files.gps = '*.log';
+swankie(dep).plot.ylim = [0 200];
 
-swankie = ross_fill_defaults(swankie,swankie0);
+
+
+swankie = ross_fill_defaults(swankie,defaults);

@@ -19,12 +19,14 @@ notrim = newfilt('none',[]);
 % Trip default options
 %========================================================
 trip_defaults.map                   = 'leconte_terminus';
+trip_defaults.files.coastline       = 'leconte2_grid_coastline.mat';
 trip_defaults.proc.skip             = false;
 trip_defaults.proc.trim_methods(1)  = notrim;
 trip_defaults.proc.filters(1)       = notrim;
 trip_defaults.plot.ylim             = [0 200];
 trip_defaults.proc.adcp_raw2mat     = true;
 trip_defaults.proc.gps_raw2mat      = true;
+
 
 % Get deployments
 casey = leconte_2017_sep_casey();

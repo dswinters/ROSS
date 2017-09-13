@@ -28,6 +28,10 @@ for i = 1:length(trip.kayaks)
     Ross(i).dirs.figs             = fullfile(dirs.figs, subdir);
     Ross(i).dirs.proc.deployments = fullfile(dirs.data, subdir, 'processed/');
     Ross(i).dirs.raw              = fullfile(dirs.data,subdir,'raw/');
+    % Fill default options
+    if ~isempty(Ross(i).deployments)
+        Ross(i).deployments = ross_fill_defaults(Ross(i).deployments,ross_defaults());
+    end
     for d = 1:length(Ross(i).deployments)
         dep = Ross(i).deployments(d);
         % Make full data paths
@@ -40,12 +44,9 @@ for i = 1:length(trip.kayaks)
         dep.files.gps  = strcat(dep.dirs.raw_gps, {gps_files.name});
         dep.files.adcp = strcat(dep.dirs.raw_adcp, {adcp_files.name});
         dep.files.map  = fullfile(dirs.maps,dep.files.map);
+        dep.files.coastline = fullfile(dirs.maps,dep.files.coastline);
         % Update deployment
         Ross(i).deployments(d) = dep;
-    end
-    % Fill default options
-    if ~isempty(Ross(i).deployments)
-        Ross(i).deployments = ross_fill_defaults(Ross(i).deployments,ross_defaults());
     end
 end
 

@@ -18,6 +18,7 @@ defaults.proc.ross_timestamps = 'pre';
 defaults.files.map = 'leconte_terminus';
 defaults.tlim = [-inf inf];
 defaults.plot.ylim = [0 200];
+defaults.plot.make_figure.coastline_map = true;
 defaults.proc.skip = false;
 defaults.proc.use_3beam = false;
 defaults.proc.adcp_raw2mat = true;
@@ -31,7 +32,6 @@ swankie(dep).dirs.raw_adcp = 'decktest_20170912/ADCP/';
 swankie(dep).files.adcp    = '*timestamped*.bin';
 swankie(dep).files.gps     = '*.log';
 swankie(dep).plot.ylim     = [0 200];
-
 
 % Fill defaults
 if ~isempty(swankie)

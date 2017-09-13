@@ -11,14 +11,10 @@ flink = ['[[' fullfile('..',fparts{6:end}) ']]'];
 if ~exist(matfile,'file') || D.proc.gps_raw2mat
     gps = nav_read(f_in,prefix);
     save(matfile,'-struct','gps');
-    disp(['Saved ' flink]);
+    disp(['% Saved ' flink]);
 else
     gps = load(matfile);
-    disp(['- Loaded ' flink]);
-    for i = 1:length(gps.files)
-        disp(sprintf('  - %s',gps.files{i}));
-    end
-    fprintf('\n');
+    disp(['% Loaded ' flink]);
 end
 
 %% Make sure GPRMC timestamps are unique
@@ -125,6 +121,16 @@ end
 [vx_gprmc vy_gprmc] = nav_ltln2vel(gps.GPRMC.lat,...
                                    gps.GPRMC.lon,...
                                    gps.GPRMC.dn);
+
+diary on
+disp(['- Raw GPS .mat file: ', flink])
+disp('  - This file contains data from the following GPS log file(s):')
+for i = 1:length(gps.files)
+    disp(sprintf('  - %s',gps.files{i}));
+end
+fprintf('\n');
+diary off
+
 gps = struct(...
     'dn'  , gps.GPRMC.dn  ,...
     'lat' , gps.GPRMC.lat ,...
@@ -134,3 +140,4 @@ gps = struct(...
     'r'   , r_pashr       ,...
     'vx'  , vx_gprmc      ,...
     'vy'  , vy_gprmc);
+

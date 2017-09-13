@@ -5,6 +5,10 @@ if checkfield(dep.proc,'skip')
     return
 end
 
+diary on
+fprintf('\n- Figures\n')
+diary off
+
 %% Set up figure directory
 dirout = [ross.dirs.figs dep.name '/'];
 if ~exist(dirout); mkdir(dirout); end
@@ -20,7 +24,9 @@ for i = 1:length(figtypes)
         print(hfig,'-djpeg90','-r300',fout);
         fparts = strsplit(fout,'/');
         flink = fullfile('..',fparts{6:end});
-        disp(['[[' flink ']]'])
+        diary on
+        disp(['  - [[' flink ']]'])
+        diary off
     end
 end
 

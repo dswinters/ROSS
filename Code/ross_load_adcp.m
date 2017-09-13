@@ -6,7 +6,6 @@ fexist = exist(matfile,'file');
 fparts = strsplit(matfile,'/');
 flink = ['[[' fullfile('..',fparts{6:end}) ']]'];
 
-diary off
 if ~fexist || ross.deployments(ndep).proc.adcp_raw2mat
     %% Load raw data
     % Default binary ADCP data parsing function - slow, but safe
@@ -55,15 +54,15 @@ if ~fexist || ross.deployments(ndep).proc.adcp_raw2mat
     
     %% save matfile
     save(matfile,'A');
-    disp(['Saved ' flink])
+    disp(['% Saved ' flink])
 else
     load(matfile,'A');
-    disp(['- Loaded ' flink])
+    disp(['% Loaded ' flink])
 end
 
 diary on
-disp(['Raw ADCP .mat file: ' flink]);
-disp('- This file contains data from the following binary file(s):')
+disp(['- Raw ADCP .mat file: ' flink]);
+disp('  - This file contains data from the following binary file(s):')
 for i = 1:length(A(1).files)
     disp(sprintf('  - %s',A(1).files{i}));
 end
@@ -97,5 +96,6 @@ for ia = 1:length(A)
     fprintf('\n')
 end
 fprintf('\n');
+diary off
 
 end

@@ -25,7 +25,7 @@ for i = 1:length(figtypes)
         fparts = strsplit(fout,'/');
         flink = fullfile('..',fparts{6:end});
         diary on
-        disp(['  - [[' flink ']]'])
+        disp(sprintf('  - [[%s][%s]]',flink,figtypes{i}))
         diary off
     end
 end

@@ -14,13 +14,13 @@ function ross = ross_proc_deployment(ross,ndep)
 D = ross.deployments(ndep);
 
 if checkfield(D.proc,'skip')
-    disp(sprintf('\n*** %d. %s', ndep, D.name));
+    disp(sprintf('\n** %d. %s', ndep, D.name));
     disp('Skipped!')
     return
 end
 
 diary on
-disp(sprintf('\n*** %d. %s', ndep, D.name));
+disp(sprintf('\n** %d. %s', ndep, D.name));
 diary off
 
 %% Load ADCP data, load & pre-process GPS data
@@ -140,11 +140,11 @@ fout = [D.name '.mat'];
 ross.deployments(ndep).files.final = [dirout fout];
 save(ross.deployments(ndep).files.final,'adcp')
 fparts = strsplit(ross.deployments(ndep).files.final,'/');
-flink = ['[[' fullfile('..',fparts{6:end}) ']]'];
+flink = fullfile('..',fparts{6:end});
 
 diary on
-disp(['- Processed deployment file: ', flink])
-disp('- Processing information:')
+disp(sprintf('- [[%s][Processed deployment file]]', flink))
+fprintf('\n- Processing information:\n')
 for i = 1:length(adcp(1).info)
     disp(['  - ' adcp(1).info{i}])
 end

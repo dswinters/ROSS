@@ -4,7 +4,7 @@ D = ross.deployments(ndep);
 matfile = [D.dirs.raw_adcp D.name '_adcp.mat'];
 fexist = exist(matfile,'file');
 fparts = strsplit(matfile,'/');
-flink = ['[[' fullfile('..',fparts{6:end}) ']]'];
+flink = fullfile('..',fparts{6:end});
 
 if ~fexist || ross.deployments(ndep).proc.adcp_raw2mat
     %% Load raw data
@@ -61,7 +61,7 @@ else
 end
 
 diary on
-disp(['- Raw ADCP .mat file: ' flink]);
+disp(sprintf('- [[%s][Raw ADCP .mat file]]',flink))
 disp('  - This file contains data from the following binary file(s):')
 for i = 1:length(A(1).files)
     disp(sprintf('  - %s',A(1).files{i}));

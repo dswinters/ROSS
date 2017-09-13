@@ -7,7 +7,7 @@ f_in = D.files.gps;
 
 matfile = [D.dirs.raw_gps D.name '_gps.mat'];
 fparts = strsplit(matfile,'/');
-flink = ['[[' fullfile('..',fparts{6:end}) ']]'];
+flink = fullfile('..',fparts{6:end});
 if ~exist(matfile,'file') || D.proc.gps_raw2mat
     gps = nav_read(f_in,prefix);
     save(matfile,'-struct','gps');
@@ -123,7 +123,7 @@ end
                                    gps.GPRMC.dn);
 
 diary on
-disp(['- Raw GPS .mat file: ', flink])
+disp(sprintf('- [[%s][Raw GPS .mat file]]', flink))
 disp('  - This file contains data from the following GPS log file(s):')
 for i = 1:length(gps.files)
     disp(sprintf('  - %s',gps.files{i}));

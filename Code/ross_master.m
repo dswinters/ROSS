@@ -66,7 +66,7 @@ for k = 1:length(trip.kayaks)
         eval(['!rm ' logfile])
         diary(logfile);
     end
-    disp(sprintf('\n** Deployment Processing: %s ',trip.kayaks{k}))
+    disp(sprintf('* Deployment Processing: %s ',trip.kayaks{k}))
     for ndep = 1:length(Ross(k).deployments)
         Ross(k) = ross_proc_deployment(Ross(k),ndep);
     end

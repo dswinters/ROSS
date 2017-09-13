@@ -59,7 +59,9 @@ for i = 1:length(trip.kayaks)
             Ross(i).deployments(d) = dep;
         end
         % Fill default options
-        Ross(i).deployments = ross_fill_defaults(Ross(i).deployments,ross_defaults());
+        if ~isempty(Ross(i).deployments)
+            Ross(i).deployments = ross_fill_defaults(Ross(i).deployments,ross_defaults());
+        end
     end
 end
 

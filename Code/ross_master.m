@@ -3,7 +3,7 @@ function ross_master(cruise_name)
 addpath(cruise_name); % add cruise-specific functions to path
 addpath('figures/');  % add figure functions to path
 
-%% Trip-specific initial setup
+%% Cruise-specific initial setup
 cruise_config_func = ['config_' cruise_name];
 [cruise, deployments] = feval(cruise_config_func);
 

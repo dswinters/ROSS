@@ -30,11 +30,17 @@ for i = 1:length(trip.kayaks)
     Ross(i).dirs.raw              = fullfile(dirs.data,subdir,'raw/');
     for d = 1:length(Ross(i).deployments)
         dep = Ross(i).deployments(d);
-        files = dir([dep.dirs.raw_gps, dep.files.gps]);    % GPS files
-        dep.files.gps = strcat(dep.dirs.raw_gps, {files.name});
-        files = dir([dep.dirs.raw_adcp, dep.files.adcp]);  % ADCP files
-        dep.files.adcp = strcat(dep.dirs.raw_adcp, {files.name});
-        dep.files.map = fullfile(dirs.maps,dep.files.map); % Map file
+        % Make full data paths
+        dep.dirs.raw_gps  = [Ross(i).dirs.raw, dep.dirs.raw_gps];
+        dep.dirs.raw_adcp = [Ross(i).dirs.raw, dep.dirs.raw_adcp];
+        % Find GPS & ADCP files
+        gps_files  = dir([dep.dirs.raw_gps, dep.files.gps]);
+        adcp_files = dir([dep.dirs.raw_adcp, dep.files.adcp]);
+        % Make full file paths
+        dep.files.gps  = strcat(dep.dirs.raw_gps, {gps_files.name});
+        dep.files.adcp = strcat(dep.dirs.raw_adcp, {adcp_files.name});
+        dep.files.map  = fullfile(dirs.maps,dep.files.map);
+        % Update deployment
         Ross(i).deployments(d) = dep;
     end
     % Fill default options
@@ -74,5 +80,4 @@ end
 f_out = fullfile(dirs.meta,[tripname '.mat']);
 save(f_out,'-struct','metadat')
 disp(['Saved ' f_out])
-
 

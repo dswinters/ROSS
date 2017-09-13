@@ -12,7 +12,6 @@
 
 function ross = ross_proc_deployment(ross,ndep)
 D = ross.deployments(ndep);
-beamnames = {'east_vel','north_vel','vert_vel','error_vel'};
 
 if checkfield(D.proc,'skip')
     disp('Skipped!')
@@ -40,13 +39,6 @@ end
 for ia = 1:length(adcp)
     [ross, adcp(ia)] = ross_proc_gps(ross,ndep,adcp(ia),gps);
 end
-
-% %% Save velocity data in beam coordinates (?)
-% if checkfield(D.proc,'save_beam')
-%     for i = 1:length(beamnames)
-%         adcp.beam_vel(:,i,:) = adcp.(beamnames{i});
-%     end
-% end
 
 %% Trim data
 for ia = 1:length(adcp)

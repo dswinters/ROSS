@@ -2,13 +2,14 @@ function defaults = ross_defaults();
 defaults = struct();
 
 % Plot options
-defaults.plot.vlim          = [0.3 0.3 0.3];
-defaults.plot.map.pos       = [963 708 723 630];
-defaults.plot.map.latlim    = [NaN NaN];
-defaults.plot.map.lonlim    = [NaN NaN];
-defaults.plot.map.nx        = 75;
-defaults.plot.map.ny        = 75;
-defaults.files.map = 'none';
+defaults.tlim            = [-inf inf];
+defaults.plot.vlim       = [0.3 0.3 0.3];
+defaults.plot.map.pos    = [963 708 723 630];
+defaults.plot.map.latlim = [NaN NaN];
+defaults.plot.map.lonlim = [NaN NaN];
+defaults.plot.map.nx     = 75;
+defaults.plot.map.ny     = 75;
+defaults.files.map       = 'none';
 defaults.files.coastline = 'none';
 
 % Figures
@@ -22,5 +23,4 @@ defaults.plot.make_figure.coastline_map = false;
 defaults.proc.ship_vel_removal = 'GPS';
 defaults.proc.adcp_raw2mat = false;
 defaults.proc.gps_raw2mat = false;
-
 

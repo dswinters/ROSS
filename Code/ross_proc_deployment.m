@@ -13,6 +13,15 @@
 function ross = ross_proc_deployment(ross,ndep)
 D = ross.deployments(ndep);
 
+%% Set up logging on first deployment
+if ndep == 1
+    logfile = fullfile(ross.dirs.logs, [ross.trip,'_',lower(ross.name),'.org']);
+    eval(['!rm ' logfile])
+    diary(logfile);
+    disp(sprintf('* Deployment Processing: %s ',ross.name))
+    diary off
+end
+
 if checkfield(D.proc,'skip')
     disp(sprintf('\n** %d. %s', ndep, D.name));
     disp('Skipped!')

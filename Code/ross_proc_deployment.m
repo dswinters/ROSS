@@ -1,11 +1,11 @@
 %% ross_proc_deployment.m
-% Usage: ross = ross_proc_deployment(config,ndep)
+% Usage: config = ross_proc_deployment(config,ndep)
 % Description: Save a structure with processed ROSS deployment data
 %              using the given ROSS control structure and deployment
 %              number.
-% Inputs: ross - one entry of ross control structure from ross_master.m
+% Inputs: config - one entry of ross config structure from ross_master.m
 %         ndep - a deployment number
-% Outputs: ross - modified ross control structure
+% Outputs: config - modified ross confign structure
 % 
 % Author: Dylan Winters
 % Created: 2016-10-14
@@ -42,7 +42,7 @@ end
 %% Deployment-specific post-load function
 fn = [config.cruise.name '_proc_post_load'];
 if exist(fn) == 2
-    [ross adcp] = feval(fn,ross,ndep,adcp);
+    [config adcp] = feval(fn,config,ndep,adcp);
 end
 
 %% Process GPS data for ADCP data
@@ -51,7 +51,7 @@ end
 %  2. Pixhawk logs (using differential heading estimate)
 [adcp(:).gps] = deal(struct());
 for ia = 1:length(adcp)
-    [ross, adcp(ia)] = ross_proc_gps(config,ndep,adcp(ia),gps);
+    [config, adcp(ia)] = ross_proc_gps(config,ndep,adcp(ia),gps);
 end
 
 %% Trim data
@@ -62,7 +62,7 @@ end
 %% Deployment-specific pre-rotation processing
 fn = [config.cruise.name '_proc_pre_rotation'];
 if exist(fn) == 2
-    [ross adcp] = feval(fn,ross,ndep,adcp);
+    [config adcp] = feval(fn,config,ndep,adcp);
 end
 
 %% Coordinate transformations
@@ -116,7 +116,7 @@ end
 %% Deployment-specific post-rotation processing
 fn = [config.cruise.name '_proc_post_rotation'];
 if exist(fn) == 2
-    [ross adcp] = feval(fn,ross,ndep,adcp);
+    [config adcp] = feval(fn,config,ndep,adcp);
 end
 
 %% Additional filters
@@ -161,5 +161,5 @@ diary off
 
 %% Make figures
 close all
-ross = ross_figures(config,ndep);
+config = ross_figures(config,ndep);
 

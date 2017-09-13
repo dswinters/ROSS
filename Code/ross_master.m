@@ -9,6 +9,5 @@ cruise_config_func = ['config_' cruise_name];
 
 %% Processing setup
 Config = ross_setup(cruise,deployments);    % filepaths and directories
-Config = ross_post_setup(Config);           % trip-specific additional setup
 Config = ross_proc_all_deployments(Config); % Process deployments!
 

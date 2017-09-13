@@ -199,13 +199,6 @@ text(0.5,1,{dep.name;ttext},'fontsize',14,...
      'horizontalalignment','center',...
      'interpreter','none');
 
-%% Save figure
-fout = [dep.fig_dir 'summary.jpg'];
-print('-djpeg90','-r300',fout);
-fparts = strsplit(fout,'/');
-flink = fullfile('..',fparts{6:end});
-disp(['[[' flink ']]'])
-
 %% Restore defaults
 set(0,'defaultaxesfontsize',defaultaxesfontsize);
 

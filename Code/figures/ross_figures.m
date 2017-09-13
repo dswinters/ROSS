@@ -17,6 +17,13 @@ figtypes = {'summary';
             'coastline_map'};
 for i = 1:length(figtypes)
     if dep.plot.make_figure.(figtypes{i}) | dep.plot.make_figure.all
-        ross = feval(['ross_figure_' figtypes{i}],ross,ndep);
+        % Draw figure
+        [ross, hfig] = feval(['ross_figure_' figtypes{i}],ross,ndep);
+        % Save figure
+        fout = [dep.dirs.figs figtypes{i} '.jpg'];
+        print(hfig,'-djpeg90','-r300',fout);
+        fparts = strsplit(fout,'/');
+        flink = fullfile('..',fparts{6:end});
+        disp(['[[' flink ']]'])
     end
 end

@@ -34,9 +34,10 @@ for i = 1:length(trip.kayaks)
     end
     for d = 1:length(Ross(i).deployments)
         dep = Ross(i).deployments(d);
-        % Make full data paths
+        % Make full paths
         dep.dirs.raw_gps  = [Ross(i).dirs.raw, dep.dirs.raw_gps];
         dep.dirs.raw_adcp = [Ross(i).dirs.raw, dep.dirs.raw_adcp];
+        dep.dirs.figs     = [Ross(i).dirs.figs, dep.name '/'];
         % Find GPS & ADCP files
         gps_files  = dir([dep.dirs.raw_gps, dep.files.gps]);
         adcp_files = dir([dep.dirs.raw_adcp, dep.files.adcp]);

@@ -27,11 +27,3 @@ set(ax,'DataAspectRatio',[1 yx 1],...
 xlabel('Longitude (deg E)')
 ylabel('Latitude (deg N)')
 
-%% Save figure
-fout = [dep.fig_dir 'coastline_map.jpg'];
-print('-djpeg90','-r300',fout);
-fparts = strsplit(fout,'/');
-flink = fullfile('..',fparts{6:end});
-disp(['[[' flink ']]'])
-
-

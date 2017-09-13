@@ -23,8 +23,18 @@ defaults.proc.use_3beam = false;
 defaults.proc.adcp_raw2mat = true;
 
 % Deployments here
+%--------------------------------------------------------%
+dep = dep+1;
+swankie(dep).name          = 'swankie_decktest_20170912';
+swankie(dep).dirs.raw_gps  = 'decktest_20170912/GPS/';
+swankie(dep).dirs.raw_adcp = 'decktest_20170912/ADCP/';
+swankie(dep).files.adcp    = '*timestamped*.bin';
+swankie(dep).files.gps     = '*.log';
+swankie(dep).plot.ylim     = [0 200];
+
 
 % Fill defaults
 if ~isempty(swankie)
     swankie = ross_fill_defaults(swankie,defaults);
 end
+

@@ -34,3 +34,8 @@ swankie = leconte_2017_sep_swankie();
 % Combine deployment structures into cell array
 deployments = {casey, rosie, swankie};
 
+for i = 1:length(deployments)
+    if ~isempty(deployments{i})
+        deployments{i} = ross_fill_defaults(deployments{i},trip_defaults);
+    end
+end

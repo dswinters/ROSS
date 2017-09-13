@@ -1,14 +1,14 @@
-function ross_master(tripname)
+function ross_master(cruise_name)
 
-addpath(tripname);   % add trip-specific functions to path
-addpath('figures/'); % add figure functions to path
+addpath(cruise_name); % add cruise-specific functions to path
+addpath('figures/');  % add figure functions to path
 
 %% Trip-specific initial setup
-fn = [tripname '_deployments'];
-[trip, deployments] = feval(fn);
+cruise_config_func = ['config_' cruise_name];
+[cruise, deployments] = feval(cruise_config_func);
 
 %% Processing setup
-Ross = ross_setup(trip,deployments);    % filepaths and directories
-Ross = ross_post_setup(Ross,trip);      % trip-specific additional setup
-Ross = ross_proc_all_deployments(Ross); % Process deployments!
+Config = ross_setup(cruise,deployments);    % filepaths and directories
+Config = ross_post_setup(Config);           % trip-specific additional setup
+Config = ross_proc_all_deployments(Config); % Process deployments!
 

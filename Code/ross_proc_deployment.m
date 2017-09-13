@@ -1,5 +1,5 @@
 %% ross_proc_deployment.m
-% Usage: ross = ross_proc_deployment(ross,ndep)
+% Usage: ross = ross_proc_deployment(config,ndep)
 % Description: Save a structure with processed ROSS deployment data
 %              using the given ROSS control structure and deployment
 %              number.
@@ -10,15 +10,15 @@
 % Author: Dylan Winters
 % Created: 2016-10-14
 
-function ross = ross_proc_deployment(ross,ndep)
-D = ross.deployments(ndep);
+function config = ross_proc_deployment(config,ndep)
+D = config.deployments(ndep);
 
 %% Set up logging on first deployment
 if ndep == 1
-    logfile = fullfile(ross.dirs.logs, [ross.trip,'_',lower(ross.name),'.org']);
+    logfile = fullfile(config.dirs.logs, [config.cruise.name,'_',lower(config.name),'.org']);
     eval(['!rm ' logfile])
     diary(logfile);
-    disp(sprintf('* Deployment Processing: %s ',ross.name))
+    disp(sprintf('* Deployment Processing: %s ',config.name))
     diary off
 end
 
@@ -33,14 +33,14 @@ disp(sprintf('\n** %d. %s', ndep, D.name));
 diary off
 
 %% Load ADCP data, load & pre-process GPS data
-adcp = ross_load_adcp(ross,ndep);
-gps = ross_load_gps(ross,ndep);
+adcp = ross_load_adcp(config,ndep);
+gps = ross_load_gps(config,ndep);
 if ~isfield(adcp,'info')
     [adcp(:).info] = deal({});
 end
 
 %% Deployment-specific post-load function
-fn = [ross.trip '_proc_post_load'];
+fn = [config.cruise.name '_proc_post_load'];
 if exist(fn) == 2
     [ross adcp] = feval(fn,ross,ndep,adcp);
 end
@@ -51,7 +51,7 @@ end
 %  2. Pixhawk logs (using differential heading estimate)
 [adcp(:).gps] = deal(struct());
 for ia = 1:length(adcp)
-    [ross, adcp(ia)] = ross_proc_gps(ross,ndep,adcp(ia),gps);
+    [ross, adcp(ia)] = ross_proc_gps(config,ndep,adcp(ia),gps);
 end
 
 %% Trim data
@@ -60,7 +60,7 @@ for ia = 1:length(adcp)
 end
 
 %% Deployment-specific pre-rotation processing
-fn = [ross.trip '_proc_pre_rotation'];
+fn = [config.cruise.name '_proc_pre_rotation'];
 if exist(fn) == 2
     [ross adcp] = feval(fn,ross,ndep,adcp);
 end
@@ -114,7 +114,7 @@ for ia = 1:length(adcp)
 end
 
 %% Deployment-specific post-rotation processing
-fn = [ross.trip '_proc_post_rotation'];
+fn = [config.cruise.name '_proc_post_rotation'];
 if exist(fn) == 2
     [ross adcp] = feval(fn,ross,ndep,adcp);
 end
@@ -143,12 +143,12 @@ if isfield(D.proc,'bad');
 end
 
 %% Save deployment file
-dirout = ross.dirs.proc.deployments;
+dirout = config.dirs.proc.deployments;
 if ~exist(dirout,'dir'); mkdir(dirout); end
 fout = [D.name '.mat'];
-ross.deployments(ndep).files.final = [dirout fout];
-save(ross.deployments(ndep).files.final,'adcp')
-fparts = strsplit(ross.deployments(ndep).files.final,'/');
+config.deployments(ndep).files.final = [dirout fout];
+save(config.deployments(ndep).files.final,'adcp')
+fparts = strsplit(config.deployments(ndep).files.final,'/');
 flink = fullfile('..',fparts{6:end});
 
 diary on
@@ -161,5 +161,5 @@ diary off
 
 %% Make figures
 close all
-ross = ross_figures(ross,ndep);
+ross = ross_figures(config,ndep);
 

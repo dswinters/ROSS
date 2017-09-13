@@ -25,7 +25,7 @@ defaults.proc.adcp_raw2mat = true;
 %--------------------------------------------------------%
 % Testing on the deck - no useable data!
 dep = dep+1;
-swankie(dep).proc.skip = true;
+% swankie(dep).proc.skip = true;
 swankie(dep).name          = 'swankie_decktest_20170912';
 swankie(dep).dirs.raw_gps  = 'decktest_20170912/GPS/';
 swankie(dep).dirs.raw_adcp = 'decktest_20170912/ADCP/';

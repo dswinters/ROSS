@@ -1,8 +1,8 @@
 %% ross_setup.m
-% Usage: Ross = ross_setup(trip,deployments)
+% Usage: Ross = ross_setup(cruise,deployments)
 % Description: This function does all the heavy lifting for determining full
 %              paths to files that will be loaded or saved during processing.
-% Inputs: trip,deployments - Trip and deployment information from the trip-
+% Inputs: cruise,deployments - Cruise and deployment information from the cruise-
 %         specific deployment file.
 % Outputs: Ross - The master control structure containing filepaths and 
 %          processing instructions.
@@ -10,7 +10,7 @@
 % Author: Dylan Winters
 % Created: 2017-09-13
 
-function Ross = ross_setup(trip,deployments)
+function Ross = ross_setup(cruise,deployments)
 
 Dirs = struct();
 Dirs.base = fullfile(getenv('HOME'),'OSU/ROSS/');
@@ -20,13 +20,13 @@ Dirs.maps = fullfile(Dirs.base, 'Maps/');
 Dirs.logs = fullfile(Dirs.base, 'org/');
 Dirs.meta = fullfile(Dirs.base, 'Metadata/');
 
-for i = 1:length(trip.kayaks)
+for i = 1:length(cruise.kayaks)
     Ross(i).dirs        = Dirs;
-    Ross(i).name        = trip.kayaks{i};
-    Ross(i).trip        = trip.name;
+    Ross(i).name        = cruise.kayaks{i};
+    Ross(i).cruise      = cruise;
     Ross(i).deployments = deployments{i};
     %
-    subdir = fullfile(trip.name, trip.kayaks{i}, '/');
+    subdir = fullfile(cruise.name, cruise.kayaks{i}, '/');
     Ross(i).dirs.figs             = fullfile(Dirs.figs, subdir);
     Ross(i).dirs.proc.deployments = fullfile(Dirs.data, subdir, 'processed/');
     Ross(i).dirs.raw              = fullfile(Dirs.data,subdir,'raw/');

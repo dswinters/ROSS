@@ -61,8 +61,8 @@ else
 end
 
 diary on
-disp(sprintf('- [[%s][Raw ADCP .mat file]]',flink))
-disp('  - This file contains data from the following binary file(s):')
+fprintf('\n- [[%s][Raw ADCP .mat file]]. ',flink)
+fprintf('This file contains data from the following binary file(s):\n')
 for i = 1:length(A(1).files)
     disp(sprintf('  - %s',A(1).files{i}));
 end
@@ -74,20 +74,20 @@ flds = {'beam_freq'  , 'Freq'          , '%d';
         'n_cells'    , 'Depth Cells'   , '%d';
         'cell_size'  , 'Cell Size'     , '%.2f';
         'blank'      , 'Blank Distance', '%.2f'};
-disp('- ADCP configuration(s):')
-fprintf('|')
+fprintf('\n- ADCP configuration(s):\n')
+fprintf('  |')
 for i = 1:length(flds)
     fprintf([flds{i,2} '|']);
 end
 fprintf('\n')
-fprintf('|')
+fprintf('  |')
 for i = 1:length(flds)-1
     fprintf('-+-')
 end
 fprintf('|\n')
 
 for ia = 1:length(A)
-    fprintf('|')
+    fprintf('  |')
     for i = 1:length(flds)
         str = sprintf(flds{i,3},...
                       A(ia).config.(flds{i,1}));
@@ -95,7 +95,6 @@ for ia = 1:length(A)
     end
     fprintf('\n')
 end
-fprintf('\n');
 diary off
 
 end

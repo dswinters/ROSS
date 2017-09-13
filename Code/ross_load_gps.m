@@ -123,8 +123,8 @@ end
                                    gps.GPRMC.dn);
 
 diary on
-disp(sprintf('- [[%s][Raw GPS .mat file]]', flink))
-disp('  - This file contains data from the following GPS log file(s):')
+fprintf('\n- [[%s][Raw GPS .mat file]]. ', flink)
+fprintf('This file contains data from the following GPS log file(s):\n')
 for i = 1:length(gps.files)
     disp(sprintf('  - %s',gps.files{i}));
 end

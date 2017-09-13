@@ -1,4 +1,4 @@
-function ross = ross_figure_coastline_map(ross,ndep)
+function [ross hfig] = ross_figure_coastline_map(ross,ndep)
 
 dep = ross.deployments(ndep);
 if strcmp(dep.files.coastline(end-3:end),'none')

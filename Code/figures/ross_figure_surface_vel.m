@@ -1,4 +1,4 @@
-function ross = ross_figure_surface_vel(ross,ndep)
+function [ross, hfig] = ross_figure_surface_vel(ross,ndep)
 
 dep = ross.deployments(ndep);
 dat = load(dep.files.final);
@@ -36,7 +36,7 @@ else
     map.I = uint8(0.7*255*ones(2,2,3));
 end
 
-figure('position',pos,'paperpositionmode','auto')
+hfig = figure('position',pos,'paperpositionmode','auto');
 ha_map = axes();
 m = mapshow(map.x,map.y,map.I); hold on
 xlim(map.x([1 end]))

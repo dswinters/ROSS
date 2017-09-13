@@ -1,4 +1,4 @@
-function ross = ross_figure_echo_intens(ross,ndep)
+function [ross, hfig] = ross_figure_echo_intens(ross,ndep)
 
 load redblue
 dep = ross.deployments(ndep);
@@ -18,9 +18,9 @@ defaultaxesfontsize = get(0,'defaultaxesfontsize');
 set(0,'defaultaxesfontsize',axesfontsize);
 
 %% Initialize figure & axes
-figure('position',[758 5 591 823],...
-       'paperpositionmode','auto',...
-       'inverthardcopy','off');
+hfig = figure('position',[758 5 591 823],...
+              'paperpositionmode','auto',...
+              'inverthardcopy','off');
 bgcol = 0.7*[1 1 1];
 size_small = 0.33; % height of small panels (relative to full plots)
 np_small = 4; % number of small panels (location, ROSS velocity, heading)

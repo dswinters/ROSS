@@ -10,13 +10,9 @@ dirout = [ross.dirs.figs dep.name '/'];
 if ~exist(dirout); mkdir(dirout); end
 ross.deployments(ndep).fig_dir = dirout;
 
-figtypes = {'summary';
-            'surface_vel';
-            'echo_intens';
-            'corr'
-            'coastline_map'};
+figtypes = fields(dep.plot.make_figure);
 for i = 1:length(figtypes)
-    if dep.plot.make_figure.(figtypes{i}) | dep.plot.make_figure.all
+    if dep.plot.make_figure.(figtypes{i})
         % Draw figure
         [ross, hfig] = feval(['ross_figure_' figtypes{i}],ross,ndep);
         % Save figure

@@ -12,7 +12,7 @@ hfig = figure('position',[39 357 738 460],'paperpositionmode','auto');
 
 ax = axes('color',0.3*[1 1 1]);
 p = patch(cl.lon,cl.lat,[0.7 0.9 1]); hold on
-s = scatter(adcp.gps.lon,adcp.gps.lat,15,adcp.gps.dn)
+s = scatter(adcp.gps.lon,adcp.gps.lat,15,adcp.gps.dn);
 set(s,'marker','.')
 plot(adcp.gps.lon,adcp.gps.lat,'color',[0 0 0 0.5])
 

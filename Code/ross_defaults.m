@@ -8,15 +8,13 @@ defaults.plot.map.latlim    = [NaN NaN];
 defaults.plot.map.lonlim    = [NaN NaN];
 defaults.plot.map.nx        = 75;
 defaults.plot.map.ny        = 75;
-defaults.plot.map.coastline = false;
 defaults.files.map = 'none';
 defaults.files.coastline = 'none';
 
-% Make figures
-defaults.plot.make_figure.all           = false;
+% Figures
 defaults.plot.make_figure.summary       = true;
 defaults.plot.make_figure.surface_vel   = false;
-defaults.plot.make_figure.echo_intens   = true;
+defaults.plot.make_figure.echo_intens   = false;
 defaults.plot.make_figure.corr          = false;
 defaults.plot.make_figure.coastline_map = false;
 

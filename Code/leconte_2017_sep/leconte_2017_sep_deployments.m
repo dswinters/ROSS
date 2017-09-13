@@ -27,6 +27,11 @@ trip_defaults.plot.ylim             = [0 200];
 trip_defaults.proc.adcp_raw2mat     = true;
 trip_defaults.proc.gps_raw2mat      = true;
 
+% Figures
+trip_defaults.plot.make_figures.summary       = true;
+% trip_defaults.plot.make_figures.echo_intens   = true;
+% trip_defaults.plot.make_figures.corr          = true;
+trip_defaults.plot.make_figures.coastline_map = true;
 
 % Get deployments
 casey = leconte_2017_sep_casey();

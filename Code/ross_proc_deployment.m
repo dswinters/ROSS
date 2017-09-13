@@ -5,7 +5,7 @@
 %              number.
 % Inputs: ross - one entry of ross control structure from ross_master.m
 %         ndep - a deployment number
-% Outputs: fout - path to processed data file
+% Outputs: ross - modified ross control structure
 % 
 % Author: Dylan Winters
 % Created: 2016-10-14
@@ -63,16 +63,6 @@ for ia = 1:length(adcp)
         ve(ia) = adcp_beam2earth(adcp(ia));
     end
 end
-
-% %% Save velocity data in ship coordinates (?)
-% if checkfield(D.proc,'save_ship')
-%     htmp = adcp.heading;
-%     adcp.heading = zeros(size(adcp.heading));
-%     vs = adcp_beam2earth(adcp);
-%     adcp.heading = htmp;
-%     adcp.vel_starboard = vs.east_vel;
-%     adcp.vel_forward = vs.north_vel;
-% end
 
 %% Calculate ship speed from BT or GPS
 mes = ['Ship velocity corrected using '];

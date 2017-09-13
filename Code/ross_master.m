@@ -24,44 +24,22 @@ for i = 1:length(trip.kayaks)
     Ross(i).trip        = trip.name;
     Ross(i).deployments = deployments{i};
     %
-    subdir              = fullfile(trip.name, trip.kayaks{i}, '/');
-    Ross(i).dirs.figs   = fullfile(dirs.figs, subdir);
-
-    % By default, look for data in:
-    %
-    % ADCP: ROSS/Data/<TRIP>/<KAYAK>/raw/<DIR_RAW>/ADCP/
-    % GPS: ROSS/Data/<TRIP>/<KAYAK>/raw/<DIR_RAW>/GPS/
-    %
-    % The string provided in the deployment's "files.gps" and "files.adcp"
-    % fields are used as matching criteria for MATLAB's "dir" function within
-    % these folders. If raw data are not organized in this way, use a
-    % trip-specific file finding function.
-    if exist(fullfile(dirs.base,'Code',trip.name,[trip.name '_find_files.m']),'file') == 2
-        % TODO: implement this
-    else
-        Ross(i).dirs.proc.deployments = fullfile(dirs.data, subdir, 'processed/');
-        Ross(i).dirs.raw = fullfile(dirs.data,subdir,'raw/');
-        for d = 1:length(Ross(i).deployments)
-            dep = Ross(i).deployments(d);
-            dep.dirs.raw_gps  = ...
-                fullfile(Ross(i).dirs.raw, dep.dirs.raw, 'GPS/');
-            dep.dirs.raw_adcp = ...
-                fullfile(Ross(i).dirs.raw, dep.dirs.raw, 'ADCP/');
-            % GPS files
-            files = dir([dep.dirs.raw_gps, dep.files.gps]);
-            dep.files.gps = strcat(dep.dirs.raw_gps, {files.name});
-            % ADCP files
-            files = dir([dep.dirs.raw_adcp, dep.files.adcp]);
-            dep.files.adcp = strcat(dep.dirs.raw_adcp, {files.name});
-            % Map file
-            dep.files.map = fullfile(dirs.maps,dep.files.map);
-            % update deployment structure
-            Ross(i).deployments(d) = dep;
-        end
-        % Fill default options
-        if ~isempty(Ross(i).deployments)
-            Ross(i).deployments = ross_fill_defaults(Ross(i).deployments,ross_defaults());
-        end
+    subdir = fullfile(trip.name, trip.kayaks{i}, '/');
+    Ross(i).dirs.figs             = fullfile(dirs.figs, subdir);
+    Ross(i).dirs.proc.deployments = fullfile(dirs.data, subdir, 'processed/');
+    Ross(i).dirs.raw              = fullfile(dirs.data,subdir,'raw/');
+    for d = 1:length(Ross(i).deployments)
+        dep = Ross(i).deployments(d);
+        files = dir([dep.dirs.raw_gps, dep.files.gps]);    % GPS files
+        dep.files.gps = strcat(dep.dirs.raw_gps, {files.name});
+        files = dir([dep.dirs.raw_adcp, dep.files.adcp]);  % ADCP files
+        dep.files.adcp = strcat(dep.dirs.raw_adcp, {files.name});
+        dep.files.map = fullfile(dirs.maps,dep.files.map); % Map file
+        Ross(i).deployments(d) = dep;
+    end
+    % Fill default options
+    if ~isempty(Ross(i).deployments)
+        Ross(i).deployments = ross_fill_defaults(Ross(i).deployments,ross_defaults());
     end
 end
 

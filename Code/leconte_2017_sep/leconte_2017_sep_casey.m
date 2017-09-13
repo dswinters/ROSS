@@ -1,15 +1,16 @@
-function swankie = leconte_2017_sep_casey()
+function casey = leconte_2017_sep_casey()
 %--------------------------------------------------------%
 % ADCP orientation                                       %
 %--------------------------------------------------------%
 %        FORWARD
 %  1   3    ^
-%    5      |--> STARBOARD
+%    x      |--> STARBOARD
 %  4   2   
+casey = [];
 dep = 0;
 
 %--------------------------------------------------------%
-% Default deployment options                             %
+% Default kayak options                                  %
 %--------------------------------------------------------%
 defaults.proc.heading_offset = 45;
 defaults.proc.adcp_load_function = 'adcp_parse';
@@ -24,4 +25,7 @@ defaults.proc.adcp_raw2mat = true;
 % Deployments here
 
 
-casey = ross_fill_defaults(casey,defaults);
+% Fill defaults
+if ~isempty(casey)
+    casey = ross_fill_defaults(casey,defaults);
+end

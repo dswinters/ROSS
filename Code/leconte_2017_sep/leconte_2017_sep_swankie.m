@@ -6,10 +6,11 @@ function swankie = leconte_2017_sep_swankie()
 %  1   3    ^
 %    5      |--> STARBOARD
 %  4   2   
+swankie = [];
 dep = 0;
 
 %--------------------------------------------------------%
-% Default deployment options                             %
+% Default kayak options                                  %
 %--------------------------------------------------------%
 defaults.proc.heading_offset = 45;
 defaults.proc.adcp_load_function = 'adcp_parse';
@@ -23,4 +24,7 @@ defaults.proc.adcp_raw2mat = true;
 
 % Deployments here
 
-swankie = ross_fill_defaults(swankie,defaults);
+% Fill defaults
+if ~isempty(swankie)
+    swankie = ross_fill_defaults(swankie,defaults);
+end

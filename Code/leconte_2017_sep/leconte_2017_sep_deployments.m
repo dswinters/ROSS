@@ -5,7 +5,7 @@ function [trip deployments] = leconte_2017_sep_deployments()
 %========================================================
 trip = struct();
 trip.name = 'leconte_2017_sep';
-trip.kayaks = {'Rosie','Swankie'};
+trip.kayaks = {'Casey','Rosie','Swankie'};
 
 %========================================================
 % Define some filters
@@ -16,22 +16,21 @@ filt_rotmax3   = newfilt('rotmax',3);
 notrim = newfilt('none',[]);
 
 %========================================================
-% Processing options
+% Trip default options
 %========================================================
-opts.proc.skip             = false;
-opts.proc.trim_methods(1)  = notrim;
-opts.proc.filters(1)       = notrim;
-opts.plot.ylim             = [0 200];
-opts.proc.adcp_raw2mat     = true;
-opts.proc.gps_raw2mat      = true;
+trip_defaults.map                   = 'leconte_terminus';
+trip_defaults.proc.skip             = false;
+trip_defaults.proc.trim_methods(1)  = notrim;
+trip_defaults.proc.filters(1)       = notrim;
+trip_defaults.plot.ylim             = [0 200];
+trip_defaults.proc.adcp_raw2mat     = true;
+trip_defaults.proc.gps_raw2mat      = true;
 
-% rosie = leconte_2017_sep_rosie();
-% rosie = ross_fill_defaults(rosie,opts);
-
+% Get deployments
+casey = leconte_2017_sep_casey();
+rosie = leconte_2017_sep_rosie();
 swankie = leconte_2017_sep_swankie();
-swankie = ross_fill_defaults(swankie,opts);
-trip.kayaks = {'Swankie'};
-deployments = {swankie};
 
+% Combine deployment structures into cell array
+deployments = {casey, rosie, swankie};
 
-% deployments = {rosie, swankie};

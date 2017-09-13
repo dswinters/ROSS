@@ -6,10 +6,11 @@ function rosie = leconte_2017_sep_rosie()
 %  4   1    ^
 %    x      |--> STARBOARD
 %  2   3  
+rosie = [];
 dep = 0;
 
 %--------------------------------------------------------%
-% Default deployment options                             %
+% Default kayak options                                  %
 %--------------------------------------------------------%
 defaults.proc.heading_offset = 135;
 defaults.proc.adcp_load_function = 'adcp_parse';
@@ -22,4 +23,7 @@ defaults.proc.use_3beam = false;
 
 % Deployments here
 
-rosie = ross_fill_defaults(rosie,defaults);
+% Fill defaults
+if ~isempty(rosie)
+    rosie = ross_fill_defaults(rosie,defaults);
+end

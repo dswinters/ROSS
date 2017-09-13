@@ -1,4 +1,3 @@
-#+SETUPFILE: ~/git/org-html-themes/setup/theme-readtheorg.setup
 #+OPTIONS: ^:nil
 #+LATEX_HEADER: \usepackage[margin=0.5in]{geometry}
 #+TITLE: ROSS Data Processing

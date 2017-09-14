@@ -37,22 +37,23 @@ for i = 1:length(cruise.kayaks)
     for d = 1:length(Config(i).deployments)
         dep = Config(i).deployments(d);
         % Make full paths
-        dir_raw_gps  = [Config(i).dirs.raw, dep.dirs.raw_gps];
-        dir_raw_adcp = [Config(i).dirs.raw, dep.dirs.raw_adcp];
-        dep.dirs.figs     = [Config(i).dirs.figs, dep.name '/'];
+        dir_raw       = fullfile(Config(i).dirs.raw, dep.dirs.raw, '/');
+        dep.dirs.figs = fullfile(Config(i).dirs.figs, dep.name, '/');
         % Find GPS & ADCP files
-        gps_files  = dir([dir_raw_gps, dep.files.gps]);
-        adcp_files = dir([dir_raw_adcp, dep.files.adcp]);
+        gps_files    = dir(fullfile(dir_raw, dep.files.gps));
+        adcp_files   = dir(fullfile(dir_raw, dep.files.adcp));
+        dep.dirs.raw_gps  = [fileparts([dir_raw, dep.files.gps]) '/'];
+        dep.dirs.raw_adcp = [fileparts([dir_raw, dep.files.adcp]) '/'];
         % Make full file paths
-        dep.files.gps  = strcat(dir_raw_gps, {gps_files.name});
-        dep.files.adcp = strcat(dir_raw_adcp, {adcp_files.name});
+        dep.files.gps  = fullfile(dep.dirs.raw_gps, {gps_files.name});
+        dep.files.adcp = fullfile(dep.dirs.raw_adcp, {adcp_files.name});
         dep.files.map  = fullfile(Dirs.maps,dep.files.map);
         dep.files.coastline = fullfile(Dirs.maps,dep.files.coastline);
         % Full-deployment raw .mat files
-        parts = strsplit(dep.dirs.raw_gps,'/');
-        dep.files.gps_all  = [dir_raw_gps  lower(Config(i).name) '_' parts{1} '_gps.mat'];
-        parts = strsplit(dep.dirs.raw_adcp,'/');
-        dep.files.adcp_all = [dir_raw_adcp lower(Config(i).name) '_' parts{1} '_adcp.mat'];
+        dep.files.gps_all  = [dep.dirs.raw_gps,...
+                            lower(Config(i).name) '_' dep.dirs.raw '_gps.mat'];
+        dep.files.adcp_all = [dep.dirs.raw_adcp,...
+                            lower(Config(i).name) '_' dep.dirs.raw '_adcp.mat'];
         % Update deployment
         Config(i).deployments(d) = dep;
     end

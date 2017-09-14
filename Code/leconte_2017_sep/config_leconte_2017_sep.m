@@ -24,14 +24,16 @@ cruise_defaults.proc.skip             = false;
 cruise_defaults.proc.trim_methods(1)  = notrim;
 cruise_defaults.proc.filters(1)       = notrim;
 cruise_defaults.plot.ylim             = [0 200];
+cruise_defaults.plot.lonlim           = [-132.3768 -132.3470];
+cruise_defaults.plot.latlim           = [56.8228 56.8434];
 cruise_defaults.proc.adcp_raw2mat     = false;
 cruise_defaults.proc.gps_raw2mat      = false;
 
 % Figures
-cruise_defaults.plot.make_figure.summary       = false;
-cruise_defaults.plot.make_figure.echo_intens   = false;
-cruise_defaults.plot.make_figure.corr          = false;
-cruise_defaults.plot.make_figure.coastline_map = false;
+cruise_defaults.plot.make_figure.summary       = true;
+cruise_defaults.plot.make_figure.echo_intens   = true;
+cruise_defaults.plot.make_figure.corr          = true;
+cruise_defaults.plot.make_figure.coastline_map = true;
 cruise_defaults.plot.make_figure.surface_vel   = false;
 
 % Get deployments

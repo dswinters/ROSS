@@ -1,8 +1,8 @@
-function Ross = ross_proc_all_deployments(Ross)
+function Config = ross_proc_all_deployments(Config)
 
-for k = 1:length(Ross)
-    for ndep = 1:length(Ross(k).deployments)
-        Ross(k) = ross_proc_deployment(Ross(k),ndep);
+for k = 1:length(Config)
+    for ndep = 1:length(Config(k).deployments)
+        Config(k) = ross_proc_deployment(Config(k),ndep);
     end
 end
 

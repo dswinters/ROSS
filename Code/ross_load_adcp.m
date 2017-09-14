@@ -67,6 +67,7 @@ for ia = 1:length(A)
     A(ia) = adcp_index(A(ia),idx);
 end
 
+%% Print some information to the log file
 diary on
 fprintf('\n- [[%s][Raw ADCP .mat file]]. ',flink)
 fprintf('This file contains data from the following binary file(s):\n')
@@ -74,7 +75,6 @@ for i = 1:length(A(1).files)
     disp(sprintf('  - %s',A(1).files{i}));
 end
 
-%% Print some information to the log file
 flds = {'beam_freq'  , 'Freq'          , '%d';
         'n_beams'    , 'Beams'         , '%d';
         'beam_angle' , 'Beam Angle'    , '%d';

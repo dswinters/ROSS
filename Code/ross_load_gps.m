@@ -61,7 +61,7 @@ for i = 1:length(f_in)
     end
 end
 
-% Transform intra-file line numbers into cumulative inter-file line numbers
+%% Transform intra-file line numbers into cumulative inter-file line numbers
 lnum_max = 0;
 for i = 1:length(f_in)
     lnum_max = 0;
@@ -75,7 +75,7 @@ for i = 1:length(f_in)
     end
 end
 
-% make sure timestamps are year 20xx instead of 00xx
+%% make sure timestamps are year 20xx instead of 00xx
 idx = year(gps.GPRMC.dn) < 2000;
 gps.GPRMC.dn(idx) = gps.GPRMC.dn(idx) + datenum([2000 0 0 0 0 0]);
 
@@ -132,6 +132,8 @@ end
                                    gps.GPRMC.lon,...
                                    gps.GPRMC.dn);
 
+
+%% Write information to the log file
 diary on
 fprintf('\n- [[%s][Raw GPS .mat file]]. ', flink)
 fprintf('This file contains data from the following GPS log file(s):\n')
@@ -141,6 +143,7 @@ end
 fprintf('\n');
 diary off
 
+%% Create returned GPS structure
 gps = struct(...
     'dn'  , gps.GPRMC.dn  ,...
     'lat' , gps.GPRMC.lat ,...

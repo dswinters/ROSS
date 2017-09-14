@@ -1,0 +1,64 @@
+#+OPTIONS: ^:nil
+#+TITLE: ROSS Code
+
+* =ross_master=
+
+The outermost function, called directly by the user. Just give it a cruise name
+and watch it go!
+
+Calls:
+- =cruise_config=
+- =ross_setup=
+- =ross_proc_all_deployments=
+
+** =cruise_config=
+Locate and run the cruise-specific configuration file that initializes cruise
+and deployment options.
+
+** =ross_setup=
+Take the cruise-specific configuration information and create a config structure
+that contains paths to files and directories that will be used during
+processing. Any unspecified options default to those specified in
+- =ross_defaults()=.
+
+Calls:
+- =ross_fill_defaults=
+- =ross_defaults=
+- =ross_post_setup=
+
+** =ross_proc_all_deployments=
+A simple wrapper around =ross_proc_deployment= for processing all deployments
+from all kayaks.
+
+Calls:
+- =ross_proc_deployment=
+
+* =ross_proc_deployment=
+
+The main processing function that works on one deployment at a time. At a high
+level, this will:
+
+- Initialize the processing log file
+- Load or create =.mat= files containing raw data
+- Process ADCP data
+  - Trim data
+  - Rotate to Earth coordinates
+  - Remove vessel velocity
+  - Apply trip- and deployment-specific filtering & additional processing
+- Save the final processed data structure to a file
+- Create figures
+
+Calls:
+- =ross_load_adcp=
+- =ross_load_gps=
+- =ross_proc_gps=
+- =adcp_trim_data=
+- deployment-specific pre-rotation function
+- earth coordinate rotation function
+- deployment-specific post-rotation function
+- =adcp_filter=
+- =ross_figures=
+  
+Many of these function are self-explainatory. Some of these live in the
+~ocean_tools~ repository rather than the main ROSS repository.
+

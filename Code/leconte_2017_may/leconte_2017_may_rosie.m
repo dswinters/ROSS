@@ -9,6 +9,8 @@ rosie0.plot.ylim = [0 200];
 rosie0.proc.adcp_load_function = 'adcp_parse';
 rosie0.proc.ross_timestamps = 'post';
 rosie0.proc.skip = true;
+rosie0.files.adcp = 'ADCP/*timestamped*.bin';
+rosie0.files.gps  = 'GPS/*.log';
 dep=0;
 %--------------------------------------------------------%
 % Define some filters                                    %
@@ -22,25 +24,16 @@ rosie0.proc.trim_methods(1) = trim_ei_edge_b;
 
 %--------------------------------------------------------%
 dep = dep+1;
-rosie(dep).name       = 'rosie_deployment_201705100100';
-rosie(dep).dirs.raw_adcp = 'deployment_201705100100/ADCP/';
-rosie(dep).dirs.raw_gps = 'deployment_201705100100/GPS/';
-rosie(dep).files.adcp = '*timestamped*.bin';
-rosie(dep).files.gps  = '*.log';
+rosie(dep).name     = 'rosie_deployment_201705100100';
+rosie(dep).dirs.raw = 'deployment_201705100100';
 %--------------------------------------------------------%
 dep = dep+1;
-rosie(dep).name       = 'rosie_deployment_201705102330';
-rosie(dep).dirs.raw_adcp = 'deployment_201705102330/ADCP/';
-rosie(dep).dirs.raw_gps = 'deployment_201705102330/GPS/';
-rosie(dep).files.adcp = '*timestamped*.bin';
-rosie(dep).files.gps  = '*.log';
+rosie(dep).name     = 'rosie_deployment_201705102330';
+rosie(dep).dirs.raw = 'deployment_201705102330';
 %--------------------------------------------------------%
 dep = dep+1;
-rosie(dep).name       = 'rosie_deployment_201705130300';
-rosie(dep).dirs.raw_adcp = 'deployment_201705130300/ADCP/';
-rosie(dep).dirs.raw_gps = 'deployment_201705130300/GPS/';
-rosie(dep).files.adcp = '*timestamped*.bin';
-rosie(dep).files.gps  = '*.log';
+rosie(dep).name     = 'rosie_deployment_201705130300';
+rosie(dep).dirs.raw = 'deployment_201705130300';
 rosie(dep).proc.trim_methods = newfilt('none',[]);
 %--------------------------------------------------------%
 

@@ -32,6 +32,7 @@ cruise_defaults.plot.make_figure.summary       = true;
 cruise_defaults.plot.make_figure.echo_intens   = true;
 cruise_defaults.plot.make_figure.corr          = true;
 cruise_defaults.plot.make_figure.coastline_map = true;
+cruise_defaults.plot.make_figure.surface_vel   = true;
 
 % Get deployments
 casey = leconte_2017_sep_casey();

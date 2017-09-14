@@ -42,18 +42,18 @@ for i = 1:length(cruise.kayaks)
         % Find GPS & ADCP files
         gps_files    = dir(fullfile(dir_raw, dep.files.gps));
         adcp_files   = dir(fullfile(dir_raw, dep.files.adcp));
-        dep.dirs.raw_gps  = [fileparts([dir_raw, dep.files.gps]) '/'];
-        dep.dirs.raw_adcp = [fileparts([dir_raw, dep.files.adcp]) '/'];
+        dep.dirs.raw_gps  = [fileparts(dep.files.gps) '/'];
+        dep.dirs.raw_adcp = [fileparts(dep.files.adcp) '/'];
         % Make full file paths
-        dep.files.gps  = fullfile(dep.dirs.raw_gps, {gps_files.name});
-        dep.files.adcp = fullfile(dep.dirs.raw_adcp, {adcp_files.name});
+        dep.files.gps  = fullfile(dir_raw, dep.dirs.raw_gps, {gps_files.name});
+        dep.files.adcp = fullfile(dir_raw, dep.dirs.raw_adcp, {adcp_files.name});
         dep.files.map  = fullfile(Dirs.maps,dep.files.map);
         dep.files.coastline = fullfile(Dirs.maps,dep.files.coastline);
         % Full-deployment raw .mat files
-        dep.files.gps_all  = [dep.dirs.raw_gps,...
-                            lower(Config(i).name) '_' dep.dirs.raw '_gps.mat'];
-        dep.files.adcp_all = [dep.dirs.raw_adcp,...
-                            lower(Config(i).name) '_' dep.dirs.raw '_adcp.mat'];
+        dep.files.gps_all  = fullfile(dir_raw, dep.dirs.raw_gps, ...
+                                      [lower(Config(i).name) '_' dep.dirs.raw '_gps.mat']);
+        dep.files.adcp_all = fullfile(dir_raw, dep.dirs.raw_adcp, ...
+                                      [lower(Config(i).name) '_' dep.dirs.raw '_adcp.mat']);
         % Update deployment
         Config(i).deployments(d) = dep;
     end

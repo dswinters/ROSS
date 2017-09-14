@@ -20,7 +20,7 @@ defaults.plot.ylim = [0 200];
 defaults.plot.make_figure.coastline_map = true;
 defaults.proc.skip = false;
 defaults.proc.use_3beam = false;
-defaults.proc.adcp_raw2mat = true;
+defaults.proc.adcp_raw2mat = false;
 trim_corr_edge = struct('name','corr_edge','params','beam');
 defaults.proc.trim_methods(1) = trim_corr_edge;
 
@@ -46,6 +46,42 @@ swankie(dep).plot.ylim     = [0 200];
 swankie(dep).tlim = datenum([...
     '13-Sep-2017 14:03:47';
     '13-Sep-2017 17:01:19']);
+% Sections
+namefmt = [swankie(dep).name '_s%02d'];
+tlims = datenum(['13-Sep-2017 15:49:54';
+                 '13-Sep-2017 15:51:15';
+                 '13-Sep-2017 15:51:18';
+                 '13-Sep-2017 15:52:02';
+                 '13-Sep-2017 15:52:13';
+                 '13-Sep-2017 15:52:57';
+                 '13-Sep-2017 15:53:13';
+                 '13-Sep-2017 15:54:48';
+                 '13-Sep-2017 15:55:06';
+                 '13-Sep-2017 15:56:28';
+                 '13-Sep-2017 15:57:56';
+                 '13-Sep-2017 16:00:31';
+                 '13-Sep-2017 16:00:51';
+                 '13-Sep-2017 16:02:15';
+                 '13-Sep-2017 16:03:35';
+                 '13-Sep-2017 16:04:34';
+                 '13-Sep-2017 16:04:50';
+                 '13-Sep-2017 16:05:25';
+                 '13-Sep-2017 16:06:21';
+                 '13-Sep-2017 16:08:11';
+                 '13-Sep-2017 16:08:27';
+                 '13-Sep-2017 16:08:58';
+                 '13-Sep-2017 16:09:13';
+                 '13-Sep-2017 16:10:00';
+                 '13-Sep-2017 16:10:11';
+                 '13-Sep-2017 16:11:39';
+                 '13-Sep-2017 16:12:21';
+                 '13-Sep-2017 16:13:54';
+                 '13-Sep-2017 16:14:47';
+                 '13-Sep-2017 16:15:58';
+                 '13-Sep-2017 16:16:20';
+                 '13-Sep-2017 16:18:04']);
+[swankie,dep] = ross_deployment_sections(swankie,dep,tlims,namefmt);
+
 
 
 % Fill defaults

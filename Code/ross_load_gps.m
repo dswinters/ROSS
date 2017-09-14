@@ -2,19 +2,31 @@ function [gps] = ross_load_gps(ross,ndep)
 
 %% Load logged gps data
 D = ross.deployments(ndep);
+matfile = [D.dirs.raw_gps D.name '_gps.mat'];
 prefix = {'GPRMC','HEHDT','PASHR','GPGGA'};
 f_in = D.files.gps;
 
-matfile = [D.dirs.raw_gps D.name '_gps.mat'];
+% Check for a full-deployment .mat file
+depfolder = strsplit(matfile,'/');
+matfile_all = [ross.deployments(ndep).dirs.raw_gps ...
+               lower(ross.name) '_' depfolder{end-2} '_gps.mat'];
+fexist_all = exist(matfile_all,'file');
+
+% Check for a sub-deployment .mat file
+fexist = exist(matfile,'file');
 fparts = strsplit(matfile,'/');
 flink = fullfile('..',fparts{6:end});
-if ~exist(matfile,'file') || D.proc.gps_raw2mat
+
+if fexist_all && ~D.proc.gps_raw2mat
+    gps = load(matfile_all);
+    disp(['% Loaded ' matfile_all]);
+elseif fexist && ~D.proc.gps_raw2mat
+    gps = load(matfile);
+    disp(['% Loaded ' matfile]);
+else
     gps = nav_read(f_in,prefix);
     save(matfile,'-struct','gps');
     disp(['% Saved ' flink]);
-else
-    gps = load(matfile);
-    disp(['% Loaded ' flink]);
 end
 
 %% Make sure GPRMC timestamps are unique

@@ -2,11 +2,27 @@ function A = ross_load_adcp(ross,ndep)
 
 D = ross.deployments(ndep);
 matfile = [D.dirs.raw_adcp D.name '_adcp.mat'];
+
+% Check for a full-deployment .mat file
+depfolder = strsplit(matfile,'/');
+matfile_all = [ross.deployments(ndep).dirs.raw_adcp ...
+               lower(ross.name) '_' depfolder{end-2} '_adcp.mat'];
+fexist_all = exist(matfile_all,'file');
+
+% Check for a sub-deployment .mat file
 fexist = exist(matfile,'file');
 fparts = strsplit(matfile,'/');
 flink = fullfile('..',fparts{6:end});
 
-if ~fexist || ross.deployments(ndep).proc.adcp_raw2mat
+% load the full-deployment .mat file if it exists
+if fexist_all && ~D.proc.adcp_raw2mat
+    load(matfile_all,'A');
+    disp(['% Loaded ' matfile_all])
+% load the sub-deployment .mat file if it exists
+elseif fexist && ~D.proc.adcp_raw2mat
+    load(matfile,'A');
+    disp(['% Loaded ' matfile])
+else
     %% Load raw data
     % Default binary ADCP data parsing function - slow, but safe
     adcp_load_func = 'adcp_rdradcp_multi';
@@ -27,22 +43,6 @@ if ~fexist || ross.deployments(ndep).proc.adcp_raw2mat
         A = feval(adcp_load_func,D.files.adcp);
     end
 
-
-    %% Minor processing
-    for ia = 1:length(A)
-        % Make sure century is correct
-        idx = year(A(ia).mtime) < 2000;
-        A(ia).mtime(idx) = A(ia).mtime(idx) + datenum([2000 0 0 0 0 0]);
-
-        % % Fix timestamps
-        % A(ia).mtime = A(ia).mtime(1) + A(ia).mtime_raw - A(ia).mtime_raw(1);
-
-        % limit to deployment start/stop time
-        idx = find(A(ia).mtime >= D.tlim(1) & ...
-                   A(ia).mtime <= D.tlim(2));
-        A(ia) = adcp_index(A(ia),idx);
-    end
-
     % sort by adcp configuration
     maxrange = nan(1,length(A));
     for i = 1:length(A)
@@ -51,13 +51,21 @@ if ~fexist || ross.deployments(ndep).proc.adcp_raw2mat
     [~,idx] = sort(maxrange);
     A = A(idx);
 
-    
     %% save matfile
     save(matfile,'A');
     disp(['% Saved ' flink])
-else
-    load(matfile,'A');
-    disp(['% Loaded ' flink])
+end
+
+%% Minor processing
+for ia = 1:length(A)
+    % Make sure century is correct
+    idx = year(A(ia).mtime) < 2000;
+    A(ia).mtime(idx) = A(ia).mtime(idx) + datenum([2000 0 0 0 0 0]);
+
+    % limit to deployment start/stop time
+    idx = find(A(ia).mtime >= D.tlim(1) & ...
+               A(ia).mtime <= D.tlim(2));
+    A(ia) = adcp_index(A(ia),idx);
 end
 
 diary on

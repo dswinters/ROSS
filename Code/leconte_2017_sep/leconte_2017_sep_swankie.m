@@ -23,7 +23,6 @@ defaults.proc.adcp_raw2mat = false;
 trim_corr_edge = struct('name','corr_edge','params','beam');
 defaults.proc.trim_methods(1) = trim_corr_edge;
 
-
 %--------------------------------------------------------%
 % Testing on the deck - no useable data!
 % dep = dep+1;
@@ -34,13 +33,14 @@ defaults.proc.trim_methods(1) = trim_corr_edge;
 
 %--------------------------------------------------------%
 dep = dep+1;
+% swankie(dep).proc.skip = true;
 swankie(dep).name      = 'swankie_deployment_20170913132345';
 swankie(dep).dirs.raw  = 'deployment_20170913132345';
 swankie(dep).tlim = datenum([...
     '13-Sep-2017 14:03:47';
     '13-Sep-2017 17:01:19']);
 % Sections
-namefmt = [swankie(dep).name '_s%02d'];
+namefmt = [swankie(dep).name '/sec_%02d'];
 tlims = datenum(['13-Sep-2017 15:49:54';
                  '13-Sep-2017 15:51:15';
                  '13-Sep-2017 15:51:18';
@@ -76,6 +76,17 @@ tlims = datenum(['13-Sep-2017 15:49:54';
 if do_sections
     [swankie,dep] = ross_deployment_sections(swankie,dep,tlims,namefmt);
 end
+
+%--------------------------------------------------------%
+dep = dep+1;
+swankie(dep).name      = 'swankie_deployment_20170914_204159_shortwatertest';
+swankie(dep).dirs.raw  = 'deployment_20170914_204159_shortwatertest';
+swankie(dep).tlim = datenum([...
+    '14-Sep-2017 21:45:00';
+    '14-Sep-2017 22:02:00']);
+
+
+
 
 % Fill defaults
 if ~isempty(swankie)

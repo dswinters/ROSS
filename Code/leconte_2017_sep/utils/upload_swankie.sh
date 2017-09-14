@@ -5,7 +5,7 @@ base="${HOME}/OSU/ROSS"
 
 # Local files/directories
 matfile="${base}/Data/${TRIP}/Swankie/processed/swankie_*_${dep}*.mat"
-figdir="${base}/Figures/${TRIP}/Swankie/swankie_*_201709${dep}*"
+figdir="${base}/Figures/${TRIP}/Swankie/swankie_*_${dep}*"
 
 # Remote directories
 rprocdir="${SCISHARE}/data/processed/ADCP_ROSS/"

@@ -1,7 +1,7 @@
-function A = ross_load_adcp(ross,ndep)
+function A = ross_load_adcp(config,ndep)
 
-D = ross.deployments(ndep);
-matfile = [ross.dirs.raw D.dirs.raw_adcp D.name '_adcp.mat'];
+D = config.deployments(ndep);
+matfile = [config.dirs.raw D.dirs.raw_adcp D.name '_adcp.mat'];
 
 % Check for a full-deployment .mat file
 fexist_all = exist(D.files.adcp_all,'file');

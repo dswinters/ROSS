@@ -1,13 +1,10 @@
 function A = ross_load_adcp(ross,ndep)
 
 D = ross.deployments(ndep);
-matfile = [D.dirs.raw_adcp D.name '_adcp.mat'];
+matfile = [ross.dirs.raw D.dirs.raw_adcp D.name '_adcp.mat'];
 
 % Check for a full-deployment .mat file
-depfolder = strsplit(matfile,'/');
-matfile_all = [ross.deployments(ndep).dirs.raw_adcp ...
-               lower(ross.name) '_' depfolder{end-2} '_adcp.mat'];
-fexist_all = exist(matfile_all,'file');
+fexist_all = exist(D.files.adcp_all,'file');
 
 % Check for a sub-deployment .mat file
 fexist = exist(matfile,'file');
@@ -16,8 +13,10 @@ flink = fullfile('..',fparts{6:end});
 
 % load the full-deployment .mat file if it exists
 if fexist_all && ~D.proc.adcp_raw2mat
-    load(matfile_all,'A');
-    disp(['% Loaded ' matfile_all])
+    load(D.files.adcp_all,'A');
+    disp(['% Loaded ' D.files.adcp_all])
+    fparts = strsplit(D.files.adcp_all,'/');
+    flink = fullfile('..',fparts{6:end});
 % load the sub-deployment .mat file if it exists
 elseif fexist && ~D.proc.adcp_raw2mat
     load(matfile,'A');
@@ -106,3 +105,4 @@ end
 diary off
 
 end
+

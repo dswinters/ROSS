@@ -2,15 +2,12 @@ function [gps] = ross_load_gps(ross,ndep)
 
 %% Load logged gps data
 D = ross.deployments(ndep);
-matfile = [D.dirs.raw_gps D.name '_gps.mat'];
+matfile = [ross.dirs.raw D.dirs.raw_gps D.name '_gps.mat'];
 prefix = {'GPRMC','HEHDT','PASHR','GPGGA'};
 f_in = D.files.gps;
 
 % Check for a full-deployment .mat file
-depfolder = strsplit(matfile,'/');
-matfile_all = [ross.deployments(ndep).dirs.raw_gps ...
-               lower(ross.name) '_' depfolder{end-2} '_gps.mat'];
-fexist_all = exist(matfile_all,'file');
+fexist_all = exist(D.files.gps_all,'file');
 
 % Check for a sub-deployment .mat file
 fexist = exist(matfile,'file');
@@ -18,8 +15,10 @@ fparts = strsplit(matfile,'/');
 flink = fullfile('..',fparts{6:end});
 
 if fexist_all && ~D.proc.gps_raw2mat
-    gps = load(matfile_all);
-    disp(['% Loaded ' matfile_all]);
+    gps = load(D.files.gps_all);
+    disp(['% Loaded ' D.files.gps_all]);
+    fparts = strsplit(D.files.gps_all,'/');
+    flink = fullfile('..',fparts{6:end});
 elseif fexist && ~D.proc.gps_raw2mat
     gps = load(matfile);
     disp(['% Loaded ' matfile]);
@@ -35,7 +34,6 @@ flds = fields(gps.GPRMC);
 for i = 1:length(flds)
     gps.GPRMC.(flds{i}) = gps.GPRMC.(flds{i})(uidx);
 end
-
 
 %% Ensure files are in the right order
 dn0 = nan(size(gps.files));

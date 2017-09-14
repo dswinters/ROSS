@@ -1,4 +1,3 @@
-scratch.m
 .DS_Store
 ROSS.pdf
 Maps/
@@ -9,8 +8,4 @@ Maps/
 *.log
 *.BIN*
 *.000
-*Pixhawk*
-*pixhawk*
-scratch/*
-scratch
 raw/

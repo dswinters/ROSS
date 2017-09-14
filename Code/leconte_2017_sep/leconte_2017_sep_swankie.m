@@ -9,6 +9,8 @@ function swankie = leconte_2017_sep_swankie()
 swankie = [];
 dep = 0;
 
+do_sections = true;
+
 %--------------------------------------------------------%
 % Default kayak options                                  %
 %--------------------------------------------------------%
@@ -79,9 +81,9 @@ tlims = datenum(['13-Sep-2017 15:49:54';
                  '13-Sep-2017 16:15:58';
                  '13-Sep-2017 16:16:20';
                  '13-Sep-2017 16:18:04']);
-[swankie,dep] = ross_deployment_sections(swankie,dep,tlims,namefmt);
-
-
+if do_sections
+    [swankie,dep] = ross_deployment_sections(swankie,dep,tlims,namefmt);
+end
 
 % Fill defaults
 if ~isempty(swankie)

@@ -1,7 +1,6 @@
 function [ross hfig] = ross_figure_coastline_map(ross,ndep)
 
 %% Load data and coastline map
-You have scored 0 out of a possible 90 points.
 dep = ross.deployments(ndep);
 if strcmp(dep.files.coastline(end-3:end),'none')
     return

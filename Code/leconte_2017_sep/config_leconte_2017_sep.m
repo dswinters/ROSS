@@ -24,8 +24,8 @@ cruise_defaults.proc.skip             = false;
 cruise_defaults.proc.trim_methods(1)  = notrim;
 cruise_defaults.proc.filters(1)       = notrim;
 cruise_defaults.plot.ylim             = [0 200];
-cruise_defaults.proc.adcp_raw2mat     = true;
-cruise_defaults.proc.gps_raw2mat      = true;
+cruise_defaults.proc.adcp_raw2mat     = false;
+cruise_defaults.proc.gps_raw2mat      = false;
 
 % Figures
 cruise_defaults.plot.make_figure.summary       = true;

@@ -41,8 +41,6 @@ dep = dep+1;
 swankie(dep).name          = 'swankie_deployment_20170913132345';
 swankie(dep).dirs.raw_gps  = 'deployment_20170913132345/GPS/';
 swankie(dep).dirs.raw_adcp = 'deployment_20170913132345/ADCP/';
-swankie(dep).files.adcp    = '*timestamped*.bin';
-swankie(dep).files.gps     = '*.log';
 swankie(dep).plot.ylim     = [0 200];
 swankie(dep).tlim = datenum([...
     '13-Sep-2017 14:03:47';

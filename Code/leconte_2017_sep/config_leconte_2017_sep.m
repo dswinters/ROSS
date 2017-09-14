@@ -28,6 +28,8 @@ cruise_defaults.plot.lonlim           = [-132.3768 -132.3470];
 cruise_defaults.plot.latlim           = [56.8228 56.8434];
 cruise_defaults.proc.adcp_raw2mat     = false;
 cruise_defaults.proc.gps_raw2mat      = false;
+cruise_defaults.files.gps             = '*.log';
+cruise_defaults.files.adcp            = '*timestamped*.bin';
 
 % Figures
 cruise_defaults.plot.make_figure.summary       = true;

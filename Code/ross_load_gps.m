@@ -1,8 +1,8 @@
-function [gps] = ross_load_gps(ross,ndep)
+function [gps] = ross_load_gps(config,ndep)
 
 %% Load logged gps data
-D = ross.deployments(ndep);
-matfile = [ross.dirs.raw D.dirs.raw_gps D.name '_gps.mat'];
+D = config.deployments(ndep);
+matfile = [config.dirs.raw D.dirs.raw_gps D.name '_gps.mat'];
 prefix = {'GPRMC','HEHDT','PASHR','GPGGA'};
 f_in = D.files.gps;
 

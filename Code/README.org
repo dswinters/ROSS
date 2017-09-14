@@ -1,4 +1,3 @@
-#+OPTIONS: ^:nil
 #+TITLE: ROSS Code
 
 * =ross_master=
@@ -61,4 +60,72 @@ Calls:
   
 Many of these function are self-explainatory. Some of these live in the
 ~ocean_tools~ repository rather than the main ROSS repository.
+
+* Creating Deployments
+
+Deployments are set up in the cruise-specific configuration file, e.g.
+[[./leconte_2017_sep/config_leconte_2017_sep.m][config_leconte_2017_sep.m]]. In this file, I've created multiple levels of options
+to fall back on by using =ross_fill_defaults= at a cruise-wide and per-kayak
+level. The final outputs of a cruise config file are:
+
+- cruise
+  - A structure with two fields. The "name" field contains the cruise name, and
+    the "kayaks" field contains a cell array of kayak names.
+- deployments
+  - A cell array with a deployment structure for each kayak. The entries in this
+    array should correspond to the names in the cruise structure.
+
+A kayak's deployment structure has an entry for each deployment to be processed.
+An easy way to incrementally add deployments is to increment a deployment index
+each time a deployment is added to the structure. For example:
+
+#+BEGIN_SRC matlab
+  dep = dep+1;
+  swankie(dep).name          = 'swankie_deployment_20170913132345';
+  swankie(dep).dirs.raw_gps  = 'deployment_20170913132345/GPS/';
+  swankie(dep).dirs.raw_adcp = 'deployment_20170913132345/ADCP/';
+  swankie(dep).tlim = datenum([...
+      '13-Sep-2017 14:03:47';
+      '13-Sep-2017 17:01:19']);
+#+END_SRC
+
+The above code block appends a deployment to Swankie's deployment structure.
+Below is a list of all deployment options. These can be specified
+per-deployment, or as default options to be filled in using
+=ross_fill_defaults=. 
+
+| Option                         | Description                                                                                 |
+|--------------------------------+---------------------------------------------------------------------------------------------|
+| name                           | Deployment name                                                                             |
+| tlim                           | Deployment time limits (start time, end time)                                               |
+| proc.skip                      | Set to true to skip processing                                                              |
+| proc.adcp_raw2mat              | Force re-parsing of raw ADCP data                                                           |
+| proc.gps_raw2mat               | Force re-parsing of raw GPS data                                                            |
+| proc.heading_offset            | The kayak's ADCP mounting offset                                                            |
+| proc.adcp_load_function        | The function used to parse raw ADCP data                                                    |
+| proc.ross_timestamps           | 'pre' or 'post', depending on where the kayak's computer has inserted timestamps            |
+| proc.trim_methods              | Trim methods passed to adcp_trim_data.m                                                     |
+| proc.filters                   | Filters passed to adcp_filter.m                                                             |
+| proc.use_3beam                 | A flag specifying if complex 3-beam solutions should be used (for the Sentinel V)           |
+| dirs.raw_gps                   | The directory in which to search for raw GPS files                                          |
+| dirs.raw_adcp                  | The directory in which to serach for raw ADCP files                                         |
+| files.adcp                     | A shell completion pattern to find ADCP files within dirs.raw_adcp                          |
+| files.gps                      | A shell completion pattern to find GPS files within dirs.raw_gps                            |
+| files.map                      | The name of a file containing a map structure (used for surface vel plot)                   |
+| files.coastline                | The name of a file containing a coastline contour structure (used for coastline map figure) |
+| plot.ylim                      | Vertical axis limits for 2d figures                                                         |
+| plot.lonlim                    | Longitude limits for spatial figures                                                        |
+| plot.latlim                    | Latitude limits for spatial figures                                                         |
+| plot.make_figure.summary       | Make summary figure?                                                                        |
+| plot.make_figure.echo_intens   | Make echo intensity figure?                                                                 |
+| plot.make_figure.corr          | Make correlation magnitude figure?                                                          |
+| plot.make_figure.coastline_map | Make coastline map figure?                                                                  |
+| plot.make_figure.surface_vel   | Make surface velocity figure?                                                               |
+
+Some options are better used as defaults than others - the deployment name, for
+example, should not have a default value, while the adcp load function might be
+the same across all deployments for a given cruise or kayak. In the previous
+example, only the deployment's name, time limits, and raw data directories were
+directly specified. Other options were filled as kayak defaults, cruise
+defaults, or global defaults (in that order).
 

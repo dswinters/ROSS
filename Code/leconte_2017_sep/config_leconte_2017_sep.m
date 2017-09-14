@@ -28,11 +28,11 @@ cruise_defaults.proc.adcp_raw2mat     = false;
 cruise_defaults.proc.gps_raw2mat      = false;
 
 % Figures
-cruise_defaults.plot.make_figure.summary       = true;
-cruise_defaults.plot.make_figure.echo_intens   = true;
-cruise_defaults.plot.make_figure.corr          = true;
-cruise_defaults.plot.make_figure.coastline_map = true;
-cruise_defaults.plot.make_figure.surface_vel   = true;
+cruise_defaults.plot.make_figure.summary       = false;
+cruise_defaults.plot.make_figure.echo_intens   = false;
+cruise_defaults.plot.make_figure.corr          = false;
+cruise_defaults.plot.make_figure.coastline_map = false;
+cruise_defaults.plot.make_figure.surface_vel   = false;
 
 % Get deployments
 casey = leconte_2017_sep_casey();

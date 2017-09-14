@@ -17,7 +17,6 @@ defaults.proc.adcp_load_function = 'adcp_parse';
 defaults.proc.ross_timestamps = 'pre';
 defaults.files.map = 'leconte_terminus';
 defaults.plot.ylim = [0 200];
-defaults.plot.make_figure.coastline_map = true;
 defaults.proc.skip = false;
 defaults.proc.use_3beam = false;
 defaults.proc.adcp_raw2mat = false;

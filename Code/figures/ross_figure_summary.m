@@ -2,8 +2,8 @@ function [ross, hfig] = ross_figure_summary(ross,ndep)
 
 load redblue
 dep = ross.deployments(ndep);
-dat = load(dep.files.processed);
-adcp = dat.adcp; clear dat
+adcp = load(dep.files.processed);
+
 maxrange = 0;
 for i = 1:length(adcp)
     maxrange = max(maxrange,max(adcp(i).config.ranges));

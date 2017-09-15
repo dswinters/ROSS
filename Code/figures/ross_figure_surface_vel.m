@@ -1,8 +1,7 @@
 function [ross, hfig] = ross_figure_surface_vel(ross,ndep)
 
 dep = ross.deployments(ndep);
-dat = load(dep.files.processed);
-adcp = dat.adcp; clear dat;
+adcp = load(dep.files.processed);
 
 dmax = 20;
 nx = dep.plot.map.nx;

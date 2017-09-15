@@ -1,11 +1,4 @@
-function [cruise, deployments] = config_leconte_2017_sep()
-
-%========================================================
-% Cruise info
-%========================================================
-cruise = struct();
-cruise.name = 'leconte_2017_sep';
-cruise.kayaks = {'Casey','Rosie','Swankie'};
+function Config = config_leconte_2017_sep()
 
 %========================================================
 % Define some filters
@@ -39,15 +32,17 @@ cruise_defaults.plot.make_figure.coastline_map = true;
 cruise_defaults.plot.make_figure.surface_vel   = false;
 
 % Get deployments
-casey = leconte_2017_sep_casey();
-rosie = leconte_2017_sep_rosie();
-swankie = leconte_2017_sep_swankie();
+Config(1).name = 'Casey';
+Config(1).deployments = leconte_2017_sep_casey();
+Config(2).name = 'Rosie';
+Config(2).deployments = leconte_2017_sep_rosie();
+Config(3).name = 'Swankie';
+Config(3).deployments = leconte_2017_sep_swankie();
 
-% Combine deployment structures into cell array
-deployments = {casey, rosie, swankie};
-
-for i = 1:length(deployments)
-    if ~isempty(deployments{i})
-        deployments{i} = ross_fill_defaults(deployments{i},cruise_defaults);
+for i = 1:length(Config)
+    if ~isempty(Config(i).deployments)
+        Config(i).deployments = ross_fill_defaults(...
+            Config(i).deployments,...
+            cruise_defaults);
     end
 end

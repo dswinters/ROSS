@@ -15,7 +15,7 @@ D = config.deployments(ndep);
 
 %% Set up logging on first deployment
 if ndep == 1
-    logfile = fullfile(config.dirs.logs, [config.cruise.name,'_',lower(config.name),'.org']);
+    logfile = fullfile(config.dirs.logs, [config.cruise,'_',lower(config.name),'.org']);
     eval(['!rm ' logfile])
     diary(logfile);
     disp(sprintf('* Deployment Processing: %s ',config.name))
@@ -40,7 +40,7 @@ if ~isfield(adcp,'info')
 end
 
 %% Deployment-specific post-load function
-fn = [config.cruise.name '_proc_post_load'];
+fn = [config.cruise '_proc_post_load'];
 if exist(fn) == 2
     [config adcp] = feval(fn,config,ndep,adcp);
 end
@@ -60,7 +60,7 @@ for ia = 1:length(adcp)
 end
 
 %% Deployment-specific pre-rotation processing
-fn = [config.cruise.name '_proc_pre_rotation'];
+fn = [config.cruise '_proc_pre_rotation'];
 if exist(fn) == 2
     [config adcp] = feval(fn,config,ndep,adcp);
 end
@@ -114,7 +114,7 @@ for ia = 1:length(adcp)
 end
 
 %% Deployment-specific post-rotation processing
-fn = [config.cruise.name '_proc_post_rotation'];
+fn = [config.cruise '_proc_post_rotation'];
 if exist(fn) == 2
     [config adcp] = feval(fn,config,ndep,adcp);
 end

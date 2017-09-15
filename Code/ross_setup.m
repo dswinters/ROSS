@@ -1,16 +1,4 @@
-%% ross_setup.m
-% Usage: Config = ross_setup(cruise,deployments)
-% Description: This function does all the heavy lifting for determining full
-%              paths to files that will be loaded or saved during processing.
-% Inputs: cruise,deployments - Cruise and deployment information from the cruise-
-%         specific deployment file.
-% Outputs: Config - The master control structure containing filepaths and 
-%          processing instructions.
-%
-% Author: Dylan Winters
-% Created: 2017-09-13
-
-function Config = ross_setup(cruise,deployments)
+function Config = ross_setup(Config)
 
 dir_base = fullfile(getenv('HOME'),'OSU/ROSS/');
 Dirs = struct();
@@ -20,13 +8,9 @@ Dirs.maps = fullfile(dir_base, 'Maps/');
 Dirs.logs = fullfile(dir_base, 'org/');
 Dirs.meta = fullfile(dir_base, 'Metadata/');
 
-for i = 1:length(cruise.kayaks)
-    Config(i).name        = cruise.kayaks{i};
+for i = 1:length(Config)
     Config(i).dirs        = Dirs;
-    Config(i).cruise      = cruise;
-    Config(i).deployments = deployments{i};
-    %
-    subdir = fullfile(cruise.name, cruise.kayaks{i}, '/');
+    subdir = fullfile(Config(i).cruise, Config(i).name, '/');
     Config(i).dirs.data = fullfile(Dirs.data, subdir);
     Config(i).dirs.figs = fullfile(Dirs.figs, subdir);
     Config(i).dirs.proc = fullfile(Dirs.data, subdir, 'processed/');

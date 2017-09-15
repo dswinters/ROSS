@@ -1,6 +1,6 @@
-function Ross = ross_post_setup(Ross)
+function Config = ross_post_setup(Config)
 
-setup_post_fun = [Ross(1).cruise.name '_post_setup'];
+setup_post_fun = [Config.cruise '_post_setup'];
 if exist(setup_post_fun)==2
-    Ross = feval(setup_post_fun,Ross);
+    Ross = feval(setup_post_fun,Config);
 end

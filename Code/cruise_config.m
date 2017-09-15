@@ -1,6 +1,6 @@
-function [cruise, deployments] = cruise_config(cruise_name)
+function Config = cruise_config(cruise_name)
 
 cruise_config_func = ['config_' cruise_name];
-[cruise, deployments] = feval(cruise_config_func);
-
+Config = feval(cruise_config_func);
+[Config.cruise] = deal(cruise_name);
 

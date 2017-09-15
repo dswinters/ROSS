@@ -30,34 +30,38 @@ for i = 1:length(cruise.kayaks)
     Config(i).dirs.data             = fullfile(Dirs.data, subdir);
     Config(i).dirs.figs             = fullfile(Dirs.figs, subdir);
     Config(i).dirs.proc.deployments = fullfile(Dirs.data, subdir, 'processed/');
-    Config(i).dirs.raw              = fullfile(Dirs.data,subdir,'raw/');
+    Config(i).dirs.raw              = fullfile(Dirs.data, subdir, 'raw/');
     % Fill default options
     if ~isempty(Config(i).deployments)
         Config(i).deployments = ross_fill_defaults(Config(i).deployments,ross_defaults());
     end
+    
     for d = 1:length(Config(i).deployments)
         dep = Config(i).deployments(d);
         subdir_raw    = dep.dirs.raw; % e.g. <recovery>/
 
         %% Make full directories
-        dir_raw           = fullfile(Config(i).dirs.raw, subdir_raw, '/');
-        gps_files         = dir(fullfile(dir_raw, dep.files.gps));
-        adcp_files        = dir(fullfile(dir_raw, dep.files.adcp));
+        dir_raw     = fullfile(Config(i).dirs.raw, subdir_raw, '/');
+        gps_files   = dir(fullfile(dir_raw, dep.files.gps));
+        adcp_files  = dir(fullfile(dir_raw, dep.files.adcp));
+        %
         dep.dirs.raw_gps  = fullfile(dir_raw, [fileparts(dep.files.gps) '/']);
         dep.dirs.raw_adcp = fullfile(dir_raw, [fileparts(dep.files.adcp) '/']);
         dep.dirs.figs     = fullfile(Config(i).dirs.figs, dep.name, '/');
 
         %% Make full file paths
+        gps_all  = [lower(Config(i).name) '_' subdir_raw '_gps.mat'];
+        adcp_all = [lower(Config(i).name) '_' subdir_raw '_adcp.mat'];
+        %
         dep.files.gps       = fullfile(dir_raw, dep.dirs.raw_gps, {gps_files.name});
         dep.files.adcp      = fullfile(dir_raw, dep.dirs.raw_adcp, {adcp_files.name});
         dep.files.gps_mat   = fullfile(dir_raw, [dep.name '_gps.mat']);
         dep.files.adcp_mat  = fullfile(dir_raw, [dep.name '_adcp.mat']);
         dep.files.map       = fullfile(Dirs.maps,dep.files.map);
         dep.files.coastline = fullfile(Dirs.maps,dep.files.coastline);
-        dep.files.gps_all   = fullfile(dep.dirs.raw_gps, ...
-                                       [lower(Config(i).name) '_' subdir_raw '_gps.mat']);
-        dep.files.adcp_all  = fullfile(dep.dirs.raw_adcp, ...
-                                       [lower(Config(i).name) '_' subdir_raw '_adcp.mat']);
+        dep.files.gps_all   = fullfile(dep.dirs.raw_gps, gps_all);
+        dep.files.adcp_all  = fullfile(dep.dirs.raw_adcp, adcp_all);
+                                       
         % Update deployment
         dep.dirs = rmfield(dep.dirs,'raw');
         Config(i).deployments(d) = dep;

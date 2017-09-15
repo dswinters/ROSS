@@ -2,7 +2,7 @@ function [ross, hfig] = ross_figure_echo_intens(ross,ndep)
 
 load redblue
 dep = ross.deployments(ndep);
-dat = load(dep.files.final);
+dat = load(dep.files.processed);
 adcp = dat.adcp; clear dat
 maxrange = 0;
 for i = 1:length(adcp)

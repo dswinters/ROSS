@@ -143,13 +143,11 @@ if isfield(D.proc,'bad');
 end
 
 %% Save deployment file
-fout = fullfile(config.dirs.proc.deployments, [D.name '.mat']);
-config.deployments(ndep).files.final = fout;
-dirout = fileparts(fout);
+dirout = fileparts(D.files.processed);
 if ~exist(dirout,'dir'); mkdir(dirout); end
-save(config.deployments(ndep).files.final,'adcp')
+save(D.files.processed,'adcp')
 
-fparts = strsplit(config.deployments(ndep).files.final,'/');
+fparts = strsplit(D.files.processed,'/');
 flink = fullfile('..',fparts{6:end});
 
 diary on

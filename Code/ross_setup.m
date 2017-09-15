@@ -27,10 +27,10 @@ for i = 1:length(cruise.kayaks)
     Config(i).deployments = deployments{i};
     %
     subdir = fullfile(cruise.name, cruise.kayaks{i}, '/');
-    Config(i).dirs.data             = fullfile(Dirs.data, subdir);
-    Config(i).dirs.figs             = fullfile(Dirs.figs, subdir);
-    Config(i).dirs.proc.deployments = fullfile(Dirs.data, subdir, 'processed/');
-    Config(i).dirs.raw              = fullfile(Dirs.data, subdir, 'raw/');
+    Config(i).dirs.data = fullfile(Dirs.data, subdir);
+    Config(i).dirs.figs = fullfile(Dirs.figs, subdir);
+    Config(i).dirs.proc = fullfile(Dirs.data, subdir, 'processed/');
+    Config(i).dirs.raw  = fullfile(Dirs.data, subdir, 'raw/');
     % Fill default options
     if ~isempty(Config(i).deployments)
         Config(i).deployments = ross_fill_defaults(Config(i).deployments,ross_defaults());
@@ -57,10 +57,11 @@ for i = 1:length(cruise.kayaks)
         dep.files.adcp      = fullfile(dir_raw, dep.dirs.raw_adcp, {adcp_files.name});
         dep.files.gps_mat   = fullfile(dir_raw, [dep.name '_gps.mat']);
         dep.files.adcp_mat  = fullfile(dir_raw, [dep.name '_adcp.mat']);
-        dep.files.map       = fullfile(Dirs.maps,dep.files.map);
-        dep.files.coastline = fullfile(Dirs.maps,dep.files.coastline);
+        dep.files.map       = fullfile(Config(i).dirs.maps,dep.files.map);
+        dep.files.coastline = fullfile(Config(i).dirs.maps,dep.files.coastline);
         dep.files.gps_all   = fullfile(dep.dirs.raw_gps, gps_all);
         dep.files.adcp_all  = fullfile(dep.dirs.raw_adcp, adcp_all);
+        dep.files.processed = fullfile(Config(i).dirs.proc, [dep.name '.mat']);
                                        
         % Update deployment
         dep.dirs = rmfield(dep.dirs,'raw');

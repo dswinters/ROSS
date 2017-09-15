@@ -5,7 +5,7 @@ dep = ross.deployments(ndep);
 if strcmp(dep.files.coastline(end-3:end),'none')
     return
 end
-dat = load(dep.files.final);
+dat = load(dep.files.processed);
 cl = load(dep.files.coastline);
 adcp = dat.adcp; clear dat
 

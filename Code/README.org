@@ -1,44 +1,45 @@
+#+OPTIONS: ^:nil
 #+TITLE: ROSS Code
 
-* =ross_master=
+* ~ross_master~
 
 The outermost function, called directly by the user. Just give it a cruise name
 and watch it go!
 
 Calls:
-- =cruise_config=
-- =ross_setup=
-- =ross_proc_all_deployments=
+- ~cruise_config~
+- ~ross_setup~
+- ~ross_proc_all_deployments~
 
-** =cruise_config=
+** ~cruise_config~
 Locate and run the cruise-specific configuration file that initializes cruise
 and deployment options.
 
-** =ross_setup=
+** ~ross_setup~
 Take the cruise-specific configuration information and create a config structure
 that contains paths to files and directories that will be used during
 processing. Any unspecified options default to those specified in
-- =ross_defaults()=.
+- ~ross_defaults()~.
 
 Calls:
-- =ross_fill_defaults=
-- =ross_defaults=
-- =ross_post_setup=
+- ~ross_fill_defaults~
+- ~ross_defaults~
+- ~ross_post_setup~
 
-** =ross_proc_all_deployments=
-A simple wrapper around =ross_proc_deployment= for processing all deployments
+** ~ross_proc_all_deployments~
+A simple wrapper around ~ross_proc_deployment~ for processing all deployments
 from all kayaks.
 
 Calls:
-- =ross_proc_deployment=
+- ~ross_proc_deployment~
 
-* =ross_proc_deployment=
+* ~ross_proc_deployment~
 
 The main processing function that works on one deployment at a time. At a high
 level, this will:
 
 - Initialize the processing log file
-- Load or create =.mat= files containing raw data
+- Load or create ~.mat~ files containing raw data
 - Process ADCP data
   - Trim data
   - Rotate to Earth coordinates
@@ -48,15 +49,15 @@ level, this will:
 - Create figures
 
 Calls:
-- =ross_load_adcp=
-- =ross_load_gps=
-- =ross_proc_gps=
-- =adcp_trim_data=
+- ~ross_load_adcp~
+- ~ross_load_gps~
+- ~ross_proc_gps~
+- ~adcp_trim_data~
 - deployment-specific pre-rotation function
 - earth coordinate rotation function
 - deployment-specific post-rotation function
-- =adcp_filter=
-- =ross_figures=
+- ~adcp_filter~
+- ~ross_figures~
   
 Many of these function are self-explainatory. Some of these live in the
 ~ocean_tools~ repository rather than the main ROSS repository.
@@ -65,7 +66,7 @@ Many of these function are self-explainatory. Some of these live in the
 
 Deployments are set up in the cruise-specific configuration file, e.g.
 [[./leconte_2017_sep/config_leconte_2017_sep.m][config_leconte_2017_sep.m]]. In this file, I've created multiple levels of options
-to fall back on by using =ross_fill_defaults= at a cruise-wide and per-kayak
+to fall back on by using ~ross_fill_defaults~ at a cruise-wide and per-kayak
 level. The final outputs of a cruise config file are:
 
 - cruise
@@ -81,9 +82,8 @@ each time a deployment is added to the structure. For example:
 
 #+BEGIN_SRC matlab
   dep = dep+1;
-  swankie(dep).name          = 'swankie_deployment_20170913132345';
-  swankie(dep).dirs.raw_gps  = 'deployment_20170913132345/GPS/';
-  swankie(dep).dirs.raw_adcp = 'deployment_20170913132345/ADCP/';
+  swankie(dep).name      = 'swankie_deployment_20170913132345';
+  swankie(dep).dirs.raw  = 'deployment_20170913132345';
   swankie(dep).tlim = datenum([...
       '13-Sep-2017 14:03:47';
       '13-Sep-2017 17:01:19']);
@@ -92,7 +92,7 @@ each time a deployment is added to the structure. For example:
 The above code block appends a deployment to Swankie's deployment structure.
 Below is a list of all deployment options. These can be specified
 per-deployment, or as default options to be filled in using
-=ross_fill_defaults=. 
+~ross_fill_defaults~. 
 
 | Option                         | Description                                                                                 |
 |--------------------------------+---------------------------------------------------------------------------------------------|
@@ -107,10 +107,9 @@ per-deployment, or as default options to be filled in using
 | proc.trim_methods              | Trim methods passed to adcp_trim_data.m                                                     |
 | proc.filters                   | Filters passed to adcp_filter.m                                                             |
 | proc.use_3beam                 | A flag specifying if complex 3-beam solutions should be used (for the Sentinel V)           |
-| dirs.raw_gps                   | The directory in which to search for raw GPS files                                          |
-| dirs.raw_adcp                  | The directory in which to serach for raw ADCP files                                         |
-| files.adcp                     | A shell completion pattern to find ADCP files within dirs.raw_adcp                          |
-| files.gps                      | A shell completion pattern to find GPS files within dirs.raw_gps                            |
+| dirs.raw                       | Deployment raw data directory                                                               |
+| files.adcp                     | A shell completion pattern to find ADCP files within dirs.raw                               |
+| files.gps                      | A shell completion pattern to find GPS files within dirs.raw                                |
 | files.map                      | The name of a file containing a map structure (used for surface vel plot)                   |
 | files.coastline                | The name of a file containing a coastline contour structure (used for coastline map figure) |
 | plot.ylim                      | Vertical axis limits for 2d figures                                                         |

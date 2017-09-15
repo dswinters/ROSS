@@ -20,7 +20,7 @@ defaults.tlim = [-inf inf];
 defaults.plot.ylim = [0 200];
 defaults.proc.skip = false;
 defaults.proc.use_3beam = false;
-defaults.proc.adcp_raw2mat = true;
+defaults.proc.nmea = {'GPRMC','HEHDT','PASHR','GPGGA'};
 
 % Deployments here
 

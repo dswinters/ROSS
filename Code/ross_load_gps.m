@@ -3,7 +3,8 @@ function [gps] = ross_load_gps(config,ndep)
 %% Load logged gps data
 D = config.deployments(ndep);
 matfile = D.files.gps_mat;
-prefix = {'GPRMC','HEHDT','PASHR','GPGGA'};
+prefix = D.proc.nmea;
+
 f_in = D.files.gps;
 
 % Check for a full-deployment .mat file

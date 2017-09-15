@@ -23,26 +23,11 @@ elseif fexist && ~D.proc.adcp_raw2mat
     disp(['% Loaded ' matfile])
 else
     %% Load raw data
-    % Default binary ADCP data parsing function - slow, but safe
-    adcp_load_func = 'adcp_rdradcp_multi';
-    % Override binary ADCP data parsing function?
-    if isfield(D.proc,'adcp_load_function')
-        adcp_load_func = D.proc.adcp_load_function;
-    end
-    if strcmp('adcp_parse',adcp_load_func)     && ...
-            isfield(D.proc,'ross_timestamps')  && ...
-            ismember(D.proc.ross_timestamps,{'pre','post'})
-        A = feval(adcp_load_func,D.files.adcp,'ross',...
-                  D.proc.ross_timestamps);
-        for ia = 1:length(A)
-            A(ia).mtime_raw = A(ia).mtime;
-            A(ia).mtime = A(ia).ross_mtime;
-        end
-    else
-        A = feval(adcp_load_func,D.files.adcp);
-    end
+    A = feval(D.proc.adcp_load_function,...
+              D.files.adcp,...
+              D.proc.adcp_load_args{:});
 
-    % sort by adcp configuration
+    % sort by adcp configuration max range
     maxrange = nan(1,length(A));
     for i = 1:length(A)
         maxrange(i) = max(A(i).config.ranges);

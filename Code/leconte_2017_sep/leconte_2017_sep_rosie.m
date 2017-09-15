@@ -14,7 +14,7 @@ dep = 0;
 %--------------------------------------------------------%
 defaults.proc.heading_offset = 135;
 defaults.proc.adcp_load_function = 'adcp_parse';
-defaults.proc.ross_timestamps = 'pre';
+defaults.proc.adcp_load_args = {'ross','pre'};
 defaults.files.map = 'leconte_terminus';
 defaults.tlim = [-inf inf];
 defaults.plot.ylim = [0 200];

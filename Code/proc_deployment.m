@@ -39,11 +39,7 @@ if ~isfield(adcp,'info')
     [adcp(:).info] = deal({});
 end
 
-%% Deployment-specific post-load function
-fn = [config.cruise '_proc_post_load'];
-if exist(fn) == 2
-    [config adcp] = feval(fn,config,ndep,adcp);
-end
+[config, adcp, gps] = post_load_hook(config,adcp,gps);
 
 %% Interpolate GPS data to ADCP timestamps
 [adcp(:).gps] = deal(struct());

@@ -1,5 +1,6 @@
 function defaults = ross_defaults();
 defaults = struct();
+nofilt = struct('name','none','params',[]);
 
 % Plot options
 defaults.tlim            = [-inf inf];
@@ -25,3 +26,5 @@ defaults.proc.adcp_raw2mat = false;
 defaults.proc.gps_raw2mat = false;
 defaults.proc.adcp_load_function = 'adcp_rdradcp_multi';
 defaults.proc.adcp_load_args = {};
+defaults.proc.trim_methods = nofilt;
+defaults.proc.filters = nofilt;

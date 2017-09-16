@@ -39,6 +39,7 @@ if ~isfield(adcp,'info')
     [adcp(:).info] = deal({});
 end
 
+%% cruise-specific post-load hook function
 [config, adcp, gps] = post_load_hook(config,adcp,gps);
 
 %% Interpolate GPS data to ADCP timestamps
@@ -59,10 +60,7 @@ for ia = 1:length(adcp)
 end
 
 %% Deployment-specific pre-rotation processing
-fn = [config.cruise '_proc_pre_rotation'];
-if exist(fn) == 2
-    [config adcp] = feval(fn,config,ndep,adcp);
-end
+[config, adcp] = pre_rotation_hook(config,adcp);
 
 %% Coordinate transformations
 % save raw ADCP compass heading
@@ -113,10 +111,7 @@ for ia = 1:length(adcp)
 end
 
 %% Deployment-specific post-rotation processing
-fn = [config.cruise '_proc_post_rotation'];
-if exist(fn) == 2
-    [config adcp] = feval(fn,config,ndep,adcp);
-end
+[config, adcp] = post_rotation_hook(config,adcp);
 
 %% Additional filters
 if isfield(D.proc,'filters')

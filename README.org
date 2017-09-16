@@ -291,24 +291,53 @@ that has been broken into several files and streamlined using ~fill_defaults~:
   - [[Code/leconte_2017_sep/leconte_2017_sep_steller][leconte_2017_sep_steller]]
 
 
-** TODO Custom configuration
+** Complex configuration with hook functions
 
 There are several points during execution at which the program looks for
 cruise-specific functions and calls them, if they exist. These functions are
-described below, with some example applications. It can be useful to set up
-switch statements within these functions that execute a certain set of
-instructions if a deployment name is matched. These functions allow for the
-addition of complex user-defined processing functions without modification of
-the core processing code.
+called *hooks*, and are described bwlow with some example applications. It can
+be useful to set up switch statements within these functions that execute a
+certain set of instructions if a deployment name is matched. These functions
+allow for the addition of arbitrarily complex user-defined processing without
+modification of the core processing code.
 
-*** Additional pre-rotation ADCP processing (~cruise/cruise_proc_pre_rotation.m~)
+Note that a cruise's ~config~ file is a hook - it is special in that it is
+required and not named with a ~_hook~ suffix, but it is analogous to other hooks
+described below.
+
+*Be careful when using hooks. Compatibility of data structures with the core processing program must be maintained.*
+
+
+*** post_setup_hook
+~Config = post_setup_hook(Config)~
+
+Modify the main ~Config~ structure before any processing has been done. This
+function may be removed in the future, as most changes done at this stage in
+processing should be possible from within the cruise's main ~config~ file.
+
+
+*** post_load_hook
+~[config, adcp, gps] = post_load_hook(config, adcp, gps)~
+
+Modify a vessel's ~config~, ~adcp~, and/or ~gps~ data structures after loading
+raw data. This is useful for integrating data separate from the primary data
+sources declared in the cruise's config file. For example, this can be used to
+overwrite sections of data in the ~gps~ structure from a secondary GPS source in
+case of failure during a particular deployment.
+
+
+*** pre_rotation_hook
+~[config, adcp] = pre_rotation_hook(config, adcp)~
 
 In case one wants to do additional processing that requires beam velocities
 before the rotation to earth coordinates. For example, remove data from a beam
 that was contaminated during a certain deployment.
 
-*** Additional post-rotation ADCP processing (~cruise/cruise_proc_post_rotation.m~)
+*** post_rotation_hook
+~[config, adcp] = post_rotation_hook(config, adcp)~
 
-Similar, but after velocities have been rotated to earth coordinates.
+Similar, but after velocities have been rotated to earth coordinates. Maybe the
+vertical motion of a CTD was detected during sections of a particular deployment
+and can be removed with some qick deployment-specific code.
 
 

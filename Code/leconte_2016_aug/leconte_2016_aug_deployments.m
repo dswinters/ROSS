@@ -21,7 +21,7 @@ ADCP_300 = struct('freq',300,...
 
 %% Kayak 1: Rosie
 rosie0.proc.skip = false;
-rosie0.proc.adcp_load_function = 'adcp_rdradcp_multi';
+rosie0.proc.adcp_load_func = 'adcp_rdradcp_multi';
 rosie0.proc.trim_methods(1).name = 'ei_edge';
 rosie0.proc.trim_methods(1).params = 'beam';
 rosie0.proc.ship_vel_removal = 'GPS';
@@ -114,7 +114,7 @@ rosie = ross_fill_defaults(rosie,rosie0);
 
 %% Kayak 2: Casey
 casey0.proc.skip = false;
-casey0.proc.adcp_load_function = 'adcp_rdradcp_multi';
+casey0.proc.adcp_load_func = 'adcp_rdradcp_multi';
 casey0.proc.trim_methods(1).name = 'corr_edge';
 casey0.proc.trim_methods(1).params = 'beam';
 casey0.proc.trim_methods(2).name = 'cutoff';

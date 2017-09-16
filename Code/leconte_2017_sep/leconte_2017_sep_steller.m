@@ -10,18 +10,9 @@ config.name = 'Steller';
 dep = 0;
 
 defaults.proc.heading_offset = 55;
-defaults.proc.adcp_load_function = 'adcp_rdradcp_multi';
-defaults.files.map = 'leconte_terminus';
-defaults.plot.ylim = [0 200];
-defaults.proc.skip = false;
-defaults.proc.use_3beam = false;
+defaults.proc.adcp_load_func = 'adcp_rdradcp_multi';
 defaults.proc.nmea = {'GPRMC','HEHDT'};
-defaults.map = 'leconte_terminus';
-defaults.files.coastline = 'leconte2_grid_coastline.mat';
-defaults.proc.use_3beam = false;
-defaults.proc.adcp_raw2mat = false;
 defaults.dirs.raw = ''; % All raw data is in the same folder
-
 
 dep = dep+1;
 steller(dep).name = 'ADCP_steller';

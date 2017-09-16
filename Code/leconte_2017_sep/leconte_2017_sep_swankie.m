@@ -15,12 +15,6 @@ do_sections = true;
 % Default kayak options                                  %
 %--------------------------------------------------------%
 defaults.proc.heading_offset = 45;
-defaults.proc.adcp_load_function = 'adcp_parse';
-defaults.proc.adcp_load_args = {'ross','pre'};
-defaults.files.map = 'leconte_terminus';
-defaults.proc.skip = false;
-defaults.proc.use_3beam = false;
-defaults.proc.adcp_raw2mat = false;
 trim_corr_edge = struct('name','corr_edge','params','beam');
 defaults.proc.trim_methods(1) = trim_corr_edge;
 
@@ -35,8 +29,8 @@ defaults.proc.trim_methods(1) = trim_corr_edge;
 %--------------------------------------------------------%
 dep = dep+1;
 % swankie(dep).proc.skip = true;
-swankie(dep).name      = 'swankie_deployment_20170913132345';
-swankie(dep).dirs.raw  = 'deployment_20170913132345';
+swankie(dep).name      = 'swankie_deployment_2017091323';
+swankie(dep).dirs.raw  = 'deployment_20170913_132345';
 swankie(dep).tlim = datenum([...
     '13-Sep-2017 14:03:47';
     '13-Sep-2017 17:01:19']);

@@ -102,7 +102,7 @@ per-deployment, or as default options to be filled in using
 | proc.adcp_raw2mat              | Force re-parsing of raw ADCP data                                                           |
 | proc.gps_raw2mat               | Force re-parsing of raw GPS data                                                            |
 | proc.heading_offset            | The kayak's ADCP mounting offset                                                            |
-| proc.adcp_load_function        | The function used to parse raw ADCP data                                                    |
+| proc.adcp_load_func        | The function used to parse raw ADCP data                                                    |
 | proc.ross_timestamps           | 'pre' or 'post', depending on where the kayak's computer has inserted timestamps            |
 | proc.trim_methods              | Trim methods passed to adcp_trim_data.m                                                     |
 | proc.filters                   | Filters passed to adcp_filter.m                                                             |

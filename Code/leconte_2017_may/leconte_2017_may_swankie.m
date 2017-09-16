@@ -12,7 +12,7 @@ dep = 0;
 % Default deployment options                             %
 %--------------------------------------------------------%
 swankie0.proc.heading_offset = 45;
-swankie0.proc.adcp_load_function = 'adcp_parse';
+swankie0.proc.adcp_load_func = 'adcp_parse';
 swankie0.proc.adcp_load_args = {'ross','post'};
 swankie0.tlim = [-inf inf];
 swankie0.files.map = 'none';

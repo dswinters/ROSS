@@ -20,7 +20,7 @@ corrflt = struct('name','corrmin','params',50);
 rotmax = struct('name','rotmax','params',3);
 ata0.plot.map.pos = [1000 847 548 491];
 ata0.proc.heading_offset = 135;
-ata0.proc.adcp_load_function = 'adcp_parse';
+ata0.proc.adcp_load_func = 'adcp_parse';
 ata0.proc.filters(1) = corrflt;
 % ata0.proc.filters(2) = rotmax;
 

@@ -38,34 +38,42 @@ end
 % Steller
 
 %========================================================
-% ROSS default options
+% Default options
 %========================================================
-ross_defaults.map                   = 'leconte_terminus';
-ross_defaults.files.coastline       = 'leconte2_grid_coastline.mat';
-ross_defaults.proc.skip             = false;
-ross_defaults.proc.trim_methods(1)  = notrim;
-ross_defaults.proc.filters(1)       = notrim;
-ross_defaults.proc.nmea             = {'GPRMC','HEHDT','PASHR','GPGGA'};
-ross_defaults.plot.ylim             = [0 200];
-ross_defaults.plot.lonlim           = [-132.3768 -132.3470];
-ross_defaults.plot.latlim           = [56.8228 56.8434];
-ross_defaults.proc.adcp_raw2mat     = false;
-ross_defaults.proc.gps_raw2mat      = false;
-ross_defaults.files.gps             = 'GPS/*.log';
-ross_defaults.files.adcp            = 'ADCP/*timestamped*.bin';
+% Global
+all_defaults.map               = 'leconte_terminus';
+all_defaults.files.coastline   = 'leconte2_grid_coastline.mat';
+all_defaults.proc.skip         = false; % only skip if explicitly directed
+all_defaults.plot.ylim         = [0 200];
+all_defaults.proc.adcp_raw2mat = false;
+all_defaults.proc.gps_raw2mat  = false;
+all_defaults.proc.use_3beam    = false;
+% ROSS
+ross_defaults.plot.lonlim         = [-132.3768 -132.3470];
+ross_defaults.plot.latlim         = [56.8228 56.8434];
+ross_defaults.proc.adcp_load_func = 'adcp_parse';
+ross_defaults.proc.adcp_load_args = {'ross','pre'};
+ross_defaults.proc.nmea           = {'GPRMC','HEHDT','PASHR','GPGGA'};
+ross_defaults.files.gps           = 'GPS/*.log';
+ross_defaults.files.adcp          = 'ADCP/*timestamped*.bin';
 % Figures
-ross_defaults.plot.make_figure.summary       = true;
-ross_defaults.plot.make_figure.echo_intens   = true;
-ross_defaults.plot.make_figure.corr          = true;
-ross_defaults.plot.make_figure.coastline_map = true;
-ross_defaults.plot.make_figure.surface_vel   = false;
+fig_defaults.plot.make_figure.summary       = true;
+fig_defaults.plot.make_figure.echo_intens   = true;
+fig_defaults.plot.make_figure.corr          = true;
+fig_defaults.plot.make_figure.coastline_map = true;
+fig_defaults.plot.make_figure.surface_vel   = false;
 
 % Fill ROSS defaults
-for i = 1:3
+for i = 1:4
     if ~isempty(Config(i).deployments)
-        Config(i).deployments = ross_fill_defaults(...
-            Config(i).deployments,...
-            ross_defaults);
+        switch i
+          case {1,2,3}
+            Config(i).deployments = ross_fill_defaults(...
+                Config(i).deployments,...
+                ross_defaults);
+        end
+        Config(i).deployments = ross_fill_defaults(Config(i).deployments,fig_defaults);
+        Config(i).deployments = ross_fill_defaults(Config(i).deployments,all_defaults);
     end
 end
 

@@ -14,13 +14,6 @@ dep = 0;
 % Default kayak options                                  %
 %--------------------------------------------------------%
 defaults.proc.heading_offset = 135;
-defaults.proc.adcp_load_function = 'adcp_parse';
-defaults.proc.adcp_load_args = {'ross','pre'};
-defaults.files.map = 'leconte_terminus';
-defaults.tlim = [-inf inf];
-defaults.plot.ylim = [0 200];
-defaults.proc.skip = false;
-defaults.proc.use_3beam = false;
 
 % Deployments here
 

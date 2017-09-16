@@ -4,7 +4,7 @@ function rosie = petersburg_2017_apr_rosie()
 %    x      |--> STARBOARD
 %  2   3  
 rosie0.proc.heading_offset = 135;
-rosie0.proc.adcp_load_function = 'adcp_parse';
+rosie0.proc.adcp_load_func = 'adcp_parse';
 rosie0.proc.ross_timestamps    = false;
 %--------------------------------------------------------%
 dep = 1;

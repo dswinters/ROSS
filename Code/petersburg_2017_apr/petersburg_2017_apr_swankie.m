@@ -4,7 +4,7 @@ function swankie = petersburg_2017_apr_swankie()
 %    5      |--> STARBOARD
 %  4   2   
 swankie0.proc.heading_offset = 45;
-swankie0.proc.adcp_load_function = 'adcp_parse';
+swankie0.proc.adcp_load_func = 'adcp_parse';
 %--------------------------------------------------------%
 dep = 1;
 swankie(dep).name       = 'SWANKIE_test1';

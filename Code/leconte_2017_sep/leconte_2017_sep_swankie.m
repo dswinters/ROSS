@@ -80,7 +80,10 @@ swankie(dep).tlim = datenum([...
     '14-Sep-2017 21:45:00';
     '14-Sep-2017 22:02:00']);
 
-
+%--------------------------------------------------------%
+dep = dep+1;
+swankie(dep).name      = 'swankie_deployment_20170916_002146';
+swankie(dep).dirs.raw  = 'deployment_20170916_002146';
 
 
 % Fill defaults

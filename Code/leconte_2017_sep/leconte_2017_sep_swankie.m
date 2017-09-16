@@ -20,7 +20,6 @@ defaults.files.map = 'leconte_terminus';
 defaults.proc.skip = false;
 defaults.proc.use_3beam = false;
 defaults.proc.adcp_raw2mat = false;
-defaults.proc.nmea = {'GPRMC','HEHDT','PASHR','GPGGA'};
 trim_corr_edge = struct('name','corr_edge','params','beam');
 defaults.proc.trim_methods(1) = trim_corr_edge;
 

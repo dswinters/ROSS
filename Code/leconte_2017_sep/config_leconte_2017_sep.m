@@ -18,7 +18,10 @@ Config(3).name = 'Swankie';
 Config(1).deployments = leconte_2017_sep_casey();
 Config(2).deployments = leconte_2017_sep_rosie();
 Config(3).deployments = leconte_2017_sep_swankie();
+
+%========================================================
 % Set up directories
+%========================================================
 scishare = '/Volumes/data/20170912_Alaska/';
 for i = 1:3
     subdir = [Config(i).name '/'];
@@ -37,6 +40,7 @@ ross_defaults.files.coastline       = 'leconte2_grid_coastline.mat';
 ross_defaults.proc.skip             = false;
 ross_defaults.proc.trim_methods(1)  = notrim;
 ross_defaults.proc.filters(1)       = notrim;
+ross_defaults.proc.nmea             = {'GPRMC','HEHDT','PASHR','GPGGA'};
 ross_defaults.plot.ylim             = [0 200];
 ross_defaults.plot.lonlim           = [-132.3768 -132.3470];
 ross_defaults.plot.latlim           = [56.8228 56.8434];
@@ -45,7 +49,9 @@ ross_defaults.proc.gps_raw2mat      = false;
 ross_defaults.files.gps             = 'GPS/*.log';
 ross_defaults.files.adcp            = 'ADCP/*timestamped*.bin';
 
+%========================================================
 % Figures
+%========================================================
 ross_defaults.plot.make_figure.summary       = true;
 ross_defaults.plot.make_figure.echo_intens   = true;
 ross_defaults.plot.make_figure.corr          = true;

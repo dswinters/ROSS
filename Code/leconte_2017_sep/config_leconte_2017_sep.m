@@ -40,7 +40,7 @@ end
 % Default options
 %========================================================
 % Global
-all_defaults.map               = 'leconte_terminus';
+all_defaults.files.map         = 'leconte_terminus';
 all_defaults.files.coastline   = 'leconte2_grid_coastline.mat';
 all_defaults.proc.skip         = false; % only skip if explicitly directed
 all_defaults.plot.ylim         = [0 200];

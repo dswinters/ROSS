@@ -82,28 +82,30 @@ gps.GPRMC.dn(idx) = gps.GPRMC.dn(idx) + datenum([2000 0 0 0 0 0]);
 
 
 %% Interpolate pitch and roll from PASHR lines
-n1 = length(gps.GPRMC.lnum);
-n2 = length(gps.PASHR.lnum);
-idx = [[  1+zeros(1,n1),    2+zeros(1,n2)];
-       [gps.GPRMC.lnum',  gps.PASHR.lnum'];
-       [           1:n1,             1:n2]];
-if ~isempty(idx)
-    s = full(sparse(idx(1,:),idx(2,:),idx(3,:)));
-    s = s(:,~all(s==0));
-    gprmc0 = find(s(1,:)>0,1,'first');
-    s = s(:,gprmc0:end);
-    s = [s(1,:); s(2,2:end) 0];
-    s = s(:,~any(s==0));
-    %
-    dn = gps.GPRMC.dn(s(1,:));
-    p  = gps.PASHR.pitch(s(2,:));
-    r  = gps.PASHR.roll(s(2,:));
-    p_pashr = interp1(dn,p,gps.GPRMC.dn);
-    r_pashr = interp1(dn,r,gps.GPRMC.dn);
-else
-    warning('Unable to compute timestamps for $PASHR data')
-    p_pashr = [];
-    r_pashr = [];
+p_pashr = [];
+r_pashr = [];
+if ismember('PASHR',D.proc.nmea)
+    n1 = length(gps.GPRMC.lnum);
+    n2 = length(gps.PASHR.lnum);
+    idx = [[  1+zeros(1,n1),    2+zeros(1,n2)];
+           [gps.GPRMC.lnum',  gps.PASHR.lnum'];
+           [           1:n1,             1:n2]];
+    if ~isempty(idx)
+        s = full(sparse(idx(1,:),idx(2,:),idx(3,:)));
+        s = s(:,~all(s==0));
+        gprmc0 = find(s(1,:)>0,1,'first');
+        s = s(:,gprmc0:end);
+        s = [s(1,:); s(2,2:end) 0];
+        s = s(:,~any(s==0));
+        %
+        dn = gps.GPRMC.dn(s(1,:));
+        p  = gps.PASHR.pitch(s(2,:));
+        r  = gps.PASHR.roll(s(2,:));
+        p_pashr = interp1(dn,p,gps.GPRMC.dn);
+        r_pashr = interp1(dn,r,gps.GPRMC.dn);
+    else
+        warning('Unable to compute timestamps for $PASHR data')
+    end
 end
 
 %% Interpolate heading from HEHDT lines

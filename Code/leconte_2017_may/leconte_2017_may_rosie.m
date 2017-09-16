@@ -7,10 +7,12 @@ rosie0.proc.heading_offset = 135;
 rosie0.tlim = [-inf inf];
 rosie0.plot.ylim = [0 200];
 rosie0.proc.adcp_load_function = 'adcp_parse';
-rosie0.proc.ross_timestamps = 'post';
+rosie0.proc.adcp_load_args = {'ross','post'};
 rosie0.proc.skip = true;
 rosie0.files.adcp = 'ADCP/*timestamped*.bin';
 rosie0.files.gps  = 'GPS/*.log';
+rosie0.proc.nmea = {'GPRMC','HEHDT','PASHR','GPGGA'};
+
 dep=0;
 %--------------------------------------------------------%
 % Define some filters                                    %

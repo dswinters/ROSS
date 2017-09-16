@@ -1,4 +1,4 @@
-function [trip deployments] = leconte_2017_may_deployments()
+function Config = config_leconte_2017_may()
 
 %========================================================
 % Trip info
@@ -19,6 +19,7 @@ notrim = newfilt('none',[]);
 % Default options
 %========================================================
 defaults.files.map             = 'leconte_terminus';
+defaults.files.coastline       = 'leconte2_grid_coastline.mat';
 defaults.proc.skip             = false;
 defaults.proc.trim_methods(1)  = trim_ei_edge_b;
 defaults.proc.filters(1)       = filt_rotmax3;
@@ -30,17 +31,19 @@ defaults.plot.map.coastline    = '../Maps/leconte2_grid_coastline.mat';
 %=======================================================
 % Rosie deployments (150 hHz PAVS, Alaska flag)
 %========================================================
-rosie = leconte_2017_may_rosie();
-rosie = ross_fill_defaults(rosie,defaults);
-
+Config(1).name = 'Rosie';
+Config(1).deployments = leconte_2017_may_rosie();
 %========================================================
 % Swankie deployments (300 kHz Sentinel V, Sweden flag)
 %========================================================
-swankie = leconte_2017_may_swankie();
-swankie = ross_fill_defaults(swankie,defaults);
+Config(2).name = 'Swankie';
+Config(2).deployments = leconte_2017_may_swankie();
 
-%========================================================
-% Combine deployment structures into final cell array
-%========================================================
-deployments = {rosie, swankie};
+for i = 1:length(Config)
+    if ~isempty(Config(i).deployments)
+        Config(i).deployments = ross_fill_defaults(...
+            Config(i).deployments,...
+            defaults);
+    end
+end
 

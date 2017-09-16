@@ -39,6 +39,7 @@ Config(2).deployments = leconte_2017_sep_rosie();
 Config(3).name = 'Swankie';
 Config(3).deployments = leconte_2017_sep_swankie();
 
+
 for i = 1:length(Config)
     if ~isempty(Config(i).deployments)
         Config(i).deployments = ross_fill_defaults(...

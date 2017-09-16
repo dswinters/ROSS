@@ -13,12 +13,14 @@ dep = 0;
 %--------------------------------------------------------%
 swankie0.proc.heading_offset = 45;
 swankie0.proc.adcp_load_function = 'adcp_parse';
+swankie0.proc.adcp_load_args = {'ross','post'};
 swankie0.tlim = [-inf inf];
-swankie0.proc.ross_timestamps = 'pre';
 swankie0.files.map = 'none';
 swankie0.proc.skip = false;
 swankie0.files.adcp = 'ADCP/*timestamped*.bin';
 swankie0.files.gps = 'GPS/*.log';
+swankie0.proc.nmea = {'GPRMC','HEHDT','PASHR','GPGGA'};
+
 
 %--------------------------------------------------------%
 % Define some filters                                    %

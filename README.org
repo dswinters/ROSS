@@ -45,7 +45,7 @@ The function defined in this file has no inputs and returns a ~Config~ structure
 as its only output. This structure contains file input/output information and
 processing instructions.
 
-Once again using the *leconte_2017_sep* cruise an an example:
+Using the *leconte_2017_sep* cruise an an example:
 
 #+BEGIN_SRC matlab
   >> Config = config_leconte_2017_sep()
@@ -63,7 +63,7 @@ Once again using the *leconte_2017_sep* cruise an an example:
 
 The 4 entries in the above ~Config~ example correspond to the 4 vessels used
 during this cruise: 3 ROSS kayaks (Casey, Rosie, and Swankie) and the MV
-Steller. The third entrybelongs to the ROSS kayak Swankie:
+Steller. The third entry belongs to the ROSS kayak Swankie:
 
 #+BEGIN_SRC matlab
   >> Config(3)
@@ -77,8 +77,9 @@ Steller. The third entrybelongs to the ROSS kayak Swankie:
              dirs: [1x1 struct]
 #+END_SRC
 
-The ~deployments~ structure will be described in the next section. The ~dirs~
-structure has 3 required fields (all are strings):
+The ~deployments~ structure will be described in the next section.
+
+The ~dirs~ structure has 3 required fields (all are strings):
 
 |-------+------------------------------------------------------------|
 | Field | Description                                                |
@@ -226,8 +227,8 @@ repository in the ~Code/figures/~ folder.
 
 *** Organizing cruise configuration
 
-It is not necessary to define all fields described in the previous directly
-within the cruise's ~config~ function. It might make sense to separate
+It is not necessary to define all fields described in the previous section
+directly within the cruise's ~config~ function. It might make sense to separate
 configuration into vessel-specific files which are in turn called from the main
 ~config~ function:
 
@@ -288,4 +289,26 @@ that has been broken into several files and streamlined using ~fill_defaults~:
   - [[Code/leconte_2017_sep/leconte_2017_sep_rosie][leconte_2017_sep_rosie]]
   - [[Code/leconte_2017_sep/leconte_2017_sep_swankie][leconte_2017_sep_swankie]]
   - [[Code/leconte_2017_sep/leconte_2017_sep_steller][leconte_2017_sep_steller]]
+
+
+** TODO Advanced customization
+
+There are several points during execution at which the program looks for
+cruise-specific functions and calls them, if they exist. These functions are
+described below, with some example applications. It can be useful to set up
+switch statements within these functions that trigger a certain set of
+instructions if a deployment name is matched. These functions allow for the
+addition of complex user-defined processing functions without modification of
+the core processing code.
+
+*** Additional pre-rotation ADCP processing (~cruise/cruise_proc_pre_rotation.m~)
+
+In case one wants to do additional processing that requires beam velocities
+before the rotation to earth coordinates. For example, remove data from a beam
+that was contaminated during a certain deployment.
+
+*** Additional post-rotation ADCP processing (~cruise/cruise_proc_post_rotation.m~)
+
+Similar, but after velocities have been rotated to earth coordinates.
+
 

@@ -33,7 +33,7 @@ for i = 1:3
 end
 
 %========================================================
-% Cruise default options
+% ROSS default options
 %========================================================
 ross_defaults.map                   = 'leconte_terminus';
 ross_defaults.files.coastline       = 'leconte2_grid_coastline.mat';
@@ -66,3 +66,4 @@ for i = 1:3
             ross_defaults);
     end
 end
+

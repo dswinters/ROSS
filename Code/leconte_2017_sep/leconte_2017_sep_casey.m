@@ -1,4 +1,4 @@
-function casey = leconte_2017_sep_casey()
+function config = leconte_2017_sep_casey()
 %--------------------------------------------------------%
 % ADCP orientation                                       %
 %--------------------------------------------------------%
@@ -6,6 +6,7 @@ function casey = leconte_2017_sep_casey()
 %  1   3    ^
 %    x      |--> STARBOARD
 %  4   2   
+config.name = 'Casey';
 casey = [];
 dep = 0;
 
@@ -28,3 +29,4 @@ defaults.proc.use_3beam = false;
 if ~isempty(casey)
     casey = ross_fill_defaults(casey,defaults);
 end
+config.deployments = casey;

@@ -1,4 +1,4 @@
-function rosie = leconte_2017_sep_rosie()
+function config = leconte_2017_sep_rosie()
 %--------------------------------------------------------%
 % ADCP orientation                                       %
 %--------------------------------------------------------%
@@ -6,6 +6,7 @@ function rosie = leconte_2017_sep_rosie()
 %  4   1    ^
 %    x      |--> STARBOARD
 %  2   3  
+config.name = 'Rosie';
 rosie = [];
 dep = 0;
 
@@ -27,3 +28,5 @@ defaults.proc.use_3beam = false;
 if ~isempty(rosie)
     rosie = ross_fill_defaults(rosie,defaults);
 end
+config.deployments = rosie;
+

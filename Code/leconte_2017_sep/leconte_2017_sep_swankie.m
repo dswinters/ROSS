@@ -1,4 +1,4 @@
-function swankie = leconte_2017_sep_swankie()
+function config = leconte_2017_sep_swankie()
 %--------------------------------------------------------%
 % ADCP orientation                                       %
 %--------------------------------------------------------%
@@ -6,6 +6,7 @@ function swankie = leconte_2017_sep_swankie()
 %  1   3    ^
 %    5      |--> STARBOARD
 %  4   2   
+config.name = 'Swankie';
 swankie = [];
 dep = 0;
 do_sections = true;
@@ -92,4 +93,4 @@ swankie(dep).tlim = datenum([...
 if ~isempty(swankie)
     swankie = ross_fill_defaults(swankie,defaults);
 end
-
+config.deployments = swankie;

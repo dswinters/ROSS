@@ -27,7 +27,7 @@ for i = 1:4
         Config(i).dirs.raw  = [scishare 'data/raw/ROSS/' subdir];
         Config(i).dirs.proc = [scishare 'data/processed/ADCP_ROSS/' subdir];
         Config(i).dirs.figs = [scishare 'figures/ROSS/' subdir];
-      case 4         % Steller
+      case 4       % Steller
         Config(i).dirs.raw  = [scishare 'data/raw/ADCP_steller/'];
         Config(i).dirs.proc = [scishare 'data/processed/ADCP_steller/'];
         Config(i).dirs.figs = [scishare 'figures/ADCP_steller/'];
@@ -35,7 +35,6 @@ for i = 1:4
     Config(i).dirs.maps = fullfile(getenv('HOME'),'OSU/ROSS/Maps/');
     Config(i).dirs.logs = fullfile(getenv('HOME'),'OSU/ROSS/org/');
 end
-% Steller
 
 %========================================================
 % Default options

@@ -35,6 +35,10 @@ for i = 1:length(Config)
         dep.files.gps_all   = fullfile(dep.dirs.raw_gps, gps_all);
         dep.files.adcp_all  = fullfile(dep.dirs.raw_adcp, adcp_all);
         dep.files.processed = fullfile(Config(i).dirs.proc, [dep.name '.mat']);
+
+        %% Add cruise and vessel information
+        dep.cruise = Config(i).cruise;
+        dep.vessel = Config(i).name;
                                        
         % Update deployment
         dep.dirs = rmfield(dep.dirs,'raw');

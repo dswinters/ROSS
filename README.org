@@ -1,5 +1,4 @@
 #+OPTIONS: ^:nil
-#+LATEX_HEADER: \usepackage[margin=0.5in]{geometry}
 #+TITLE: ADCP Data Processing
 #+AUTHOR: Dylan Winters
 

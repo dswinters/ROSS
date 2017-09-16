@@ -45,13 +45,16 @@ if exist(fn) == 2
     [config adcp] = feval(fn,config,ndep,adcp);
 end
 
-%% Process GPS data for ADCP data
-% For lat/lon/heading, this prioritizes:
-%  1. GPS logged to ROSS computer
-%  2. Pixhawk logs (using differential heading estimate)
+%% Interpolate GPS data to ADCP timestamps
 [adcp(:).gps] = deal(struct());
 for ia = 1:length(adcp)
-    [config, adcp(ia)] = ross_proc_gps(config,ndep,adcp(ia),gps);
+    adcp(ia).gps = struct(...
+        'dn' , interp1(gps.dn, gps.dn , adcp(ia).mtime)  ,...
+        'lat', interp1(gps.dn, gps.lat, adcp(ia).mtime)  ,...
+        'lon', interp1(gps.dn, gps.lon, adcp(ia).mtime)  ,...
+        'h'  , interp1(gps.dn, gps.h  , adcp(ia).mtime)  ,...
+        'vx' , interp1(gps.dn, gps.vx , adcp(ia).mtime)  ,...
+        'vy' , interp1(gps.dn, gps.vy , adcp(ia).mtime)) ;
 end
 
 %% Trim data

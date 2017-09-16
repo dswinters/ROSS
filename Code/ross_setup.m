@@ -1,28 +1,16 @@
 function Config = ross_setup(Config)
 
-dir_base = fullfile(getenv('HOME'),'OSU/ROSS/');
-Dirs = struct();
-Dirs.data = fullfile(dir_base, 'Data/');
-Dirs.figs = fullfile(dir_base, 'Figures/');
-Dirs.maps = fullfile(dir_base, 'Maps/');
-Dirs.logs = fullfile(dir_base, 'org/');
-Dirs.meta = fullfile(dir_base, 'Metadata/');
-
 for i = 1:length(Config)
-    Config(i).dirs        = Dirs;
-    subdir = fullfile(Config(i).cruise, Config(i).name, '/');
-    Config(i).dirs.data = fullfile(Dirs.data, subdir);
-    Config(i).dirs.figs = fullfile(Dirs.figs, subdir);
-    Config(i).dirs.proc = fullfile(Dirs.data, subdir, 'processed/');
-    Config(i).dirs.raw  = fullfile(Dirs.data, subdir, 'raw/');
+
     % Fill default options
     if ~isempty(Config(i).deployments)
         Config(i).deployments = ross_fill_defaults(Config(i).deployments,ross_defaults());
     end
-    
+
+    % Set up deployments
     for d = 1:length(Config(i).deployments)
         dep = Config(i).deployments(d);
-        subdir_raw    = dep.dirs.raw; % e.g. <recovery>/
+        subdir_raw    = dep.dirs.raw;
 
         %% Make full directories
         dir_raw     = fullfile(Config(i).dirs.raw, subdir_raw, '/');
@@ -37,10 +25,10 @@ for i = 1:length(Config)
         gps_all  = [lower(Config(i).name) '_' subdir_raw '_gps.mat'];
         adcp_all = [lower(Config(i).name) '_' subdir_raw '_adcp.mat'];
         %
-        dep.files.gps       = fullfile(dir_raw, dep.dirs.raw_gps, {gps_files.name});
-        dep.files.adcp      = fullfile(dir_raw, dep.dirs.raw_adcp, {adcp_files.name});
-        dep.files.gps_mat   = fullfile(dir_raw, [dep.name '_gps.mat']);
-        dep.files.adcp_mat  = fullfile(dir_raw, [dep.name '_adcp.mat']);
+        dep.files.gps       = fullfile(dep.dirs.raw_gps, {gps_files.name});
+        dep.files.adcp      = fullfile(dep.dirs.raw_adcp, {adcp_files.name});
+        dep.files.gps_mat   = fullfile(dep.dirs.raw_gps, [dep.name '_gps.mat']);
+        dep.files.adcp_mat  = fullfile(dep.dirs.raw_adcp, [dep.name '_adcp.mat']);
         dep.files.map       = fullfile(Config(i).dirs.maps,dep.files.map);
         dep.files.coastline = fullfile(Config(i).dirs.maps,dep.files.coastline);
         dep.files.gps_all   = fullfile(dep.dirs.raw_gps, gps_all);

@@ -1,4 +1,4 @@
-function deps = ross_fill_defaults(deps,defaults)
+function deps = fill_defaults(deps,defaults)
 
 depflds = fields(deps);
 defflds = fields(defaults);

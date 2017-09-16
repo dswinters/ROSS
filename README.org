@@ -1,53 +1,292 @@
 #+OPTIONS: ^:nil
 #+LATEX_HEADER: \usepackage[margin=0.5in]{geometry}
-#+TITLE: ROSS Data Processing
+#+TITLE: ADCP Data Processing
 #+AUTHOR: Dylan Winters
 
-* TODO Overview
-This repository is designed to serve as both a code repository and lab
-notebook for processing data from Robotic Oceanographic Surface
-Sampler (ROSS) kayaks. 
-
-** File/Folder Structure
-[[./Code][Code]], data, and [[./Figures][figures]] are organized by trips > kayaks >
-deployments. Each trip has been given a unique name that is used for
-organization.
-
-** Deployment Files
-Each trip requires a deployment file that contains processing
-instructions for each kayak deployment.
-
-See [[./Code/petersburg_2017_apr/petersburg_2017_apr_deployments.m][petersburg_2017_apr_deployments.m]] for an example deployment
-file. Note that for this trip, deployment information has been
-separated into different functions for each kayak: [[Code/petersburg_2017_apr/petersburg_2017_apr_rosie.m][Rosie]], [[Code/petersburg_2017_apr/petersburg_2017_apr_casey.m][Casey]], and
-[[Code/petersburg_2017_apr/petersburg_2017_apr_swankie.m][Swankie]].
-
-* Data Sets
-
-** 2016 Aug - LeConte Glacier
-- [[org/leconte_2016_aug_rosie.org][Rosie processing log & figures]]
-- [[org/leconte_2016_aug_casey.org][Casey processing log & figures]]
-
-** 2016 Nov - Palau
-- [[org/palau_2016_nov_ata.org][Ata processing log & figures]]
-
-** TODO 2017 Jan - Newport
-** 2017 Jan - Puget Sound
-- [[org/puget_2017_jan_spanky.org][Spanky processing log & figures]]
-- [[org/puget_2017_jan.org][Additional notes]]
+A modular framework for processing vessel-mounted Acoustic Doppler Current
+Profiler (ADCP) data. This code is designed to centralize core processing
+functions while retaining enough flexibility to process data from a variety of
+sources and handle different organizational structures with minimal
+configuration.
 
 
-** 2017 Apr - Petersburg
-- [[org/petersburg_2017_apr_rosie.org][Rosie processing log & figures]]
-- [[org/petersburg_2017_apr_swankie.org][Swankie processing log & figures]]
-- [[org/petersburg_2017_apr.org][Additional notes]]
+* Configuration
+
+Configuration is abstracted into three levels: cruises, vessels, and
+deployments. 
+
+- A *cruise* is the highest level of abstraction. This is usually named after
+  the date and location of an experiment involving one or more vessel-mounted
+  ADCPs. The cruise name is used as a directory for vessel- and
+  deployment-specific code, and is the only required input to the outermost
+  processing function.
+
+- A *vessel* is any ship or other mobile platform on which an ADCP is mounted
+  during a cruise. Each vessel has an entry in the main processing program's
+  configuration structure, containing basic information about the vessel (such
+  as its name). Separating configuration by vessels is useful for configuring
+  deployments which may share many properties.
+
+- A *deployment* is the lowest level of abstraction. Think of deployments as
+  discrete units that pass through the processing code. For each deployment, raw
+  data is loaded or parsed and a processed data file is created.
+
+** Configuring a new dataset
+
+*** Cruise configuration
+
+The first step to configuring a new dataset is to assign a cruise name and
+create a folder within the ~Code~ directory. A MATLAB function named after the
+cruise and prefixed with ~config_~ must be present in this directory. As an
+example, note that the *leconte_2017_sep* cruise has a ~Code/leconte_2017_sep/~
+directory containing ~config_leconte_2017_sep.m~. *A file of this form is
+necessary for each cruise*.
+
+The function defined in this file has no inputs and returns a ~Config~ structure
+as its only output. This structure contains file input/output information and
+processing instructions.
+
+Once again using the *leconte_2017_sep* cruise an an example:
+
+#+BEGIN_SRC matlab
+  >> Config = config_leconte_2017_sep()
+
+  Config = 
+
+    1x4 struct array with fields:
+
+      name
+      deployments
+      dirs
+#+END_SRC
+
+*** Vessel configuration
+
+The 4 entries in the above ~Config~ example correspond to the 4 vessels used
+during this cruise: 3 ROSS kayaks (Casey, Rosie, and Swankie) and the MV
+Steller. The third entrybelongs to the ROSS kayak Swankie:
+
+#+BEGIN_SRC matlab
+  >> Config(3)
+
+  ans = 
+
+    struct with fields:
+
+             name: 'Swankie'
+      deployments: [1x19 struct]
+             dirs: [1x1 struct]
+#+END_SRC
+
+The ~deployments~ structure will be described in the next section. The ~dirs~
+structure has 3 required fields (all are strings):
+
+|-------+------------------------------------------------------------|
+| Field | Description                                                |
+|-------+------------------------------------------------------------|
+| raw   | The base directory from which raw data is read             |
+| proc  | The base directory to which processed data will be written |
+| figs  | The base directory to which figures will be writted        |
+|-------+------------------------------------------------------------|
+
+On this particular cruise, we had a network drive which I mounted at
+~/Volumes/data/~. The values of the fields in ~dirs~ reflect the organizational
+structure of the files stored on this drive:
+
+#+BEGIN_SRC matlab
+  >> Config(3).dirs
+
+  ans = 
+
+    struct with fields:
+
+       raw: '/Volumes/data/20170912_Alaska/data/raw/ROSS/Swankie/'
+      proc: '/Volumes/data/20170912_Alaska/data/processed/ADCP_ROSS/Swankie/'
+      figs: '/Volumes/data/20170912_Alaska/figures/ROSS/Swankie/'
+#+END_SRC
+
+Compare this to the ~dirs~ structure in the MV Steller's ~Config~ entry for an
+example of handling different organizational structures on a per-vessel basis:
+
+#+BEGIN_SRC matlab
+>> Config(4).dirs
+
+ans = 
+
+  struct with fields:
+
+     raw: '/Volumes/data/20170912_Alaska/data/raw/ADCP_steller/'
+    proc: '/Volumes/data/20170912_Alaska/data/processed/ADCP_steller/'
+    figs: '/Volumes/data/20170912_Alaska/figures/ADCP_steller/'
+#+END_SRC
+
+*** Deployment configuration
+
+The majority of configuration information is stored within each vessel's
+~deployments~ structure. Entries in this structure contain processing
+instructions and information for locating deployment-specific files - they are
+similar to the vessel ~Config~ structure in which they are contained:
+
+|-------+---------------------------------+--------|
+| Field | Description                     | Type   |
+|-------+---------------------------------+--------|
+| name  | Deployment name                 | string |
+| tlim  | Deployment start and end time   | vector |
+| dirs  | Deployment-specific directories | struct |
+| files | Deployment-specific files       | strucg |
+| proc  | Processing options              | struct |
+| plot  | Plotting options                | struct |
+|-------+---------------------------------+--------|
+
+#+BEGIN_SRC matlab
+>> Config(3).deployments
+
+ans = 
+
+  1x19 struct array with fields:
+
+    name
+    dirs
+    tlim
+    proc
+    plot
+    files
+#+END_SRC
+
+The ~name~ and ~tlim~ fields are straightforward. The other fields are described
+below. *Any field without a default value must be specified by the user*.
+Otherwise, unspecified options will be filled with their default values.
+
+**** ~dirs~: Deployment-specific directories
+
+|-------+----------------------------------------+--------------------------------|
+| Field | Description                            | Example                        |
+|-------+----------------------------------------+--------------------------------|
+| ~raw~ | deployment-specific raw data directory | ~'deployment_20170913_132345'~ |
+|-------+----------------------------------------+--------------------------------|
+
+*Note*: If deployment data is not separated by directories (i.e. all data are
+within the vessel's ~dirs.raw~ folder), this can be set to an empty string. This
+is often the case with data logged by ADCP data acquisition programs, e.g.
+VMDAS, which dump many ~.ENR~ (raw ADCP) and ~.N1R~ (navigation) data into the
+same folder.
+
+**** ~files~: Deployment-specific files
+
+|--------+--------------------+----------------+----------------------------|
+| Field  | Description        | Type           | Example                    |
+|--------+--------------------+----------------+----------------------------|
+| ~gps~  | raw GPS filenames  | String or Cell | ~'GPS/*.log'~              |
+| ~adcp~ | raw ADCP filenames | String or Cell | ~'ADCP/*timestamped*.bin'~ |
+|--------+--------------------+----------------+----------------------------|
+
+If these fields are strings, they are used as completion patterns with MATLAB's
+~dir~ function (a full filename will match an individual file). If they are cell
+arrays of strings, each string will be used as a completion pattern.
+
+In the example shown, file completion patterns with wildcards are used to match
+all files of a certain type within a directory. However, GPS and ADCP data need
+not be in distinct directories, and completion patterns need not contain
+wildcards.
+
+**** ~proc~: Processing options
+
+|------------------+-------------------------------------------------------------+--------+------------------------|
+| Field            | Description                                                 | Type   | Default                |
+|------------------+-------------------------------------------------------------+--------+------------------------|
+| ~heading_offset~ | ADCP vessel mounting offset                                 | double | none                   |
+| ~trim_methods~   | Method(s) to use for trimming ADCP data                     | struct | none                   |
+| ~adcp_load_func~ | The function to use for parsing raw ADCP data               | string | ~'adcp_rdradcp_multi'~ |
+| ~adcp_load_args~ | Additional arguments to pass to ~adcp_load_func~            | cell   | ~{}~                   |
+| ~nmea~           | NMEA prefixes contained in GPS data files                   | cell   | ~{'GPRMC','HEHDT'}~    |
+| ~skip~           | A flag to skip processing deployments                       | bool   | ~false~                |
+| ~adcp_raw2mat~   | A flag to force re-parsing of raw ADCP data                 | bool   | ~false~                |
+| ~gps_raw2mat~    | A flag to force re-parsing of raw GPS data                  | bool   | ~false~                |
+| ~use_3beam~      | A flag for using all 3-beam solutions (for Sentinel V ADCP) | bool   | ~false~                |
+|------------------+-------------------------------------------------------------+--------+------------------------|
+
+**** ~plot~: Plotting options
+
+|---------------+--------------------------------------------------------+--------+-----------|
+| Field         | Description                                            | Type   | Default   |
+|---------------+--------------------------------------------------------+--------+-----------|
+| ~lonlim~      | Longitudinal axis limits for spatial plots             | double | ~none~    |
+| ~latlim~      | Latitudinal axis limits for spatial plots              | double | ~none~    |
+| ~make_figure~ | Structure containing flags for making specific figures | struct | all false |
+| ~ylim~        | Vertical axis limits for 2d plots                      | double | ~[0 200]~ |
+|---------------+--------------------------------------------------------+--------+-----------|
+
+***** ~plot.make_figure~: Figure flags
+
+For each entry in this structure, a corresponding figure function will be called
+if its value is true. For example, if ~make_figure.summary == true~, then the
+function ~figure_make_summary~ will be called using the deployment's
+configuration as input. There are several figure functions included in this
+repository in the ~Code/figures/~ folder.
 
 
-** 2017 May - LeConte Glacier
-- [[org/leconte_2017_may_swankie.org][Swankie processing log & figures]]
-** 2017 Sep - LeConte Glacier
-- [[org/leconte_2017_sep_casey.org][Casey processing log & figures]]
-- [[org/leconte_2017_sep_rosie.org][Rosie processing log & figures]]
-- [[org/leconte_2017_sep_swankie.org][Swankie processing log & figures]]
+*** Organizing cruise configuration
 
+It is not necessary to define all fields described in the previous directly
+within the cruise's ~config~ function. It might make sense to separate
+configuration into vessel-specific files which are in turn called from the main
+~config~ function:
+
+#+BEGIN_SRC matlab
+Config(1) = leconte_2017_sep_casey();
+Config(2) = leconte_2017_sep_rosie();
+Config(3) = leconte_2017_sep_swankie();
+Config(4) = leconte_2017_sep_steller();
+#+END_SRC
+
+*** Using ~fill_defaults~
+
+It can be tedious and cumbersome to repeatedly specify the same options for
+deployments that share properties. The [[Code/fill_defaults.m][~fill_defaults~]] function can be used to
+avoid this by recursively replacing blank or non-existent fields in a structure
+with those from a template, or "default", structure. For example, we can fill a
+structure named ~incomplete~ with default values from a structured named
+~defaults~:
+
+#+BEGIN_SRC matlab
+  >> incomplete
+
+  incomplete = 
+
+    struct with fields:
+
+           someField: 'I will not be overwritten'
+      someOtherField: []
+
+  >> defaults
+
+  defaults = 
+
+    struct with fields:
+
+              someField: 'I want to overwrite someField!'
+         someOtherField: 'I am a default value!'
+      anotherOtherField: 'Where did this field come from?'
+
+  >> fill_defaults(incomplete,defaults)
+
+  ans = 
+
+    struct with fields:
+
+              someField: 'I will not be overwritten'
+         someOtherField: 'I am a default value!'
+      anotherOtherField: 'Where did this field come from?'
+#+END_SRC
+
+*** Complete example
+
+See the [[Code/leconte_2017_sep/][leconte_2017_sep]] folder for a complete example of a cruise configuration
+that has been broken into several files and streamlined using ~fill_defaults~:
+
+- [[Code/leconte_2017_sep/config_leconte_2017_sep][config_leconte_2017_sep]]
+  - [[Code/leconte_2017_sep/leconte_2017_sep_casey][leconte_2017_sep_casey]]
+  - [[Code/leconte_2017_sep/leconte_2017_sep_rosie][leconte_2017_sep_rosie]]
+  - [[Code/leconte_2017_sep/leconte_2017_sep_swankie][leconte_2017_sep_swankie]]
+  - [[Code/leconte_2017_sep/leconte_2017_sep_steller][leconte_2017_sep_steller]]
 

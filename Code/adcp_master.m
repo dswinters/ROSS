@@ -15,6 +15,6 @@ addpath(cruise_name); % add cruise-specific functions to path
 addpath('adcp_figures/');  % add figure functions to path
 addpath('misc/');
 
-Config = adcp_setup(cruise_name,varargin{:}); % filepaths and directories
+Config = config_setup(cruise_name,varargin{:}); % filepaths and directories
 Config = proc_all_deployments(Config);  % Process deployments!
 

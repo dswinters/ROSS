@@ -8,14 +8,14 @@ and watch it go!
 
 Calls:
 - ~config_cruise~
-- ~adcp_setup~
+- ~config_setup~
 - ~proc_all_deployments~
 
 ** ~config_cruise~
 Locate and run the cruise-specific configuration file that initializes cruise
 and deployment options.
 
-** ~adcp_setup~
+** ~config_setup~
 Take the cruise-specific configuration information and create a config structure
 that contains paths to files and directories that will be used during
 processing. Any unspecified options default to those specified in

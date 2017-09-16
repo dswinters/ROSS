@@ -291,12 +291,12 @@ that has been broken into several files and streamlined using ~fill_defaults~:
   - [[Code/leconte_2017_sep/leconte_2017_sep_steller][leconte_2017_sep_steller]]
 
 
-** TODO Advanced customization
+** TODO Custom configuration
 
 There are several points during execution at which the program looks for
 cruise-specific functions and calls them, if they exist. These functions are
 described below, with some example applications. It can be useful to set up
-switch statements within these functions that trigger a certain set of
+switch statements within these functions that execute a certain set of
 instructions if a deployment name is matched. These functions allow for the
 addition of complex user-defined processing functions without modification of
 the core processing code.

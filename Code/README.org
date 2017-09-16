@@ -8,32 +8,32 @@ and watch it go!
 
 Calls:
 - ~cruise_config~
-- ~ross_setup~
-- ~ross_proc_all_deployments~
+- ~adcp_setup~
+- ~adcp_proc_all_deployments~
 
 ** ~cruise_config~
 Locate and run the cruise-specific configuration file that initializes cruise
 and deployment options.
 
-** ~ross_setup~
+** ~adcp_setup~
 Take the cruise-specific configuration information and create a config structure
 that contains paths to files and directories that will be used during
 processing. Any unspecified options default to those specified in
-- ~ross_defaults()~.
+- ~adcp_defaults()~.
 
 Calls:
 - ~fill_defaults~
-- ~ross_defaults~
+- ~adcp_defaults~
 - ~ross_post_setup~
 
-** ~ross_proc_all_deployments~
-A simple wrapper around ~ross_proc_deployment~ for processing all deployments
+** ~adcp_proc_all_deployments~
+A simple wrapper around ~adcp_proc_deployment~ for processing all deployments
 from all kayaks.
 
 Calls:
-- ~ross_proc_deployment~
+- ~adcp_proc_deployment~
 
-* ~ross_proc_deployment~
+* ~adcp_proc_deployment~
 
 The main processing function that works on one deployment at a time. At a high
 level, this will:

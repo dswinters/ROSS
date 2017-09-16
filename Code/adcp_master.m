@@ -16,5 +16,5 @@ addpath('adcp_figures/');  % add figure functions to path
 addpath('misc/');
 
 Config = adcp_setup(cruise_name,varargin{:}); % filepaths and directories
-Config = adcp_proc_all_deployments(Config);  % Process deployments!
+Config = proc_all_deployments(Config);  % Process deployments!
 

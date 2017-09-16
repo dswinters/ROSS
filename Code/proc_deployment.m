@@ -1,5 +1,5 @@
-%% adcp_proc_deployment.m
-% Usage: config = adcp_proc_deployment(config,ndep)
+%% proc_deployment.m
+% Usage: config = proc_deployment(config,ndep)
 % Description: Save a structure with processed ROSS deployment data
 %              using the given ROSS control structure and deployment
 %              number.
@@ -10,7 +10,7 @@
 % Author: Dylan Winters
 % Created: 2016-10-14
 
-function config = adcp_proc_deployment(config,ndep)
+function config = proc_deployment(config,ndep)
 D = config.deployments(ndep);
 
 %% Set up logging on first deployment

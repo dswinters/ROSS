@@ -50,7 +50,7 @@ level, this will:
 
 Calls:
 - ~load_adcp~
-- ~ross_load_gps~
+- ~load_gps~
 - ~ross_proc_gps~
 - ~adcp_trim_data~
 - deployment-specific pre-rotation function

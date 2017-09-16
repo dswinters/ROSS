@@ -1,4 +1,4 @@
-function ross = ross_leconte_2016_aug_calibrate_compass(ross)
+function ross = leconte_2016_aug_calibrate_compass(ross)
 
 icasey = find(strcmp({ross.name},'Casey'));
 
@@ -24,7 +24,7 @@ else
             c.dn = cat(2,c.dn,adcp.mtime);
             c.h = cat(2,c.h,adcp.heading);
             %
-            [gps adcp] = ross_load_gps(r,ndep);
+            [gps adcp] = load_gps(r,ndep);
             n.dn = cat(2,n.dn,gps.dn');
             n.h = cat(2,n.h,gps.h');
         end

@@ -1,4 +1,4 @@
-function [gps] = ross_load_gps(config,ndep)
+function [gps] = load_gps(config,ndep)
 
 %% Load logged gps data
 D = config.deployments(ndep);

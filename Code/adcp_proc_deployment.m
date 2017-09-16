@@ -34,7 +34,7 @@ diary off
 
 %% Load ADCP data, load & pre-process GPS data
 adcp = load_adcp(config,ndep);
-gps = ross_load_gps(config,ndep);
+gps = load_gps(config,ndep);
 if ~isfield(adcp,'info')
     [adcp(:).info] = deal({});
 end

@@ -1,4 +1,4 @@
-function A = ross_load_adcp(config,ndep)
+function A = load_adcp(config,ndep)
 
 D = config.deployments(ndep);
 matfile = D.files.adcp_mat;

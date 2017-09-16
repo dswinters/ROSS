@@ -49,7 +49,7 @@ level, this will:
 - Create figures
 
 Calls:
-- ~ross_load_adcp~
+- ~load_adcp~
 - ~ross_load_gps~
 - ~ross_proc_gps~
 - ~adcp_trim_data~

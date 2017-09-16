@@ -33,7 +33,7 @@ disp(sprintf('\n** %d. %s', ndep, D.name));
 diary off
 
 %% Load ADCP data, load & pre-process GPS data
-adcp = ross_load_adcp(config,ndep);
+adcp = load_adcp(config,ndep);
 gps = ross_load_gps(config,ndep);
 if ~isfield(adcp,'info')
     [adcp(:).info] = deal({});

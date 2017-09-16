@@ -20,7 +20,7 @@ else
     r = ross(icasey);
     for ndep = 1:length(r.deployments)
         if r.deployments(ndep).ADCP.freq == 600
-            adcp = ross_load_adcp(r,ndep);
+            adcp = load_adcp(r,ndep);
             c.dn = cat(2,c.dn,adcp.mtime);
             c.h = cat(2,c.h,adcp.heading);
             %

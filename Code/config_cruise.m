@@ -1,7 +1,7 @@
-function Config = cruise_config(cruise_name,varargin)
+function Config = config_cruise(cruise_name,varargin)
 
-cruise_config_func = ['config_' cruise_name];
-Config = feval(cruise_config_func);
+config_cruise_func = ['config_' cruise_name];
+Config = feval(config_cruise_func);
 [Config.cruise] = deal(cruise_name);
 
 % Limit to specified vessel(s)

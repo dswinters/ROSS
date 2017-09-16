@@ -7,11 +7,11 @@ The outermost function, called directly by the user. Just give it a cruise name
 and watch it go!
 
 Calls:
-- ~cruise_config~
+- ~config_cruise~
 - ~adcp_setup~
 - ~adcp_proc_all_deployments~
 
-** ~cruise_config~
+** ~config_cruise~
 Locate and run the cruise-specific configuration file that initializes cruise
 and deployment options.
 

@@ -1,5 +1,5 @@
 function Config = adcp_setup(cruise_name,varargin)
-Config = cruise_config(cruise_name,varargin{:}); % Cruise configuration
+Config = config_cruise(cruise_name,varargin{:}); % Cruise configuration
 
 for i = 1:length(Config)
 

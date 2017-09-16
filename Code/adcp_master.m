@@ -14,6 +14,6 @@ function ross_master(cruise_name,varargin)
 addpath(cruise_name); % add cruise-specific functions to path
 addpath('figures/');  % add figure functions to path
 
-Config = ross_setup(cruise_name,varargin{:}); % filepaths and directories
-Config = ross_proc_all_deployments(Config);  % Process deployments!
+Config = adcp_setup(cruise_name,varargin{:}); % filepaths and directories
+Config = adcp_proc_all_deployments(Config);  % Process deployments!
 

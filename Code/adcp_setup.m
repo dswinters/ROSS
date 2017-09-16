@@ -1,11 +1,11 @@
-function Config = ross_setup(cruise_name,varargin)
+function Config = adcp_setup(cruise_name,varargin)
 Config = cruise_config(cruise_name,varargin{:}); % Cruise configuration
 
 for i = 1:length(Config)
 
     % Fill default options
     if ~isempty(Config(i).deployments)
-        Config(i).deployments = fill_defaults(Config(i).deployments,ross_defaults());
+        Config(i).deployments = fill_defaults(Config(i).deployments,adcp_defaults());
     end
 
     % Set up deployments

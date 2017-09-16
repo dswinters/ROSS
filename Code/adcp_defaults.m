@@ -1,4 +1,4 @@
-function defaults = ross_defaults();
+function defaults = adcp_defaults();
 defaults = struct();
 nofilt = struct('name','none','params',[]);
 

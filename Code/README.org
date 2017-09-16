@@ -24,7 +24,7 @@ processing. Any unspecified options default to those specified in
 Calls:
 - ~fill_defaults~
 - ~config_defaults~
-- ~hook_post_setup~
+- ~post_setup_hook~
 
 ** ~proc_all_deployments~
 A simple wrapper around ~proc_deployment~ for processing all deployments

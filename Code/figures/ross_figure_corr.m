@@ -3,6 +3,7 @@ function [ross, hfig] = ross_figure_corr(ross,ndep)
 load redblue
 dep = ross.deployments(ndep);
 adcp = load(dep.files.processed);
+adcp = adcp.adcp;
 
 maxrange = 0;
 for i = 1:length(adcp)

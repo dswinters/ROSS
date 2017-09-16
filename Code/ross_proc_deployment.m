@@ -145,7 +145,7 @@ end
 %% Save deployment file
 dirout = fileparts(D.files.processed);
 if ~exist(dirout,'dir'); mkdir(dirout); end
-save(D.files.processed,'-struct','adcp')
+save(D.files.processed,'adcp')
 
 fparts = strsplit(D.files.processed,'/');
 flink = fullfile('..',fparts{6:end});

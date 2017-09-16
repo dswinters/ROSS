@@ -6,6 +6,7 @@ if strcmp(dep.files.coastline(end-3:end),'none')
     return
 end
 adcp = load(dep.files.processed);
+adcp = adcp.adcp;
 cl = load(dep.files.coastline);
 
 

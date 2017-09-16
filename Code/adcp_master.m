@@ -11,7 +11,6 @@ function adcp_master(cruise_name,varargin)
 %   ADCP_MASTER(CRUISE_NAME,VESSEL,DEPLOYMENT) parses a single DEPLOYMENT of
 %   VESSEL. These are strings specifying a vessel and deployment name.
 
-addpath(cruise_name); % add cruise-specific functions to path
 addpath('adcp_figures/');  % add figure functions to path
 addpath('misc/');
 

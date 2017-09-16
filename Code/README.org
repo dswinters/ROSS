@@ -24,7 +24,7 @@ processing. Any unspecified options default to those specified in
 Calls:
 - ~fill_defaults~
 - ~config_defaults~
-- ~ross_post_setup~
+- ~hook_post_setup~
 
 ** ~proc_all_deployments~
 A simple wrapper around ~proc_deployment~ for processing all deployments

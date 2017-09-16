@@ -42,5 +42,5 @@ for i = 1:length(Config)
     end
 end
 
-Config = ross_post_setup(Config); % cruise-specific additional setup
+Config = hook_post_setup(Config); % cruise-specific additional setup
 

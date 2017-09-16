@@ -69,7 +69,7 @@ tlims = datenum(['13-Sep-2017 15:49:54';
                  '13-Sep-2017 16:16:20';
                  '13-Sep-2017 16:18:04']);
 if do_sections
-    [swankie,dep] = config_deployment_sections(swankie,dep,tlims,namefmt);
+    [swankie,dep] = deployment_sections(swankie,dep,tlims,namefmt);
 end
 
 %--------------------------------------------------------%

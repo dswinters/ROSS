@@ -19,11 +19,11 @@ and deployment options.
 Take the cruise-specific configuration information and create a config structure
 that contains paths to files and directories that will be used during
 processing. Any unspecified options default to those specified in
-- ~adcp_defaults()~.
+- ~config_defaults()~.
 
 Calls:
 - ~fill_defaults~
-- ~adcp_defaults~
+- ~config_defaults~
 - ~ross_post_setup~
 
 ** ~adcp_proc_all_deployments~

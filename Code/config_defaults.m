@@ -1,4 +1,4 @@
-function defaults = adcp_defaults();
+function defaults = config_defaults();
 defaults = struct();
 nofilt = struct('name','none','params',[]);
 

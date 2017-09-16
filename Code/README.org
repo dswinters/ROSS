@@ -1,7 +1,7 @@
 #+OPTIONS: ^:nil
 #+TITLE: ROSS Code
 
-* ~ross_master~
+* ~adcp_master~
 
 The outermost function, called directly by the user. Just give it a cruise name
 and watch it go!

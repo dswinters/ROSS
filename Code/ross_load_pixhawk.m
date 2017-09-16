@@ -1,7 +1,7 @@
 %% ross_load_pixhawk.m
 % Usage: pixhawk = ross_load_pixhawk(ross,flags)
 % Description: Create and/or load pixhawk data into a Matlab structure
-% Inputs: ross - control structure from ross_master.m
+% Inputs: ross - control structure from adcp_master.m
 % Outputs: pixhawk - A structure with fields: dn, lat, lon; one entry
 %                    per kayak
 % 

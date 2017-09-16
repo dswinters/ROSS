@@ -3,7 +3,7 @@
 % Description: Save a structure with processed ROSS deployment data
 %              using the given ROSS control structure and deployment
 %              number.
-% Inputs: config - one entry of ross config structure from ross_master.m
+% Inputs: config - one entry of ross config structure from adcp_master.m
 %         ndep - a deployment number
 % Outputs: config - modified ross confign structure
 % 

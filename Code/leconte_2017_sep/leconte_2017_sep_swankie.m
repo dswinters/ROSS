@@ -29,7 +29,7 @@ defaults.proc.trim_methods(1) = trim_corr_edge;
 %--------------------------------------------------------%
 dep = dep+1;
 % swankie(dep).proc.skip = true;
-swankie(dep).name      = 'swankie_deployment_2017091323';
+swankie(dep).name      = 'swankie_deployment_20170913_132345';
 swankie(dep).dirs.raw  = 'deployment_20170913_132345';
 swankie(dep).tlim = datenum([...
     '13-Sep-2017 14:03:47';

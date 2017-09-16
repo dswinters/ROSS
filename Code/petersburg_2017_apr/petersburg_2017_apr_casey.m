@@ -11,4 +11,4 @@ casey(dep).tlim       = datenum([;]);
 casey(dep).files.adcp = {};
 casey(dep).files.gps  = {};
 %--------------------------------------------------------%
-casey = ross_fill_defaults(casey,casey0);
+casey = fill_defaults(casey,casey0);

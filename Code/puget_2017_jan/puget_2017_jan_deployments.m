@@ -51,6 +51,6 @@ spanky(dep).files.gps = {'GPS_20170119120950.log';
                          'GPS_20170119131948.log'};
 
 %%% Final deployment structure
-spanky = ross_fill_defaults(spanky,defs);
+spanky = fill_defaults(spanky,defs);
 deployments = {spanky};
 

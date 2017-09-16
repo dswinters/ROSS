@@ -68,12 +68,12 @@ for i = 1:4
     if ~isempty(Config(i).deployments)
         switch i
           case {1,2,3}
-            Config(i).deployments = ross_fill_defaults(...
+            Config(i).deployments = fill_defaults(...
                 Config(i).deployments,...
                 ross_defaults);
         end
-        Config(i).deployments = ross_fill_defaults(Config(i).deployments,fig_defaults);
-        Config(i).deployments = ross_fill_defaults(Config(i).deployments,all_defaults);
+        Config(i).deployments = fill_defaults(Config(i).deployments,fig_defaults);
+        Config(i).deployments = fill_defaults(Config(i).deployments,all_defaults);
     end
 end
 

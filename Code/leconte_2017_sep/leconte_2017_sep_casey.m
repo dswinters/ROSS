@@ -21,6 +21,6 @@ defaults.proc.heading_offset = 45;
 
 % Fill defaults
 if ~isempty(casey)
-    casey = ross_fill_defaults(casey,defaults);
+    casey = fill_defaults(casey,defaults);
 end
 config.deployments = casey;

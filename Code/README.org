@@ -22,7 +22,7 @@ processing. Any unspecified options default to those specified in
 - ~ross_defaults()~.
 
 Calls:
-- ~ross_fill_defaults~
+- ~fill_defaults~
 - ~ross_defaults~
 - ~ross_post_setup~
 
@@ -66,7 +66,7 @@ Many of these function are self-explainatory. Some of these live in the
 
 Deployments are set up in the cruise-specific configuration file, e.g.
 [[./leconte_2017_sep/config_leconte_2017_sep.m][config_leconte_2017_sep.m]]. In this file, I've created multiple levels of options
-to fall back on by using ~ross_fill_defaults~ at a cruise-wide and per-kayak
+to fall back on by using ~fill_defaults~ at a cruise-wide and per-kayak
 level. The final outputs of a cruise config file are:
 
 - cruise
@@ -92,7 +92,7 @@ each time a deployment is added to the structure. For example:
 The above code block appends a deployment to Swankie's deployment structure.
 Below is a list of all deployment options. These can be specified
 per-deployment, or as default options to be filled in using
-~ross_fill_defaults~. 
+~fill_defaults~. 
 
 | Option                         | Description                                                                                 |
 |--------------------------------+---------------------------------------------------------------------------------------------|

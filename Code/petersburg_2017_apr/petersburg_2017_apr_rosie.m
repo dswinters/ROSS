@@ -83,7 +83,7 @@ rosie(dep).plot.ylim = [0 200];
 rosie(dep).proc.trim_methods = noflt;
 rosie(dep).proc.filters = rotmax;
 %--------------------------------------------------------%
-rosie = ross_fill_defaults(rosie,rosie0);
+rosie = fill_defaults(rosie,rosie0);
 
 
 

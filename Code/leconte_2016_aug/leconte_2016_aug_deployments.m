@@ -110,7 +110,7 @@ rosie(dep).files.gps = {'GPS_20160815001414.log';
                         'GPS_20160815013051.log'};
 %-------------------------------------------------------%
 
-rosie = ross_fill_defaults(rosie,rosie0);
+rosie = fill_defaults(rosie,rosie0);
 
 %% Kayak 2: Casey
 casey0.proc.skip = false;
@@ -208,7 +208,7 @@ casey(dep).files.gps = {'GPS_20160815004929.log'};
 casey(dep).proc.heading_offset = ADCP_300.h0;
 %-------------------------------------------------------%
 
-casey = ross_fill_defaults(casey,casey0);
+casey = fill_defaults(casey,casey0);
 
 master.kayaks = {'Rosie','Casey'};
 deployments = {rosie, casey};

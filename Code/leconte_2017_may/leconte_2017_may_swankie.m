@@ -293,5 +293,5 @@ swankie(dep).plot.ylim = [0 100];
 %--------------------------------------------------------%
 % Fill defaults                                          %
 %--------------------------------------------------------%
-swankie = ross_fill_defaults(swankie,swankie0);
+swankie = fill_defaults(swankie,swankie0);
 

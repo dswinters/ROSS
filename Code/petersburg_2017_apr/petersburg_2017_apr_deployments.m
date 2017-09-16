@@ -36,19 +36,19 @@ defaults.plot.ylim             = [0 20];
 % Rosie deployments (150 hHz PAVS, Alaska flag)
 %========================================================
 rosie = petersburg_2017_apr_rosie();
-rosie = ross_fill_defaults(rosie,defaults);
+rosie = fill_defaults(rosie,defaults);
 
 %========================================================
 % Casey deployments (300 kHz Workhorse, Norway flag)
 %========================================================
 casey = petersburg_2017_apr_casey();
-casey = ross_fill_defaults(casey,defaults);
+casey = fill_defaults(casey,defaults);
 
 %========================================================
 % Swankie deployments (300 kHz Sentinel V, Sweden flag)
 %========================================================
 swankie = petersburg_2017_apr_swankie();
-swankie = ross_fill_defaults(swankie,defaults);
+swankie = fill_defaults(swankie,defaults);
 
 %========================================================
 % Combine deployment structures into final cell array

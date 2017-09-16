@@ -19,7 +19,7 @@ defaults.proc.heading_offset = 135;
 
 % Fill defaults
 if ~isempty(rosie)
-    rosie = ross_fill_defaults(rosie,defaults);
+    rosie = fill_defaults(rosie,defaults);
 end
 config.deployments = rosie;
 

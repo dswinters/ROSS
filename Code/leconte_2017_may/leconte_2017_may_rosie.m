@@ -39,4 +39,4 @@ rosie(dep).dirs.raw = 'deployment_201705130300';
 rosie(dep).proc.trim_methods = newfilt('none',[]);
 %--------------------------------------------------------%
 
-rosie = ross_fill_defaults(rosie,rosie0);
+rosie = fill_defaults(rosie,rosie0);

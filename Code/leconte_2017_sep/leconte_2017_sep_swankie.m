@@ -85,6 +85,6 @@ swankie(dep).tlim = datenum([...
 
 % Fill defaults
 if ~isempty(swankie)
-    swankie = ross_fill_defaults(swankie,defaults);
+    swankie = fill_defaults(swankie,defaults);
 end
 config.deployments = swankie;

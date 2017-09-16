@@ -4,7 +4,7 @@ for i = 1:length(Config)
 
     % Fill default options
     if ~isempty(Config(i).deployments)
-        Config(i).deployments = ross_fill_defaults(Config(i).deployments,ross_defaults());
+        Config(i).deployments = fill_defaults(Config(i).deployments,ross_defaults());
     end
 
     % Set up deployments

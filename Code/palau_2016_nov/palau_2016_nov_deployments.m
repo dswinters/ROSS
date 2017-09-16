@@ -77,5 +77,5 @@ ata(dep).plot.ylim             = [0 100];
 ata(dep).proc.trim_methods(1)  = co90;
 %-------------------------------------------------------%
 
-ata                            = ross_fill_defaults(ata,ata0);
+ata                            = fill_defaults(ata,ata0);
 deployments                    = {ata};

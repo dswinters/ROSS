@@ -66,5 +66,5 @@ swankie(dep).proc.trim_methods = newfilt('none',[]);
 swankie(dep).proc.filters(1) = newfilt('rotmax',3);
 %--------------------------------------------------------%
 
-swankie = ross_fill_defaults(swankie,swankie0);
+swankie = fill_defaults(swankie,swankie0);
 

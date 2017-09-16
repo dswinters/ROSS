@@ -9,7 +9,7 @@ for d = 1:length(deps)
             deps(d).(defflds{i}) = defaults.(defflds{i});
         else
             if isstruct(deps(d).(defflds{i}))
-                deps(d).(defflds{i}) = ross_fill_defaults(deps(d).(defflds{i}),defaults.(defflds{i}));
+                deps(d).(defflds{i}) = fill_defaults(deps(d).(defflds{i}),defaults.(defflds{i}));
             end
         end
     end

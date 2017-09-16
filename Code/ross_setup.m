@@ -1,4 +1,5 @@
-function Config = ross_setup(Config)
+function Config = ross_setup(cruise_name,varargin)
+Config = cruise_config(cruise_name,varargin{:}); % Cruise configuration
 
 for i = 1:length(Config)
 

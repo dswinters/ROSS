@@ -24,4 +24,4 @@ defaults.proc.ship_vel_removal = 'GPS';
 defaults.proc.adcp_raw2mat = false;
 defaults.proc.gps_raw2mat = false;
 defaults.proc.adcp_load_function = 'adcp_rdradcp_multi';
-defaults.rpco.adcp_load_args = {};
+defaults.proc.adcp_load_args = {};

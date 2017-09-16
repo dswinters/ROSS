@@ -11,8 +11,12 @@ if nargin > 1
     end
     Config = Config(ismember({Config.name},varargin{1}));
 end
+
 % Limit to specified deployment(s)
 if nargin > 2
+    if ~iscell(varargin{2})
+        varargin{2} = {varargin{2}};
+    end
     ind = ismember({Config.deployments.name},varargin{2});
     Config.deployments = Config.deployments(ind);
 end

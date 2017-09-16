@@ -12,7 +12,7 @@ function adcp_master(cruise_name,varargin)
 %   VESSEL. These are strings specifying a vessel and deployment name.
 
 addpath(cruise_name); % add cruise-specific functions to path
-addpath('figures/');  % add figure functions to path
+addpath('adcp_figures/');  % add figure functions to path
 
 Config = adcp_setup(cruise_name,varargin{:}); % filepaths and directories
 Config = adcp_proc_all_deployments(Config);  % Process deployments!

@@ -41,7 +41,7 @@ for i = 1:length(Config)
         %% Add cruise and vessel information
         dep.cruise.name = Config(i).cruise;
         dep.vessel.name = Config(i).name;
-                                       
+
         % Update deployment
         dep.dirs = rmfield(dep.dirs,'raw');
         Config(i).deployments(d) = dep;

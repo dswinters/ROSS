@@ -23,4 +23,4 @@ defaults.proc.heading_offset = 45;
 if ~isempty(casey)
     casey = fill_defaults(casey,defaults);
 end
-config.deployments = casey;
+config.deployment = casey;

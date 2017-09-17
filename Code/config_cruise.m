@@ -18,7 +18,7 @@ if nargin > 2
     if ~iscell(varargin{2})
         varargin{2} = {varargin{2}};
     end
-    ind = ismember({Config.deployments.name},varargin{2});
-    Config.deployments = Config.deployments(ind);
+    ind = ismember({Config.deployment.name},varargin{2});
+    Config.deployment = Config.deployment(ind);
 end
 

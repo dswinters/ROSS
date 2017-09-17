@@ -10,23 +10,23 @@ Vessels = config_cruise(cruise_name,varargin{:}); % Cruise configuration
 for i = 1:length(Vessels)
 
     % Fill default options
-    if ~isempty(Vessels(i).deployments)
-        Vessels(i).deployments = fill_defaults(Vessels(i).deployments,config_defaults());
+    if ~isempty(Vessels(i).deployment)
+        Vessels(i).deployment = fill_defaults(Vessels(i).deployment,config_defaults());
     end
 
     % Add 'cruise' field if there isn't one already
-    if ~isfield(Vessels(i).deployments,'cruise')
-        [Vessels(i).deployments.cruise] = deal(struct());
+    if ~isfield(Vessels(i).deployment,'cruise')
+        [Vessels(i).deployment.cruise] = deal(struct());
     end
 
     % Add 'vessel' field if there isn't one already
-    if ~isfield(Vessels(i).deployments,'vessel')
-        [Vessels(i).deployments.vessel] = deal(struct());
+    if ~isfield(Vessels(i).deployment,'vessel')
+        [Vessels(i).deployment.vessel] = deal(struct());
     end
 
     % Set up deployments
-    for d = 1:length(Vessels(i).deployments)
-        dep = Vessels(i).deployments(d);
+    for d = 1:length(Vessels(i).deployment)
+        dep = Vessels(i).deployment(d);
 
         %% Make full directories
         dir_raw     = fullfile(Vessels(i).dirs.raw, dep.dirs.raw, '/');
@@ -65,7 +65,7 @@ for i = 1:length(Vessels)
 
         % Update deployment
         dep.dirs = rmfield(dep.dirs,'raw');
-        Vessels(i).deployments(d) = dep;
+        Vessels(i).deployment(d) = dep;
     end
 end
 

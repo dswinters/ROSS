@@ -32,17 +32,17 @@ defaults.plot.map.coastline    = '../Maps/leconte2_grid_coastline.mat';
 % Rosie deployments (150 hHz PAVS, Alaska flag)
 %========================================================
 Config(1).name = 'Rosie';
-Config(1).deployments = leconte_2017_may_rosie();
+Config(1).deployment = leconte_2017_may_rosie();
 %========================================================
 % Swankie deployments (300 kHz Sentinel V, Sweden flag)
 %========================================================
 Config(2).name = 'Swankie';
-Config(2).deployments = leconte_2017_may_swankie();
+Config(2).deployment = leconte_2017_may_swankie();
 
 for i = 1:length(Config)
-    if ~isempty(Config(i).deployments)
-        Config(i).deployments = fill_defaults(...
-            Config(i).deployments,...
+    if ~isempty(Config(i).deployment)
+        Config(i).deployment = fill_defaults(...
+            Config(i).deployment,...
             defaults);
     end
 end

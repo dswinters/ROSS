@@ -18,8 +18,8 @@ else
 
     %% Load data
     r = ross(icasey);
-    for ndep = 1:length(r.deployments)
-        if r.deployments(ndep).ADCP.freq == 600
+    for ndep = 1:length(r.deployment)
+        if r.deployment(ndep).ADCP.freq == 600
             adcp = load_adcp(r,ndep);
             c.dn = cat(2,c.dn,adcp.mtime);
             c.h = cat(2,c.h,adcp.heading);
@@ -91,9 +91,9 @@ depnames = {'CASEY_2016_08_10_1730';
             'CASEY_2016_08_13_2354';
             'CASEY_2016_08_13_2150';
             'CASEY_2016_08_14_1717'};
-for i = 1:length(ross(icasey).deployments)
-    if ismember(ross(icasey).deployments(i).name,depnames)
-        ross(icasey).deployments(i).ADCP.calibration = calibration(1);
+for i = 1:length(ross(icasey).deployment)
+    if ismember(ross(icasey).deployment(i).name,depnames)
+        ross(icasey).deployment(i).ADCP.calibration = calibration(1);
     end
 end
 

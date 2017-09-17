@@ -1,7 +1,7 @@
 function ross_make_bottom_profile(ross,ndep,adcp)
 close all
 
-id = regexp(ross.deployments(ndep).name,'(\d{12})','tokens');
+id = regexp(ross.deployment(ndep).name,'(\d{12})','tokens');
 id = str2num(id{1}{1});
 
 maxrange = nan(1,length(adcp));
@@ -32,13 +32,13 @@ S.lines.bt = plot(nan,nan,'g-','linewidth',2);
 axis ij, shading flat, colormap(parula), hold on
 set(gca,'color',0.5*[1 1 1])
 
-S.suptitle = suptitle(ross.deployments(ndep).name);
+S.suptitle = suptitle(ross.deployment(ndep).name);
 S.title = title('');
 set(S.suptitle,'interpreter','none');
 
 
 % Initialize data
-dirin = [ross.dirs.proc.deployments 'bt_profiles/'];
+dirin = [ross.dirs.proc.deployment 'bt_profiles/'];
 f_out = sprintf('%s%s_%d_bt.mat',dirin,lower(ross.name),id);
 if exist(f_out,'file');
     S.bt = load(f_out);

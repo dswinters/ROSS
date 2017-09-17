@@ -32,4 +32,4 @@ steller(dep).plot.make_figure.coastline_map = true;
 % steller(dep).proc.diagnostic = true;
 
 steller = fill_defaults(steller,defaults);
-config.deployments = steller;
+config.deployment = steller;

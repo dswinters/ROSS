@@ -21,5 +21,5 @@ defaults.proc.heading_offset = 135;
 if ~isempty(rosie)
     rosie = fill_defaults(rosie,defaults);
 end
-config.deployments = rosie;
+config.deployment = rosie;
 

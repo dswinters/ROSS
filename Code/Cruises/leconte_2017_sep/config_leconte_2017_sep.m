@@ -64,13 +64,13 @@ fig_defaults.plot.make_figure.surface_vel   = false;
 
 % Fill ROSS defaults
 for i = 1:4
-    if ~isempty(Config(i).deployments)
+    if ~isempty(Config(i).deployment)
         switch i
           case {1,2,3}
-            Config(i).deployments = fill_defaults(Config(i).deployments,ross_defaults);
+            Config(i).deployment = fill_defaults(Config(i).deployment,ross_defaults);
         end
-        Config(i).deployments = fill_defaults(Config(i).deployments,fig_defaults);
-        Config(i).deployments = fill_defaults(Config(i).deployments,all_defaults);
+        Config(i).deployment = fill_defaults(Config(i).deployment,fig_defaults);
+        Config(i).deployment = fill_defaults(Config(i).deployment,all_defaults);
     end
 end
 

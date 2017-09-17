@@ -97,6 +97,6 @@ swankie(dep).dirs.raw  = 'deployment_20170916_232943';
 if ~isempty(swankie)
     swankie = fill_defaults(swankie,defaults);
 end
-config.deployments = swankie;
+config.deployment = swankie;
 
 

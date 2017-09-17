@@ -2,7 +2,7 @@
 
 function [ross adcp] = leconte_2017_may_proc_pre_rotation(ross,ndep,adcp)
 
-id = regexp(ross.deployments(ndep).name,'(\d{12})','tokens');
+id = regexp(ross.deployment(ndep).name,'(\d{12})','tokens');
 id = str2num(id{1}{1});
 
 switch id

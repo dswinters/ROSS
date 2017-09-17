@@ -20,7 +20,7 @@ set(s,'marker','.')
 
 %% Colorbar
 cb = colorbar;
-ticks = linspace(adcp.gps.dn(1),adcp.gps.dn(end),10);
+ticks = linspace(min(adcp.gps.dn),max(adcp.gps.dn),10);
 set(cb,'Ticks',ticks,'TickLabels',datestr(ticks,'mmdd hhMM'))
 
 %% Compute some reasonable x and y limits

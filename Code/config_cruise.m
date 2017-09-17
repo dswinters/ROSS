@@ -1,6 +1,6 @@
 function Config = config_cruise(cruise_name,varargin)
 
-addpath(['Cruises/' cruise_name]); % add cruise-specific functions to path
+addpath(['cruises/' cruise_name]); % add cruise-specific functions to path
 config_cruise_func = ['config_' cruise_name];
 Config = feval(config_cruise_func);
 [Config.cruise] = deal(cruise_name);

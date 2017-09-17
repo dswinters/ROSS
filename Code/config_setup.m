@@ -13,8 +13,16 @@ for i = 1:length(Config)
     if ~isempty(Config(i).deployments)
         Config(i).deployments = fill_defaults(Config(i).deployments,config_defaults());
     end
-    [Config(i).deployments.cruise] = deal(struct());
-    [Config(i).deployments.vessel] = deal(struct());
+
+    % Add 'cruise' field if there isn't one already
+    if ~isfield(Config(i).deployments,'cruise')
+        [Config(i).deployments.cruise] = deal(struct());
+    end
+
+    % Add 'vessel' field if there isn't one already
+    if ~isfield(Config(i).deployments,'vessel')
+        [Config(i).deployments.vessel] = deal(struct());
+    end
 
     % Set up deployments
     for d = 1:length(Config(i).deployments)

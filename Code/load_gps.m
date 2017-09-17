@@ -1,26 +1,25 @@
-function [gps] = load_gps(config,ndep)
+function [gps] = load_gps(DEP)
 
 %% Load logged gps data
-D = config.deployments(ndep);
-matfile = D.files.gps_mat;
-prefix = D.proc.nmea;
+matfile = DEP.files.gps_mat;
+prefix = DEP.proc.nmea;
 
-f_in = D.files.gps;
+f_in = DEP.files.gps;
 
 % Check for a full-deployment .mat file
-fexist_all = exist(D.files.gps_all,'file');
+fexist_all = exist(DEP.files.gps_all,'file');
 
 % Check for a sub-deployment .mat file
 fexist = exist(matfile,'file');
 fparts = strsplit(matfile,'/');
 flink = fullfile('..',fparts{6:end});
 
-if fexist_all && ~D.proc.gps_raw2mat
-    gps = load(D.files.gps_all);
-    disp(['% Loaded ' D.files.gps_all]);
-    fparts = strsplit(D.files.gps_all,'/');
+if fexist_all && ~DEP.proc.gps_raw2mat
+    gps = load(DEP.files.gps_all);
+    disp(['% Loaded ' DEP.files.gps_all]);
+    fparts = strsplit(DEP.files.gps_all,'/');
     flink = fullfile('..',fparts{6:end});
-elseif fexist && ~D.proc.gps_raw2mat
+elseif fexist && ~DEP.proc.gps_raw2mat
     gps = load(matfile);
     disp(['% Loaded ' matfile]);
 else
@@ -84,7 +83,7 @@ gps.GPRMC.dn(idx) = gps.GPRMC.dn(idx) + datenum([2000 0 0 0 0 0]);
 %% Interpolate pitch and roll from PASHR lines
 p_pashr = [];
 r_pashr = [];
-if ismember('PASHR',D.proc.nmea)
+if ismember('PASHR',DEP.proc.nmea)
     n1 = length(gps.GPRMC.lnum);
     n2 = length(gps.PASHR.lnum);
     idx = [[  1+zeros(1,n1),    2+zeros(1,n2)];

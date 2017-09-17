@@ -1,6 +1,6 @@
-function [config, adcp, gps] = pre_rotation_hook(config,adcp,gps)
+function [deployment adcp] = pre_rotation_hook(deployment, adcp)
 
-func = [config.cruise '_pre_rotation_hook'];
-if exist(fn) == 2
-    [config, adcp] = feval(func,config,adcp);
+func = [deployment.cruise '_pre_rotation_hook'];
+if exist(func) == 2
+    [deployment, adcp] = feval(func,deployment,adcp);
 end

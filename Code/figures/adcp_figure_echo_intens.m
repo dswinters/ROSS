@@ -1,8 +1,7 @@
-function [ross, hfig] = ross_figure_corr(ross,ndep)
+function hfig = adcp_figure_echo_intens(DEP)
 
 load redblue
-dep = ross.deployments(ndep);
-adcp = load(dep.files.processed);
+adcp = load(DEP.files.processed);
 adcp = adcp.adcp;
 
 maxrange = 0;
@@ -80,11 +79,11 @@ cmaps = {nan,nan,nan,nan};
 clims = {nan,nan,nan,nan};
 plotdims = [1,1,1,1];
 for i = 1:adcp(1).config.n_beams
-    titles{end+1} = sprintf('Beam %d Correlation Magnitude (counts)',i);
+    titles{end+1} = sprintf('Beam %d Echo Intensity (counts)',i);
     ylabs{end+1} = 'depth (m)';
     cmaps{end+1} = 'lin';
     clims{end+1} = nan;
-    plotfuns{end+1} = @(adcp) adcpcolor(adcp,'corr',i);
+    plotfuns{end+1} = @(adcp) adcpcolor(adcp,'intens',i);
     plotdims(end+1) = 2;
 end
 for ia = 1:length(adcp)
@@ -138,13 +137,44 @@ for i = 1:np
     end
 end
 
+% %% Plot echo intensity edges
+% tmethod = struct('name','ei_edge','params','beam');
+% edges = {};
+% for i = 1:length(adcp)
+%     [~,edges{i}] = adcp_trim_data(adcp(i),tmethod);
+%     edges{i}(edges{i}>=adcp(i).config.ranges(end)) = nan;
+% end
+% edges = cat(2,edges{:});
+% dn = cat(2,adcp.mtime);
+% [dn,idx] = sort(dn);
+% edges = edges(:,idx);
+% for i = 1:adcp(1).config.n_beams
+%     axes(ax(4+i));
+%     hold on
+%     plot(dn,edges(i,:),'linewidth',2,'color',[0 1 0 0.5])
+% end
+
+%% Plot BT ranges
+btdn = cat(2,adcp(:).mtime);
+btd = cat(2,adcp(:).bt_range);
+[~,idx] = sort(btdn);
+btdn = btdn(idx);
+btd = btd(:,idx);
+for i = 1:adcp(1).config.n_beams
+    axes(ax(4+i));
+    hold on
+    plot(btdn,btd(i,:),'g-','linewidth',1.5)
+end
+
+
+
 %% Format plots
 t = sort(cat(2,adcp(:).mtime));
 % XTicks
 axes(ax(end))
 datetick('keeplimits')
 set(ax(1:end-1),'xticklabel',[])
-set(ax,'xlim',ross.deployments(ndep).tlim)
+set(ax,'xlim',DEP.tlim)
 % ROSS heading
 axes(ax(3))
 ylim([0 360])
@@ -176,7 +206,7 @@ end
 % Figure title
 axes(ha_full);
 ttext = sprintf('%s to %s',datestr(min(t)),datestr(max(t)));
-text(0.5,1,{dep.name;ttext},'fontsize',14,...
+text(0.5,1,{DEP.name;ttext},'fontsize',14,...
      'fontweight','bold',...
      'verticalalignment','top',...
      'horizontalalignment','center',...

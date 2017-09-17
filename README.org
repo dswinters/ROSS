@@ -309,32 +309,30 @@ described below.
 
 
 *** post_setup_hook
-~Config = post_setup_hook(Config)~
+~[Config] = post_setup_hook(Config)~
 
-Modify the main ~Config~ structure before any processing has been done. This
-function may be removed in the future, as most changes done at this stage in
-processing should be possible from within the cruise's main ~config~ file.
-
+Modify the main ~Config~ structure before any processing has been done. This can
+be used to set up user-defined file and directory structures programatically for
+access in later hooks.
 
 *** post_load_hook
-~[config, adcp, gps] = post_load_hook(config, adcp, gps)~
+~[deployment, adcp, gps] = post_load_hook(deployment, adcp, gps)~
 
-Modify a vessel's ~config~, ~adcp~, and/or ~gps~ data structures after loading
+Modify a ~deployment~'s ~adcp~, and/or ~gps~ data structures after loading
 raw data. This is useful for integrating data separate from the primary data
 sources declared in the cruise's config file. For example, this can be used to
 overwrite sections of data in the ~gps~ structure from a secondary GPS source in
 case of failure during a particular deployment.
 
-
 *** pre_rotation_hook
-~[config, adcp] = pre_rotation_hook(config, adcp)~
+~[deployment, adcp] = pre_rotation_hook(deployment, adcp)~
 
 In case one wants to do additional processing that requires beam velocities
 before the rotation to earth coordinates. For example, remove data from a beam
 that was contaminated during a certain deployment.
 
 *** post_rotation_hook
-~[config, adcp] = post_rotation_hook(config, adcp)~
+~[deployment, adcp] = post_rotation_hook(deployment, adcp)~
 
 Similar, but after velocities have been rotated to earth coordinates. Maybe the
 vertical motion of a CTD was detected during sections of a particular deployment

@@ -1,10 +1,9 @@
-function A = load_adcp(config,ndep)
+function A = load_adcp(DEP)
 
-D = config.deployments(ndep);
-matfile = D.files.adcp_mat;
+matfile = DEP.files.adcp_mat;
 
 % Check for a full-deployment .mat file
-fexist_all = exist(D.files.adcp_all,'file');
+fexist_all = exist(DEP.files.adcp_all,'file');
 
 % Check for a sub-deployment .mat file
 fexist = exist(matfile,'file');
@@ -12,20 +11,20 @@ fparts = strsplit(matfile,'/');
 flink = fullfile('..',fparts{6:end});
 
 % load the full-deployment .mat file if it exists
-if fexist_all && ~D.proc.adcp_raw2mat
-    load(D.files.adcp_all,'A');
-    disp(['% Loaded ' D.files.adcp_all])
-    fparts = strsplit(D.files.adcp_all,'/');
+if fexist_all && ~DEP.proc.adcp_raw2mat
+    load(DEP.files.adcp_all,'A');
+    disp(['% Loaded ' DEP.files.adcp_all])
+    fparts = strsplit(DEP.files.adcp_all,'/');
     flink = fullfile('..',fparts{6:end});
 % load the sub-deployment .mat file if it exists
-elseif fexist && ~D.proc.adcp_raw2mat
+elseif fexist && ~DEP.proc.adcp_raw2mat
     load(matfile,'A');
     disp(['% Loaded ' matfile])
 else
     %% Load raw data
-    A = feval(D.proc.adcp_load_func,...
-              D.files.adcp,...
-              D.proc.adcp_load_args{:});
+    A = feval(DEP.proc.adcp_load_func,...
+              DEP.files.adcp,...
+              DEP.proc.adcp_load_args{:});
 
     % sort by adcp configuration max range
     maxrange = nan(1,length(A));
@@ -47,8 +46,8 @@ for ia = 1:length(A)
     A(ia).mtime(idx) = A(ia).mtime(idx) + datenum([2000 0 0 0 0 0]);
 
     % limit to deployment start/stop time
-    idx = find(A(ia).mtime >= D.tlim(1) & ...
-               A(ia).mtime <= D.tlim(2));
+    idx = find(A(ia).mtime >= DEP.tlim(1) & ...
+               A(ia).mtime <= DEP.tlim(2));
     A(ia) = adcp_index(A(ia),idx);
 end
 

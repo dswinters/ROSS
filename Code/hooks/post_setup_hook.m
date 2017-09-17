@@ -1,6 +1,6 @@
-function Config = post_setup_hook(Config)
+function config = post_setup_hook(config)
 
-setup_post_fun = [Config.cruise '_post_setup'];
-if exist(setup_post_fun)==2
-    Ross = feval(setup_post_fun,Config);
+func = [config.cruise '_post_setup_hook'];
+if exist(func)==2
+    config = feval(func,config);
 end

@@ -1,13 +1,12 @@
-function [ross hfig] = ross_figure_coastline_map(ross,ndep)
+function hfig = adcp_figure_coastline_map(DEP)
 
 %% Load data and coastline map
-dep = ross.deployments(ndep);
-if strcmp(dep.files.coastline(end-3:end),'none')
+if strcmp(DEP.files.coastline(end-3:end),'none')
     return
 end
-adcp = load(dep.files.processed);
+adcp = load(DEP.files.processed);
 adcp = adcp.adcp;
-cl = load(dep.files.coastline);
+cl = load(DEP.files.coastline);
 
 
 %% Create figure, axes, plots
@@ -25,9 +24,9 @@ ticks = linspace(adcp.gps.dn(1),adcp.gps.dn(end),10);
 set(cb,'Ticks',ticks,'TickLabels',datestr(ticks,'mmdd hhMM'))
 
 %% Compute some reasonable x and y limits
-if isfield(dep.plot,'latlim')
-    xl = dep.plot.lonlim;
-    yl = dep.plot.latlim;
+if isfield(DEP.plot,'latlim')
+    xl = DEP.plot.lonlim;
+    yl = DEP.plot.latlim;
 else
     % get mean position
     [lt0 ln0] = deal(nanmean(adcp.gps.lat),nanmean(adcp.gps.lon));

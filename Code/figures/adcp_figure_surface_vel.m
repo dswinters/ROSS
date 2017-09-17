@@ -1,19 +1,18 @@
-function [ross, hfig] = ross_figure_surface_vel(ross,ndep)
+function hfig = adcp_figure_surface_vel(DEP)
 
-dep = ross.deployments(ndep);
-adcp = load(dep.files.processed);
+adcp = load(DEP.files.processed);
 
 dmax = 20;
-nx = dep.plot.map.nx;
-ny = dep.plot.map.ny;
-pos = dep.plot.map.pos;
+nx = DEP.plot.map.nx;
+ny = DEP.plot.map.ny;
+pos = DEP.plot.map.pos;
 
-[fdir fname fext] = fileparts(dep.files.map);
+[fdir fname fext] = fileparts(DEP.files.map);
 matfile = fullfile(fdir,[fname '.mat']);
 
 %% Create the background image
 if exist(matfile,'file')
-    map = load(dep.files.map);
+    map = load(DEP.files.map);
 else
     map = struct;
     lonmin = inf;
@@ -26,10 +25,10 @@ else
         latmin = min(latmin,min(adcp(i).gps.lat));
         latmax = max(latmin,max(adcp(i).gps.lat));        
     end
-    lonmin = max(lonmin,dep.plot.map.lonlim(1));
-    lonmax = min(lonmax,dep.plot.map.lonlim(2));
-    latmin = max(latmin,dep.plot.map.latlim(1));
-    latmax = min(latmax,dep.plot.map.latlim(2));
+    lonmin = max(lonmin,DEP.plot.map.lonlim(1));
+    lonmax = min(lonmax,DEP.plot.map.lonlim(2));
+    latmin = max(latmin,DEP.plot.map.latlim(1));
+    latmax = min(latmax,DEP.plot.map.latlim(2));
     map.x = [lonmin lonmax];
     map.y = [latmin latmax]';
     map.I = uint8(0.7*255*ones(2,2,3));
@@ -95,7 +94,7 @@ mag = sqrt(vx.^2 + vy.^2);
 
 %% Show current speeds as a sparse pcolor
 pcolor(ha_map,xbe,ybe,padarray(mag,[1 1],nan,'post'))
-caxis([0 sqrt(sum(dep.plot.vlim(1:2).^2))])
+caxis([0 sqrt(sum(DEP.plot.vlim(1:2).^2))])
 shading flat
 cb = colorbar;
 
@@ -109,7 +108,7 @@ ha = axes('position',[0 0 1 1],...
           'visible','off');
 xlim([-1 1]); ylim([-1 1])
 text(0,1,...
-     {dep.name;
+     {DEP.name;
       sprintf('Surface Velocity (depth < %.1fm)',dmax)},...
      'fontsize',18,'fontweight','bold',...
      'verticalalignment','top',...

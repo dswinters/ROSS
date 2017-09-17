@@ -1,8 +1,7 @@
-function [ross, hfig] = ross_figure_summary(ross,ndep)
+function hfig = adcp_figure_corr(DEP)
 
 load redblue
-dep = ross.deployments(ndep);
-adcp = load(dep.files.processed);
+adcp = load(DEP.files.processed);
 adcp = adcp.adcp;
 
 maxrange = 0;
@@ -25,7 +24,7 @@ hfig = figure('position',[758 5 591 823],...
 bgcol = 0.7*[1 1 1];
 size_small = 0.33; % height of small panels (relative to full plots)
 np_small = 4; % number of small panels (location, ROSS velocity, heading)
-np_full = 5; % number of full panels (east/north/vert vel, echo intensity, correlation)
+np_full = adcp(1).config.n_beams; % number of full panels
 np = np_small + np_full; % total number of panels
 vspace = 0.02; % vertical spacing between panels
 vpad = [0.03 0.06]; % vertical padding (bottom,top)
@@ -63,54 +62,36 @@ end
 %% Set plot info
 titles = {'ROSS Location (deg E/N)';
           'ROSS Velocity (ms^{-1} E/N)';
-          'ROSS Heading (degrees)'
-          'ADCP Pitch & Roll (degrees)'
-          'East-West Currents (ms^{-1} East)';
-          'North-South Currents (ms^{-1} North)';
-          'Vertical Currents (ms^{-1} up)';
-          'Beam-Averaged Echo Intensity (counts)';
-          'Beam-Averaged Correlation (counts)'};
+          'ROSS Heading (degrees)';
+          'ADCP Pitch & Roll (degrees)'};
 ylabs = {{'lon','lat'};
          {'v_{EW}','v_{NS}'};
          'heading'
-         {'pitch','roll'}
-         'depth (m)';
-         'depth (m)'
-         'depth (m)'
-         'depth (m)'
-         'depth (m)'};
-cmaps = {nan,nan,nan,nan,'sym','sym','sym','lin','lin'};
-clims = {nan;
-         nan;
-         nan;
-         nan;
-         dep.plot.vlim(1)*[-1 1]; % East-West velocity (m/s)
-         dep.plot.vlim(2)*[-1 1]; % North-South velocity (m/s)
-         dep.plot.vlim(3)*[-1 1]; % Vertical velocity (m/s)
-         nan;      % Echo intensity (counts)
-         nan};     % Correlation (counts)
-
-for ia = 1:length(adcp)
-    adcp(ia).gps_lon = adcp(ia).gps.lon;
-    adcp(ia).gps_lat = adcp(ia).gps.lat;
-    adcp(ia).gps_vx  = adcp(ia).gps.vx;
-    adcp(ia).gps_vy  = adcp(ia).gps.vy;
-end
-
-
+         {'pitch','roll'}};
 plotfuns = {{@(adcp) adcplot(adcp,'gps_lon',psty,msiz);
              @(adcp) adcplot(adcp,'gps_lat',psty,msiz)};
             {@(adcp) adcplot(adcp,'gps_vx',psty,msiz);
              @(adcp) adcplot(adcp,'gps_vy',psty,msiz)};
             @(adcp) adcplot(adcp,'heading',psty,msiz);
             {@(adcp) adcplot(adcp,'pitch',psty,msiz);
-             @(adcp) adcplot(adcp,'roll',psty,msiz)};
-            @(adcp) adcpcolor(adcp,'vel',1);
-            @(adcp) adcpcolor(adcp,'vel',2);
-            @(adcp) adcpcolor(adcp,'vel',3);
-            @(adcp) adcpcolor(adcp,'intens',[1:adcp(1).config.n_beams]);
-            @(adcp) adcpcolor(adcp,'corr',[1:adcp(1).config.n_beams])};
-plotdims = [1,1,1,1,2,2,2,2,2];
+             @(adcp) adcplot(adcp,'roll',psty,msiz)}};
+cmaps = {nan,nan,nan,nan};
+clims = {nan,nan,nan,nan};
+plotdims = [1,1,1,1];
+for i = 1:adcp(1).config.n_beams
+    titles{end+1} = sprintf('Beam %d Correlation Magnitude (counts)',i);
+    ylabs{end+1} = 'depth (m)';
+    cmaps{end+1} = 'lin';
+    clims{end+1} = nan;
+    plotfuns{end+1} = @(adcp) adcpcolor(adcp,'corr',i);
+    plotdims(end+1) = 2;
+end
+for ia = 1:length(adcp)
+    adcp(ia).gps_lon = adcp(ia).gps.lon;
+    adcp(ia).gps_lat = adcp(ia).gps.lat;
+    adcp(ia).gps_vx  = adcp(ia).gps.vx;
+    adcp(ia).gps_vy  = adcp(ia).gps.vy;
+end
 ross_vel_scale = 3.5;
 
 %% Make plots
@@ -162,17 +143,17 @@ t = sort(cat(2,adcp(:).mtime));
 axes(ax(end))
 datetick('keeplimits')
 set(ax(1:end-1),'xticklabel',[])
-set(ax,'xlim',ross.deployments(ndep).tlim)
+set(ax,'xlim',DEP.tlim)
+% ROSS heading
+axes(ax(3))
+ylim([0 360])
+set(gca,'ytick',0:180:360)
 % ROSS velocity
 axes(ax(2))
 yyaxis left
 ylim(ross_vel_scale*[-1 1]);
 yyaxis right
 ylim(ross_vel_scale*[-1 1]);
-% ROSS heading
-axes(ax(3))
-ylim([0 360])
-set(gca,'ytick',0:180:360)
 % Grid markers for ROSS location, velocity, and heading
 for i = 1:4
     axes(ax(i))
@@ -194,7 +175,7 @@ end
 % Figure title
 axes(ha_full);
 ttext = sprintf('%s to %s',datestr(min(t)),datestr(max(t)));
-text(0.5,1,{dep.name;ttext},'fontsize',14,...
+text(0.5,1,{DEP.name;ttext},'fontsize',14,...
      'fontweight','bold',...
      'verticalalignment','top',...
      'horizontalalignment','center',...

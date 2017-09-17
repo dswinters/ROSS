@@ -1,6 +1,6 @@
-function [config, adcp, gps] = post_rotation_hook(config,adcp,gps)
+function [deployment, adcp, gps] = post_rotation_hook(deployment, adcp, gps)
 
-func = [config.cruise '_post_rotation_hook'];
-if exist(fn) == 2
+func = [deployment.cruise '_post_rotation_hook'];
+if exist(func) == 2
     [config, adcp] = feval(func,config,adcp);
 end

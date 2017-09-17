@@ -36,15 +36,18 @@ for i = 1:length(Config)
         dep.files.adcp_all  = fullfile(dep.dirs.raw_adcp, adcp_all);
         dep.files.processed = fullfile(Config(i).dirs.proc, [dep.name '.mat']);
 
-        %% Add cruise and vessel information
-        dep.cruise = Config(i).cruise;
-        dep.vessel = Config(i).name;
                                        
         % Update deployment
         dep.dirs = rmfield(dep.dirs,'raw');
         Config(i).deployments(d) = dep;
+
+        %% Add cruise and vessel information
+        Config(i).deployments(d).cruise = Config(i).cruise;
+        Config(i).deployments(d).vessel = Config(i).name;
     end
 end
 
-Config = post_setup_hook(Config); % cruise-specific additional setup
+for i = 1:length(Config)
+    Config(i) = post_setup_hook(Config(i));
+end
 

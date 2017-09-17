@@ -1,46 +1,19 @@
-%% proc_deployment.m
-% Usage: config = proc_deployment(config,ndep)
-% Description: Save a structure with processed ROSS deployment data
-%              using the given ROSS control structure and deployment
-%              number.
-% Inputs: config - one entry of ross config structure from adcp_master.m
-%         ndep - a deployment number
-% Outputs: config - modified ross confign structure
-% 
-% Author: Dylan Winters
-% Created: 2016-10-14
+function DEP = proc_deployment(DEP)
 
-function config = proc_deployment(config,ndep)
-D = config.deployments(ndep);
-
-%% Set up logging on first deployment
-if ndep == 1
-    logfile = fullfile(config.dirs.logs, [config.cruise,'_',lower(config.name),'.org']);
-    eval(['!rm ' logfile])
-    diary(logfile);
-    disp(sprintf('* Deployment Processing: %s ',config.name))
-    diary off
-end
-
-if checkfield(D.proc,'skip')
-    disp(sprintf('\n** %d. %s', ndep, D.name));
-    disp('Skipped!')
+if DEP.proc.skip
+    disp(['% Skipping ' DEP.name])
     return
 end
 
-diary on
-disp(sprintf('\n** %d. %s', ndep, D.name));
-diary off
-
 %% Load ADCP data, load & pre-process GPS data
-adcp = load_adcp(config,ndep);
-gps = load_gps(config,ndep);
+adcp = load_adcp(DEP);
+gps = load_gps(DEP);
 if ~isfield(adcp,'info')
     [adcp(:).info] = deal({});
 end
 
 %% cruise-specific post-load hook function
-[config, adcp, gps] = post_load_hook(config,adcp,gps);
+[DEP, adcp, gps] = post_load_hook(DEP, adcp, gps);
 
 %% Interpolate GPS data to ADCP timestamps
 [adcp(:).gps] = deal(struct());
@@ -56,19 +29,19 @@ end
 
 %% Trim data
 for ia = 1:length(adcp)
-    adcp(ia) = adcp_trim_data(adcp(ia),D.proc.trim_methods);    
+    adcp(ia) = adcp_trim_data(adcp(ia),DEP.proc.trim_methods);    
 end
 
 %% Deployment-specific pre-rotation processing
-[config, adcp] = pre_rotation_hook(config,adcp);
+[DEP, adcp] = pre_rotation_hook(DEP,adcp);
 
 %% Coordinate transformations
 % save raw ADCP compass heading
 for ia = 1:length(adcp)
     adcp(ia).heading_compass = adcp(ia).heading;
     adcp(ia).heading = adcp(ia).gps.h;
-    adcp(ia).config.xducer_misalign = D.proc.heading_offset;
-    if checkfield(D.proc,'use_3beam')
+    adcp(ia).config.xducer_misalign = DEP.proc.heading_offset;
+    if checkfield(DEP.proc,'use_3beam')
         ve(ia) = adcp_5beam2earth(adcp(ia));
     else
         ve(ia) = adcp_beam2earth(adcp(ia));
@@ -78,7 +51,7 @@ end
 %% Calculate ship speed from BT or GPS
 mes = ['Ship velocity corrected using '];
 for ia = 1:length(adcp)
-    switch D.proc.ship_vel_removal
+    switch DEP.proc.ship_vel_removal
       case 'BT'
         mes = [mes 'bottom-track velocity'];
         adcp(ia).ship_vel_east  = -ve.bt_vel(1,:);
@@ -111,20 +84,20 @@ for ia = 1:length(adcp)
 end
 
 %% Deployment-specific post-rotation processing
-[config, adcp] = post_rotation_hook(config,adcp);
+[DEP, adcp] = post_rotation_hook(DEP, adcp);
 
 %% Additional filters
-if isfield(D.proc,'filters')
-    for i = 1:length(D.proc.filters)
+if isfield(DEP.proc,'filters')
+    for i = 1:length(DEP.proc.filters)
         for ia = 1:length(adcp)
-            adcp(ia) = adcp_filter(adcp(ia),D.proc.filters(i));            
+            adcp(ia) = adcp_filter(adcp(ia),DEP.proc.filters(i));            
         end
     end
 end
 
 %% Remove manually-specified bad data segments
-if isfield(D.proc,'bad');
-    bad = D.proc.bad;
+if isfield(DEP.proc,'bad');
+    bad = DEP.proc.bad;
     for i = 1:length(bad)
         for ia = 1:length(adcp)
             mes = sprintf('Data removed manually between %s and %s',...
@@ -137,11 +110,11 @@ if isfield(D.proc,'bad');
 end
 
 %% Save deployment file
-dirout = fileparts(D.files.processed);
+dirout = fileparts(DEP.files.processed);
 if ~exist(dirout,'dir'); mkdir(dirout); end
-save(D.files.processed,'adcp')
+save(DEP.files.processed,'adcp')
 
-fparts = strsplit(D.files.processed,'/');
+fparts = strsplit(DEP.files.processed,'/');
 flink = fullfile('..',fparts{6:end});
 
 diary on
@@ -154,5 +127,5 @@ diary off
 
 %% Make figures
 close all
-config = ross_figures(config,ndep);
+DEP = adcp_figures(DEP);
 

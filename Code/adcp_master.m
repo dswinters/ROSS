@@ -11,10 +11,6 @@ function adcp_master(cruise_name,varargin)
 %   ADCP_MASTER(CRUISE_NAME,VESSEL,DEPLOYMENT) parses a single DEPLOYMENT of
 %   VESSEL. These are strings specifying a vessel and deployment name.
 
-addpath('figures/'); % add figure functions to path
-addpath('misc/');    % misc helper functions
-addpath('hooks/');   % hooks
-
 Config = config_setup(cruise_name,varargin{:}); % filepaths and directories
 Config = proc_all_deployments(Config);  % Process deployments!
 

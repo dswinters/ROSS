@@ -1,4 +1,10 @@
 function Config = config_setup(cruise_name,varargin)
+
+% Ensure that necessary directories are in MATLAB's search path
+addpath('figures/'); % add figure functions to path
+addpath('misc/');    % misc helper functions
+addpath('hooks/');   % hooks
+
 Config = config_cruise(cruise_name,varargin{:}); % Cruise configuration
 
 for i = 1:length(Config)

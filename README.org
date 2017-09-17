@@ -295,7 +295,7 @@ that has been broken into several files and streamlined using ~fill_defaults~:
 
 There are several points during execution at which the program looks for
 cruise-specific functions and calls them, if they exist. These functions are
-called *hooks*, and are described bwlow with some example applications. It can
+called *hooks*, and are described below with some example applications. It can
 be useful to set up switch statements within these functions that execute a
 certain set of instructions if a deployment name is matched. These functions
 allow for the addition of arbitrarily complex user-defined processing without
@@ -307,13 +307,24 @@ described below.
 
 *Be careful when using hooks. Compatibility of data structures with the core processing program must be maintained.*
 
+Due to MATLAB structure limitations, new fields cannot be added to structures
+modified by hooks, i.e. ~deployment~ must have the same fields as
+~some_hook(deployment)~ when making assignments with:
+
+#+BEGIN_SRC matlab
+deployment = some_hook(deployment)
+#+END_SRC
+
+To avoid this issue, all custom fields added to deployments by hooks should be
+added to the ~deployment.cruise~ field.
+
 
 *** post_setup_hook
-~[Config] = post_setup_hook(Config)~
+~[config] = post_setup_hook(config)~
 
-Modify the main ~Config~ structure before any processing has been done. This can
-be used to set up user-defined file and directory structures programatically for
-access in later hooks.
+Modify vessel entries in the main ~Config~ structure before any processing has
+been done. This can be used to set up user-defined file and directory structures
+programatically for access in later hooks.
 
 *** post_load_hook
 ~[deployment, adcp, gps] = post_load_hook(deployment, adcp, gps)~

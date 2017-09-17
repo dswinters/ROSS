@@ -7,6 +7,8 @@ for i = 1:length(Config)
     if ~isempty(Config(i).deployments)
         Config(i).deployments = fill_defaults(Config(i).deployments,config_defaults());
     end
+    [Config(i).deployments.cruise] = deal(struct());
+    [Config(i).deployments.vessel] = deal(struct());
 
     % Set up deployments
     for d = 1:length(Config(i).deployments)
@@ -36,14 +38,14 @@ for i = 1:length(Config)
         dep.files.adcp_all  = fullfile(dep.dirs.raw_adcp, adcp_all);
         dep.files.processed = fullfile(Config(i).dirs.proc, [dep.name '.mat']);
 
+        %% Add cruise and vessel information
+        dep.cruise.name = Config(i).cruise;
+        dep.vessel.name = Config(i).name;
                                        
         % Update deployment
         dep.dirs = rmfield(dep.dirs,'raw');
         Config(i).deployments(d) = dep;
 
-        %% Add cruise and vessel information
-        Config(i).deployments(d).cruise = Config(i).cruise;
-        Config(i).deployments(d).vessel = Config(i).name;
     end
 end
 

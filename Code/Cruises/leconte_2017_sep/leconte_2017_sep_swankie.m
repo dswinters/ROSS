@@ -85,9 +85,17 @@ dep = dep+1;
 swankie(dep).name      = 'swankie_deployment_20170916_002146';
 swankie(dep).dirs.raw  = 'deployment_20170916_002146';
 
+%--------------------------------------------------------%
+dep = dep+1;
+swankie(dep).name      = 'swankie_deployment_20170916_232943';
+swankie(dep).dirs.raw  = 'deployment_20170916_232943';
+
+
 
 % Fill defaults
 if ~isempty(swankie)
     swankie = fill_defaults(swankie,defaults);
 end
 config.deployments = swankie;
+
+

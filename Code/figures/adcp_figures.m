@@ -4,9 +4,7 @@ if checkfield(DEP.proc,'skip')
     return
 end
 
-diary on
-fprintf('\n- Figures\n')
-diary off
+disp('  - Figures')
 
 %% Set up figure directory
 dirout = fullfile(DEP.dirs.figs, DEP.name, '/');
@@ -20,7 +18,7 @@ for i = 1:length(figtypes)
         % Save figure
         fout = fullfile(DEP.dirs.figs, [figtypes{i} '.jpg']);
         print(hfig,'-djpeg90','-r300',fout);
-        disp(['  - ' figtypes{i} '.jpg'])
+        disp(['    - ' fout])
     end
 end
 

@@ -114,16 +114,10 @@ dirout = fileparts(DEP.files.processed);
 if ~exist(dirout,'dir'); mkdir(dirout); end
 save(DEP.files.processed,'adcp')
 
-fparts = strsplit(DEP.files.processed,'/');
-flink = fullfile('..',fparts{6:end});
-
-diary on
-disp(sprintf('- [[%s][Processed deployment file]]', flink))
-fprintf('\n- Processing information:\n')
-for i = 1:length(adcp(1).info)
-    disp(['  - ' adcp(1).info{i}])
+disp(['  - Saved ' DEP.files.processed])
+for i = 1:length(adcp.info)
+    disp(['    - ' adcp.info{i}])
 end
-diary off
 
 %% Make figures
 close all

@@ -7,19 +7,15 @@ fexist_all = exist(DEP.files.adcp_all,'file');
 
 % Check for a sub-deployment .mat file
 fexist = exist(matfile,'file');
-fparts = strsplit(matfile,'/');
-flink = fullfile('..',fparts{6:end});
 
 % load the full-deployment .mat file if it exists
 if fexist_all && ~DEP.proc.adcp_raw2mat
     load(DEP.files.adcp_all,'A');
-    disp(['% Loaded ' DEP.files.adcp_all])
-    fparts = strsplit(DEP.files.adcp_all,'/');
-    flink = fullfile('..',fparts{6:end});
+    disp(['  - Loaded ' DEP.files.adcp_all])
 % load the sub-deployment .mat file if it exists
 elseif fexist && ~DEP.proc.adcp_raw2mat
     load(matfile,'A');
-    disp(['% Loaded ' matfile])
+    disp(['  - Loaded ' matfile])
 else
     %% Load raw data
     A = feval(DEP.proc.adcp_load_func,...
@@ -36,7 +32,7 @@ else
 
     %% save matfile
     save(matfile,'A');
-    disp(['% Saved ' flink])
+    disp(['  - Saved ' matfile])
 end
 
 %% Minor processing
@@ -49,44 +45,5 @@ for ia = 1:length(A)
     idx = find(A(ia).mtime >= DEP.tlim(1) & ...
                A(ia).mtime <= DEP.tlim(2));
     A(ia) = adcp_index(A(ia),idx);
-end
-
-%% Print some information to the log file
-diary on
-fprintf('\n- [[%s][Raw ADCP .mat file]]. ',flink)
-fprintf('This file contains data from the following binary file(s):\n')
-for i = 1:length(A(1).files)
-    disp(sprintf('  - %s',A(1).files{i}));
-end
-
-flds = {'beam_freq'  , 'Freq'          , '%d';
-        'n_beams'    , 'Beams'         , '%d';
-        'beam_angle' , 'Beam Angle'    , '%d';
-        'n_cells'    , 'Depth Cells'   , '%d';
-        'cell_size'  , 'Cell Size'     , '%.2f';
-        'blank'      , 'Blank Distance', '%.2f'};
-fprintf('\n- ADCP configuration(s):\n')
-fprintf('  |')
-for i = 1:length(flds)
-    fprintf([flds{i,2} '|']);
-end
-fprintf('\n')
-fprintf('  |')
-for i = 1:length(flds)-1
-    fprintf('-+-')
-end
-fprintf('|\n')
-
-for ia = 1:length(A)
-    fprintf('  |')
-    for i = 1:length(flds)
-        str = sprintf(flds{i,3},...
-                      A(ia).config.(flds{i,1}));
-        fprintf('%s|',str);
-    end
-    fprintf('\n')
-end
-diary off
-
 end
 

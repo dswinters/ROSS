@@ -1,9 +1,11 @@
 function Config = proc_all_deployments(Config)
 
-for k = 1:length(Config)
-    for ndep = 1:length(Config(k).deployments)
-        Config(k).deployments(ndep) = ...
-            proc_deployment(Config(k).deployments(ndep));
+for nves = 1:length(Config)
+    fprintf('\n* %s deployments\n',Config(nves).name);
+    for ndep = 1:length(Config(nves).deployments)
+        fprintf('\n** %s\n',Config(nves).deployments(ndep).name);
+        Config(nves).deployments(ndep) = ...
+            proc_deployment(Config(nves).deployments(ndep));
     end
 end
 

@@ -8,24 +8,19 @@ f_in = DEP.files.gps;
 
 % Check for a full-deployment .mat file
 fexist_all = exist(DEP.files.gps_all,'file');
-
 % Check for a sub-deployment .mat file
 fexist = exist(matfile,'file');
-fparts = strsplit(matfile,'/');
-flink = fullfile('..',fparts{6:end});
 
 if fexist_all && ~DEP.proc.gps_raw2mat
     gps = load(DEP.files.gps_all);
-    disp(['% Loaded ' DEP.files.gps_all]);
-    fparts = strsplit(DEP.files.gps_all,'/');
-    flink = fullfile('..',fparts{6:end});
+    disp(['  - Loaded ' DEP.files.gps_all]);
 elseif fexist && ~DEP.proc.gps_raw2mat
     gps = load(matfile);
-    disp(['% Loaded ' matfile]);
+    disp(['  - Loaded ' matfile]);
 else
     gps = nav_read(f_in,prefix);
     save(matfile,'-struct','gps');
-    disp(['% Saved ' flink]);
+    disp(['  - Saved ' matfile]);
 end
 
 %% Make sure GPRMC timestamps are unique
@@ -134,16 +129,6 @@ end
                                    gps.GPRMC.lon,...
                                    gps.GPRMC.dn);
 
-
-%% Write information to the log file
-diary on
-fprintf('\n- [[%s][Raw GPS .mat file]]. ', flink)
-fprintf('This file contains data from the following GPS log file(s):\n')
-for i = 1:length(gps.files)
-    disp(sprintf('  - %s',gps.files{i}));
-end
-fprintf('\n');
-diary off
 
 %% Create returned GPS structure
 gps = struct(...

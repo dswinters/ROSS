@@ -45,11 +45,8 @@ end
 %% Coordinate transformations
 % save raw ADCP compass heading
 for ia = 1:length(adcp)
-    if checkfield(DEP.proc,'use_3beam')
-        ve(ia) = adcp_5beam2earth(adcp(ia));
-    else
-        ve(ia) = adcp_beam2earth(adcp(ia));
-    end
+    ve(ia) = feval(DEP.proc.adcp_rotation_func, adcp(ia), ...
+                   DEP.proc.adcp_rotation_args{:});
 end
 
 %% Calculate ship speed from BT or GPS

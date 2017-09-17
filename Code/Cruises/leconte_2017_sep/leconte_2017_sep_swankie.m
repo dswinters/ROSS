@@ -17,6 +17,7 @@ do_sections = true;
 defaults.proc.heading_offset = 45;
 trim_corr_edge = struct('name','corr_edge','params','beam');
 defaults.proc.trim_methods(1) = trim_corr_edge;
+defaults.proc.adcp_rotation_func = 'adcp_5beam2earth';
 
 %--------------------------------------------------------%
 % Testing on the deck - no useable data!

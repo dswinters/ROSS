@@ -57,7 +57,7 @@ for ia = 1:length(adcp)
         adcp(ia).ship_vel_east  = -ve.bt_vel(1,:);
         adcp(ia).ship_vel_north = -ve.bt_vel(2,:);
       case 'GPS'
-        mes = [mes 'GPS-based velocity estimate'];
+        mes = [mes 'GPS track velocity'];
         adcp(ia).ship_vel_east  = adcp(ia).gps.vx;
         adcp(ia).ship_vel_north = adcp(ia).gps.vy;
       otherwise
@@ -82,6 +82,7 @@ end
 for ia = 1:length(adcp)
     adcp(ia).vel = ve(ia).vel;
 end
+clear ve;
 
 %% Deployment-specific post-rotation processing
 [DEP, adcp] = post_rotation_hook(DEP, adcp);

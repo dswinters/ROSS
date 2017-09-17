@@ -27,10 +27,9 @@ for i = 1:length(Vessels)
     % Set up deployments
     for d = 1:length(Vessels(i).deployments)
         dep = Vessels(i).deployments(d);
-        subdir_raw    = dep.dirs.raw;
 
         %% Make full directories
-        dir_raw     = fullfile(Vessels(i).dirs.raw, subdir_raw, '/');
+        dir_raw     = fullfile(Vessels(i).dirs.raw, dep.dirs.raw, '/');
         gps_files   = dir(fullfile(dir_raw, dep.files.gps));
         adcp_files  = dir(fullfile(dir_raw, dep.files.adcp));
         %
@@ -39,28 +38,34 @@ for i = 1:length(Vessels)
         dep.dirs.figs     = fullfile(Vessels(i).dirs.figs, dep.name, '/');
 
         %% Make full file paths
-        [~,dirname] = fileparts(fileparts(fullfile(dep.dirs.raw_adcp,'/')));
-        adcp_all = [dirname '_adcp.mat'];
-        [~,dirname] = fileparts(fileparts(fullfile(dep.dirs.raw_gps,'/')));
-        gps_all = [dirname '_gps.mat'];
         dep.files.gps       = fullfile(dep.dirs.raw_gps, {gps_files.name});
         dep.files.adcp      = fullfile(dep.dirs.raw_adcp, {adcp_files.name});
         dep.files.gps_mat   = fullfile(dep.dirs.raw_gps, [dep.name '_gps.mat']);
         dep.files.adcp_mat  = fullfile(dep.dirs.raw_adcp, [dep.name '_adcp.mat']);
         dep.files.map       = fullfile(Vessels(i).dirs.maps,dep.files.map);
         dep.files.coastline = fullfile(Vessels(i).dirs.maps,dep.files.coastline);
-        dep.files.gps_all   = fullfile(dep.dirs.raw_gps, gps_all);
-        dep.files.adcp_all  = fullfile(dep.dirs.raw_adcp, adcp_all);
         dep.files.processed = fullfile(Vessels(i).dirs.proc, [dep.name '.mat']);
 
         %% Add cruise and vessel information
         dep.cruise.name = Vessels(i).cruise;
         dep.vessel.name = Vessels(i).name;
 
+        %% Full-deployment files
+        % Create these if the deployment name ends with the name of the
+        % subfolder containing the deployment's raw data. If any later
+        % deployments (e.g. specific sections) use the same raw data subfolder,
+        % these will be loaded.
+        dep.files.gps_all   = fullfile(dep.dirs.raw_gps,'gps_all.mat');
+        dep.files.adcp_all  = fullfile(dep.dirs.raw_adcp,'adcp_all.mat');
+        [~,dirname] = fileparts(fileparts(dir_raw));
+        if endsWith(dep.name,dirname)
+            dep.files.gps_mat = dep.files.gps_all;
+            dep.files.adcp_mat = dep.files.adcp_all;
+        end
+
         % Update deployment
         dep.dirs = rmfield(dep.dirs,'raw');
         Vessels(i).deployments(d) = dep;
-
     end
 end
 

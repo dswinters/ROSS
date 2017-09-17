@@ -39,9 +39,10 @@ for i = 1:length(Vessels)
         dep.dirs.figs     = fullfile(Vessels(i).dirs.figs, dep.name, '/');
 
         %% Make full file paths
-        gps_all  = [lower(Vessels(i).name) '_' subdir_raw '_gps.mat'];
-        adcp_all = [lower(Vessels(i).name) '_' subdir_raw '_adcp.mat'];
-        %
+        [~,dirname] = fileparts(fileparts(fullfile(dep.dirs.raw_adcp,'/')));
+        adcp_all = [dirname '_adcp.mat'];
+        [~,dirname] = fileparts(fileparts(fullfile(dep.dirs.raw_gps,'/')));
+        gps_all = [dirname '_gps.mat'];
         dep.files.gps       = fullfile(dep.dirs.raw_gps, {gps_files.name});
         dep.files.adcp      = fullfile(dep.dirs.raw_adcp, {adcp_files.name});
         dep.files.gps_mat   = fullfile(dep.dirs.raw_gps, [dep.name '_gps.mat']);

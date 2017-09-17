@@ -32,15 +32,19 @@ for ia = 1:length(adcp)
     adcp(ia) = adcp_trim_data(adcp(ia),DEP.proc.trim_methods);    
 end
 
+%% Get GPS heading and mounting offset
+for ia = 1:length(adcp)
+    adcp(ia).heading_compass = adcp(ia).heading;
+    adcp(ia).heading = adcp(ia).gps.h;
+    adcp(ia).config.xducer_misalign = DEP.proc.heading_offset;
+end
+
 %% Deployment-specific pre-rotation processing
 [DEP, adcp] = pre_rotation_hook(DEP,adcp);
 
 %% Coordinate transformations
 % save raw ADCP compass heading
 for ia = 1:length(adcp)
-    adcp(ia).heading_compass = adcp(ia).heading;
-    adcp(ia).heading = adcp(ia).gps.h;
-    adcp(ia).config.xducer_misalign = DEP.proc.heading_offset;
     if checkfield(DEP.proc,'use_3beam')
         ve(ia) = adcp_5beam2earth(adcp(ia));
     else

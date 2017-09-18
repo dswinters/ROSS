@@ -23,6 +23,8 @@ else
     disp(['  - Saved ' matfile]);
 end
 
+has_pitchroll = ismember('PASHR',DEP.proc.nmea);
+
 %% Make sure GPRMC timestamps are unique
 [~,uidx] = unique(gps.GPRMC.dn);
 flds = fields(gps.GPRMC);
@@ -76,9 +78,7 @@ gps.GPRMC.dn(idx) = gps.GPRMC.dn(idx) + datenum([2000 0 0 0 0 0]);
 
 
 %% Interpolate pitch and roll from PASHR lines
-p_pashr = [];
-r_pashr = [];
-if ismember('PASHR',DEP.proc.nmea)
+if has_pitchroll
     n1 = length(gps.GPRMC.lnum);
     n2 = length(gps.PASHR.lnum);
     idx = [[  1+zeros(1,n1),    2+zeros(1,n2)];
@@ -131,13 +131,17 @@ end
 
 
 %% Create returned GPS structure
-gps = struct(...
-    'dn'  , gps.GPRMC.dn  ,...
-    'lat' , gps.GPRMC.lat ,...
-    'lon' , gps.GPRMC.lon ,...
-    'h'   , h_hehdt       ,...
-    'p'   , p_pashr       ,...
-    'r'   , r_pashr       ,...
-    'vx'  , vx_gprmc      ,...
-    'vy'  , vy_gprmc);
+gps_out = struct();
+% datenum, lat, lon from GPRMC lines
+gps_out.dn = gps.GPRMC.dn;
+gps_out.lat = gps.GPRMC.lat;
+gps_out.lon = gps.GPRMC.lon;
+gps_out.h   = h_hehdt;
+if has_pitchroll
+    gps_out.p = p_pashr;
+    gps_out.r = r_pashr;
+end
+gps_out.vx = vx_gprmc;
+gps_out.vy = vy_gprmc;
 
+gps = gps_out;

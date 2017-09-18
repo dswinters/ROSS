@@ -14,19 +14,21 @@ for i = 1:length(Vessels)
         Vessels(i).deployment = fill_defaults(Vessels(i).deployment,config_defaults());
     end
 
-    % Add 'cruise' field if there isn't one already
-    if ~isfield(Vessels(i).deployment,'cruise')
-        [Vessels(i).deployment.cruise] = deal(struct());
-    end
-
-    % Add 'vessel' field if there isn't one already
-    if ~isfield(Vessels(i).deployment,'vessel')
-        [Vessels(i).deployment.vessel] = deal(struct());
-    end
-
     % Set up deployments
     for d = 1:length(Vessels(i).deployment)
         dep = Vessels(i).deployment(d);
+
+        %% Add cruise and vessel info into deployment structure
+        if ~isfield(Vessels(i).deployment,'cruise')
+            [Vessels(i).deployment.cruise] = deal(struct());
+        end
+        if ~isfield(Vessels(i).deployment,'vessel')
+            [Vessels(i).deployment.vessel] = deal(struct());
+        end
+        dep.cruise.name = Vessels(i).cruise;
+        dep.vessel.name = Vessels(i).name;
+        dep.vessel.dirs.raw  = Vessels(i).dirs.raw;
+        dep.vessel.dirs.proc = Vessels(i).dirs.proc;
 
         %% Make full directories
         dir_raw     = fullfile(Vessels(i).dirs.raw, dep.dirs.raw, '/');
@@ -45,12 +47,6 @@ for i = 1:length(Vessels)
         dep.files.map       = fullfile(Vessels(i).dirs.maps,dep.files.map);
         dep.files.coastline = fullfile(Vessels(i).dirs.maps,dep.files.coastline);
         dep.files.processed = fullfile(Vessels(i).dirs.proc, [dep.name '.mat']);
-
-        %% Add cruise and vessel information
-        dep.cruise.name = Vessels(i).cruise;
-        dep.vessel.name = Vessels(i).name;
-        dep.vessel.dirs.raw  = Vessels(i).dirs.raw;
-        dep.vessel.dirs.proc = Vessels(i).dirs.proc;
 
         %% Full-deployment files
         % Create these if the deployment name ends with the name of the
@@ -71,3 +67,5 @@ for i = 1:length(Vessels)
     Vessels(i) = post_setup_hook(Vessels(i));
 end
 
+% Remove dirs and cruise fields
+Vessels = rmfield(Vessels,{'dirs','cruise'});

@@ -57,10 +57,9 @@ ross_defaults.files.gps           = 'GPS/*.log';
 ross_defaults.files.adcp          = 'ADCP/*timestamped*.bin';
 % Figures
 fig_defaults.plot.make_figure.summary       = true;
-fig_defaults.plot.make_figure.echo_intens   = true;
-fig_defaults.plot.make_figure.corr          = true;
-fig_defaults.plot.make_figure.coastline_map = true;
-fig_defaults.plot.make_figure.surface_vel   = false;
+% fig_defaults.plot.make_figure.echo_intens   = true;
+% fig_defaults.plot.make_figure.corr          = true;
+% fig_defaults.plot.make_figure.coastline_map = true;
 
 % Fill ROSS defaults
 for i = 1:4

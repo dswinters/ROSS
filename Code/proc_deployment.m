@@ -8,50 +8,50 @@ end
 %% Load ADCP data, load & pre-process GPS data
 adcp = load_adcp(DEP);
 gps = load_gps(DEP);
-if ~isfield(adcp,'info')
-    [adcp(:).info] = deal({});
-end
 
-%% cruise-specific post-load hook function
-[DEP, adcp, gps] = post_load_hook(DEP, adcp, gps);
-
-%% Interpolate GPS data to ADCP timestamps
-[adcp(:).gps] = deal(struct());
+% An ADCP structure may have multiple configurations...
+% Loop through these.
 for ia = 1:length(adcp)
-    adcp(ia).gps = struct(...
-        'dn' , interp1(gps.dn, gps.dn , adcp(ia).mtime)  ,...
-        'lat', interp1(gps.dn, gps.lat, adcp(ia).mtime)  ,...
-        'lon', interp1(gps.dn, gps.lon, adcp(ia).mtime)  ,...
-        'h'  , interp1(gps.dn, gps.h  , adcp(ia).mtime)  ,...
-        'vx' , interp1(gps.dn, gps.vx , adcp(ia).mtime)  ,...
-        'vy' , interp1(gps.dn, gps.vy , adcp(ia).mtime)) ;
-end
 
-%% Trim data
-for ia = 1:length(adcp)
+    if ~isfield(adcp(ia),'info'); adcp(ia).info = {}; end
+
+    % cruise-specific post-load hook function
+    [DEP, adcp(ia), gps] = post_load_hook(DEP, adcp(ia), gps);
+
+    % Interpolate GPS data to ADCP timestamps
+    gpsflds = fields(gps);
+    for i = 1:length(gpsflds)
+        adcp(ia).gps.(gpsflds{i}) = ...
+            interp1(gps.dn,gps.(gpsflds{i}),adcp(ia).mtime);
+    end
+
+    % Trim data
     adcp(ia) = adcp_trim_data(adcp(ia),DEP.proc.trim_methods);    
-end
 
-%% Get GPS heading and mounting offset
-for ia = 1:length(adcp)
-    adcp(ia).heading_compass = adcp(ia).heading;
-    adcp(ia).heading = adcp(ia).gps.h;
+    % Set heading offset
     adcp(ia).config.xducer_misalign = DEP.proc.heading_offset;
-end
 
-%% Deployment-specific pre-rotation processing
-[DEP, adcp] = pre_rotation_hook(DEP,adcp);
+    % Fill adcp data struct with external gyro data if available
+    adcp(ia).heading_internal = adcp(ia).heading; % save raw heading
+    adcp(ia).heading = adcp(ia).gps.h;
+    % if isfield(gps,'p')
+    %     adcp(ia).pitch_internal = adcp(ia).pitch;
+    %     adcp(ia).pitch = adcp(ia).gps.p;
+    % end
+    % if isfield(gps,'r')
+    %     adcp(ia).roll_internal = adcp(ia).roll;
+    %     adcp(ia).roll = adcp(ia).gps.r;
+    % end        
 
-%% Coordinate transformations
-% save raw ADCP compass heading
-for ia = 1:length(adcp)
-    ve(ia) = feval(DEP.proc.adcp_rotation_func, adcp(ia), ...
-                   DEP.proc.adcp_rotation_args{:});
-end
+    % Deployment-specific pre-rotation processing
+    [DEP, adcp(ia)] = pre_rotation_hook(DEP,adcp(ia));
 
-%% Calculate ship speed from BT or GPS
-mes = ['Ship velocity corrected using '];
-for ia = 1:length(adcp)
+    % Coordinate transformations
+    ve = feval(DEP.proc.adcp_rotation_func, adcp(ia), ...
+               DEP.proc.adcp_rotation_args{:});
+
+    % Calculate ship speed from BT or GPS
+    mes = ['Ship velocity corrected using '];
     switch DEP.proc.ship_vel_removal
       case 'BT'
         mes = [mes 'bottom-track velocity'];
@@ -67,41 +67,35 @@ for ia = 1:length(adcp)
         adcp(ia).ship_vel_north = zeros(size(adcp(ia).mtime));
     end
     adcp(ia).info = cat(1,adcp(ia).info,mes);
-end
 
-%% Remove ship speed
-for ia = 1:length(adcp)
-    veast  = squeeze(ve(ia).vel(:,1,:));
-    vnorth = squeeze(ve(ia).vel(:,2,:));
-    veast  = veast + repmat(adcp(ia).ship_vel_east,adcp(ia).config.n_cells,1);
-    vnorth = vnorth + repmat(adcp(ia).ship_vel_north,adcp(ia).config.n_cells,1);
-    ve(ia).vel(:,1,:) = veast;
-    ve(ia).vel(:,2,:) = vnorth;
-end
+    % Remove ship speed
+    for ia = 1:length(adcp)
+        veast  = squeeze(ve.vel(:,1,:));
+        vnorth = squeeze(ve.vel(:,2,:));
+        veast  = veast + repmat(adcp(ia).ship_vel_east,adcp(ia).config.n_cells,1);
+        vnorth = vnorth + repmat(adcp(ia).ship_vel_north,adcp(ia).config.n_cells,1);
+        ve.vel(:,1,:) = veast;
+        ve.vel(:,2,:) = vnorth;
+    end
 
-%% Update ADCP data structure
-for ia = 1:length(adcp)
+    % Update ADCP data structure
     adcp(ia).vel = ve(ia).vel;
-end
-clear ve;
+    clear ve;
 
-%% Deployment-specific post-rotation processing
-[DEP, adcp] = post_rotation_hook(DEP, adcp);
+    % Deployment-specific post-rotation processing
+    [DEP, adcp(ia)] = post_rotation_hook(DEP, adcp(ia));
 
-%% Additional filters
-if isfield(DEP.proc,'filters')
-    for i = 1:length(DEP.proc.filters)
-        for ia = 1:length(adcp)
+    % Additional filters
+    if isfield(DEP.proc,'filters')
+        for i = 1:length(DEP.proc.filters)
             adcp(ia) = adcp_filter(adcp(ia),DEP.proc.filters(i));            
         end
     end
-end
 
-%% Remove manually-specified bad data segments
-if isfield(DEP.proc,'bad');
-    bad = DEP.proc.bad;
-    for i = 1:length(bad)
-        for ia = 1:length(adcp)
+    % Remove manually-specified bad data segments
+    if isfield(DEP.proc,'bad');
+        bad = DEP.proc.bad;
+        for i = 1:length(bad)
             mes = sprintf('Data removed manually between %s and %s',...
                           datestr(bad{i}(1)),datestr(bad{i}(2)));
             idx = adcp(ia).mtime>=bad{i}(1) & adcp(ia).mtime<=bad{i}(2);
@@ -112,6 +106,7 @@ if isfield(DEP.proc,'bad');
 end
 
 %% Save deployment file
+
 dirout = fileparts(DEP.files.processed);
 if ~exist(dirout,'dir'); mkdir(dirout); end
 save(DEP.files.processed,'adcp')

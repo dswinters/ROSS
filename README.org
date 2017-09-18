@@ -8,6 +8,10 @@ functions while retaining enough flexibility to process data from a variety of
 sources and handle different organizational structures with minimal
 configuration.
 
+Basic processing instructions are managed with input files, while a system of
+"hook" functions allows the user to implement arbitrarily complex additional
+processing at various stages of execution.
+
 
 * Configuration
 
@@ -35,49 +39,49 @@ deployments.
 *** Cruise configuration
 
 The first step to configuring a new dataset is to assign a cruise name and
-create a folder within the ~Code~ directory. A MATLAB function named after the
-cruise and prefixed with ~config_~ must be present in this directory. As an
-example, note that the *leconte_2017_sep* cruise has a ~Code/leconte_2017_sep/~
-directory containing ~config_leconte_2017_sep.m~. *A file of this form is
-necessary for each cruise*.
+create a folder within the ~Code/cruises/~ directory. A MATLAB function named
+after the cruise and prefixed with ~config_~ must be present in this directory.
+As an example, note that the *leconte_2017_sep* cruise has a
+~Code/cruises/leconte_2017_sep/~ directory containing
+~config_leconte_2017_sep.m~. *A file of this form is necessary for each cruise*.
 
-The function defined in this file has no inputs and returns a ~Config~ structure
+The function defined in this file has no inputs and returns a ~Vessels~ structure
 as its only output. This structure contains file input/output information and
 processing instructions.
 
 Using the *leconte_2017_sep* cruise an an example:
 
 #+BEGIN_SRC matlab
-  >> Config = config_leconte_2017_sep()
+  >> Vessels = config_leconte_2017_sep()
 
-  Config = 
+  Vessels = 
 
     1x4 struct array with fields:
 
       name
-      deployments
+      deployment
       dirs
 #+END_SRC
 
 *** Vessel configuration
 
-The 4 entries in the above ~Config~ example correspond to the 4 vessels used
+The 4 entries in the above ~Vessels~ example correspond to the 4 vessels used
 during this cruise: 3 ROSS kayaks (Casey, Rosie, and Swankie) and the MV
 Steller. The third entry belongs to the ROSS kayak Swankie:
 
 #+BEGIN_SRC matlab
-  >> Config(3)
+  >> Vessels(3)
 
   ans = 
 
     struct with fields:
 
              name: 'Swankie'
-      deployments: [1x19 struct]
+      deployment: [1x19 struct]
              dirs: [1x1 struct]
 #+END_SRC
 
-The ~deployments~ structure will be described in the next section.
+The ~deployment~ structure will be described in the next section.
 
 The ~dirs~ structure has 3 required fields (all are strings):
 
@@ -89,12 +93,12 @@ The ~dirs~ structure has 3 required fields (all are strings):
 | figs  | The base directory to which figures will be writted        |
 |-------+------------------------------------------------------------|
 
-On this particular cruise, we had a network drive which I mounted at
-~/Volumes/data/~. The values of the fields in ~dirs~ reflect the organizational
-structure of the files stored on this drive:
+On this particular cruise, a network drive which I mounted as ~/Volumes/data/~
+contained raw instrument data. The values of the fields in ~dirs~ reflect the
+organizational structure of the files stored on this drive:
 
 #+BEGIN_SRC matlab
-  >> Config(3).dirs
+  >> Vessels(3).dirs
 
   ans = 
 
@@ -105,11 +109,11 @@ structure of the files stored on this drive:
       figs: '/Volumes/data/20170912_Alaska/figures/ROSS/Swankie/'
 #+END_SRC
 
-Compare this to the ~dirs~ structure in the MV Steller's ~Config~ entry for an
+Compare this to the ~dirs~ structure in the MV Steller's ~Vessels~ entry for an
 example of handling different organizational structures on a per-vessel basis:
 
 #+BEGIN_SRC matlab
->> Config(4).dirs
+>> Vessels(4).dirs
 
 ans = 
 
@@ -123,9 +127,9 @@ ans =
 *** Deployment configuration
 
 The majority of configuration information is stored within each vessel's
-~deployments~ structure. Entries in this structure contain processing
+~deployment~ structure. Entries in this structure contain processing
 instructions and information for locating deployment-specific files - they are
-similar to the vessel ~Config~ structure in which they are contained:
+similar to the vessel ~Vessels~ structure in which they are contained:
 
 |-------+---------------------------------+--------|
 | Field | Description                     | Type   |
@@ -139,7 +143,7 @@ similar to the vessel ~Config~ structure in which they are contained:
 |-------+---------------------------------+--------|
 
 #+BEGIN_SRC matlab
->> Config(3).deployments
+>> Vessels(3).deployment
 
 ans = 
 
@@ -191,21 +195,32 @@ wildcards.
 
 **** ~proc~: Processing options
 
-|------------------+-------------------------------------------------------------+--------+------------------------|
-| Field            | Description                                                 | Type   | Default                |
-|------------------+-------------------------------------------------------------+--------+------------------------|
-| ~heading_offset~ | ADCP vessel mounting offset                                 | double | none                   |
-| ~trim_methods~   | Method(s) to use for trimming ADCP data                     | struct | none                   |
-| ~adcp_load_func~ | The function to use for parsing raw ADCP data               | string | ~'adcp_rdradcp_multi'~ |
-| ~adcp_load_args~ | Additional arguments to pass to ~adcp_load_func~            | cell   | ~{}~                   |
-| ~nmea~           | NMEA prefixes contained in GPS data files                   | cell   | ~{'GPRMC','HEHDT'}~    |
-| ~skip~           | A flag to skip processing deployments                       | bool   | ~false~                |
-| ~adcp_raw2mat~   | A flag to force re-parsing of raw ADCP data                 | bool   | ~false~                |
-| ~gps_raw2mat~    | A flag to force re-parsing of raw GPS data                  | bool   | ~false~                |
-| ~use_3beam~      | A flag for using all 3-beam solutions (for Sentinel V ADCP) | bool   | ~false~                |
-|------------------+-------------------------------------------------------------+--------+------------------------|
+|----------------------+----------------------------------------------------------------+--------+------------------------|
+| Field                | Description                                                    | Type   | Default                |
+|----------------------+----------------------------------------------------------------+--------+------------------------|
+| ~heading_offset~     | ADCP vessel mounting offset                                    | double | none                   |
+| ~trim_methods~       | Method(s) to use for trimming ADCP data                        | struct | none                   |
+| ~adcp_load_func~     | Name of function to use for parsing raw ADCP data              | string | ~'adcp_rdradcp_multi'~ |
+| ~adcp_load_args~     | Additional arguments to pass to ~adcp_load_func~               | cell   | ~{}~                   |
+| ~adcp_rotation_func~ | Name of function to use for transforming ADCP data coordinates | string | ~'adcp_beam2earth'~    |
+| ~adcp_rotation_args~ | Additional arguments to pass to ~adcp_rotation_func~           | cell   |                        |
+| ~nmea~               | NMEA prefixes contained in GPS data files                      | cell   | ~{'GPRMC','HEHDT'}~    |
+| ~skip~               | A flag to skip processing deployments                          | bool   | ~false~                |
+| ~adcp_raw2mat~       | A flag to force re-parsing of raw ADCP data                    | bool   | ~false~                |
+| ~gps_raw2mat~        | A flag to force re-parsing of raw GPS data                     | bool   | ~false~                |
+|----------------------+----------------------------------------------------------------+--------+------------------------|
+
+**** ~plot.make_figure~: Figure flags
+
+For each entry in this structure, a corresponding figure function will be called
+if its value is true. For example, if ~make_figure.summary == true~, then the
+function ~figure_make_summary~ will be called using the deployment's
+configuration as input. There are several figure functions included in this
+repository in the ~Code/figures/~ folder.
 
 **** ~plot~: Plotting options
+
+Fields accessed by figure functions.
 
 |---------------+--------------------------------------------------------+--------+-----------|
 | Field         | Description                                            | Type   | Default   |
@@ -216,15 +231,6 @@ wildcards.
 | ~ylim~        | Vertical axis limits for 2d plots                      | double | ~[0 200]~ |
 |---------------+--------------------------------------------------------+--------+-----------|
 
-***** ~plot.make_figure~: Figure flags
-
-For each entry in this structure, a corresponding figure function will be called
-if its value is true. For example, if ~make_figure.summary == true~, then the
-function ~figure_make_summary~ will be called using the deployment's
-configuration as input. There are several figure functions included in this
-repository in the ~Code/figures/~ folder.
-
-
 *** Organizing cruise configuration
 
 It is not necessary to define all fields described in the previous section
@@ -233,10 +239,10 @@ configuration into vessel-specific files which are in turn called from the main
 ~config~ function, /e.g./:
 
 #+BEGIN_SRC matlab
-Config(1) = leconte_2017_sep_casey();
-Config(2) = leconte_2017_sep_rosie();
-Config(3) = leconte_2017_sep_swankie();
-Config(4) = leconte_2017_sep_steller();
+Vessels(1) = leconte_2017_sep_casey();
+Vessels(2) = leconte_2017_sep_rosie();
+Vessels(3) = leconte_2017_sep_swankie();
+Vessels(4) = leconte_2017_sep_steller();
 #+END_SRC
 
 *** Using ~fill_defaults~

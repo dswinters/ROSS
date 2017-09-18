@@ -230,7 +230,7 @@ repository in the ~Code/figures/~ folder.
 It is not necessary to define all fields described in the previous section
 directly within the cruise's ~config~ function. It might make sense to separate
 configuration into vessel-specific files which are in turn called from the main
-~config~ function:
+~config~ function, /e.g./:
 
 #+BEGIN_SRC matlab
 Config(1) = leconte_2017_sep_casey();
@@ -243,10 +243,9 @@ Config(4) = leconte_2017_sep_steller();
 
 It can be tedious and cumbersome to repeatedly specify the same options for
 deployments that share properties. The [[Code/fill_defaults.m][~fill_defaults~]] function can be used to
-avoid this by recursively replacing blank or non-existent fields in a structure
-with those from a template, or "default", structure. For example, we can fill a
-structure named ~incomplete~ with default values from a structured named
-~defaults~:
+avoid this by recursively replacing blank or non-existent fields with those from
+a template, or "default", structure. For example, we can fill a structure named
+~incomplete~ with default values from a structured named ~defaults~:
 
 #+BEGIN_SRC matlab
   >> incomplete
@@ -297,9 +296,9 @@ There are several points during execution at which the program looks for
 cruise-specific functions and calls them, if they exist. These functions are
 called *hooks*, and are described below with some example applications. It can
 be useful to set up switch statements within these functions that execute a
-certain set of instructions if a deployment name is matched. These functions
-allow for the addition of arbitrarily complex user-defined processing without
-modification of the core processing code.
+certain set of instructions if a vessel or deployment name is matched. These
+functions allow for the addition of arbitrarily complex user-defined processing
+without modification of the core processing code.
 
 Note that a cruise's ~config~ file is a hook - it is special in that it is
 required and not named with a ~_hook~ suffix, but it is analogous to other hooks
@@ -309,31 +308,39 @@ described below.
 
 Due to MATLAB structure limitations, new fields cannot be added to structures
 modified by hooks, i.e. ~deployment~ must have the same fields as
-~some_hook(deployment)~ when making assignments with:
+~some_hook(deployment)~ if making an assignment using:
 
 #+BEGIN_SRC matlab
 deployment = some_hook(deployment)
 #+END_SRC
 
-To avoid this issue, all custom fields added to deployments by hooks should be
-added to the ~deployment.cruise~ field.
+To avoid this issue, all custom fields added to structures by hooks should be
+added to existing sub-structures.
 
 
 *** post_setup_hook
-~[config] = post_setup_hook(config)~
+~[vessel] = post_setup_hook(vessel)~
 
-Modify vessel entries in the main ~Config~ structure before any processing has
+Modify vessel entries in the main ~Vessels~ structure before any processing has
 been done. This can be used to set up user-defined file and directory structures
 programatically for access in later hooks.
+
+See [[file:Code/cruises/leconte_2017_sep/leconte_2017_sep_post_setup_hook.m][this example]], where an additional entry in each deployment's ~files~
+structure has been added for a particular vessel.
 
 *** post_load_hook
 ~[deployment, adcp, gps] = post_load_hook(deployment, adcp, gps)~
 
-Modify a ~deployment~'s ~adcp~, and/or ~gps~ data structures after loading
-raw data. This is useful for integrating data separate from the primary data
-sources declared in the cruise's config file. For example, this can be used to
-overwrite sections of data in the ~gps~ structure from a secondary GPS source in
-case of failure during a particular deployment.
+Modify a ~deployment~'s ~adcp~, and/or ~gps~ data structures after loading raw
+data, before processing. This can be used, for example, to integrate external
+data sources into the ~adcp~ and ~gps~ structures before they are passed through
+the main processing routine.
+
+During the *leconte_2017_sep* cruise, the ADCP file naming convention was
+changed mid-cruise, causing files to be concatenated out of chronological order.
+Re-sorting data by timestamps in [[file:Code/cruises/leconte_2017_sep/leconte_2017_sep_post_load_hook.m][leconte_2017_sep_post_load_hook]] fixed this
+issue.
+
 
 *** pre_rotation_hook
 ~[deployment, adcp] = pre_rotation_hook(deployment, adcp)~

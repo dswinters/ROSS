@@ -7,7 +7,7 @@ end
 disp('  - Figures')
 
 %% Set up figure directory
-dirout = fullfile(DEP.dirs.figs, DEP.name, '/');
+dirout = fullfile(DEP.dirs.figs,'/');
 if ~exist(dirout); mkdir(dirout); end
 
 figtypes = fields(DEP.plot.make_figure);

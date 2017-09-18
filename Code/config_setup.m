@@ -44,8 +44,6 @@ for i = 1:length(Vessels)
         dep.files.adcp      = fullfile(dep.dirs.raw_adcp, {adcp_files.name});
         dep.files.gps_mat   = fullfile(dep.dirs.raw_gps, [dep.name '_gps.mat']);
         dep.files.adcp_mat  = fullfile(dep.dirs.raw_adcp, [dep.name '_adcp.mat']);
-        dep.files.map       = fullfile(Vessels(i).dirs.maps,dep.files.map);
-        dep.files.coastline = fullfile(Vessels(i).dirs.maps,dep.files.coastline);
         dep.files.processed = fullfile(Vessels(i).dirs.proc, [dep.name '.mat']);
 
         %% Full-deployment files

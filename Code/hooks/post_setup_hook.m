@@ -1,6 +1,6 @@
-function config = post_setup_hook(config)
+function vessel = post_setup_hook(vessel)
 
-func = [config.cruise '_post_setup_hook'];
+func = [vessel.cruise '_post_setup_hook'];
 if exist(func)==2
-    config = feval(func,config);
+    vessel = feval(func,vessel);
 end

@@ -49,6 +49,8 @@ for i = 1:length(Vessels)
         %% Add cruise and vessel information
         dep.cruise.name = Vessels(i).cruise;
         dep.vessel.name = Vessels(i).name;
+        dep.vessel.dirs.raw  = Vessels(i).dirs.raw;
+        dep.vessel.dirs.proc = Vessels(i).dirs.proc;
 
         %% Full-deployment files
         % Create these if the deployment name ends with the name of the
@@ -64,12 +66,8 @@ for i = 1:length(Vessels)
         end
 
         % Update deployment
-        dep.dirs = rmfield(dep.dirs,'raw');
         Vessels(i).deployment(d) = dep;
     end
-end
-
-for i = 1:length(Vessels)
     Vessels(i) = post_setup_hook(Vessels(i));
 end
 

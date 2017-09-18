@@ -10,8 +10,9 @@ for i = 1:length(adcp)
 end
 
 %% Plot settings
-psty = '.'; % plot style
-msiz = 10; % plot marker size
+psty = '-'; % plot style
+lwid = 0.5; % lindwidth
+msiz = 1.0; % plot marker size
 axesfontsize = 10;
 
 defaultaxesfontsize = get(0,'defaultaxesfontsize');
@@ -97,13 +98,13 @@ for ia = 1:length(adcp)
 end
 
 
-plotfuns = {{@(adcp) adcplot(adcp,'gps_lon',psty,msiz);
-             @(adcp) adcplot(adcp,'gps_lat',psty,msiz)};
-            {@(adcp) adcplot(adcp,'gps_vx',psty,msiz);
-             @(adcp) adcplot(adcp,'gps_vy',psty,msiz)};
-            @(adcp) adcplot(adcp,'heading',psty,msiz);
-            {@(adcp) adcplot(adcp,'pitch',psty,msiz);
-             @(adcp) adcplot(adcp,'roll',psty,msiz)};
+plotfuns = {{@(adcp) adcplot(adcp,'gps_lon',psty,lwid,msiz);
+             @(adcp) adcplot(adcp,'gps_lat',psty,lwid,msiz)};
+            {@(adcp) adcplot(adcp,'gps_vx',psty,lwid,msiz);
+             @(adcp) adcplot(adcp,'gps_vy',psty,lwid,msiz)};
+            @(adcp) adcplot(adcp,'heading',psty,lwid,msiz);
+            {@(adcp) adcplot(adcp,'pitch',psty,lwid,msiz);
+             @(adcp) adcplot(adcp,'roll',psty,lwid,msiz)};
             @(adcp) adcpcolor(adcp,'vel',1);
             @(adcp) adcpcolor(adcp,'vel',2);
             @(adcp) adcpcolor(adcp,'vel',3);
@@ -204,10 +205,10 @@ set(0,'defaultaxesfontsize',defaultaxesfontsize);
 
 %% Functions
 
-function pl = adcplot(adcp,varname,psty,msiz);
+function pl = adcplot(adcp,varname,psty,lwid,msiz);
 dn = cat(2,adcp.mtime);
 v = cat(2,adcp.(varname));
 [dn,idx] = sort(dn);
 v = v(idx);
-pl = plot(dn,v,psty,'markersize',msiz);
+pl = plot(dn,v,psty,'linewidth',lwid,'markersize',msiz);
 

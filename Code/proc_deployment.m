@@ -13,7 +13,7 @@ gps = load_gps(DEP);
 % Loop through these.
 for ia = 1:length(adcp)
 
-    if ~isfield(adcp(ia),'info'); adcp(ia).info = {}; end
+    if ~isfield(adcp,'info'); [adcp.info] = deal({}); end
 
     % cruise-specific post-load hook function
     [DEP, adcp(ia), gps] = post_load_hook(DEP, adcp(ia), gps);
@@ -69,17 +69,15 @@ for ia = 1:length(adcp)
     adcp(ia).info = cat(1,adcp(ia).info,mes);
 
     % Remove ship speed
-    for ia = 1:length(adcp)
-        veast  = squeeze(ve.vel(:,1,:));
-        vnorth = squeeze(ve.vel(:,2,:));
-        veast  = veast + repmat(adcp(ia).ship_vel_east,adcp(ia).config.n_cells,1);
-        vnorth = vnorth + repmat(adcp(ia).ship_vel_north,adcp(ia).config.n_cells,1);
-        ve.vel(:,1,:) = veast;
-        ve.vel(:,2,:) = vnorth;
-    end
+    veast  = squeeze(ve.vel(:,1,:));
+    vnorth = squeeze(ve.vel(:,2,:));
+    veast  = veast + repmat(adcp(ia).ship_vel_east,adcp(ia).config.n_cells,1);
+    vnorth = vnorth + repmat(adcp(ia).ship_vel_north,adcp(ia).config.n_cells,1);
+    ve.vel(:,1,:) = veast;
+    ve.vel(:,2,:) = vnorth;
 
     % Update ADCP data structure
-    adcp(ia).vel = ve(ia).vel;
+    adcp(ia).vel = ve.vel;
     clear ve;
 
     % Deployment-specific post-rotation processing
@@ -112,8 +110,8 @@ if ~exist(dirout,'dir'); mkdir(dirout); end
 save(DEP.files.processed,'adcp')
 
 disp(['  - Saved ' DEP.files.processed])
-for i = 1:length(adcp.info)
-    disp(['    - ' adcp.info{i}])
+for i = 1:length(adcp(1).info)
+    disp(['    - ' adcp(1).info{i}])
 end
 
 %% Make figures

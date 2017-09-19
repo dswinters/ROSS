@@ -1,4 +1,4 @@
-function Config = config_leconte_2017_sep()
+function Vessels = config_leconte_2017_sep()
 
 %========================================================
 % Define some filters
@@ -9,31 +9,16 @@ filt_rotmax3   = newfilt('rotmax',3);
 notrim = newfilt('none',[]);
 
 %========================================================
-% Initialize Config struct
+% Initialize Vessels struct
 %========================================================
-Config(1) = leconte_2017_sep_casey();
-Config(2) = leconte_2017_sep_rosie();
-Config(3) = leconte_2017_sep_swankie();
-Config(4) = leconte_2017_sep_steller();
+Vessels(1) = leconte_2017_sep_casey();
+Vessels(2) = leconte_2017_sep_rosie();
+Vessels(3) = leconte_2017_sep_swankie();
+Vessels(4) = leconte_2017_sep_steller();
 
-%========================================================
-% Set up directories
-%========================================================
-scishare = '/Volumes/data/20170912_Alaska/';
 for i = 1:4
-    switch i
-      case {1,2,3} % ROSS kayaks
-        subdir = [Config(i).name '/'];
-        Config(i).dirs.raw  = [scishare 'data/raw/ROSS/' subdir];
-        Config(i).dirs.proc = [scishare 'data/processed/ADCP_ROSS/' subdir];
-        Config(i).dirs.figs = [scishare 'figures/ROSS/' subdir];
-      case 4       % Steller
-        Config(i).dirs.raw  = [scishare 'data/raw/ADCP_steller/'];
-        Config(i).dirs.proc = [scishare 'data/processed/ADCP_steller/'];
-        Config(i).dirs.figs = [scishare 'figures/ADCP_steller/'];
-    end        
-    Config(i).dirs.maps = fullfile(getenv('HOME'),'OSU/ROSS/Maps/');
-    Config(i).dirs.logs = fullfile(getenv('HOME'),'OSU/ROSS/org/');
+    Vessels(i).dirs.maps = fullfile(getenv('HOME'),'OSU/ROSS/Maps/');
+    Vessels(i).dirs.logs = fullfile(getenv('HOME'),'OSU/ROSS/org/');
 end
 
 %========================================================
@@ -63,13 +48,13 @@ fig_defaults.plot.make_figure.summary       = true;
 
 % Fill ROSS defaults
 for i = 1:4
-    if ~isempty(Config(i).deployment)
+    if ~isempty(Vessels(i).deployment)
         switch i
           case {1,2,3}
-            Config(i).deployment = fill_defaults(Config(i).deployment,ross_defaults);
+            Vessels(i).deployment = fill_defaults(Vessels(i).deployment,ross_defaults);
         end
-        Config(i).deployment = fill_defaults(Config(i).deployment,fig_defaults);
-        Config(i).deployment = fill_defaults(Config(i).deployment,all_defaults);
+        Vessels(i).deployment = fill_defaults(Vessels(i).deployment,fig_defaults);
+        Vessels(i).deployment = fill_defaults(Vessels(i).deployment,all_defaults);
     end
 end
 

@@ -1,11 +1,4 @@
-function Config = config_leconte_2017_may()
-
-%========================================================
-% Trip info
-%========================================================
-trip = struct();
-trip.name   = 'leconte_2017_may';
-trip.kayaks = {'Rosie','Swankie'};
+function Vessels = config_leconte_2017_may()
 
 %========================================================
 % Define some filters
@@ -28,21 +21,13 @@ defaults.proc.adcp_raw2mat     = false;
 defaults.proc.gps_raw2mat      = false;
 defaults.plot.map.coastline    = '../Maps/leconte2_grid_coastline.mat';
 
-%=======================================================
-% Rosie deployments (150 hHz PAVS, Alaska flag)
-%========================================================
-Config(1).name = 'Rosie';
-Config(1).deployment = leconte_2017_may_rosie();
-%========================================================
-% Swankie deployments (300 kHz Sentinel V, Sweden flag)
-%========================================================
-Config(2).name = 'Swankie';
-Config(2).deployment = leconte_2017_may_swankie();
+Vessels(1) = leconte_2017_may_rosie();
+Vessels(2) = leconte_2017_may_swankie();
 
-for i = 1:length(Config)
-    if ~isempty(Config(i).deployment)
-        Config(i).deployment = fill_defaults(...
-            Config(i).deployment,...
+for i = 1:length(Vessels)
+    if ~isempty(Vessels(i).deployment)
+        Vessels(i).deployment = fill_defaults(...
+            Vessels(i).deployment,...
             defaults);
     end
 end

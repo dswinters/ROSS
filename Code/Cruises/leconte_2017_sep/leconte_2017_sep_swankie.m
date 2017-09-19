@@ -1,4 +1,4 @@
-function config = leconte_2017_sep_swankie()
+function vessel = leconte_2017_sep_swankie()
 %--------------------------------------------------------%
 % ADCP orientation                                       %
 %--------------------------------------------------------%
@@ -6,8 +6,15 @@ function config = leconte_2017_sep_swankie()
 %  1   3    ^
 %    5      |--> STARBOARD
 %  4   2   
-config.name = 'Swankie';
-swankie = [];
+vessel.name = 'Swankie';
+% Vessel directories
+scishare = '/Volumes/data/20170912_Alaska/';
+vessel.dirs.raw = fullfile(scishare,'data/raw/ROSS/ROSS7_Swankie/');
+vessel.dirs.proc = fullfile(scishare,'data/processed/ADCP_ROSS/Swankie/');
+vessel.dirs.figs = fullfile(scishare,'figures/ROSS/Swankie/');
+
+% Initialize deployment structure
+deployment = [];
 dep = 0;
 do_sections = true;
 
@@ -22,21 +29,21 @@ defaults.proc.adcp_rotation_func = 'adcp_5beam2earth';
 %--------------------------------------------------------%
 % Testing on the deck - no useable data!
 % dep = dep+1;
-% swankie(dep).proc.skip = true;
-% swankie(dep).name          = 'swankie_decktest_20170912';
-% swankie(dep).dirs.raw_gps  = 'decktest_20170912/GPS/';
-% swankie(dep).dirs.raw_adcp = 'decktest_20170912/ADCP/';
+% deployment(dep).proc.skip = true;
+% deployment(dep).name          = 'swankie_decktest_20170912';
+% deployment(dep).dirs.raw_gps  = 'decktest_20170912/GPS/';
+% deployment(dep).dirs.raw_adcp = 'decktest_20170912/ADCP/';
 
 %--------------------------------------------------------%
 dep = dep+1;
-% swankie(dep).proc.skip = true;
-swankie(dep).name      = 'swankie_deployment_20170913_132345';
-swankie(dep).dirs.raw  = 'deployment_20170913_132345';
-swankie(dep).tlim = datenum([...
+% deployment(dep).proc.skip = true;
+deployment(dep).name      = 'swankie_deployment_20170913_132345';
+deployment(dep).dirs.raw  = 'deployment_20170913_132345';
+deployment(dep).tlim = datenum([...
     '13-Sep-2017 14:03:47';
     '13-Sep-2017 17:01:19']);
 % Sections
-namefmt = [swankie(dep).name '/sec_%02d'];
+namefmt = [deployment(dep).name '/sec_%02d'];
 tlims = datenum(['13-Sep-2017 15:49:54';
                  '13-Sep-2017 15:51:15';
                  '13-Sep-2017 15:51:18';
@@ -70,36 +77,36 @@ tlims = datenum(['13-Sep-2017 15:49:54';
                  '13-Sep-2017 16:16:20';
                  '13-Sep-2017 16:18:04']);
 if do_sections
-    [swankie,dep] = deployment_sections(swankie,dep,tlims,namefmt);
+    [deployment,dep] = deployment_sections(deployment,dep,tlims,namefmt);
 end
 
 %--------------------------------------------------------%
 dep = dep+1;
-swankie(dep).name      = 'swankie_deployment_20170914_204159_shortwatertest';
-swankie(dep).dirs.raw  = 'deployment_20170914_204159_shortwatertest';
-swankie(dep).tlim = datenum([...
+deployment(dep).name      = 'swankie_deployment_20170914_204159_shortwatertest';
+deployment(dep).dirs.raw  = 'deployment_20170914_204159_shortwatertest';
+deployment(dep).tlim = datenum([...
     '14-Sep-2017 21:45:00';
     '14-Sep-2017 22:02:00']);
 
 %--------------------------------------------------------%
 dep = dep+1;
-swankie(dep).name      = 'swankie_deployment_20170916_002146';
-swankie(dep).dirs.raw  = 'deployment_20170916_002146';
+deployment(dep).name      = 'swankie_deployment_20170916_002146';
+deployment(dep).dirs.raw  = 'deployment_20170916_002146';
 
 %--------------------------------------------------------%
 dep = dep+1;
-swankie(dep).name      = 'swankie_deployment_20170916_232943';
-swankie(dep).dirs.raw  = 'deployment_20170916_232943';
-swankie(dep).tlim = datenum([2017 09 16 23 45 00;
+deployment(dep).name      = 'swankie_deployment_20170916_232943';
+deployment(dep).dirs.raw  = 'deployment_20170916_232943';
+deployment(dep).tlim = datenum([2017 09 16 23 45 00;
                              2017 09 17 02 00 00]);
 
 %--------------------------------------------------------%
 dep = dep+1;
-swankie(dep).name      = 'swankie_deployment_20170917_202349';
-swankie(dep).dirs.raw  = 'deployment_20170917_202349';
-swankie(dep).tlim = datenum([2017 09 17 21 10 00;
+deployment(dep).name      = 'swankie_deployment_20170917_202349';
+deployment(dep).dirs.raw  = 'deployment_20170917_202349';
+deployment(dep).tlim = datenum([2017 09 17 21 10 00;
                              2017 09 17 23 25 00]);
-namefmt = [swankie(dep).name '/sec_%02d'];
+namefmt = [deployment(dep).name '/sec_%02d'];
 tlims = datenum(['17-Sep-2017 20:27:56';
                  '17-Sep-2017 20:32:45';
                  '17-Sep-2017 20:34:13';
@@ -139,16 +146,14 @@ tlims = datenum(['17-Sep-2017 20:27:56';
                  '17-Sep-2017 23:12:04';
                  '17-Sep-2017 23:16:15']);
 if do_sections
-    [swankie,dep] = deployment_sections(swankie,dep,tlims,namefmt);
+    [deployment,dep] = deployment_sections(deployment,dep,tlims,namefmt);
 end
-
-
 
 
 % Fill defaults
-if ~isempty(swankie)
-    swankie = fill_defaults(swankie,defaults);
+if ~isempty(deployment)
+    deployment = fill_defaults(deployment,defaults);
 end
-config.deployment = swankie;
+vessel.deployment = deployment;
 
 

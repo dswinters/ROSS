@@ -1,4 +1,9 @@
-function swankie = leconte_2017_may_swankie()
+function vessel = leconte_2017_may_swankie()
+vessel.name = 'Swankie';
+vessel.dirs.raw = fullfile(getenv('HOME'),'OSU/ROSS/Data/leconte_2017_may/Swankie/raw/');
+vessel.dirs.proc = fullfile(getenv('HOME'),'OSU/ROSS/Data/leconte_2017_may/Swankie/processed/');
+vessel.dirs.figs = fullfile(getenv('HOME'),'OSU/ROSS/Figures/leconte_2017_may/Swankie/');
+vessel.dirs.maps = fullfile(getenv('HOME'),'OSU/ROSS/Maps/');
 %--------------------------------------------------------%
 % ADCP orientation                                       %
 %--------------------------------------------------------%
@@ -13,10 +18,7 @@ dep = 0;
 %--------------------------------------------------------%
 swankie0.proc.heading_offset = 45;
 swankie0.proc.adcp_load_func = 'adcp_parse';
-swankie0.proc.adcp_load_args = {'ross','post'};
-swankie0.tlim = [-inf inf];
-swankie0.files.map = 'none';
-swankie0.proc.skip = false;
+swankie0.proc.adcp_load_args = {'ross','pre'};
 swankie0.files.adcp = 'ADCP/*timestamped*.bin';
 swankie0.files.gps = 'GPS/*.log';
 swankie0.proc.nmea = {'GPRMC','HEHDT','PASHR','GPGGA'};
@@ -294,4 +296,4 @@ swankie(dep).plot.ylim = [0 100];
 % Fill defaults                                          %
 %--------------------------------------------------------%
 swankie = fill_defaults(swankie,swankie0);
-
+vessel.deployment = swankie;

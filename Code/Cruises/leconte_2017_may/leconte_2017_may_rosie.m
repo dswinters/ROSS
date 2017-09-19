@@ -1,14 +1,17 @@
-function rosie = leconte_2017_may_rosie()
+function vessel = leconte_2017_may_rosie()
 %        FORWARD
 %  4   1    ^
 %    x      |--> STARBOARD
 %  2   3  
+vessel.name = 'Rosie';
+vessel.dirs.raw = fullfile(getenv('HOME'),'OSU/ROSS/Data/leconte_2017_may/Rosie/raw/');
+vessel.dirs.proc = fullfile(getenv('HOME'),'OSU/ROSS/Data/leconte_2017_may/Rosie/processed/');
+vessel.dirs.figs = fullfile(getenv('HOME'),'OSU/ROSS/Figures/leconte_2017_may/Rosie/');
+vessel.dirs.maps = fullfile(getenv('HOME'),'OSU/ROSS/Maps/');
+
 rosie0.proc.heading_offset = 135;
-rosie0.tlim = [-inf inf];
-rosie0.plot.ylim = [0 200];
 rosie0.proc.adcp_load_func = 'adcp_parse';
 rosie0.proc.adcp_load_args = {'ross','post'};
-rosie0.proc.skip = true;
 rosie0.files.adcp = 'ADCP/*timestamped*.bin';
 rosie0.files.gps  = 'GPS/*.log';
 rosie0.proc.nmea = {'GPRMC','HEHDT','PASHR','GPGGA'};
@@ -40,3 +43,4 @@ rosie(dep).proc.trim_methods = newfilt('none',[]);
 %--------------------------------------------------------%
 
 rosie = fill_defaults(rosie,rosie0);
+vessel.deployment = rosie;

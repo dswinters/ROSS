@@ -9,14 +9,18 @@ vessel.dirs.figs = '/Volumes/Norgannon/Data/asiri_2015_aug/figures/';
 % Initialize deployment info
 deployment = [];
 dep = 0;
+defaults.dirs.raw = '';
+defaults.proc.nmea = {'GPRMC'};
+defaults.proc.gps_raw2mat = true;
 
-% Deployment info
-dep = dep+1;
-deployment(dep).name = 'Deploy1';
-deployment(dep).dirs.raw = '';
-deployment(dep).files.gps = 'Deploy1/gps/Downloaded 8_25_2015/*.TXT';
-deployment(dep).files.adcp = 'Deploy1/adcp/raw/*.000';
-% deployment(dep).tlim = [];
+for dep = 1:6
+    deployment(dep).name = sprintf('Deploy%d',dep);
+    gpsdir = dir(fullfile(vessel.dirs.raw,deployment(dep).name,'gps','Downloaded*'));
+    deployment(dep).files.gps  = [deployment(dep).name '/gps/' gpsdir.name '/*.TXT'];
+    deployment(dep).files.adcp = [deployment(dep).name '/adcp/raw/*.000'];
+end
+
+deployment = fill_defaults(deployment,defaults);
 
 % Add deployment info to vessel info
 vessel.deployment = deployment;

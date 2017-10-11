@@ -21,6 +21,7 @@ defaults.plot.make_figure.corr          = false;
 defaults.plot.make_figure.coastline_map = false;
 
 % Processing options
+defaults.proc.skip = false;
 defaults.proc.ship_vel_removal = 'GPS';
 defaults.proc.adcp_raw2mat = false;
 defaults.proc.gps_raw2mat = false;

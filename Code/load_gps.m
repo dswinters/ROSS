@@ -23,7 +23,8 @@ else
     disp(['  - Saved ' matfile]);
 end
 
-has_pitchroll = ismember('PASHR',DEP.proc.nmea);
+has_pashr = ismember('PASHR',DEP.proc.nmea);
+has_hehdt = ismember('HEHDT',DEP.proc.nmea);
 
 %% Make sure GPRMC timestamps are unique
 [~,uidx] = unique(gps.GPRMC.dn);
@@ -78,7 +79,7 @@ gps.GPRMC.dn(idx) = gps.GPRMC.dn(idx) + datenum([2000 0 0 0 0 0]);
 
 
 %% Interpolate pitch and roll from PASHR lines
-if has_pitchroll
+if has_pashr
     n1 = length(gps.GPRMC.lnum);
     n2 = length(gps.PASHR.lnum);
     idx = [[  1+zeros(1,n1),    2+zeros(1,n2)];
@@ -103,32 +104,33 @@ if has_pitchroll
 end
 
 %% Interpolate heading from HEHDT lines
-n1 = length(gps.GPRMC.lnum);
-n2 = length(gps.HEHDT.lnum);
-idx = [[  1+zeros(1,n1),    2+zeros(1,n2)];
-       [gps.GPRMC.lnum',  gps.HEHDT.lnum'];
-       [           1:n1,             1:n2]];
-if ~isempty(idx)
-    s = full(sparse(idx(1,:),idx(2,:),idx(3,:)));
-    s = s(:,~all(s==0));
-    gprmc0 = find(s(1,:)>0,1,'first');
-    s = s(:,gprmc0:end);
-    s = [s(1,:); s(2,2:end) 0];
-    s = s(:,~any(s==0));
-    %
-    dn = gps.GPRMC.dn(s(1,:));
-    h  = gps.HEHDT.head(s(2,:));
-    h_hehdt = nav_interp_heading(dn,h,gps.GPRMC.dn);
-else
-    warning('Unable to compute timestamps for $HEHDT data')
-    h_hehdt = [];
+if has_hehdt
+    n1 = length(gps.GPRMC.lnum);
+    n2 = length(gps.HEHDT.lnum);
+    idx = [[  1+zeros(1,n1),    2+zeros(1,n2)];
+           [gps.GPRMC.lnum',  gps.HEHDT.lnum'];
+           [           1:n1,             1:n2]];
+    if ~isempty(idx)
+        s = full(sparse(idx(1,:),idx(2,:),idx(3,:)));
+        s = s(:,~all(s==0));
+        gprmc0 = find(s(1,:)>0,1,'first');
+        s = s(:,gprmc0:end);
+        s = [s(1,:); s(2,2:end) 0];
+        s = s(:,~any(s==0));
+        %
+        dn = gps.GPRMC.dn(s(1,:));
+        h  = gps.HEHDT.head(s(2,:));
+        h_hehdt = nav_interp_heading(dn,h,gps.GPRMC.dn);
+    else
+        warning('Unable to compute timestamps for $HEHDT data')
+        h_hehdt = [];
+    end
 end
 
-%% Estimate velocities lat/lon data
+%% Estimate velocities using lat/lon data
 [vx_gprmc vy_gprmc] = nav_ltln2vel(gps.GPRMC.lat,...
                                    gps.GPRMC.lon,...
                                    gps.GPRMC.dn);
-
 
 %% Create returned GPS structure
 gps_out = struct();
@@ -136,8 +138,10 @@ gps_out = struct();
 gps_out.dn = gps.GPRMC.dn;
 gps_out.lat = gps.GPRMC.lat;
 gps_out.lon = gps.GPRMC.lon;
-gps_out.h   = h_hehdt;
-if has_pitchroll
+if has_hehdt
+    gps_out.h   = h_hehdt;
+end
+if has_pashr
     gps_out.p = p_pashr;
     gps_out.r = r_pashr;
 end

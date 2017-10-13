@@ -33,7 +33,9 @@ for ia = 1:length(adcp)
 
     % Fill adcp data struct with external gyro data if available
     adcp(ia).heading_internal = adcp(ia).heading; % save raw heading
-    adcp(ia).heading = adcp(ia).gps.h;
+    if isfield(adcp(ia).gps,'h')
+        adcp(ia).heading = adcp(ia).gps.h;
+    end
     % if isfield(gps,'p')
     %     adcp(ia).pitch_internal = adcp(ia).pitch;
     %     adcp(ia).pitch = adcp(ia).gps.p;

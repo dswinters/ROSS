@@ -1,37 +1,58 @@
 clear all, close all;
 
-force_reload = false;
+force_reload = true;
 cdir = pwd;
 cd ../../
 config = config_setup('asiri_2015_aug');
 cd(cdir);
 
+spd_thresh = 2.2;
+
 if force_reload | ~exist('compass_cal_info.mat','file')
-    lat = [];
-    lon = [];
+    LAT = [];
+    LON = [];
     h = [];
+    HT = [];
     dn = [];
     dep = [];
-
-    for i = 1:length(config.deployment)
-        load(config.deployment(i).files.processed);
-        disp(['Loaded ' config.deployment(i).files.processed])
+    for i = 1:2
+        cd ../../
+        adcp = load_adcp(config.deployment(i));
+        cd(cdir)
         dn = cat(2,dn,adcp.mtime);
-        lat = cat(2,lat,adcp.gps.lat);
-        lon = cat(2,lon,adcp.gps.lon);
         h = cat(2,h,adcp.heading_internal);
         dep = cat(2,dep,zeros(size(adcp.mtime))+i);
+
+        gps = load(config.deployment(i).files.gps_mat);
+        [ve vn] = nav_ltln2vel(gps.GPRMC.lat,gps.GPRMC.lon,gps.GPRMC.dn);
+
+        th = cart2pol(ve,vn);
+        ht = rad2degt(th);
+        ht = cosd(ht) + 1i*sind(ht);
+        [~,iu] = unique(gps.GPRMC.dn);
+        ht = interp1(gps.GPRMC.dn(iu),ht(iu),adcp.mtime);
+        ht = mod(180/pi*angle(ht),360);
+        HT = cat(2,HT,ht);
+
+        lat = interp1(gps.GPRMC.dn(iu),gps.GPRMC.lat(iu),adcp.mtime);
+        lon = interp1(gps.GPRMC.dn(iu),gps.GPRMC.lon(iu),adcp.mtime);
+        LAT = cat(2,LAT,lat);
+        LON = cat(2,LON,lon);
+
     end
-    save compass_cal_info.mat dn lat lon h dep
+    ht = HT;
+    lat = LAT;
+    lon = LON;
+    save compass_cal_info.mat dn lat lon h ht dep
 else
-    load compass_cal_info.mat dn lat lon h dep
+    load compass_cal_info.mat dn lat lon h ht dep
 end
 
 [ve vn] = nav_ltln2vel(lat,lon,dn);
-[ht,spd] = cart2pol(ve,vn);
-ht = rad2degt(ht);
+[~,spd] = cart2pol(ve,vn);
 
-hd = mod(h-ht,360);
+% ht = h + hd;
+hd = mod(ht-h,360);
 
 figure('position',[376 419 590 504],'paperpositionmode','auto')
 
@@ -39,15 +60,15 @@ figure('position',[376 419 590 504],'paperpositionmode','auto')
 s = polarscatter(deg2rad(h),hd,5,spd); hold on
 set(s,'marker','.')
 colorbar
-caxis([0 2.5])
+caxis([0 spd_thresh])
 cmap = parula(50);
 cmap(end,:) = [1 0 0];
-fast = spd>=2.5;
+fast = spd>=spd_thresh;
 % plot(h(fast),hd(fast),'r.')
 polarplot(deg2rad(h(fast)),hd(fast),'r.');
 colormap(cmap)
 
-hd(spd<2.5) = nan;
+hd(spd<spd_thresh) = nan;
 
 % bin-average in 5 deg increments
 hb = 0:5:360;
@@ -77,7 +98,7 @@ pax.ThetaDir = 'clockwise';
 pax.ThetaZeroLocation = 'top';
 rlim([0 360]);
 thetalim([0 360]);
-title({'Track Heading vs. ADCP Compass Heading (deg T)';
+title({'Track Heading - ADCP Compass Heading vs. ADCP Compass Heading (deg T)';
        'points colored by ROSS speed (m/s)'})
 fitstr = '%.1f + %.1fsin(c) + %.1fcos(c) + %.1fsin(2c) + %.1fcos(2c)';
 fitstr = sprintf(fitstr,coeffs);
@@ -86,3 +107,5 @@ set(hl,'position',[0.25 0.01 0.5 0.03],'box','off',...
        'fontsize',14)
 
 print('-djpeg90','-r300','ross_compass_cal.jpg')
+
+

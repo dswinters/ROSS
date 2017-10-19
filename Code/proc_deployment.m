@@ -19,10 +19,16 @@ for ia = 1:length(adcp)
     [DEP, adcp(ia), gps] = post_load_hook(DEP, adcp(ia), gps);
 
     % Interpolate GPS data to ADCP timestamps
-    gpsflds = fields(gps);
+    gpsflds = setdiff(fields(gps),'h');
     for i = 1:length(gpsflds)
         adcp(ia).gps.(gpsflds{i}) = ...
             interp1(gps.dn,gps.(gpsflds{i}),adcp(ia).mtime);
+    end
+    if isfield(gps,'h')
+        h = cosd(gps.h) + 1i*sind(gps.h);
+        h = interp1(gps.dn,h,adcp(ia).mtime);
+        h = mod(180/pi*angle(h),360);
+        adcp(ia).heading = h;
     end
 
     % Trim data
@@ -32,7 +38,6 @@ for ia = 1:length(adcp)
     adcp(ia).config.xducer_misalign = DEP.proc.heading_offset;
 
     % Fill adcp data struct with external gyro data if available
-    adcp(ia).heading_internal = adcp(ia).heading; % save raw heading
     if isfield(adcp(ia).gps,'h')
         adcp(ia).heading = adcp(ia).gps.h;
     end

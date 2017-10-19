@@ -125,6 +125,10 @@ if has_hehdt
         warning('Unable to compute timestamps for $HEHDT data')
         h_hehdt = [];
     end
+else
+    [ve vn] = nav_ltln2vel(gps.GPRMC.lat,gps.GPRMC.lon,gps.GPRMC.dn);
+    th = cart2pol(ve,vn);
+    h_gprmc = rad2degt(th);
 end
 
 %% Estimate velocities using lat/lon data
@@ -140,6 +144,8 @@ gps_out.lat = gps.GPRMC.lat;
 gps_out.lon = gps.GPRMC.lon;
 if has_hehdt
     gps_out.h   = h_hehdt;
+else
+    gps_out.h = h_gprmc;
 end
 if has_pashr
     gps_out.p = p_pashr;

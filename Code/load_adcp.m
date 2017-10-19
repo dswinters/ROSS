@@ -45,5 +45,7 @@ for ia = 1:length(A)
     idx = find(A(ia).mtime >= DEP.tlim(1) & ...
                A(ia).mtime <= DEP.tlim(2));
     A(ia) = adcp_index(A(ia),idx);
+    % Save internal compass heading to new var
+    A(ia).heading_internal = A(ia).heading;
 end
 

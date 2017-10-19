@@ -5,8 +5,12 @@ adcp = load(DEP.files.processed);
 adcp = adcp.adcp;
 
 maxrange = 0;
-for i = 1:length(adcp)
-    maxrange = max(maxrange,max(adcp(i).config.ranges));
+if isfield(DEP.plot,'zlim');
+    maxrange = max(DEP.plot.zlim);
+else
+    for i = 1:length(adcp)
+        maxrange = max(maxrange,max(adcp(i).config.ranges));
+    end
 end
 
 %% Plot settings

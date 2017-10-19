@@ -6,14 +6,24 @@ vessel.dirs.raw = fullfile(getenv('DROPBOX'),'ROSS/');
 vessel.dirs.proc = '/Volumes/Norgannon/Data/asiri_2015_aug/';
 vessel.dirs.figs = '/Volumes/Norgannon/Data/asiri_2015_aug/figures/';
 
+% define filters
+newfilt =@(n,p) struct('name',n,'params',p);
+filt_rotmax  = newfilt('rotmax',5);
+
+
 % Initialize deployment info
 deployment = [];
 dep = 0;
 defaults.dirs.raw = '';
 defaults.proc.nmea = {'GPRMC'};
-% defaults.proc.gps_raw2mat = true;
-defaults.proc.heading_offset = 0;
-defaults.plot.vlim = [0.75 0.75 0.75];
+defaults.proc.filters(1) = filt_rotmax;
+% defaults.proc.adcp_raw2mat = true;
+defaults.plot.vlim = [1 1 1];
+defaults.proc.heading_offset = -136; % beam 3 backward-port
+defaults.plot.zlim = [0 60];
+
+% heading offsets
+h0 = [-139.5, -135.7, -131.2, -137.7, -136.4, -134.8];
 
 % files & folders
 for dep = 1:6
@@ -21,6 +31,7 @@ for dep = 1:6
     gpsdir = dir(fullfile(vessel.dirs.raw,deployment(dep).name,'gps','Downloaded*'));
     deployment(dep).files.gps  = [deployment(dep).name '/gps/' gpsdir.name '/*.TXT'];
     deployment(dep).files.adcp = [deployment(dep).name '/adcp/raw/*.000'];
+    deployment(dep).proc.heading_offset = h0(dep);
 end
 
 % time limits
@@ -33,4 +44,5 @@ deployment(6).tlim = datenum(['14-Sep-2015 04:17:00'; '14-Sep-2015 15:11:59']);
 
 % fill defaults and return
 deployment = fill_defaults(deployment,defaults);
+% deployment = deployment(4);
 vessel.deployment = deployment;

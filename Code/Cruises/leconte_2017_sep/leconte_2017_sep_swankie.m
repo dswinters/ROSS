@@ -8,23 +8,28 @@ function vessel = leconte_2017_sep_swankie()
 %  4   2   
 vessel.name = 'Swankie';
 % Vessel directories
-scishare = '/Volumes/data/20170912_Alaska/';
+scishare = '/Volumes/Norgannon/ScienceShare/20170912_Alaska/';
+dbox = getenv('DROPBOX');
+tripdir = 'LeConte/Data/ocean/september2017/';
 vessel.dirs.raw = fullfile(scishare,'data/raw/ROSS/ROSS7_Swankie/');
-vessel.dirs.proc = fullfile(scishare,'data/processed/ADCP_ROSS/Swankie/');
-vessel.dirs.figs = fullfile(scishare,'figures/ROSS/Swankie/');
+vessel.dirs.proc = fullfile(dbox,tripdir,'processed/ADCP_ROSS/Swankie/');
+vessel.dirs.figs = fullfile(dbox,tripdir,'figures/ROSS/Swankie/');
 
 % Initialize deployment structure
 deployment = [];
 dep = 0;
-do_sections = true;
+do_sections = false;
 
 %--------------------------------------------------------%
 % Default kayak options                                  %
 %--------------------------------------------------------%
 defaults.proc.heading_offset = 45;
 trim_corr_edge = struct('name','corr_edge','params','beam');
-defaults.proc.trim_methods(1) = trim_corr_edge;
-defaults.proc.adcp_rotation_func = 'adcp_5beam2earth';
+trim_bt90 = struct('name','BT','params',90);
+trim_none = struct('name','none','params',[]);
+defaults.proc.trim_methods(1) = trim_none;
+defaults.proc.adcp_rotation_func = 'adcp_beam2earth';
+defaults.proc.filters(1) = struct('name','corrmin','params',60);
 
 %--------------------------------------------------------%
 % Testing on the deck - no useable data!
@@ -42,6 +47,7 @@ deployment(dep).dirs.raw  = 'deployment_20170913_132345';
 deployment(dep).tlim = datenum([...
     '13-Sep-2017 14:03:47';
     '13-Sep-2017 17:01:19']);
+deployment(dep).trim_methods(1) = trim_bt90;
 % Sections
 namefmt = [deployment(dep).name '/sec_%02d'];
 tlims = datenum(['13-Sep-2017 15:49:54';

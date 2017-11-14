@@ -15,7 +15,7 @@ if force_reload | ~exist('compass_cal_info.mat','file')
     HT = [];
     dn = [];
     dep = [];
-    for i = 1:2
+    for i = 3:6
         cd ../../
         adcp = load_adcp(config.deployment(i));
         cd(cdir)

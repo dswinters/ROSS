@@ -28,7 +28,7 @@ for ia = 1:length(adcp)
         h = cosd(gps.h) + 1i*sind(gps.h);
         h = interp1(gps.dn,h,adcp(ia).mtime);
         h = mod(180/pi*angle(h),360);
-        adcp(ia).heading = h;
+        adcp(ia).gps.h = h;
     end
 
     % Trim data

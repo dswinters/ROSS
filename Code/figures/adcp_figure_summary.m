@@ -65,9 +65,9 @@ for i = 1:np
 end
 
 %% Set plot info
-titles = {'ROSS Location (deg E/N)';
-          'ROSS Velocity (ms^{-1} E/N)';
-          'ROSS Heading (degrees)'
+titles = {[DEP.vessel.name ' Location (deg E/N)'];
+          [DEP.vessel.name ' Velocity (ms^{-1} E/N)'];
+          [DEP.vessel.name ' Heading (degrees)'];
           'ADCP Pitch & Roll (degrees)'
           'East-West Currents (ms^{-1} East)';
           'North-South Currents (ms^{-1} North)';

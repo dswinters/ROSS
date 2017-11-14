@@ -17,15 +17,15 @@ dep = 0;
 
 defaults.proc.heading_offset = 40.86 - 9.22; % adcp mounting offset + hemisphere mounting offset
 defaults.proc.adcp_load_func = 'adcp_rdradcp_multi';
-defaults.proc.nmea = {'GPRMC','HEHDT'};
+defaults.proc.nmea = {'GPRMC','HEHDT','PADCP'};
 defaults.dirs.raw = ''; % All raw data is in the same folder
 
 dep = dep+1;
 deployment(dep).name = 'ADCP_steller';
 deployment(dep).files.gps = '*.N1R';
 deployment(dep).files.adcp = '*.ENR';
-deployment(dep).proc.adcp_raw2mat = true; % refresh ADCP mat files
-deployment(dep).proc.gps_raw2mat  = true; % refresh GPS mat files;
+deployment(dep).proc.adcp_raw2mat = false; % refresh ADCP mat files
+deployment(dep).proc.gps_raw2mat  = false; % refresh GPS mat files;
 deployment(dep).plot.lonlim = [-132.5350,-132.3470];
 deployment(dep).plot.latlim = [56.7164, 56.8462];
 deployment(dep).plot.make_figure.summary = true;
@@ -33,6 +33,23 @@ deployment(dep).plot.make_figure.surface_vel = false;
 deployment(dep).plot.make_figure.echo_intens = false;
 deployment(dep).plot.make_figure.corr = false;
 deployment(dep).plot.make_figure.coastline_map = true;
+
+dep = dep+1;
+deployment(dep).name = 'ADCP_rough_bottom_detection';
+deployment(dep).files.gps = '*.N1R';
+deployment(dep).files.adcp = '*.ENR';
+deployment(dep).proc.adcp_raw2mat = false; % refresh ADCP mat files
+deployment(dep).proc.gps_raw2mat  = false; % refresh GPS mat files;
+deployment(dep).plot.lonlim = [-132.5350,-132.3470];
+deployment(dep).plot.latlim = [56.7164, 56.8462];
+deployment(dep).plot.make_figure.summary = true;
+deployment(dep).plot.make_figure.surface_vel = false;
+deployment(dep).plot.make_figure.echo_intens = false;
+deployment(dep).plot.make_figure.corr = false;
+deployment(dep).plot.make_figure.coastline_map = true;
+deployment(dep).proc.trim_methods(1) = struct('name','ei_edge','params',[]);
+deployment(dep).proc.filters(1) = struct('name','corrmin','params',100);
+
 
 %* Diagnostics
 % deployment(dep).proc.diagnostic = true;

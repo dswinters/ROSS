@@ -51,13 +51,15 @@ end
 [ve vn] = nav_ltln2vel(lat,lon,dn);
 [~,spd] = cart2pol(ve,vn);
 
-% ht = h + hd;
-hd = mod(ht-h,360);
+hd = ht-h;
+hd(hd>180) = hd(hd>180)-360;
+hd(hd<-180) = hd(hd<-180)+360;
+
 
 figure('position',[376 419 590 504],'paperpositionmode','auto')
 
 % s = scatter(h,hd,5,spd); hold on
-s = polarscatter(deg2rad(h),hd,5,spd); hold on
+s = polarscatter(deg2rad(ht),hd,5,spd); hold on
 set(s,'marker','.')
 colorbar
 caxis([0 spd_thresh])
@@ -65,14 +67,14 @@ cmap = parula(50);
 cmap(end,:) = [1 0 0];
 fast = spd>=spd_thresh;
 % plot(h(fast),hd(fast),'r.')
-polarplot(deg2rad(h(fast)),hd(fast),'r.');
+polarplot(deg2rad(ht(fast)),hd(fast),'r.');
 colormap(cmap)
 
 hd(spd<spd_thresh) = nan;
 
 % bin-average in 5 deg increments
 hb = 0:5:360;
-[~,bn] = histc(h,hb);
+[~,bn] = histc(ht,hb);
 counts = full(sparse(1,bn(bn>0&~isnan(hd)),1));
 counts(counts<30) = nan;
 hdb = full(sparse(1,bn(bn>0&~isnan(hd)),hd(bn>0&~isnan(hd)))) ./ counts;
@@ -96,9 +98,9 @@ hfit = polarplot(deg2rad(0:360),func(coeffs,0:360),'k-','linewidth',2);
 pax = gca;
 pax.ThetaDir = 'clockwise';
 pax.ThetaZeroLocation = 'top';
-rlim([0 360]);
+rlim([-180 180]);
 thetalim([0 360]);
-title({'Track Heading - ADCP Compass Heading vs. ADCP Compass Heading (deg T)';
+title({'Track Heading - ADCP Compass Heading vs. Track Heading (deg T)';
        'points colored by ROSS speed (m/s)'})
 fitstr = '%.1f + %.1fsin(c) + %.1fcos(c) + %.1fsin(2c) + %.1fcos(2c)';
 fitstr = sprintf(fitstr,coeffs);
@@ -107,5 +109,4 @@ set(hl,'position',[0.25 0.01 0.5 0.03],'box','off',...
        'fontsize',14)
 
 print('-djpeg90','-r300','ross_compass_cal.jpg')
-
 

@@ -46,7 +46,11 @@ switch dep.vessel.name
             in = find(padcp.num(nidx) == adcp.number(aidx(ia)));
             if length(in)==1
                 has_timestamp(aidx(ia)) = true;
-                dn_new(aidx(ia)) = padcp.dn(nidx(in));
+                % Re-correct PC timestamps with average GPS offset
+                offset = padcp.dn - padcp.dn_pc;
+                idx = abs(offset-nanmean(offset)) < nanstd(offset); % exclude outliers
+                avg_offset = nanmean(offset(idx));
+                dn_new(aidx(ia)) = padcp.dn_pc(nidx(in)) + avg_offset;
             end
         end
     end
@@ -59,12 +63,31 @@ switch dep.vessel.name
 
 
   case 'Swankie'
-    % Load custom BT files
+    %% Load custom BT files
     if exist(dep.files.bt_profile,'file') == 2;
         bt = load(dep.files.bt_profile);
         bt.dn(year(bt.dn)<2000) = bt.dn(year(bt.dn)<2000) + datenum([2000 0 0 0 0 0]);
         adcp.bt_range = interp1(bt.dn',bt.depth',adcp.mtime')';
+        adcp.info = cat(1,adcp.info,{'Bottom contours defined manually'});
         adcp = adcp_trim_data(adcp,struct('name','BT','params',90));
     end
+
+    %% Reduce "bottom" depth for near-terminus positions
+    tmp = load(dep.files.terminus);
+    t = tmp.termini; clear tmp
+
+    [~,nt] = min(abs([t.dn] - mean(dep.tlim)));
+    lat = interp1(gps.dn,gps.lat,adcp.mtime);
+    lon = interp1(gps.dn,gps.lon,adcp.mtime);
+    dist = nan*lat;
+    i = 1;
+    for i = 1:length(dist)
+        dist(i) = 1000*min(lldistkm([lat(i) lon(i)],[t(nt).lat', t(nt).lon']));
+    end
+    for i = 1:size(adcp.bt_range,1)
+        adcp.bt_range(i,:) = min(adcp.bt_range(i,:),dist);
+    end
+    adcp.info = cat(1,adcp.info,{'Glacier distance used in place of bottom depth where distance<depth'});
+    adcp.info = cat(1,adcp.info,{sprintf('Terminus measured at %s',datestr(t(nt).dn))});
 end
 

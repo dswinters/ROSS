@@ -30,5 +30,9 @@ switch DEP.vessel.name
     adcp.vel(:,2,:) = vn;
     msg = 'ADCP/GPS positional offset corrected';
     adcp.info = cat(1,adcp.info,msg);
+
+  case 'Swankie'
+    %% Calculate distance to glacier
 end
+
 

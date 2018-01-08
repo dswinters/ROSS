@@ -48,7 +48,7 @@ deployment(dep).plot.make_figure.echo_intens = false;
 deployment(dep).plot.make_figure.corr = false;
 deployment(dep).plot.make_figure.coastline_map = true;
 deployment(dep).proc.trim_methods(1) = struct('name','ei_edge','params',[]);
-deployment(dep).proc.filters(1) = struct('name','corrmin','params',100);
+% deployment(dep).proc.filters(1) = struct('name','corrmin','params',100);
 
 
 %* Diagnostics

@@ -32,6 +32,10 @@ all_defaults.plot.ylim         = [0 200];
 all_defaults.proc.adcp_raw2mat = false;
 all_defaults.proc.gps_raw2mat  = false;
 all_defaults.proc.use_3beam    = false;
+all_defaults.files.terminus    = fullfile(getenv('DROPBOX'),...
+                                          'LeConte/Data/glacier/terminus_positions/201709_termini/',...
+                                          'termini_201709.mat');
+
 % ROSS
 ross_defaults.plot.lonlim         = [-132.3768 -132.3470];
 ross_defaults.plot.latlim         = [56.8228 56.8434];

@@ -12,6 +12,8 @@ scishare = '/Volumes/Norgannon/ScienceShare/20170912_Alaska/';
 dbox = getenv('DROPBOX');
 tripdir = 'LeConte/Data/ocean/september2017/';
 vessel.dirs.raw = fullfile(scishare,'data/raw/ROSS/ROSS7_Swankie/');
+% vessel.dirs.proc = fullfile(scishare,'data/processed/ADCP_ROSS/Swankie/');
+% vessel.dirs.figs = fullfile(scishare,'figures/ROSS/Swankie/');
 vessel.dirs.proc = fullfile(dbox,tripdir,'processed/ADCP_ROSS/Swankie/');
 vessel.dirs.figs = fullfile(dbox,tripdir,'figures/ROSS/Swankie/');
 

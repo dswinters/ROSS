@@ -118,7 +118,9 @@ save(DEP.files.processed,'adcp')
 
 disp(['  - Saved ' DEP.files.processed])
 for i = 1:length(adcp(1).info)
-    disp(['    - ' adcp(1).info{i}])
+    if isstring(adcp(1).info{i})
+        disp(['    - ' adcp(1).info{i}])
+    end
 end
 
 %% Make figures

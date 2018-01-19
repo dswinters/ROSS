@@ -25,18 +25,44 @@ end
 
 has_pashr = ismember('PASHR',DEP.proc.nmea);
 has_hehdt = ismember('HEHDT',DEP.proc.nmea);
+has_gprmc = ismember('GPRMC',DEP.proc.nmea);
+has_gpzda = ismember('GPZDA',DEP.proc.nmea);
+has_gpgga = ismember('GPGGA',DEP.proc.nmea);
 
-%% Make sure GPRMC timestamps are unique
-[~,uidx] = unique(gps.GPRMC.dn);
-flds = fields(gps.GPRMC);
+
+dn_source = '';
+ll_source = '';
+if has_gprmc % GPRMC gives dn, lat, lon
+    dn_source = 'GPRMC';
+    ll_source = 'GPRMC';
+else
+    % Determine dn source
+    if has_gpzda
+        dn_source = 'GPZDA';
+    end
+    if has_gpgga
+        ll_source = 'GPGGA';
+    end
+end
+
+if isempty(dn_source)
+    error('GPS data contains no supported source for datenum!')
+end
+if isempty(ll_source)
+    error('GPS data contains no supported source for lat/lon!')
+end
+
+%% Make sure timestamps are unique
+[~,uidx] = unique(gps.(dn_source).dn);
+flds = fields(gps.(dn_source));
 for i = 1:length(flds)
-    gps.GPRMC.(flds{i}) = gps.GPRMC.(flds{i})(uidx);
+    gps.(dn_source).(flds{i}) = gps.(dn_source).(flds{i})(uidx);
 end
 
 %% Ensure files are in the right order
 dn0 = nan(size(gps.files));
 for i = 1:length(dn0)
-    dn0(i) = nanmean(gps.GPRMC.dn(gps.GPRMC.fnum==i));
+    dn0(i) = nanmean(gps.(dn_source).dn(gps.(dn_source).fnum==i));
 end
 [~,idx_new] = sort(dn0);
 gps.files = gps.files(idx_new);
@@ -74,84 +100,48 @@ for i = 1:length(f_in)
 end
 
 %% make sure timestamps are year 20xx instead of 00xx
-idx = year(gps.GPRMC.dn) < 2000;
-gps.GPRMC.dn(idx) = gps.GPRMC.dn(idx) + datenum([2000 0 0 0 0 0]);
+idx = year(gps.(dn_source).dn) < 2000;
+gps.(dn_source).dn(idx) = gps.(dn_source).dn(idx) + datenum([2000 0 0 0 0 0]);
+
+%% Get datenum, lat, lon onto same time vector
+if has_gprmc
+    dn = gps.GPRMC.dn;
+    lat = gps.GPRMC.lat;
+    lon = gps.GPRMC.lon;
+elseif has_gpzda & has_gpgga
+    dn = gps.GPZDA.dn;
+    lat = gps_line_interp(gps,'GPZDA','GPGGA','lat');
+    lon = gps_line_interp(gps,'GPZDA','GPGGA','lon');
+end
+[vx vy] = nav_ltln2vel(lat,lon,dn);
 
 
 %% Interpolate pitch and roll from PASHR lines
 if has_pashr
-    n1 = length(gps.GPRMC.lnum);
-    n2 = length(gps.PASHR.lnum);
-    idx = [[  1+zeros(1,n1),    2+zeros(1,n2)];
-           [gps.GPRMC.lnum',  gps.PASHR.lnum'];
-           [           1:n1,             1:n2]];
-    if ~isempty(idx)
-        s = full(sparse(idx(1,:),idx(2,:),idx(3,:)));
-        s = s(:,~all(s==0));
-        gprmc0 = find(s(1,:)>0,1,'first');
-        s = s(:,gprmc0:end);
-        s = [s(1,:); s(2,2:end) 0];
-        s = s(:,~any(s==0));
-        %
-        dn = gps.GPRMC.dn(s(1,:));
-        p  = gps.PASHR.pitch(s(2,:));
-        r  = gps.PASHR.roll(s(2,:));
-        p_pashr = interp1(dn,p,gps.GPRMC.dn);
-        r_pashr = interp1(dn,r,gps.GPRMC.dn);
-    else
-        warning('Unable to compute timestamps for $PASHR data')
-    end
+    p_pashr = gps_line_interp(gps,dn_source,'PASHR','pitch');
+    r_pashr = gps_line_interp(gps,dn_source,'PASHR','roll');
 end
 
 %% Interpolate heading from HEHDT lines
 if has_hehdt
-    n1 = length(gps.GPRMC.lnum);
-    n2 = length(gps.HEHDT.lnum);
-    idx = [[  1+zeros(1,n1),    2+zeros(1,n2)];
-           [gps.GPRMC.lnum',  gps.HEHDT.lnum'];
-           [           1:n1,             1:n2]];
-    if ~isempty(idx)
-        s = full(sparse(idx(1,:),idx(2,:),idx(3,:)));
-        s = s(:,~all(s==0));
-        gprmc0 = find(s(1,:)>0,1,'first');
-        s = s(:,gprmc0:end);
-        s = [s(1,:); s(2,2:end) 0];
-        s = s(:,~any(s==0));
-        %
-        dn = gps.GPRMC.dn(s(1,:));
-        h  = gps.HEHDT.head(s(2,:));
-        h_hehdt = nav_interp_heading(dn,h,gps.GPRMC.dn);
-    else
-        warning('Unable to compute timestamps for $HEHDT data')
-        h_hehdt = [];
-    end
+    heading = gps_line_interp(gps,dn_source,'HEHDT','head');
 else
-    [ve vn] = nav_ltln2vel(gps.GPRMC.lat,gps.GPRMC.lon,gps.GPRMC.dn);
     th = cart2pol(ve,vn);
-    h_gprmc = rad2degt(th);
+    heading = rad2degt(th);
 end
-
-%% Estimate velocities using lat/lon data
-[vx_gprmc vy_gprmc] = nav_ltln2vel(gps.GPRMC.lat,...
-                                   gps.GPRMC.lon,...
-                                   gps.GPRMC.dn);
 
 %% Create returned GPS structure
 gps_out = struct();
 % datenum, lat, lon from GPRMC lines
-gps_out.dn = gps.GPRMC.dn;
-gps_out.lat = gps.GPRMC.lat;
-gps_out.lon = gps.GPRMC.lon;
-if has_hehdt
-    gps_out.h   = h_hehdt;
-else
-    gps_out.h = h_gprmc;
-end
+gps_out.dn = dn;
+gps_out.lat = lat;
+gps_out.lon = lon;
+gps_out.h = heading;
 if has_pashr
     gps_out.p = p_pashr;
     gps_out.r = r_pashr;
 end
-gps_out.vx = vx_gprmc;
-gps_out.vy = vy_gprmc;
+gps_out.vx = vx;
+gps_out.vy = vy;
 
 gps = gps_out;

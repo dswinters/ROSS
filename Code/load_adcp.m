@@ -31,7 +31,7 @@ else
     A = A(idx);
 
     %% save matfile
-    save(matfile,'A');
+    save(matfile,'-v7.3','A');
     disp(['  - Saved ' matfile])
 end
 
@@ -44,8 +44,8 @@ for ia = 1:length(A)
     % limit to deployment start/stop time
     idx = find(A(ia).mtime >= DEP.tlim(1) & ...
                A(ia).mtime <= DEP.tlim(2));
-    A(ia) = adcp_index(A(ia),idx);
     % Save internal compass heading to new var
     A(ia).heading_internal = A(ia).heading;
+    A(ia) = adcp_index(A(ia),idx);
 end
 

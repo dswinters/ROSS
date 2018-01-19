@@ -1,11 +1,13 @@
 function vessel = leconte_2017_sep_post_setup_hook(vessel)
 
 %% Assign map and coastline files for spatial figures
-for d = 1:length(vessel.deployment)
-    dep                  = vessel.deployment(d);
-    dep.files.map        = fullfile(vessel.dirs.maps,dep.files.map);
-    dep.files.coastline  = fullfile(vessel.dirs.maps,dep.files.coastline);
-    vessel.deployment(d) = dep;
+if ~strcmp(vessel.name,'Pelican')
+    for d = 1:length(vessel.deployment)
+        dep                  = vessel.deployment(d);
+        dep.files.map        = fullfile(vessel.dirs.maps,dep.files.map);
+        dep.files.coastline  = fullfile(vessel.dirs.maps,dep.files.coastline);
+        vessel.deployment(d) = dep;
+    end
 end
 
 %% Assign a BT profile files

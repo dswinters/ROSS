@@ -62,3 +62,5 @@ for i = 1:4
     end
 end
 
+% Pelican
+Vessels(5) = leconte_2017_sep_pelican();

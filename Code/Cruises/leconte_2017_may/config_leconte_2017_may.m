@@ -32,3 +32,6 @@ for i = 1:length(Vessels)
     end
 end
 
+%% Pelican and Steller
+Vessels(3) = leconte_2017_may_pelican();
+Vessels(4) = leconte_2017_may_steller();

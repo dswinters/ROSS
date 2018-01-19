@@ -114,7 +114,7 @@ end
 
 dirout = fileparts(DEP.files.processed);
 if ~exist(dirout,'dir'); mkdir(dirout); end
-save(DEP.files.processed,'adcp')
+save(DEP.files.processed,'-v7.3','adcp')
 
 disp(['  - Saved ' DEP.files.processed])
 for i = 1:length(adcp(1).info)

@@ -150,3 +150,49 @@ switch dep.vessel.name
     adcp.info = cat(1,adcp.info,{sprintf('Terminus measured at %s',datestr(t(nt).dn))});
 end
 
+%% Pitch/roll offsets
+p0 = -0.9;
+r0 = -1.0;
+t0h = 2.087;
+X=@(h) [ones(length(h),1) ,...
+        sind(h(:))        ,...
+        cosd(h(:))];
+func = @(C,h) mod(h + [X(h(:))*C]', 360);
+
+switch dep.vessel.name
+  case 'Swankie'
+    switch dep.name
+      case 'swankie_deployment_20170913_132345'
+        coeffs = [-22.3329;
+                  -16.8558;
+                    9.0458];
+        h0 = 46.1008;
+      case 'swankie_deployment_20170916_002146'
+        coeffs = [-20.2622;
+                  -14.3820;
+                    9.0112];
+        h0 = 43.2711;
+        t0h = -4.03;
+      case 'swankie_deployment_20170916_232943'
+        coeffs = [-23.1366;
+                  -16.2305;
+                    7.5486];
+        h0 = 44.6899;
+      case 'swankie_deployment_20170917_202349'
+        coeffs = [-22.6119
+                  -14.6621
+                  9.1032];
+        h0 = 45.9735;
+    end
+    gps.h = nav_interp_heading(gps.dn+t0h/86400,gps.h,gps.dn);
+    dep.proc.heading_offset = h0;
+
+    adcp.config.heading_cal_coeffs = coeffs;
+    adcp.config.heading_cal_func = func;
+
+    adcp.pitch = adcp.pitch + p0;
+    adcp.roll = adcp.roll + r0;
+    adcp.info = cat(1,adcp.info,{sprintf('Pitch offset: %.2f',p0)});
+    adcp.info = cat(1,adcp.info,{sprintf('Roll offset: %.2f',r0)});
+end
+

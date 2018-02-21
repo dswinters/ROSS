@@ -8,14 +8,11 @@ function vessel = leconte_2017_sep_swankie()
 %  4   2   
 vessel.name = 'Swankie';
 % Vessel directories
-scishare = '/Volumes/Norgannon/ScienceShare/20170912_Alaska/';
 dbox = getenv('DROPBOX');
 tripdir = 'LeConte/Data/ocean/september2017/';
-vessel.dirs.raw = fullfile(scishare,'data/raw/ROSS/ROSS7_Swankie/');
-% vessel.dirs.proc = fullfile(scishare,'data/processed/ADCP_ROSS/Swankie/');
-% vessel.dirs.figs = fullfile(scishare,'figures/ROSS/Swankie/');
-vessel.dirs.proc = fullfile(dbox,tripdir,'processed/ADCP_ROSS/Swankie/');
-vessel.dirs.figs = fullfile(dbox,tripdir,'figures/ROSS/Swankie/');
+vessel.dirs.raw = fullfile(dbox,tripdir,'raw/ROSS7_Swankie');
+vessel.dirs.proc = fullfile(dbox,tripdir,'processed/ADCP_ROSS/Swankie_compass/');
+vessel.dirs.figs = fullfile(dbox,tripdir,'figures/ROSS/Swankie_compass/');
 
 % Initialize deployment structure
 deployment = [];

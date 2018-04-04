@@ -45,6 +45,9 @@ for i = 1:length(Vessels)
         dep.files.gps_mat   = fullfile(dep.dirs.raw_gps, [dep.name '_gps.mat']);
         dep.files.adcp_mat  = fullfile(dep.dirs.raw_adcp, [dep.name '_adcp.mat']);
         dep.files.processed = fullfile(Vessels(i).dirs.proc, [dep.name '.mat']);
+        if isfield(dep.files,'logs') && ~isempty(dep.files.logs)
+            dep.files.logs = fullfile(dir_raw,dep.files.logs);
+        end
 
         %% Full-deployment files
         % Create these if the deployment name ends with the name of the

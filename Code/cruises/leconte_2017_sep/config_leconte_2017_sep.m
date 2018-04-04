@@ -44,6 +44,7 @@ ross_defaults.proc.adcp_load_args = {'ross','pre'};
 ross_defaults.proc.nmea           = {'GPRMC','HEHDT','PASHR','GPGGA'};
 ross_defaults.files.gps           = 'GPS/*.log';
 ross_defaults.files.adcp          = 'ADCP/*timestamped*.bin';
+ross_defaults.files.logs          = 'logs/kayak_status_*.txt';
 % Figures
 fig_defaults.plot.make_figure.summary       = true;
 % fig_defaults.plot.make_figure.echo_intens   = true;

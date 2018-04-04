@@ -8,8 +8,8 @@ function vessel = leconte_2017_sep_swankie()
 %  4   2   
 vessel.name = 'Swankie';
 % Vessel directories
-dbox = getenv('DROPBOX');
-tripdir = 'LeConte/Data/ocean/september2017/';
+dbox = getenv('DATA');
+tripdir = 'LeConte/september2017/';
 vessel.dirs.raw = fullfile(dbox,tripdir,'raw/ROSS7_Swankie');
 vessel.dirs.proc = fullfile(dbox,tripdir,'processed/ADCP_ROSS/Swankie_compass/');
 vessel.dirs.figs = fullfile(dbox,tripdir,'figures/ROSS/Swankie_compass/');
@@ -29,6 +29,7 @@ trim_none = struct('name','none','params',[]);
 defaults.proc.trim_methods(1) = trim_none;
 defaults.proc.adcp_rotation_func = 'adcp_beam2earth';
 defaults.proc.filters(1) = struct('name','corrmin','params',60);
+defaults.proc.use_pixhawk = true;
 
 %--------------------------------------------------------%
 % Testing on the deck - no useable data!

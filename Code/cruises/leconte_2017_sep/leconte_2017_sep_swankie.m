@@ -11,8 +11,8 @@ vessel.name = 'Swankie';
 dbox = getenv('DATA');
 tripdir = 'LeConte/september2017/';
 vessel.dirs.raw = fullfile(dbox,tripdir,'raw/ROSS7_Swankie');
-vessel.dirs.proc = fullfile(dbox,tripdir,'processed/ADCP_ROSS/Swankie_compass/');
-vessel.dirs.figs = fullfile(dbox,tripdir,'figures/ROSS/Swankie_compass/');
+vessel.dirs.proc = fullfile(dbox,tripdir,'processed/ADCP_ROSS/Swankie_pixhawk/');
+vessel.dirs.figs = fullfile(dbox,tripdir,'figures/ROSS/Swankie_pixhawk/');
 
 % Initialize deployment structure
 deployment = [];
@@ -28,8 +28,9 @@ trim_bt90 = struct('name','BT','params',90);
 trim_none = struct('name','none','params',[]);
 defaults.proc.trim_methods(1) = trim_none;
 defaults.proc.adcp_rotation_func = 'adcp_beam2earth';
+defaults.proc.adcp_rotation_func = 'adcp_beam2earth_ext_gyro';
 defaults.proc.filters(1) = struct('name','corrmin','params',60);
-defaults.proc.use_pixhawk = true;
+defaults.proc.use_external_gyro = true;
 
 %--------------------------------------------------------%
 % Testing on the deck - no useable data!
@@ -87,12 +88,12 @@ if do_sections
 end
 
 %--------------------------------------------------------%
-dep = dep+1;
-deployment(dep).name      = 'swankie_deployment_20170914_204159_shortwatertest';
-deployment(dep).dirs.raw  = 'deployment_20170914_204159_shortwatertest';
-deployment(dep).tlim = datenum([...
-    '14-Sep-2017 21:45:00';
-    '14-Sep-2017 22:02:00']);
+% dep = dep+1;
+% deployment(dep).name      = 'swankie_deployment_20170914_204159_shortwatertest';
+% deployment(dep).dirs.raw  = 'deployment_20170914_204159_shortwatertest';
+% deployment(dep).tlim = datenum([...
+%     '14-Sep-2017 21:45:00';
+%     '14-Sep-2017 22:02:00']);
 
 %--------------------------------------------------------%
 dep = dep+1;

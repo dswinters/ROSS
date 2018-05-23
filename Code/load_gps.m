@@ -29,6 +29,19 @@ has_gprmc = ismember('GPRMC',DEP.proc.nmea);
 has_gpzda = ismember('GPZDA',DEP.proc.nmea);
 has_gpgga = ismember('GPGGA',DEP.proc.nmea);
 
+%% Load pixhawk data from kayak logs if logfiles are specified
+has_pixhawk = false;
+if isfield(DEP.files,'logs') && ~isempty(DEP.files.logs)
+    % parse data
+    logs = ross_log_read(DEP.files.logs,'stats');
+    % only include unique timestamps
+    [~,idx] = unique(logs.stats.dn);
+    flds = fields(logs.stats);
+    for i = 1:length(flds)
+        logs.stats.(flds{i}) = logs.stats.(flds{i})(idx);
+    end
+    has_pixhawk = true;
+end
 
 dn_source = '';
 ll_source = '';
@@ -137,7 +150,10 @@ gps_out.dn = dn;
 gps_out.lat = lat;
 gps_out.lon = lon;
 gps_out.h = heading;
-if has_pashr
+if has_pixhawk
+    gps_out.p = interp1(logs.stats.dn,logs.stats.pitch*180/pi,gps_out.dn);
+    gps_out.r = interp1(logs.stats.dn,logs.stats.roll*180/pi,gps_out.dn);
+elseif has_pashr
     gps_out.p = p_pashr;
     gps_out.r = r_pashr;
 end

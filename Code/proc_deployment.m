@@ -18,12 +18,14 @@ for ia = 1:length(adcp)
     % cruise-specific post-load hook function
     [DEP, adcp(ia), gps] = post_load_hook(DEP, adcp(ia), gps);
 
-    % Interpolate GPS data to ADCP timestamps
+    % Linearly interpolate GPS data to ADCP timestamps
+    % Exclude heading... will interpolate after in complex space
     gpsflds = setdiff(fields(gps),'h');
     for i = 1:length(gpsflds)
         adcp(ia).gps.(gpsflds{i}) = ...
             interp1(gps.dn,gps.(gpsflds{i}),adcp(ia).mtime);
     end
+    % Interpolate heading in complex space to avoid wrapping issues
     if isfield(gps,'h')
         h = cosd(gps.h) + 1i*sind(gps.h);
         h = interp1(gps.dn,h,adcp(ia).mtime);
@@ -37,18 +39,24 @@ for ia = 1:length(adcp)
     % Set heading offset
     adcp(ia).config.xducer_misalign = DEP.proc.heading_offset;
 
-    % Fill adcp data struct with external gyro data if available
+    % Use external heading
     if isfield(adcp(ia).gps,'h')
         adcp(ia).heading = adcp(ia).gps.h;
     end
-    % if isfield(gps,'p')
-    %     adcp(ia).pitch_internal = adcp(ia).pitch;
-    %     adcp(ia).pitch = adcp(ia).gps.p;
-    % end
-    % if isfield(gps,'r')
-    %     adcp(ia).roll_internal = adcp(ia).roll;
-    %     adcp(ia).roll = adcp(ia).gps.r;
-    % end        
+
+    % Use external gyro if specified.
+    % Note: an appropriate rotation function must be used or this will cause
+    % velocity errors.
+    if checkfield(DEP,'use_external_gyro')
+        if isfield(gps,'p')
+            adcp(ia).pitch_internal = adcp(ia).pitch;
+            adcp(ia).pitch = adcp(ia).gps.p;
+        end
+        if isfield(gps,'r')
+            adcp(ia).roll_internal = adcp(ia).roll;
+            adcp(ia).roll = adcp(ia).gps.r;
+        end        
+    end
 
     % Deployment-specific pre-rotation processing
     [DEP, adcp(ia)] = pre_rotation_hook(DEP,adcp(ia));

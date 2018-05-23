@@ -45,8 +45,11 @@ for i = 1:length(Vessels)
         dep.files.gps_mat   = fullfile(dep.dirs.raw_gps, [dep.name '_gps.mat']);
         dep.files.adcp_mat  = fullfile(dep.dirs.raw_adcp, [dep.name '_adcp.mat']);
         dep.files.processed = fullfile(Vessels(i).dirs.proc, [dep.name '.mat']);
+
+        %% Check for kayak log files
         if isfield(dep.files,'logs') && ~isempty(dep.files.logs)
-            dep.files.logs = fullfile(dir_raw,dep.files.logs);
+            log_files = dir(fullfile(dir_raw, dep.files.logs));
+            dep.files.logs = fullfile({log_files.folder},{log_files.name});
         end
 
         %% Full-deployment files

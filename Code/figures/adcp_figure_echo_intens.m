@@ -1,6 +1,6 @@
 function hfig = adcp_figure_echo_intens(DEP)
 
-load redblue
+redblue = redbluecm();
 adcp = load(DEP.files.processed);
 adcp = adcp.adcp;
 

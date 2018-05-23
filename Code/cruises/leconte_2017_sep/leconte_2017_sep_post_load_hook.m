@@ -122,38 +122,45 @@ switch dep.vessel.name
 
 
   case 'Swankie'
-    %% Load custom BT files
-    if exist(dep.files.bt_profile,'file') == 2;
-        bt = load(dep.files.bt_profile);
-        bt.dn(year(bt.dn)<2000) = bt.dn(year(bt.dn)<2000) + datenum([2000 0 0 0 0 0]);
-        adcp.bt_range = interp1(bt.dn',bt.depth',adcp.mtime')';
-        adcp.info = cat(1,adcp.info,{'Bottom contours defined manually'});
-        adcp = adcp_trim_data(adcp,struct('name','BT','params',90));
+    if true
+        %% Load custom BT files
+        if exist(dep.files.bt_profile,'file') == 2;
+            bt = load(dep.files.bt_profile);
+            bt.dn(year(bt.dn)<2000) = bt.dn(year(bt.dn)<2000) + datenum([2000 0 0 0 0 0]);
+            adcp.bt_range = interp1(bt.dn',bt.depth',adcp.mtime')';
+            adcp.info = cat(1,adcp.info,{'Bottom contours defined manually'});
+            adcp = adcp_trim_data(adcp,struct('name','BT','params',90));
+        end
     end
 
-    %% Reduce "bottom" depth for near-terminus positions
-    tmp = load(dep.files.terminus);
-    t = tmp.termini; clear tmp
+    if false
+        %% Reduce "bottom" depth for near-terminus positions
+        tmp = load(dep.files.terminus);
+        t = tmp.termini; clear tmp
 
-    [~,nt] = min(abs([t.dn] - mean(dep.tlim)));
-    lat = interp1(gps.dn,gps.lat,adcp.mtime);
-    lon = interp1(gps.dn,gps.lon,adcp.mtime);
-    dist = nan*lat;
-    i = 1;
-    for i = 1:length(dist)
-        dist(i) = 1000*min(lldistkm([lat(i) lon(i)],[t(nt).lat', t(nt).lon']));
+        [~,nt] = min(abs([t.dn] - mean(dep.tlim)));
+        lat = interp1(gps.dn,gps.lat,adcp.mtime);
+        lon = interp1(gps.dn,gps.lon,adcp.mtime);
+        dist = nan*lat;
+        i = 1;
+        for i = 1:length(dist)
+            dist(i) = 1000*min(lldistkm([lat(i) lon(i)],[t(nt).lat', t(nt).lon']));
+        end
+        for i = 1:size(adcp.bt_range,1)
+            adcp.bt_range(i,:) = min(adcp.bt_range(i,:),dist);
+        end
+        adcp.info = cat(1,adcp.info,{'Glacier distance used in place of bottom depth where distance<depth'});
+        adcp.info = cat(1,adcp.info,{sprintf('Terminus measured at %s',datestr(t(nt).dn))});
     end
-    for i = 1:size(adcp.bt_range,1)
-        adcp.bt_range(i,:) = min(adcp.bt_range(i,:),dist);
-    end
-    adcp.info = cat(1,adcp.info,{'Glacier distance used in place of bottom depth where distance<depth'});
-    adcp.info = cat(1,adcp.info,{sprintf('Terminus measured at %s',datestr(t(nt).dn))});
 end
 
 %% Pitch/roll offsets
+
+% Default offsets, calculated while using internal ADPC gyro
 p0 = -0.9;
 r0 = -1.0;
 t0h = 2.087;
+
 X=@(h) [ones(length(h),1) ,...
         sind(h(:))        ,...
         cosd(h(:))];
@@ -166,13 +173,22 @@ switch dep.vessel.name
         coeffs = [-22.3329;
                   -16.8558;
                     9.0458];
-        h0 = 46.1008;
+        % h0 = 46.1008; % when using internal gyro
+        gh0 = 11.81;
+        gp0 = -1.18;
+        gr0 = 1.05;
+        h0 = 46.16; % when using PixHawk IMU
+        t0h = 1.03;
       case 'swankie_deployment_20170916_002146'
         coeffs = [-20.2622;
                   -14.3820;
                     9.0112];
-        h0 = 43.2711;
+        % h0 = 43.2711;
+        h0 = 44.75;
         t0h = -4.03;
+        gh0 = -5.24;
+        gp0 = -1.28;
+        gr0 = 1.05;
       case 'swankie_deployment_20170916_232943'
         coeffs = [-23.1366;
                   -16.2305;
@@ -182,17 +198,25 @@ switch dep.vessel.name
         coeffs = [-22.6119
                   -14.6621
                   9.1032];
-        h0 = 45.9735;
+        % h0 = 45.9735;
+        t0h = 2.11;
+        h0 = 44.31;
+        gh0=12.61;
+        gp0=-1.16;
+        gr0=0.44;
     end
     gps.h = nav_interp_heading(gps.dn+t0h/86400,gps.h,gps.dn);
     dep.proc.heading_offset = h0;
-
     adcp.config.heading_cal_coeffs = coeffs;
     adcp.config.heading_cal_func = func;
 
-    adcp.pitch = adcp.pitch + p0;
-    adcp.roll = adcp.roll + r0;
-    adcp.info = cat(1,adcp.info,{sprintf('Pitch offset: %.2f',p0)});
-    adcp.info = cat(1,adcp.info,{sprintf('Roll offset: %.2f',r0)});
+    adcp.config.gyro_h0 = gh0
+    adcp.config.gyro_p0 = gp0;
+    adcp.config.gyro_r0 = gr0;
+
+    % adcp.pitch = adcp.pitch + p0;
+    % adcp.roll = adcp.roll + r0;
+    % adcp.info = cat(1,adcp.info,{sprintf('Pitch offset: %.2f',p0)});
+    % adcp.info = cat(1,adcp.info,{sprintf('Roll offset: %.2f',r0)});
 end
 

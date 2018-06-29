@@ -16,7 +16,8 @@ gdep.proc.adcp_load_func = 'adcp_parse';
 gdep.proc.adcp_load_args = {'ross','pre'};
 gdep.files.gps = 'GPS/*.log';
 gdep.files.adcp = 'ADCP/*timestamped*.bin';
-gdep.files.imu = '*timestamped*.bin';
+gdep.files.imu = 'IMU/*timestamped*.bin';
+gdep.proc.nmea = {'GPRMC','HEHDT','PASHR','GPGGA'};
 
 % Deployment-specific options
 nd = 1;

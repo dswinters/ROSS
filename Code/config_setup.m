@@ -51,7 +51,7 @@ for i = 1:length(Vessels)
         if do_imu
             imu_files         = dir(fullfile(dir_raw, dep.files.imu));
             dep.dirs.raw_imu  = fullfile(dir_raw, [fileparts(dep.files.imu) '/']);
-            dep.files.imu     = fullfile(dep.dirs.raw_adcp, {imu_files.name});
+            dep.files.imu     = fullfile(dep.dirs.raw_imu, {imu_files.name});
             dep.files.imu_mat = fullfile(dep.dirs.raw_imu, [dep.name '_imu.mat']);
         end
 

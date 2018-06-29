@@ -1,6 +1,6 @@
 function imu = load_imu(DEP)
 
-if ~isfield(DEP.files.imu) || isempty(DEP.files.imu)
+if ~isfield(DEP.files,'imu') || isempty(DEP.files.imu)
     imu = [];
     return
 end
@@ -17,10 +17,10 @@ if fexist_all && ~DEP.proc.imu_raw2mat
     imu = load(DEP.files.imu_all);
     disp(['  - Loaded ' DEP.files.imu_all]);
 elseif fexist && ~DEP.proc.imu_raw2mat
-    gps = load(matfile);
+    imu = load(matfile);
     disp(['  - Loaded ' matfile]);
 else
-    gps = imu_read(f_in,DEP.proc.imu_load_args{:});
+    imu = imu_read(f_in,DEP.proc.imu_load_args{:});
     save(matfile,'-struct','imu');
     disp(['  - Saved ' matfile]);
 end

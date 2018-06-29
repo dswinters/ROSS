@@ -46,6 +46,15 @@ for i = 1:length(Vessels)
         dep.files.adcp_mat  = fullfile(dep.dirs.raw_adcp, [dep.name '_adcp.mat']);
         dep.files.processed = fullfile(Vessels(i).dirs.proc, [dep.name '.mat']);
 
+        %% Check for IMU files
+        do_imu = isfield(dep.files,'imu') && ~isempty(dep.files.imu);
+        if do_imu
+            imu_files         = dir(fullfile(dir_raw, dep.files.imu));
+            dep.dirs.raw_imu  = fullfile(dir_raw, [fileparts(dep.files.imu) '/']);
+            dep.files.imu     = fullfile(dep.dirs.raw_adcp, {imu_files.name});
+            dep.files.imu_mat = fullfile(dep.dirs.raw_imu, [dep.name '_imu.mat']);
+        end
+
         %% Check for kayak log files
         if isfield(dep.files,'logs') && ~isempty(dep.files.logs)
             log_files = dir(fullfile(dir_raw, dep.files.logs));
@@ -59,10 +68,12 @@ for i = 1:length(Vessels)
         % these will be loaded.
         dep.files.gps_all   = fullfile(dep.dirs.raw_gps,'gps_all.mat');
         dep.files.adcp_all  = fullfile(dep.dirs.raw_adcp,'adcp_all.mat');
+        if do_imu; dep.files.imu_all = fullfile(dep.dirs.raw_imu,'imu_all.mat'); end
         [~,dirname] = fileparts(fileparts(dir_raw));
         if endsWith(dep.name,dirname)
             dep.files.gps_mat = dep.files.gps_all;
             dep.files.adcp_mat = dep.files.adcp_all;
+            if do_imu; dep.files.imu_mat = dep.files.imu_all; end
         end
 
         % Update deployment

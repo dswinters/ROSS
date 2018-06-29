@@ -31,3 +31,4 @@ defaults.proc.trim_methods = nofilt;
 defaults.proc.filters = nofilt;
 defaults.proc.adcp_rotation_func = 'adcp_beam2earth';
 defaults.proc.adcp_rotation_args = {};
+defaults.proc.imu_load_args = {};

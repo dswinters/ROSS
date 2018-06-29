@@ -311,6 +311,7 @@ function output = parse_data(dat,h,d,l)
             end
         end
     end
+    fprintf('\rParsing data packets [%06d of %06d]\n',i,length(h))
 end % of parse_data()
 
 end % of imu_read()

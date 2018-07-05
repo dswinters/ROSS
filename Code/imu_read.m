@@ -141,6 +141,7 @@ end
 function output = parse_data(dat,h,d,l)
     output = struct(); % initialize output structure
     output.units = struct(); % initialize units structure
+    counter = struct();
     for i = 1:length(h)
         if mod(i,1000)==0
             fprintf('\rParsing data packets [%06d of %06d]',i,length(h))
@@ -288,6 +289,13 @@ function output = parse_data(dat,h,d,l)
                 output.units.(dname).(fname) = struct();
             end
 
+            % Track entries per descriptor
+            if ~isfield(counter,dname)
+                counter.(dname) = 1;
+            else
+                counter.(dname) = counter.(dname)+1;
+            end
+
             for e = 1:length(fentries)
                 % Compute byte indices of field
                 if e == length(fentries)
@@ -301,7 +309,7 @@ function output = parse_data(dat,h,d,l)
                 fidx = fentries(e).offset + [1:elen];
 
                 % Compute numeric field value based on data type
-                output.(dname).(fname).(fentries(e).name)(i) = ...
+                output.(dname).(fname).(fentries(e).name)(counter.(dname)) = ...
                     double(typecast(flipud(fdat(fidx)),fentries(e).type));
                 % Add entry to units field if it doesn't exist
                 if ~isfield(output.units.(dname).(fname), fentries(e).name)

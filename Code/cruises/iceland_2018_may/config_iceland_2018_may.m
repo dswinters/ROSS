@@ -15,16 +15,25 @@ rose.dirs.figs = fullfile(tripdir,'figures/ADCP/ROSE/');
 nd = 0;
 gdep.proc.adcp_load_func = 'adcp_parse';
 gdep.proc.adcp_load_args = {'ross','pre'};
-gdep.proc.adcp_raw2mat = true;
+gdep.proc.imu_load_args = {'ROSE'};
+
+% Make these true to re-make .mat files
+gdep.proc.adcp_raw2mat = false;
+gdep.proc.gps_raw2mat = false;
+gdep.proc.imu_raw2mat = false;
+
 
 gdep.files.gps = 'GPS/*.log';
 gdep.files.adcp = 'ADCP/*timestamped*.bin';
 gdep.files.imu = 'IMU/*timestamped*.bin';
 gdep.proc.nmea = {'GPRMC','HEHDT','PASHR','GPGGA'};
 gdep.proc.heading_offset = 45;
-gdep.plot.make_figure.echo_intens = true;
-gdep.plot.make_figure.corr = true;
 
+% plot options
+gdep.plot.make_figure.echo_intens = false;
+gdep.plot.make_figure.corr = false;
+gdep.plot.make_figure.summary = false;
+gdep.plot.vlim = 1*[1 1 1];
 
 % Deployment-specific options
 nd = nd + 1;

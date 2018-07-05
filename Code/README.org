@@ -101,15 +101,18 @@ per-deployment, or as default options to be filled in using
 | proc.skip                      | Set to true to skip processing                                                              |
 | proc.adcp_raw2mat              | Force re-parsing of raw ADCP data                                                           |
 | proc.gps_raw2mat               | Force re-parsing of raw GPS data                                                            |
+| proc.imu_raw2mat               |                                                                                             |
 | proc.heading_offset            | The kayak's ADCP mounting offset                                                            |
-| proc.adcp_load_func        | The function used to parse raw ADCP data                                                    |
-| proc.ross_timestamps           | 'pre' or 'post', depending on where the kayak's computer has inserted timestamps            |
+| proc.adcp_load_func            | The function used to parse raw ADCP data                                                    |
+| proc.adcp_load_args            | A cell array of additional arguments to be passed to adcp_load_func                         |
+| proc.imu_load_args             | A cell array of additional arguments to be passed to read_imu.m                             |
 | proc.trim_methods              | Trim methods passed to adcp_trim_data.m                                                     |
 | proc.filters                   | Filters passed to adcp_filter.m                                                             |
 | proc.use_3beam                 | A flag specifying if complex 3-beam solutions should be used (for the Sentinel V)           |
 | dirs.raw                       | Deployment raw data directory                                                               |
-| files.adcp                     | A shell completion pattern to find ADCP files within dirs.raw                               |
-| files.gps                      | A shell completion pattern to find GPS files within dirs.raw                                |
+| files.adcp                     | A glob pattern to find ADCP files within dirs.raw                                           |
+| files.gps                      | A glob pattern to find GPS files within dirs.raw                                            |
+| files.imu                      | A glob pattern to find IMU files within dirs.raw                                            |
 | files.map                      | The name of a file containing a map structure (used for surface vel plot)                   |
 | files.coastline                | The name of a file containing a coastline contour structure (used for coastline map figure) |
 | plot.ylim                      | Vertical axis limits for 2d figures                                                         |

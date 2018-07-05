@@ -8,6 +8,7 @@ end
 %% Load ADCP data, load & pre-process GPS data
 adcp = load_adcp(DEP);
 gps = load_gps(DEP);
+imu = load_imu(DEP);
 
 % An ADCP structure may have multiple configurations...
 % Loop through these.

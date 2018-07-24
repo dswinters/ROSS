@@ -143,6 +143,7 @@ function output = parse_data(dat,h,d,l)
     output.units = struct(); % initialize units structure
     counter = struct();
     for i = 1:length(h)
+        counted = false;
         if mod(i,1000)==0
             fprintf('\rParsing data packets [%06d of %06d]',i,length(h))
         end
@@ -290,10 +291,13 @@ function output = parse_data(dat,h,d,l)
             end
 
             % Track entries per descriptor
-            if ~isfield(counter,dname)
-                counter.(dname) = 1;
-            else
-                counter.(dname) = counter.(dname)+1;
+            if ~counted
+                if ~isfield(counter,dname)
+                    counter.(dname) = 1;
+                else
+                    counter.(dname) = counter.(dname)+1;
+                end
+                counted = true;
             end
 
             for e = 1:length(fentries)
